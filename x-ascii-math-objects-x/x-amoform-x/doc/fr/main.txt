@@ -1,0 +1,18 @@
+// This file can be used by typensee to produce the documentation.
+
+this::
+    title   = Le package ¨amoform
+    authors = Christophe, BAL [projetmbc@gmail.com]
+
+    licence = cc by nc sa 4.0
+    out     = html ; pdf
+
+    lexic = python
+
+
+abrev::
+    amoform = cf::``amoform ; https://github.com/bc-math/amoform``
+
+
+content::
+    /content/intro.txt

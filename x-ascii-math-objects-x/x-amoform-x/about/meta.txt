@@ -1,0 +1,38 @@
+// This file indicates configurations than can be used by the package setYtUp
+// that automates some stuffs before publishing our package.
+
+general::
+    name    = amoform
+    url     = https://github.com/bc-math/amoform
+    authors = Christophe, BAL [projetmbc@gmail.com]
+
+    python  = 3
+    version = 0.0.0-alpha
+    license = GPL-3.0
+
+    longdesc = readme/main.md
+    desc     = amoform allows to work with Ascii Mathematical Objects Formulas. The aim of this tools is to write easily mathematical formulas such as to use them in several contexts.
+
+    teston = Mac OS 10.15.3
+
+// The following key ``keeplogfrom`` indicates the informations to show about
+// the last versions inside the README file.
+//
+// Here are all the possible values for ``keeplogfrom``.
+//
+//    * ``:last-2:``, the default value, indicates to keep only the two most
+//      recent versions. You can more generally use ``:last-n:`` with n `
+//      a not null integer.
+//
+//    * ``:all:`` indicates to keep all the versions.
+    keeplogfrom = :last-2:
+
+// We indicate the relative path to the folder containing all the Python code.
+    maindir = ../amoform
+
+// We give keywords that can be used with the PyPI classifiers.
+    keywords = developers ; 
+               macos ; 
+               windows ; 
+               linux ; 
+               mathematics

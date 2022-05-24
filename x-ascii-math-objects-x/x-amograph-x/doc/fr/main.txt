@@ -1,0 +1,18 @@
+// This file can be used by typensee to produce the documentation.
+
+this::
+    title   = Le package ¨amograph
+    authors = Christophe, BAL [projetmbc@gmail.com]
+
+    licence = cc by nc sa 4.0
+    out     = html ; pdf
+
+    lexic = python
+
+
+abrev::
+    amograph = cf::``amograph ; https://github.com/bc-math/amograph``
+
+
+content::
+    /content/intro.txt

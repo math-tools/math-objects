@@ -1,0 +1,15 @@
+===============
+TODO - amograph (Ascii Mathematical Objects - Graphs (the discrete ones))
+===============
+
+
+> ---------------------------- <
+
+idée de taper des graphes et des arbres traduits dans un format standard objet récursif pour usage ailleiurs (typuquemet typensee)
+
+on ne founrit que...
+    ---> parsing
+    ---> abstraction pythonienne
+    ---> sortie ASCII propre
+
+ceci utilise amoform

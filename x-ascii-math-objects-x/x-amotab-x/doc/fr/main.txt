@@ -1,0 +1,18 @@
+// This file can be used by typensee to produce the documentation.
+
+this::
+    title   = Le package ¨amotab
+    authors = Christophe, BAL [projetmbc@gmail.com]
+
+    licence = cc by nc sa 4.0
+    out     = html ; pdf
+
+    lexic = python
+
+
+abrev::
+    amotab = cf::``amotab ; https://github.com/bc-math/amotab``
+
+
+content::
+    /content/intro.txt

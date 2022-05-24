@@ -1,0 +1,54 @@
+===============
+TODO - mathbapa    (Math. Ba-sic Pa-rser)
+===============
+
+VERSION = MAJOR.MINOR.PATCH
+
+
+
+> ---------------------------- <
+
+test + debug dans dossier dédié !!!
+
+
+> ---------------------------- <
+
+Créer une vraie API de "type" POO pour le parcours de l'arbre !!!
++
+Revoir complete_tree_main_category !!!! retirer l'usage du main_catgeory en argument !
+
+
+> ---------------------------- <
+
+Interdire 4 x^2^2 et 4 x/2/4
+
+
+> ---------------------------- <
+
+support des fonctions classiques : cos, sin, ... etc
+
+
+> ---------------------------- <
+
+gestion de fonctions à plusisuers variable comme logb (log en base b)
+
+    ---> , devient le caractère de spéaration (à l'anglo-saxne)
+    ---> parser doit donc renvoyer le nombre de virgule
+
+
+> ---------------------------- <
+
+support des fonctions êrsonnalisées : lors de l'appel on déclare pare exempel que f est une fonction et non une variable
+
+    ---> pb de l'arité
+
+
+> ---------------------------- <
+
+Gestion des expaces sur la verson texte directement via des regexes ?????
+
+    1) pas de doubles espaces
+
+    2) pas d'espaces autour des opérateurs
+
+    3) pas d'espace au début, à la fin d'un groupe ou globalement
