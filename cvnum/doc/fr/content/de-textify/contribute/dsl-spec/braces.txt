@@ -1,0 +1,9 @@
+this::
+    date = 2022-03-14
+
+
+=============
+Les accolades
+=============
+
+cvnum::``{XyZ}`` est un alias de cvnum::``"XyZ :if: d > 1"``.

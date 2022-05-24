@@ -1,0 +1,23 @@
+﻿this::
+    date = 2022-03-06
+
+
+=============================
+Écriture romaine d'un naturel
+=============================
+
+La fonction ``int2roman`` donne l'écriture romaine, en lettres majuscules uniquement, d'un naturel allant de `1` à `4999`
+((
+    Zéro n'existe pas en chiffre romain, et au-delà de `4999`, il n'y a pas de nombres romains.
+)).
+Voici un exemple d'utilisation
+((
+    `4888` a la plus longue l'écriture romaine.
+)).
+
+python-term::
+    >>> from cvnum.convert.roman import *
+    >>> print(repr(int2roman(23)))
+    'XXIII'
+    >>> print(repr(int2roman(4888)))
+    'MMMMDCCCLXXXVIII'

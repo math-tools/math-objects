@@ -1,0 +1,60 @@
+﻿this::
+    date = 2022-03-03
+
+
+=================
+Choisir la langue
+=================
+
+Par défaut, la langue est l'anglais de Grande-Bretagne. C'est pour cela que le code suivant affichera le texte "one hundred and twenty-three".
+
+python::
+    from cvnum import textify
+
+    oneNumber = textify.Integer(number = 123)
+
+    print(oneNumber)
+
+
+info::
+    Le nom est stocké dans l'attribut ``name``, donc si vous souhaitez stocker le nom dans une variable, il suffit d'utiliser ``uneVariable = oneNumber.name``.
+
+
+Si vous souhaitez utiliser le français de France, vous pouvez faire comme ci-dessous où vous noterez la possibilité d'utiliser une chaîne de caractères au lieu d'un entier ¨python. Ce code produira "cent vingt-trois" puis "trois cent vingt-et-un".
+
+python::
+    from cvnum import textify
+
+    oneNumber = textify.Integer(number = 123, lang = 'fr_FR')
+    print(oneNumber)
+
+    oneNumber.number = "321"
+    print(oneNumber)
+
+
+Vous pouvez aussi juste changer la langue comme dans le code suivant.
+
+python::
+    from cvnum import textify
+
+    oneNumber = textify.Integer(123)
+    print(oneNumber)
+
+    oneNumber.lang = "en_US"
+    print(oneNumber)
+
+    oneNumber.lang = "es_ES"
+    print(oneNumber)
+
+    # The method ``reset`` is well named...
+    oneNumber.reset()
+    print(oneNumber)
+
+
+Une fois lancé dans un terminal, le code produira ce qui suit.
+
+terminal::
+    one hundred and twenty-three
+    one hundred twenty-three
+    ciento veintitrés
+    one hundred and twenty-three

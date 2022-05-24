@@ -1,0 +1,52 @@
+/***
+this::
+    author = Christophe, Bal [projetmbc@gmail.com]
+    date   = 2022-03-12
+
+
+This file extends the naming rules to the case of very large numbers by following the Rowlett's rules.
+
+refs::
+    * cf::``Noms des grands nombres ;
+            https://fr.wikipedia.org/wiki/Noms_des_grands_nombres``
+***/
+
+extend::
+    lang = fr_FR
+
+group::
+    12 => tetrillion{s}
+    15 => pentillion{s}
+    18 => hexillion{s}
+
+    21 => eptillion{s}
+    24 => oktillion{s}
+    27 => ennillion{s}
+
+    30 => dekillion{s}
+    33 => hendekillion{s}
+    36 => dodekillion{s}
+    39 => trisdekillion{s}
+
+    42 => tetradekillion{s}
+    45 => pentadekillion{s}
+    48 => hexadekillion{s}
+
+    51 => heptadekillion{s}
+    54 => oktadekillion{s}
+    57 => enneadekillion{s}
+
+    60 => icosillion{s}
+    63 => icosihenillion{s}
+    66 => icosidillion{s}
+    69 => icositrillion{s}
+
+    72 => icositetrillion{s}
+    75 => icosipentillion{s}
+    78 => icosihexillion{s}
+
+    81 => icosiheptillion{s}
+    84 => icosioktillion{s}
+    87 => icosiennillion{s}
+
+    90 => triacontillion{s}

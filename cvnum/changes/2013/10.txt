@@ -1,0 +1,50 @@
+==
+25
+==
+
+-----
+:new:
+-----
+
+[[:api:]]
+The class ``number.detextify.Integer`` tries to find the value of a natural given by its textual version. In a way, this class does the opposite job of the class ``number.textify.Integer``. The languages supported are exactly the same as those for ``textify.Integer``, and the parsing is flexible enough to accept some input errors like bad spellings.
+
+
+// ---------- //
+
+
+==
+19
+==
+
+-----
+:new:
+-----
+
+[[:api:]]
+The functions ``number.convert.int2base``, ``number.convert.base2int`` and ``number.convert.base2base`` allow to change the base used to write a digit number.
+
+
+// ---------- //
+
+
+==
+14
+==
+
+-----
+:new:
+-----
+
+[[:api:]]
+The funcions ``number.convert.int2roman`` and ``number.convert.roman2int`` allow to convert a natural integer to a roman number, and vice versa.
+
+
+// ---------- //
+
+
+==
+13
+==
+
+This project will manipulate numbers in digit and textual forms. For the moment, there is only one class ``number.textify.Integer`` which allows to get the full name of an integer: supported languages are French ``fr_FR``, Belgian ``fr_BE``, Spanish ``es_ES``, British English ``en_GB`` and American English ``en_US``. Adding new languages is relatively easy even for a non-programmer.

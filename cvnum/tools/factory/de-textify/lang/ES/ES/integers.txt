@@ -1,0 +1,68 @@
+/***
+this::
+    author = Christophe, Bal [projetmbc@gmail.com]
+    date   = 2022-04-01
+
+
+This file defines the rules for naming a natural in Spanish.
+***/
+
+sign::
+    + = más
+    - = menos
+
+general::
+    sep = .
+    big = mill... -> ... de millones
+
+group::
+    3 = [d :if: d > 1]
+        mil
+        [r]
+    6 = "un :if: d = 1 :else: [d]"
+        mill"ones :if: d > 1 :else: ón"
+        [r]
+
+small::
+    0 = cero
+    1 = uno
+    2 = dos
+    3 = tres
+    4 = cuatro
+    5 = cinco
+    6 = seis
+    7 = siete
+    8 = ocho
+    9 = nueve   
+
+    10 = diez
+    11 = once
+    12 = doce
+    13 = trece
+    14 = catorce
+    15 = quince
+    16 = dieciséis  
+    1* = dieci[d(0)]
+
+    20 = veinte
+    21 = veintiuno
+    22 = veintidós
+    23 = veintitrés
+    2* = veinti[d(0)]
+
+    30 = treinta
+    40 = cuarenta
+    50 = cincuenta
+    60 = sesenta
+    70 = setenta
+    80 = ochenta
+    90 = noventa
+
+    ** = [d(1)0] y [d(0)]
+
+    100 = ciento
+    500 = quinientos
+    700 = setecientos
+    900 = novecientos
+    *00 = [d(2)]cientos
+    *** = [d(2)00] [d(1)d(0)]

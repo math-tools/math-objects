@@ -1,0 +1,32 @@
+/***
+this::
+    author = Christophe, Bal [projetmbc@gmail.com]
+    date   = 2022-03-12
+
+
+This file extends the naming rules to the case of very large numbers by following the short Chuquet's rules (without using "milliard" and co).
+
+refs::
+    1) cf::``Noms des grands nombres ;
+             https://fr.wikipedia.org/wiki/Noms_des_grands_nombres``
+
+    2) cf::``Nicolas Chuquet - Les grands nombres ;
+             https://fr.wikipedia.org/wiki/Nicolas_Chuquet#Les_grands_nombres``
+***/
+
+extend::
+    lang = fr_FR
+
+ignore-group::
+    9
+
+group::
+    12 => billion{s}
+    18 => trillion{s}
+    24 => quadrillion{s}
+    30 => quintillion{s}
+    36 => sextillion{s}
+    42 => septillion{s}
+    48 => octillion{s}
+    54 => nonillion{s}
+    60 => decillion{s}

@@ -1,0 +1,12 @@
+﻿abrev::
+    content = /big
+
+
+
+=============================
+Nommer les "¨grpes" de ¨nbres
+=============================
+
+content::
+    ¨content/small-big.txt
+    ¨content/big-big.txt

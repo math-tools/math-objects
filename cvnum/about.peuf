@@ -1,0 +1,6 @@
+general::
+    project = cvnum
+    desc    = Writing and readings numbers in several formats.
+    author  = Christophe BAL
+    licence = gnu 3
+    need    = python3 ;

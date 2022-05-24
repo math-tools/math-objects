@@ -1,0 +1,43 @@
+﻿this::
+    date = 2022-03-23
+
+
+========================================
+D'une base quelconque à la base décimale
+========================================
+
+On peut inverser le travail fait par les fonctions ``int2bdigits``, ``int2bnumerals`` et ``int2bnb``.
+Ceci se fait simplement comme suit où nous utilisons `199412 = 4 + 15*16 + 10*16**2 + 3*16**4 = [30AF4]_16`.
+
+python-term::
+    >>> from cvnum.convert.base2dec import *
+    >>> b = 16
+    >>> print(bnb2int('30AF4', b))
+    199412
+    >>> print(bnumerals2int(['3', '0', 'A', 'F', '4'], b))
+    199412
+    >>> print(bdigits2int([3, 0, 10, 15, 4], b))
+    199412
+
+Ceci fonctionne aussi sans souci avec des bases `b > 36`. Ci-après, nous avons `439 = 10*40 + 39 = [0A.13]_40` en se souvenant que `39 = 36 + 3 = [13]_36`.
+
+...python-term::
+    >>> b = 40
+    >>> print(bdigits2int([10, 39], b))
+    439
+    >>> print(bnumerals2int(['0A', '13'], b))
+    439
+    >>> print(bnb2int('0A.13', b))
+    439
+    >>> print(bnb2int('0A13', b, sep = ""))
+    439
+
+
+warning::
+    Ne pas oublier de faux zéros inutiles à gauche. Par exemple, le code suivant renvoie une erreur comme attendue car `[0A]_40` indique un chiffre, un symbole, écrit obligatoirement avec deux caractères.
+
+    ...python-term::
+        >>> print(bnb2int("A.13", 40))
+        ...
+        ValueError: unknown numeral << A >>.
+        ...

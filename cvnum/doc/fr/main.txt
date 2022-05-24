@@ -1,0 +1,22 @@
+﻿this::
+    title   = Lire et écrire des nombres avec ¨cvnum
+    author  = Christophe, BAL
+    mail    = projetmbc@gmail.com
+
+    licence = cc by nc sa 4.0
+    out     = html | pdf
+
+    lexic   = python3
+
+
+abrev::
+    cvnum = cf::``cvnum ;
+                  https://github.com/math-objects/cvnum``
+
+    content = content
+
+
+content::
+    ¨content/intro.txt
+    ¨content/convert.txt
+    ¨content/de-textify.txt     ?????

@@ -1,0 +1,46 @@
+this::
+    date = 2022-03-14
+
+
+================
+Les alternatives
+================
+
+warning::
+    Pour les tests, ainsi que les actions gagnantes et perdantes d'une alternative, les espaces de départ et de fin sont toujours ignorés.
+
+
+note::
+    La sémantique des tests est réduite au strict minimum. Par exemple, les opérateurs booléens de type ``AND`` et ``OU`` ne sont pas disponibles.
+
+
+--------------
+Forme complète
+--------------
+
+La syntaxe est cvnum::``... :if: ... :else: ...`` où le test se situe au centre entre le cvnum::``:if:`` et le cvnum::``:else:``, l'action gagnante étant avant  cvnum::``:if:``, et celle perdante après cvnum::``:else:``.
+
+
+----------------
+Forme incomplète
+----------------
+
+La syntaxe est cvnum::``... :if: ... `` où le test est après le cvnum::``:if:``.  En cas d'échec du test, rien ne sera produit lors de la traduction.
+
+
+----------------
+Utilisables où ?
+----------------
+
+On ne peut utiliser d'alternatives qu'à l'intérieur de crochets ou de guillemts doubles.
+
+
+note::
+    Voici une combinaison "maximale" d'alternatives, guillemets et crochets.
+
+    cvnum::
+        "[a :if: b :else: c]
+         :if: d :else:
+         [e :if: c :else: f]"``
+
+    Ceci semble tout de même peu utile, et n'est possible que pour des raisons purement ¨techs liées à la grammaire du langage.

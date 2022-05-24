@@ -1,0 +1,31 @@
+this::
+    date = 2022-03-06
+
+
+===============
+¨Trads directes
+===============
+
+Certains petits ¨nbres ont juste un nom, aucune réfexion n'est demandé pour les écrire.
+Ceci s'indique via une syntaxe du type peuf::``NOMBRE = TEXTE`` comme dans l'exemple ci-dessous.
+
+cvnum::
+    ---
+    file    = FR/FR/integers.txt
+    extract = yes
+    ---
+
+    small::
+        0 = zéro
+        1 = un
+        2 = deux
+
+    // ... etc.
+
+        10 = dix
+        11 = onze
+        12 = douze
+
+    // ... etc.
+
+        100 = cent

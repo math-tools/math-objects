@@ -1,0 +1,74 @@
+﻿this::
+    date = 2022-03-31
+
+
+==================================
+Nommer de ¨nbres pas trop "grands"
+==================================
+
+Voici ce que l'on trouve dans le fichier path::``FR/FR/integers.txt`` où `9` correspond à `10^9` permet de nommer les "grands" ¨nbres jusqu'aux milliards
+((
+    Le ¨nbre le plus grand nommable ici est `10^18 - 1 = 999,999,999,999,999,999` (des millions de millards).
+    La section suivante explique comment indiquer de nommer des ¨nbres "très grands".
+)).
+Noter au passage la possibilité d'utiliser des commandes conditionnelles comme cvnum::``[d :if: d > 1]`` et cvnum::``"de :if: d(0..5) = 0"``.
+
+cvnum::
+    ---
+    file    = FR/FR/integers.txt
+    extract = yes
+    ---
+
+    general::
+        sep = .
+
+    // ... etc.
+
+    group::
+        3  = [d :if: d > 1]
+             mille
+             [r]
+        6 => million{s}
+        9 => "de :if: d(0..5) = 0"
+             milliard{s}
+
+
+Commençons par cvnum::``sep = .`` dans le bloc cvnum::``general``.
+Ceci définit le séparateur décimal autorisé pour faciliter l'écriture chiffrée d'un ¨nbre à traduire.
+
+
+Passons maintenant au bloc cvnum::``group`` dont les clés correspondent à des exposants de puissances de `10`.
+
+    1) Les `3`, `6` et `9` servent à indiquer comment nommer les ¨nbres de milliers, ou les `10^3`, de millions, ou les `10^6`, et enfin les millards, ou les `10^9`.
+
+    1) Pour `3` et `6`, mais pas `9` la plus grande puisssance, on nomme les `10^3` et `10^6` en appliquant les règles aux `6 - 3 = 3` premiers chiffres, et `9 - 6 = 3` suivants ¨resp.
+
+    1) Le cas de `9`, la plus grande puissance, est à part car par exemple `111,222,333,000,000,000` se lit "cent onze millions deux cent vingt-deux mille trois cent trente-trois milliards".
+    Dans ce cas, le nom est donné par les `9` décimales à partir du milliard.
+
+    1) Pour nommer les "¨nbres de ...", on dispose de deux modes qui vont utiliser les variables spéciales cvnum::``[d]`` et cvnum::``[r]``.
+
+        * On peut indiquer tout comme dans cvnum::``3 = [d :if: d > 1] mille [r]`` où cvnum::``[d]`` et cvnum::``[r]`` indiquent ¨resp les noms du ¨nbre de milliers et de ce qu'il reste en-dessous des milliers.
+        Par exemple, pour `12,345,678`, on a cvnum::``d = 345`` et cvnum::``r = 678``.
+        La règle cvnum::``3 = [d :if: d > 1] mille [r]`` permet d'avoir "mille trois" et "quatre cent douze mille".
+
+        * On peut juste indiquer comment nommer un ¨grpe comme dans cvnum::``6 => million{s}`` qui est en fait un raccourci pour cvnum::``6 = [d] million{s} [r]`` où cvnum::``{s}`` est un alias très pratique pour cvnum::``"s :if: d > 1"``.
+        Ceci permet d'avoir "un million" et "cent millions".
+        En effet, pour `444,555,666` par exemple, on a cvnum::``d = 444`` et cvnum::``r = 555666``.
+
+        * Notons que dans cvnum::``9 => ...``, cvnum::``d`` a une signification à part, mais logique (voir les explications en début de section).
+        Par exemple, pour `111,222,333,444,555,666`, on a cvnum::``d = 111222333``, et non cvnum::``d = 333``.
+        Sans surprise, nous avons aussi cvnum::``r = 444555666``.
+
+
+Finissons cette section par quelques points très utiles.
+
+    1) On peut plus généralement utiliser cvnum::``{...}`` comme alias de cvnum::``"... :if: d > 1"`` tant que la dernière règle est correcte.
+    Par exemple, on ne peut pas utiliser cvnum::``{[]}`` qui aboutit à cvnum::``"[] :if: d > 1"`` où cvnum::``[]`` est interdit.
+
+    1) La rgèle cvnum::``9 => "de :if: d(0..5) = 0" milliard{s}`` vue plus haut utilise cvnum::``d(0..5)`` qui repésente les six dernières décimales, à droite, du ¨nbre de milliards (si besoin, des zéros inutiles à gauche sont pris en compte).
+    Ceci sert à produire "cinq milliards" et "un million de milliards".
+    En effet, pour `11,222,333,444`, on a cvnum::``d(0..5) = 11`` car cvnum::``d = 11``, tandis que pour `111,222,333,444,555,666`, on a `d(0..5) = 222333`` car cvnum::``d = 111222333``.
+
+    1) Dans le fichier path::``EN/GB/integers.txt`` est utilisé cvnum::``3 => thousand "and :if: 0 < r < 100"`` avec une alternative portant sur cvnum::``r``.
+    Cette règle demande d'ajouter "and" après "thousand" uniquement si la fin du ¨nbre est entre `0` et `100` afin d'avoir "two thousand three hundred" et "two thousand and forteen".

@@ -1,0 +1,9 @@
+this::
+    date = 2022-03-06
+
+
+======
+¨Intro
+======
+
+Le package ¨cvnum a pour objectif la manipulation en lecture et en écriture, numérique ou texuelle, de nombres (pour le moment seul les entiers relatifs sont pris en compte).

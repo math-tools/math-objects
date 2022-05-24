@@ -1,0 +1,17 @@
+this::
+    date = 2022-03-14
+
+
+======================
+Les guillemets doubles
+======================
+
+Les guillemets doubles cvnum::``"..."`` servent à utiliser un texte verbatim avec la posibilité d'utiliser une alternative pour choisir le texte en fonction d'un test.
+
+
+note::
+    On peut utiliser des crochets dans des guillemets comme dans cvnum::``"un :if: d == 1 :else: [d]"``.
+
+
+warning::
+    Des crochets ne peuvent pas contenir de guillemets doubles.

@@ -1,0 +1,45 @@
+this::
+    date = 2022-03-31
+
+
+====================================
+Petits, grands et très grands ¨nbres
+====================================
+
+Considérons les règles ci-dessous (ne soyez pas effrayer par cvnum::``"and :if: 0 < r < 100"`` qui sera expliqué plus tard dans la section cf::``big/small-big.txt``).
+
+cvnum::
+    ---
+    file    = EN/GB/integers.txt
+    extract = yes
+    ---
+
+    general::
+        sep = ,
+        big = ... of billion
+
+    group::
+        3 => thousand "and :if: 0 < r < 100"
+        6 => million
+        9 => billion
+
+    small::
+        0 = zero
+        1 = one
+        2 = two
+
+    // ... etc.
+
+
+Les blocs cvnum::``general``, cvnum::``group`` et cvnum::``small`` ont les utilités suivantes (les détails seront donnés dans les sections suivantes).
+
+    1) Le bloc cvnum::``general`` permet de donner un séparateur décimal autorisé, mais aussi d'indiquer comment nommer les "très grands" ¨nbres comme les "billion of billion" en anglais.
+
+    1) Le bloc cvnum::``group`` permet d'indiquer comment former et nommer des groupements de chiffres pour gérer les "thousand", les "million" et les "billion" en anglais.
+    Rappelons, comme nous venons de le voir, que pour nommer de "très grands" ¨nbres comme des "billion of billion", il faut passer via la clé cvnum::``big`` du bloc cvnum::``gene``.
+
+    1) Le bloc cvnum::``small`` est dédié aux "petits" nombres inférieurs à `10^3` dans le cas du fichier ci-dessus puisque `3` est le plus petit ¨nbre spécifié dans le bloc cvnum::``group``.
+
+
+note::
+    Les  "petits" nombres seront utilisés pour nommer les groupements. Par exemple, `200,100` se lit "deux cent mille cent" en français.

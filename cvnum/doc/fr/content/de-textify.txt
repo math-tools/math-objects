@@ -1,0 +1,11 @@
+﻿abrev::
+    content = /de-textify
+
+
+================
+Nommer un nombre
+================
+
+content::
+    ¨content/textify.txt        ????
+    ¨content/contibute.txt

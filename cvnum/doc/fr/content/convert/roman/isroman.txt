@@ -1,0 +1,16 @@
+﻿this::
+    date = 2022-03-06
+
+
+=========================
+Un nombre romain valide ?
+=========================
+
+La fonction ``isroman`` permet de savoir si l'on a ou non un nombre romain valide.
+
+python-term::
+    >>> from cvnum.convert.roman import *
+    >>> print(isroman("XXIII"))
+    True
+    >>> print(isroman("XXXXXIII"))
+    False

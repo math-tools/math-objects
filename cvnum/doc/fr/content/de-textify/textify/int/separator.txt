@@ -1,0 +1,9 @@
+﻿this::
+    date = 2013-11-05
+
+
+=================================
+Séparer pour grouper les chiffres
+=================================
+
+Au lieu de ``"123456789"`` ou ``"123 456 789"``, vous pouvez utiliser ``"123,456,789"`` en anglais, ou ``"123.456.789"`` en français.

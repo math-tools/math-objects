@@ -1,0 +1,48 @@
+/***
+this::
+    author = Christophe, Bal [projetmbc@gmail.com]
+    date   = 2022-03-12
+
+
+This file extends the naming rules to the case of very large numbers by following the full Chuquet's rules.
+
+refs::
+    1) cf::``Noms des grands nombres ;
+             https://fr.wikipedia.org/wiki/Noms_des_grands_nombres``
+
+    2) cf::``Le nom des grands nombres - Échelles courtes et longues ;
+             https://www.math93.com/histoire-des-maths/histoire-des-nombres/1019-noms-des-grands-nombres.html``
+***/
+
+extend::
+    lang = fr_FR
+
+group::
+    9  => milliard{s}
+
+    12 => billion{s}
+    15 => billiard{s}
+
+    18 => trillion{s}
+    21 => trilliard{s}
+
+    24 => quadrillion{s}
+    27 => quintilliard{s}
+
+    30 => quintillion{s}
+    33 => quintilliard{s}
+
+    36 => sextillion{s}
+    39 => sextilliard{s}
+
+    42 => septillion{s}
+    45 => septilliard{s}
+
+    48 => octillion{s}
+    51 => octilliard{s}
+
+    54 => nonillion{s}
+    57 => nonilliard{s}
+
+    60 => decillion{s}
+    63 => decilliard{s}

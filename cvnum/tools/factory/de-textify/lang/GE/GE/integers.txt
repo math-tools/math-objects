@@ -1,0 +1,54 @@
+/***
+this::
+    author = Christophe, Bal [projetmbc@gmail.com]
+    date   = 2022-04-01
+
+
+refs::
+    * cf::``Compter de 100 à cent milliards ;
+            https://www.allemandfacile.com/exercices/exercice-allemand-2/exercice-allemand-14795.php``
+***/
+
+sign::
+    + = plus
+    - = minus
+
+general::
+    sep = .
+    big = Milliarde... -> ... von Milliarden
+
+group::
+    3 =  [d :if: d > 1]tausend[r]
+    6 => Million{en}
+    9 => Milliarde{n}
+
+small::
+    0 = null
+    1 = eins
+    2 = zwei
+    3 = drei
+    4 = vier
+    5 = fünf
+    6 = sechs
+    7 = sieben
+    8 = acht
+    9 = neun
+
+    10 = zehn
+    11 = elf
+    12 = zwölf
+    16 = sechzehn
+    17 = siebzehn
+    1* = [d(0)][10]
+
+    20 = zwanzig
+    30 = dreißig
+    60 = sechzig
+    70 = siebzig
+    *0 = [d(1)]zig
+
+    ** = [d(0)]und[d(1)0]
+
+    100 = hundert
+    *00 = [d(2)]hundert
+    *** = [d(2)][100][d(1)d(0)]

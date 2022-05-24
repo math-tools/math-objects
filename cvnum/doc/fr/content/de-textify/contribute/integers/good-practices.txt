@@ -1,0 +1,58 @@
+this::
+    date = 2022-03-18
+
+
+================
+Bonnes pratiques
+================
+
+------------------------------
+Lisible est mieux qu'astucieux
+------------------------------
+
+Il est conseillé de produire un code facile à lire sans user d'astuces de codage (ceci est un moyen de limiter les erreurs de conception, tout en gardant un codage destiné à être lu par un humain).
+Par exemple, bien que les deux règles suivantes puissent se résumer en cvnum::``7* = [60]-"et- :if: d(0) = 1"[1d(0)]``, il semble bien plus clair d'utiliser deux règles (en se souvenant du principe du "premier arrivé, premier servi").
+De même, il semble plus parlant d'écrire cvnum::``d(1)d(0)`` au lieu de cvnum::``d(0..1)``.
+
+cvnum::
+    ---
+    file    = FR/FR/integers.txt
+    extract = yes
+    ---
+
+    small::
+    // ... etc.
+
+        71 = [60]-et-[11]
+        7* = [60]-[1d(0)]
+
+    // ... etc.
+
+
+De même, on préféra les trois règles suivantes à l'unique règle cvnum::``*** = [d(2) :if: d(2) > 1] [100]"s :if: d(1)d(0) = 0" [d(1)d(0) :if: d(1)d(0) != 0]``.
+
+cvnum::
+    ---
+    file    = FR/FR/integers.txt
+    extract = yes
+    ---
+
+    small::
+    // ... etc.
+
+    100 = cent
+    *00 = [d(2)] [100]s
+    *** = [d(2) :if: d(2) > 1]
+          [100]
+          [d(1)d(0)]
+
+    // ... etc.
+
+
+-------------------------
+Réutiliser et non retaper
+-------------------------
+
+La réutilisation de règles doit se faire via des crochets.
+Par exemple, la règle ci-dessus cvnum::``71 = [60]-et-[11]`` est plus sûre que cvnum::``71 = soixante-et-onze`` car ceci évite de multiplier les sources de fautes de frappe.
+De plus, ceci rend aussi le code plus compréhensible en faisant apparaître la logique de nommage.

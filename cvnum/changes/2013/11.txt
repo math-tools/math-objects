@@ -1,0 +1,10 @@
+==
+04
+==
+
+-----
+:new:
+-----
+
+[[:bug:]]
+In the function ``number.convert.roman2int``, the conversion to upper case letters was omitted.

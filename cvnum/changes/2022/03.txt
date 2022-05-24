@@ -1,0 +1,298 @@
+// ---------- //
+
+
+==
+31
+==
+
+--------
+:update:
+--------
+
+[[:doc:]]
+¨DSL for translations: the way used to name the very big numbers has been clarified.
+
+
+// ---------- //
+
+
+==
+29
+==
+
+-----
+:new:
+-----
+
+[[:api:]]
+¨DSL for translations: the way to name big groups like "billion of billion" must be explicitly written (if no such rule is explained, this indicates to not name big integers).
+
+
+-------
+:break:
+-------
+
+[[:api:]]
+¨DSL for translations: the support of none decimal bases has been dropped (this was a very bad good idea). This implies the suppression of the keys ``base`` and ``zero`` of the block ``general``.
+
+
+// ---------- //
+
+
+==
+26
+==
+
+-------
+:break:
+-------
+
+[[:api:]]
+Roman conversion: only integers can be given as an argument.
+
+
+// ---------- //
+
+
+==
+24
+==
+
+--------
+:update:
+--------
+
+[[:api:]]
+¨DSL for translations: the way to work with groups has been clarified and documented.
+
+
+// ---------- //
+
+
+==
+23
+==
+
+--------
+:update:
+--------
+
+[[:doc:]]
+The new way to work with two bases via ``base2base`` has been documented.
+
+
+--------
+:fordev:
+--------
+
+[[:fix:]]
+Factory: the method ``dsltr.parsers.ParserSmall.__no_spevar_r`` modified a ref-like variable (this implied unwanted changes for all the ``if-else`` rules). Please don't laugh too hard!
+
+
+// ---------- //
+
+
+==
+22
+==
+
+-----
+:new:
+-----
+
+[[:api:]]
+Converting numbers.
+
+    1) A new class ``base2base.Base2Base`` allows to make all possible kinds of conversions between two bases.
+
+    1) The specialized functions below have been deleted because the class ``base2base.Base2Base`` can do their job.
+
+        * ``base2base.bnb2bnb``
+        * ``base2base.bdigits2bdigits``
+        * ``base2base.bnumerals2bnumerals``
+
+    1) Suchas to have a coherent ¨api, the functions below have been added.
+
+        * ``dec2base.intdigits`` returns the list of integer digits of a natural number.
+
+        * ``dec2base.intnumerals`` returns the list of textual digits of a natural number.
+
+        * ``base2dec.basedigits`` returns the list of integer digits of a number wrtiting in one specific base.
+
+        * ``base2dec.basenumerals`` is the new name of ``base2dec.bnb2bnumerals``.
+
+    1) The type of arguments for conversions are now strict.
+
+
+// ---------- //
+
+
+==
+21
+==
+
+--------
+:fordev:
+--------
+
+[[:new:]]
+Direct translations: one new file path::``GE/GE/integers.txt``.
+
+
+// ---------- //
+
+
+==
+18
+==
+
+--------
+:fordev:
+--------
+
+[[:facto:]]
+Factory: the new Python variables for direct translations are build.
+
+
+// ---------- //
+
+
+==
+16
+==
+
+--------
+:fordev:
+--------
+
+[[:facto:]]
+Direct translations: the file path::``FR/FR/integers.txt`` has been simplified (this concerns the rules for numbers with two digits).
+
+
+[[:tech:]]
+Factory: rules are now normalized and shorten to obtain the Python variables for the direct translations.
+
+
+// ---------- //
+
+
+==
+15
+==
+
+-----
+:new:
+-----
+
+[[:doc:]]
+¨Dsl ¨specs for translations: important clarifications about the ¨specs for the hooks and the order of searching of the goode rule have been added.
+
+
+// ---------- //
+
+
+==
+13
+==
+
+-----
+:new:
+-----
+
+[[:doc:]]
+¨Dsl ¨specs for translations: the specs¨ about testing have been added.
+
+
+// ---------- //
+
+
+==
+12
+==
+
+-----
+:new:
+-----
+
+[[:doc:]]
+¨Dsl ¨specs for translations.
+
+    1) For groups, the rules must be verbose by using cvnum::``[d]`` and cvnum::``[r]``, but there is a shortcut cvnum::``=>`` to type cvnum::``6 => million`` instead of cvnum::``6 = [d] million [r]``.
+
+    1) An example of use of the key ``zero`` for groups have been written.
+
+    1) All the ¨dsl ¨specs have been simplified a lot.
+
+
+// ---------- //
+
+
+==
+09
+==
+
+-----
+:new:
+-----
+
+[[:doc:]]
+¨Dsl ¨specs for translations.
+
+    1) Good practices for the use of the ¨dsl.
+
+    1) Some clarifications about the special constants cvnum::``d`` and cvnum::``r``.
+
+    1) One example of "maximal" joint use of braces, brackets and alternatives.
+
+
+// ---------- //
+
+
+==
+08
+==
+
+--------
+:update:
+--------
+
+[[:doc:]]
+¨Dsl ¨specs for translations: explanations for patterns matching have been added.
+
+
+// ---------- //
+
+
+==
+07
+==
+
+--------
+:update:
+--------
+
+[[:doc:]]
+The ¨dsl ¨specs for translations are almost fully documented.
+
+
+// ---------- //
+
+
+==
+06
+==
+
+-----
+:new:
+-----
+
+[[:api:]]
+First simplifications of the code and the ¨api of the tools to convert integers (by changing the numeral base).
+
+
+--------
+:update:
+--------
+
+[[:doc:]]
+The ¨doc for the tools to convert integers has been updated regarding to the changes into the ¨api.

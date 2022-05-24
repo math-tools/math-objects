@@ -1,0 +1,30 @@
+/***
+this::
+    author = Christophe, Bal [projetmbc@gmail.com]
+    date   = 2013-10-16
+
+
+This file defines the rules for naming a natural in Belgian.
+***/
+
+extend::
+    lang = fr_FR
+
+ignore-small::
+    80
+    8*
+
+    71
+    7*
+    9*
+
+    *1
+    **
+
+small::
+    70 = septante
+    80 = octante
+    90 = nonante
+
+    *1 = [d(1)0]-et-[1]
+    ** = [d(1)0]-[d(0)]

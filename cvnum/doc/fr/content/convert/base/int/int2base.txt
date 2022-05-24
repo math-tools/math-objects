@@ -1,0 +1,79 @@
+﻿this::
+    date = 2022-03-23
+
+
+=========================================
+De la base décimale à une base quelconque
+=========================================
+
+Commençons par du classique où vous noterez que les lettres sont en majuscule
+((
+    C'est un choix comme un autre.
+)),
+et aussi que les listes de chiffres vont du poids le plus élevé à celui le plus faible
+((
+    Ceci est en accord avec l'écriture alphanumérique.
+)).
+
+python-term::
+    >>> from cvnum.convert.dec2base import *
+    >>> n = 4 + 15*16 + 10*16**2 + 3*16**4
+    >>> b = 16
+    >>> print(int2bdigits(n, b))
+    [3, 0, 10, 15, 4]
+    >>> print(int2bnumerals(n, b))
+    ['3', '0', 'A', 'F', '4']
+    >>> print(repr(int2bnb(n, b)))
+    '30AF4'
+
+
+Suivant les besoins, on peut donc au choix obtenir une liste d'entiers relativement à la base choisie via ``int2bdigits``, soit une liste de chiffres
+((
+    On peut traduire "chiffre", au sens de symbole, par "numeral" en anglais.
+))
+via ``int2bnumerals``, soit une écriture alphanumérique via ``int2bnb``.
+
+
+Comme le montre l'exemple suivant, il est possible de travailler avec des bases plus grandes et moins classiques (ce qui est à la fois intéressant et utile). Nous expliquons juste après les règles retenues pour ce type de situation un peu particulière.
+
+...python-term::
+    >>> n = 1 + 39*40 + 10*40**5
+    >>> b = 40
+    >>> print(int2bdigits(n, b))
+    [10, 0, 0, 0, 39, 1]
+    >>> print(int2bnumerals(n, b))
+    ['0A', '00', '00', '00', '13', '01']
+    >>> print(repr(int2bnb(n, b)))
+    '0A.00.00.00.13.01'
+
+
+Comment est obtenue la liste de chiffres relativement à une base `b > 1` non classique ?
+
+    1) Si **`b < 36`**, on a le fonctionnement suivant.
+
+        a) Si `0 <= n < 10`, l'écriture alphanumérique de `n` est `n` tout simplement.
+
+        b) Si `10 <= n < b`, l'écriture alphanumérique de `n` est la lettre majuscule à la position `(n - 9)` dans l'alphabet
+        ((
+            Le choix retenu est de proposer une écriture décryptable par un humain. C'est pour cela que ne sont pas utilisés les minuscules et les caractères spéciaux non blancs du code ¨ascii.
+        )).
+        Pour `n = 10`, ce sera "A", pour `n = 11`, ce sera "B"... ¨etc.
+
+    1) Si **`36 <= b < 36**2`**, notant `n = 36*q + r` la division euclidienne de `n` par `36`, ¨ie notant `[q, r]_36`  l'écriture `36`-adique de `n`, alors l'écriture alphanumérique de `n` sera la concaténation des écritures alphanumériques de `q` et `r` relativement à la base `36`, en complétant si besoin par un zéro à gauche. Par exemple, `11` et `49 = 13 + 1*36` seront transformés en ``"0B"`` et  ``"1D"`` ¨resp.
+
+    1) Pour **`b >= 36**2`**, on procède comme dans le point précédent excepté que l'écriture `36`-adique de `n` aura plus de deux chiffres avec si besoin des zéros ajoutés automatiquement à gauche.
+
+
+Quant à l'écriture alphanumérique, lorsque chaque chiffre nécessite au moins deux caractères, ¨ie pour une base `b > 36`, par défaut on ajoute un point ``.`` pour séparer chaque chiffre (ceci facilite la lecture du nombre obtenu). Si besoin, on peut changer de séparateur comme ci-après.
+
+...python-term::
+    >>> n = 1 + 39*3000 + 10*3000**7
+    >>> b = 3000
+    >>> print(int2bnumerals(n, b))
+    ['00A', '000', '000', '000', '000', '000', '013', '001']
+    >>> print(repr(int2bnb(n, b, sep = "")))
+    '00A000000000000000013001'
+
+
+warning::
+    Dans l'écriture '[00A000000000000000013001]_3000', les zéros à gauche ne sont pas superflus puisqu'en fait nous avons '[00A.000.000.000.000.000.013.001]_3000' où '[00A]_3000' désigne un chiffre, un symbole, non nul dans la base `3000`.

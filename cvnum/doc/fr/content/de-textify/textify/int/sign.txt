@@ -1,0 +1,22 @@
+﻿this::
+    date = 2013-11-05
+
+
+===================
+Besoin d'un signe ?
+===================
+
+Vous pouvez indiquer un signe comme dans le code ci-après. Nous avons utilisé des espaces afin de faciliter la lecture du nombre.
+
+python::
+    from cvnum import textify
+
+    oneNumber = textify.Integer("+ 123 456 789", lang = "fr_FR")
+    print(oneNumber)
+
+
+Le nom obtenu via ce code est le suivant.
+
+terminal::
+    plus cent vingt-trois millions quatre cent cinquante-six mille sept cent
+    quatre-vingt-neuf

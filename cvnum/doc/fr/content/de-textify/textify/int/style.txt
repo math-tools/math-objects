@@ -1,0 +1,34 @@
+﻿this::
+    date = 2022-03-03
+
+
+===============================================
+Des styles particuliers pour les "gros" nombres
+===============================================
+
+En français, il est possible d'utiliser des noms particuliers pour de très grandes puissances de dix en suivant soit la convention de M. Chuquet, soit celle de M. Rowlett. Voici une exemple.
+
+python::
+    from cvnum import textify
+
+    oneNumber = textify.Integer(10**23 + 1234, lang = 'fr_FR')
+    print("*", oneNumber)
+
+    oneNumber.style = "chuquet"
+    print("*", oneNumber)
+
+    oneNumber.style = "rowlett"
+    print("*", oneNumber)
+
+    # Retour au style usuel.
+    oneNumber.style = "usual"
+    print("*", oneNumber)
+
+
+Ceci produira les noms suivants.
+
+terminal::
+    * cent mille milliards de milliards mille deux cent trente-quatre
+    * cent mille trillions mille deux cent trente-quatre
+    * cent eptillions mille deux cent trente-quatre
+    * cent mille milliards de milliards mille deux cent trente-quatre

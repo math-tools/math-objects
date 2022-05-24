@@ -1,0 +1,14 @@
+sign::
+    + = plus
+    - = moins
+
+general::
+    sep = .
+    big = * big
+
+group::
+    3  = [d(2) :if: d(2) > 1]
+         mille
+
+small::
+    0 = [d(2) :if: d(2) > 1]

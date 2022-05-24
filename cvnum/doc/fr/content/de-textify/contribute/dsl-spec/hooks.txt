@@ -1,0 +1,48 @@
+this::
+    date = 2022-03-15
+
+
+============
+Les crochets
+============
+
+warning::
+    Des crochets ne peuvent pas contenir d'autres crochets.
+
+
+------------------------
+Analyse d'un petit ¨nbre
+------------------------
+
+Dans cette situation, les crochets peuvent avoir les types suivants de contenu.
+
+    1) L'usage d'un naturel cvnum::``m`` est possible, bien qu'inutile ici (voir le dernier point ci-dessous).
+
+    1) Via cvnum::``m..n``, on indique une alternative de valeurs allant de cvnum::``n`` à cvnum::``m``.
+
+    1) On peut indiquer des alternatives mixtes de valeurs via cvnum::``a | b | c | ...`` une suite finie de contenus séparés par des barres verticales ``|``, chaque contenu étant de l'un des deux types précédents.
+
+
+-----------------
+Déterminer un nom
+-----------------
+
+Dans cette situation, les crochets peuvent avoir les types suivants de contenu.
+
+    1) L'usage d'un naturel cvnum::``n`` est accepté.
+
+    1) L'usage de la variable spéciale cvnum::``d`` est possible.
+
+    1) Une extraction ciblée d'un chiffre via cvnum::``d(n)``, avec cvnum::``n`` un naturel, est autorisée.
+
+    1) Plus généralement, on dispose d'une extraction étendue de chiffres via cvnum::``d(m..n)``, avec cvnum::``m`` et cvnum::``n`` deux naturels.
+
+    1) De façon similaire, mais uniquement pour les groupes, on peut employer la variable spéciale cvnum::``r``, ainsi que cvnum::``r(n)`` et cvnum::``r(m..n)``.
+
+    1) On peut utiliser une suite finie de contenus de l'un des types ci-dessus comme dans cvnum::``d(2)00``.
+
+    1) Enfin, on dipose des alternatives cvnum::``... :if: ... :else: ...`` et cvnum::``... :if: ...`` où les cas gagnants ¨etou perdants doivent être du type précédent.
+
+
+note::
+    L'utilisation d'espaces comme dans cvnum::``d(2) 0  0`` est possible, mais déconseillée.

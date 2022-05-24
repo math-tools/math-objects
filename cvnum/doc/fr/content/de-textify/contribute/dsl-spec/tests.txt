@@ -1,0 +1,32 @@
+this::
+    date = 2022-03-14
+
+
+=================
+Tests disponibles
+=================
+
+-------------------------
+Opérateurs de comparaison
+-------------------------
+
+Voici la liste complète des opérateurs supportés pour faire des tests comme cvnum::``d(0..5) = 0`` ou cvnum::``r > 1``.
+
+    1) cvnum::``=`` teste une égalité
+    ((
+        Les codeurs noteront que l'on doit utiliser un signe cvnum::``=`` tout seul.
+    )).
+    On peut a contrario utiliser cvnum::``!=`` pour la non égalité.
+
+    1) cvnum::``<``, cvnum::``>``, cvnum::``<=`` et cvnum::``>=`` sont les opérateurs de comparaison classiques.
+
+
+----------------------
+Que peut-on comparer ?
+----------------------
+
+Les tests sont tous du type cvnum::``CALCULABLE_1  <:COMPARATEUR:>  CALCULABLE_2`` où les pseudo-variables cvnum::``CALCULABLE_1``, cvnum::``CALCULABLE_2`` et cvnum::``<:COMPARATEUR:>`` sont des types suivants.
+
+    1) cvnum::``<:COMPARATEUR:>`` doit être l'un des opérateurs de comparaison présentés dans la section précédente.
+
+    1) cvnum::``CALCULABLE_1`` et cvnum::``CALCULABLE_2`` doivent respecter la syntaxe des contenus, hors alternatives, pour des crochets servant à traduire un nombre.

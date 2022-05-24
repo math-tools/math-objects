@@ -1,0 +1,30 @@
+this::
+    date = 2022-03-06
+
+
+==============
+Qui et quand ?
+==============
+
+Chaque fichier de ¨trad peut fournir des ¨infos sur le fichier. Dans l'exemple suivant le code parle de lui-même une fois que l'on a compris que le bloc peuf::``this`` sert à indiquer un bloc de clé-valeur.
+
+cvnum::
+    ---
+    file    = FR/FR[chuquet-1]/integers.txt
+    extract = yes
+    ---
+
+    /***
+    this::
+        author = Christophe, Bal [projetmbc@gmail.com]
+        date   = 2022-03-05
+
+
+    Source used.
+
+        1) cf::``Noms des grands nombres ;
+                https://fr.wikipedia.org/wiki/Noms_des_grands_nombres``
+
+        2) cf::``Nicolas Chuquet - Les grands nombres ;
+                https://fr.wikipedia.org/wiki/Nicolas_Chuquet#Les_grands_nombres``
+    ***/

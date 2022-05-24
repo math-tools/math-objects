@@ -1,0 +1,19 @@
+this::
+    date = 2022-03-06
+
+
+============================
+Nommer les signes `+` et `-`
+============================
+
+Tout se passe dans le bloc cvnum::``sign`` comme dans l'exemple suivant.
+
+cvnum::
+    ---
+    file    = FR/FR/integers.txt
+    extract = yes
+    ---
+
+    sign::
+        + = plus
+        - = moins

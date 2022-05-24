@@ -1,0 +1,54 @@
+﻿this::
+    date = 2022-03-23
+
+
+=================================
+Changement de bases "quelconques"
+=================================
+
+Pour pouvoir faire tout type de transformations entre deux bases, il faut passer via la classe ``Base2Base`` comme dans l'exemple suivant où est utilisé `164 = [A4]_16 = [10100100]_2`
+((
+    La deuxième égalité s'obtient rapidement via `[A]_16 = 10 = [1010]_2` et `[4]_16 = 4 = [0100]_2`.
+)).
+
+python-term::
+    >>> from cvnum.convert.base2base import *
+    >>> base2base = Base2Base(bases = (16, 2))
+    >>> print(base2base.convert('A4', FORMAT_DIGITS))
+    [1, 0, 1, 0, 0, 1, 0, 0]
+    >>> print(base2base.convert('A4', FORMAT_NUMERALS))
+    ['1', '0', '1', '0', '0', '1', '0', '0']
+    >>> print(repr(base2base.convert('A4', FORMAT_BASE_NB)))
+    '10100100'
+
+
+En plus des constantes bien nommées ``FORMAT_DIGITS``, ``FORMAT_NUMERALS`` et ``FORMAT_BASE_NB``, il y a aussi ``FORMAT_INT`` mais qui n'est utilisable que pour la base décimale en arrivée. Voici un cas d'utilisation montrant au passage comment changer la ¨2e base.
+
+...python-term::
+    >>> base2base.changebases(b = 10, which = 2)
+    >>> print(base2base.convert('A4', FORMAT_INT))
+    164
+
+
+Lorsque la ¨1ere base est décimale, il est possible de donner à transformer un naturel comme le montre l'exemple suivant qui montre aussi comment changer les deux bases.
+Noter au passage qu'il est bien entendu impossible d'utiliser ``FORMAT_INT`` lorsque la base d'arrivée n'est pas décimale.
+
+...python-term::
+    >>> base2base.changebases(b = (10, 2))
+    >>> print(base2base.convert(7, FORMAT_BASE_NB))
+    111
+    >>> print(base2base.convert(7, FORMAT_DIGITS))
+    [1, 1, 1]
+    >>> print(base2base.convert(7, FORMAT_INT))
+    ...
+    ValueError:  format << int >> used with << base_2 = 2 != 10 >>
+    ...
+
+
+Pour finir, noter que pour les cas précédents, et le suivant, la classe ``Base2Base`` devine le format d'entrée.
+
+...python-term::
+    >>> print(base2base.convert([1, 7], FORMAT_DIGITS))
+    [1, 0, 0, 0, 1]
+    >>> print(base2base.convert(['1', '7'], FORMAT_DIGITS))
+    [1, 0, 0, 0, 1]
