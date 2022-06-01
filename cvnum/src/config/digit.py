@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-from typing import *
-
 from collections import OrderedDict
-
-# The following dictionary was automatically build.
 
 ROMAN_2_NUMERAL = OrderedDict([
     ('M', 1000),

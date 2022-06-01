@@ -50,7 +50,7 @@ def pythonify(
 # --  See the repository of the project ``cvnum`` for more      -- #
 # --  informations.                                             -- #
 # --                                                            -- #
-# --      + https://github.com/math-objects/cvnum               -- #
+# --      + https://github.com/math-tools/math-objects          -- #
 # ---------------------------------------------------------------- #
 
 from collections import OrderedDict

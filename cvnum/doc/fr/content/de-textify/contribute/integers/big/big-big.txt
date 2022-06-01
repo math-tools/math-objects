@@ -11,7 +11,7 @@ Prenons le cas de l'espagnol qui permet de parler de "millones de millones de mi
 ((
     Nous ne répondrons pas à la question épineuse de l'utilité de ceci.
 )).
-Cette régle est indiquée comme suit via la clé cvnum::``big`` du bloc cvnum::``gene``.
+Cette régle est indiquée comme suit via la clé cvnum::``big`` du bloc cvnum::``general``.
 
 cvnum::
     ---
