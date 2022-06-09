@@ -47,8 +47,8 @@ def pythonify(
 # --                                                            -- #
 # --      + ``tools/factory/de-textify/build_tr.py``            -- #
 # --                                                            -- #
-# --  See the repository of the project ``cvnum`` for more      -- #
-# --  informations.                                             -- #
+# --  See the project ``cvnum`` in the mono repository          -- #
+# --  ``math-objects`` for more informations.                   -- #
 # --                                                            -- #
 # --      + https://github.com/math-tools/math-objects          -- #
 # ---------------------------------------------------------------- #

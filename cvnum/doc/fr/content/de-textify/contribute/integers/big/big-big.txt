@@ -1,17 +1,17 @@
 ﻿this::
-    date = 2022-04-01
+    date = 2022-06-04
 
 
-==============================
-Nommer de ¨nbres "très grands"
-==============================
+===============================
+Nommer des ¨nbres "très grands"
+===============================
 
-La méthode retenue pour nommer des ¨nbres "très grands" est assez basique.
+La méthode retenue pour nommer des ¨nbres "très grands" est basique.
 Prenons le cas de l'espagnol qui permet de parler de "millones de millones de millones"
 ((
     Nous ne répondrons pas à la question épineuse de l'utilité de ceci.
 )).
-Cette régle est indiquée comme suit via la clé cvnum::``big`` du bloc cvnum::``general``.
+Cette régle est indiquée comme suit via la clé optionnelle cvnum::``big`` du bloc cvnum::``general``.
 
 cvnum::
     ---
@@ -32,25 +32,10 @@ cvnum::
 
 Le mécanisme disponible est basique.
 
-    1) La règle cvnum::``6 = "un :if: d = 1 :else: [d]" mill"ones :if: d > 1 :else: ón" [r]`` utilise un texte calculé "fixe"
-    ((
-        Copyright déposé.
-    ))
-    via cvnum::``mill"ones :if: d > 1 :else: ón"`` qui va produire soit "millones", soit "millón".
+    1) cvnum::``big = mill...`` dans cvnum::``big = mill... -> ... de millones`` indique de capturer tout mot commençant par "mill" dans le nom du nombre. Ici les trois ¨pts de suspension indiquent toute séquence de caractères sans espace.
 
-    1) cvnum::``big = mill...`` dans cvnum::``big = mill... -> ... de millones`` indique de capturer tout mot commençant par "mill" dans le texte calculé "fixe" par la règle du point précédent.
-    Les trois ¨pts de suspension indiquent toute séquence de caractères sans espace.
-
-    1) Enfin, c'est cvnum::``... de millones`` dans cvnum::``big = mill... -> ... de millones`` qui permet de demander de compléter les "millones" et "millón" capturés par autant de "de millones" que nécessaire.
-    Ici les trois ¨pts de suspension indiquent toute occurence capturée de "millones" ou "millón".
-
-
-note::
-    S'il y a plusieurs textes calculés "fixes", la capture sera faite dans chacun d'eux.
-
-
-warning::
-    Aucune capture n'est faite dans les textes produits par les régles cvnum::``"un :if: d = 1 :else: [d]"`` et cvnum::``[r]`` car celles-ci seront amenées à nommer des variables spéciales cvnum::``[d]`` et cvnum::``[r]``.
+    1) cvnum::``... de millones`` dans cvnum::``big = mill... -> ... de millones`` demande de compléter les "millones" et "millón" repérés par autant de "de millones" que nécessaire.
+    Ici les trois ¨pts de suspension indiquent toute occurence de "millones" ou "millón" (car ce sont les seuls mots produits par les règles de nommage qui commencent par "mill").
 
 
 note::

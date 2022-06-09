@@ -29,6 +29,7 @@ from src.textify import *
 
 lang = 'fr_FR'
 # lang = 'ge_GE'
+lang = 'es_ES'
 
 nbtests_by_slice = 1
 

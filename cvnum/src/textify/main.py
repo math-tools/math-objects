@@ -16,14 +16,64 @@ from .automata import *
 ###
 # This class can name integers in different languages.
 ###
-class IntName(IntNameAutomata):
+class IntName:
 ###
 # prototype::
 #     lang : the language used to name integers
 #          @ lang in ALL_LANGS
 ###
     def __init__(self, lang: str) -> None:
-        super().__init__(lang)
+        self.lang = lang
+
+###
+# We have to verify the language wanted when it is setted and also to update
+# internal variables used for one language.
+###
+    @property
+    def lang(self) -> str:
+        return self._lang
+
+    @lang.setter
+    def lang(self, lang: str) -> None:
+        assert lang in ALL_LANGS
+
+        self._lang = lang
+        self.update_internals()
+
+###
+# prototype::
+#     :action: update of the values of private attributes used to name integers.
+###
+    def update_internals(self) -> None:
+        rulestouse = INT_2_NAME[self.lang]
+
+# Signs
+        self._sign_name = {
+            '+': rulestouse[DSL_SPECS_SIGN][DSL_TAG_SIGN_PLUS],
+            '-': rulestouse[DSL_SPECS_SIGN][DSL_TAG_SIGN_MINUS],
+        }
+
+# General
+        self._groups_sep    = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_SEP]
+        self._groups_big    = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
+        self._groups_big_OK = bool(self._groups_big)
+
+# Groups
+        self._groups           = rulestouse[DSL_SPECS_GROUP]
+        self._groups_slices    = list(self._groups)
+        self._groups_max_power = self._groups_slices[-1]
+
+# Small
+        self._small_asit = rulestouse[DSL_SPECS_SMALL][
+            DSL_ACTION_ASIT
+        ]
+
+        self._small_matching = rulestouse[DSL_SPECS_SMALL][
+            DSL_ACTION_MATCHING
+        ]
+
+# Patch
+        self._patch = rulestouse[DSL_SPECS_PATCH]
 
 
 ###
@@ -37,6 +87,53 @@ class IntName(IntNameAutomata):
 #           self._build_name_from_slices
 ###
     def nameof(self, nb: Union[str, int]) -> str:
+# Name of the sign and absolute value of the integer in string format.
+        sign, absnb = self.sign_n_abs(nb)
+
+# A little big or a real big number?
+        if self._groups_big_OK:
+# The naming will use a specilaized recursive method.
+            name = self.name_very_big(absnb)
+
+        else:
+# We must have a little big number.
+            if len(str(absnb)) > 2*self._groups_max_power:
+                raise ValueError(
+                     "number too big to be named ."
+                     "The maximal number of digits is "
+                    f"{2*self._groups_max_power}"
+                     " < "
+                    f"{len(str(absnb))}."
+                )
+
+            name = self.name_little_big(absnb)
+
+# The "complete" name.
+        if sign:
+            name = f"{sign} {name}"
+
+# Patch?
+        for old, new in self._patch.items():
+            name.replace(old, new)
+
+# Nothing more to do.
+        return name
+
+
+
+
+
+
+
+
+###
+# prototype::
+#     nb : an integer to name
+#        @ type(nb) = int ==> nb >= 0
+#
+#     :return: the name of the sign, and the absolute value of ``nb``
+###
+    def sign_n_abs(self, nb: Union[str, int]) -> Tuple[str, int]:
 # Normalization and sign of the number.
         sign = ""
 
@@ -57,6 +154,12 @@ class IntName(IntNameAutomata):
 
             nb = int(nb)
 
+        else:
+            raise ValueError(
+                "``nb`` must be an integer or a string"
+            )
+
+
 # Name of the sign
         if sign:
             if self._sign_name[sign] is None:
@@ -67,130 +170,28 @@ class IntName(IntNameAutomata):
 
             sign = self._sign_name[sign]
 
-# Naming using the slices, but not a sign.
-        self._reversed_strslices = self._build_reverse_strslices(nb)
-        name                     = self._build_name_from_slices()
-
-# The "complete" name.
-        if sign:
-            name = f"{sign} {name}"
-
-# Patch?
-        for old, new in self._patch.items():
-            name.replace(old, new)
-
 # Nothing more to do.
-        return name
+        return sign, nb
 
 
-###
-# prototype::
-#     :return: the name build using a list of "small" numbers (concretly,
-#              this name is the one expected without taking care of any sign)
-###
-    def _build_name_from_slices(self) -> str:
-# Just zero to name.
-        if(
-            len(self._reversed_strslices) == 1
-            and
-            int(self._reversed_strslices[0]) == 0
-        ):
-            return self.nameofsmall('0')
 
-# A none zero value to name.
-        istart_grp = 0
-
-        for i, smallnb in enumerate(self._reversed_strslices):
-            print('---')
-
-# We have to ignore intermediate zeros.
-            if int(smallnb) != 0:
-                print(self.nameofsmall(smallnb))
-
-            nb_group_slice = i % self._groups_nb_slices - 1
-            nb_of_biggrps  = i // self._groups_nb_slices - 1
-
-            if nb_group_slice == -1 and nb_of_biggrps >= 0:
-                istart_grp = i + 1
-
-                spevar_grp_D = self._build_spevar(
-                    i,
-                    i + self._groups_nb_slices
-                )
-                spevar_grp_R = self._build_spevar(
-                    0,
-                    i
-                )
-
-                print('>>> NB OF OF  :', self._gene_big*nb_of_biggrps)
-
-            else:
-                spevar_grp_D = smallnb
-                spevar_grp_R = self._build_spevar(
-                    istart_grp,
-                    i
-                )
-
-                print('>>> GROUP POWER:', self._groups_slices[nb_group_slice])
-
-
-            print(f'{spevar_grp_D=}')
-            print(f'{spevar_grp_R=}')
 
 
 ###
 # prototype::
-#     start : the start position in ``self._reversed_strslices``
-#     end   : just after the end in ``self._reversed_strslices``
+#     ?? : ???
 #
-#     :return: the string representation of the number obtained by concatening,
-#              in the good order, the slicesfrom position ``start`` to the
-#              position just before ``end``.
+#     :return: ??
 ###
-    def _build_spevar(
-        self,
-        start: int,
-        end  : int
-    ) -> str:
-        return "".join(
-            reversed(
-                self._reversed_strslices[start: end]
-            )
-        )
+    def name_very_big(self, absnb):
+        print("DU GROS")
 
 
 ###
 # prototype::
-#     intnb : an integer to slice respecting the groups used by the
-#             language ``self.lang``
-#           @ intnb >= 0
+#     ?? : ???
 #
-#     :return: a list of string slices following the specifications of
-#              groups for the language ``self.lang``
+#     :return: ??
 ###
-    def _build_reverse_strslices(self, intnb: int) -> List[str]:
-        slices = []
-
-        iprev  = 0
-
-        for i in self._groups_slices:
-            delta_i     = i - iprev
-            iprev       = i
-            powerofbase = 10**(delta_i)
-
-# We need to fill with zeros (for groups with zero number).
-            strnb = str(intnb % powerofbase).zfill(delta_i)
-
-            slices.append(strnb)
-
-            intnb = intnb // powerofbase
-
-            if intnb == 0:
-                break
-
-# We have to continue recursively.
-        if intnb != 0:
-            slices += self._build_reverse_strslices(intnb)
-
-# Nothing more left to do.
-        return slices
+    def name_little_big(self, absnb):
+        print("PAS DU GROS")

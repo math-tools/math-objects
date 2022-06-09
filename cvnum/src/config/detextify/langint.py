@@ -5,10 +5,10 @@
 # --                                                            -- #
 # --      + ``tools/factory/de-textify/build_tr.py``            -- #
 # --                                                            -- #
-# --  See the repository of the project ``cvnum`` for more      -- #
-# --  informations.                                             -- #
+# --  See the project ``cvnum`` in the mono repository          -- #
+# --  ``math-objects`` for more informations.                   -- #
 # --                                                            -- #
-# --      + https://github.com/math-objects/cvnum               -- #
+# --      + https://github.com/math-tools/math-objects          -- #
 # ---------------------------------------------------------------- #
 
 from collections import OrderedDict
@@ -2838,19 +2838,6 @@ INT_2_NAME["ge_GE"] = {
                                 ((DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),),
                             ),
                             (DSL_ACTION_VERBATIM, "zig"),
-                        ),
-                    ),
-                    (
-                        __re_compile(".1"),
-                        (
-                            (DSL_ACTION_VERBATIM, "einsund"),
-                            (
-                                DSL_ACTION_NAME_IT,
-                                (
-                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
-                                    (DSL_ACTION_VERBATIM, "0"),
-                                ),
-                            ),
                         ),
                     ),
                     (
