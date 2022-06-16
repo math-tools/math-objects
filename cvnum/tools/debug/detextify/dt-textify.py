@@ -27,9 +27,9 @@ MODULE_DIR = addfindsrc(
 
 from src.textify import *
 
-lang = 'fr_FR'
 # lang = 'ge_GE'
 lang = 'es_ES'
+lang = 'fr_FR'
 
 nbtests_by_slice = 1
 

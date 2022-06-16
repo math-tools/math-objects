@@ -16,97 +16,35 @@ from .automata import *
 ###
 # This class can name integers in different languages.
 ###
-class IntName:
-###
-# prototype::
-#     lang : the language used to name integers
-#          @ lang in ALL_LANGS
-###
-    def __init__(self, lang: str) -> None:
-        self.lang = lang
-
-###
-# We have to verify the language wanted when it is setted and also to update
-# internal variables used for one language.
-###
-    @property
-    def lang(self) -> str:
-        return self._lang
-
-    @lang.setter
-    def lang(self, lang: str) -> None:
-        assert lang in ALL_LANGS
-
-        self._lang = lang
-        self.update_internals()
-
-###
-# prototype::
-#     :action: update of the values of private attributes used to name integers.
-###
-    def update_internals(self) -> None:
-        rulestouse = INT_2_NAME[self.lang]
-
-# Signs
-        self._sign_name = {
-            '+': rulestouse[DSL_SPECS_SIGN][DSL_TAG_SIGN_PLUS],
-            '-': rulestouse[DSL_SPECS_SIGN][DSL_TAG_SIGN_MINUS],
-        }
-
-# General
-        self._groups_sep    = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_SEP]
-        self._groups_big    = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
-        self._groups_big_OK = bool(self._groups_big)
-
-# Groups
-        self._groups           = rulestouse[DSL_SPECS_GROUP]
-        self._groups_slices    = list(self._groups)
-        self._groups_max_power = self._groups_slices[-1]
-
-# Small
-        self._small_asit = rulestouse[DSL_SPECS_SMALL][
-            DSL_ACTION_ASIT
-        ]
-
-        self._small_matching = rulestouse[DSL_SPECS_SMALL][
-            DSL_ACTION_MATCHING
-        ]
-
-# Patch
-        self._patch = rulestouse[DSL_SPECS_PATCH]
-
-
+class IntName(BaseAutomata):
 ###
 # prototype::
 #     nb : an integer to name
-#        @ type(nb) = int ==> nb >= 0
 #
 #     :return: the name of ``nb`` in the language ``self.lang``
 #
-#     :see: self._build_reverse_slicesint,
-#           self._build_name_from_slices
+#     :see: self.name_big
 ###
     def nameof(self, nb: Union[str, int]) -> str:
 # Name of the sign and absolute value of the integer in string format.
-        sign, absnb = self.sign_n_abs(nb)
+        sign, str_absnb = self.sign_n_abs(nb)
 
-# A little big or a real big number?
-        if self._groups_big_OK:
-# The naming will use a specilaized recursive method.
-            name = self.name_very_big(absnb)
+# Do big numbers are allowed?
+        if (
+            not self._very_big_allowed
+            and
+            len(str_absnb) > 2*self._small_big_max_expo
+        ):
+            raise ValueError(
+                 "number too big to be named. "
+                 "The maximal number of digits is "
+                f"{2*self._small_big_max_expo}"
+                 " < "
+                f"{len(str_absnb)}."
+            )
 
-        else:
-# We must have a little big number.
-            if len(str(absnb)) > 2*self._groups_max_power:
-                raise ValueError(
-                     "number too big to be named ."
-                     "The maximal number of digits is "
-                    f"{2*self._groups_max_power}"
-                     " < "
-                    f"{len(str(absnb))}."
-                )
-
-            name = self.name_little_big(absnb)
+# Let's go!
+        name = self.name_big(str_absnb)
 
 # The "complete" name.
         if sign:
@@ -114,26 +52,21 @@ class IntName:
 
 # Patch?
         for old, new in self._patch.items():
-            name.replace(old, new)
+            name = name.replace(old, new)
 
 # Nothing more to do.
         return name
 
 
-
-
-
-
-
-
 ###
 # prototype::
 #     nb : an integer to name
-#        @ type(nb) = int ==> nb >= 0
+#        @ real(nb) in ¨Z
 #
-#     :return: the name of the sign, and the absolute value of ``nb``
+#     :return: the name of the sign, and just the string version of
+#              the absolute value of ``nb``
 ###
-    def sign_n_abs(self, nb: Union[str, int]) -> Tuple[str, int]:
+    def sign_n_abs(self, nb: Union[str, int]) -> Tuple[str, str]:
 # Normalization and sign of the number.
         sign = ""
 
@@ -141,6 +74,8 @@ class IntName:
             if nb < 0:
                 sign = "-"
                 nb   = -nb
+
+            nb = str(nb)
 
         elif isinstance(nb, str):
             if nb[0] in "-+":
@@ -151,8 +86,6 @@ class IntName:
                 raise ValueError(
                     f'``{nb} = "{sign}{nb}"`` is not an integer'
                 )
-
-            nb = int(nb)
 
         else:
             raise ValueError(
@@ -174,24 +107,50 @@ class IntName:
         return sign, nb
 
 
+###
+# prototype::
+#     XXX :???
+#
+#     :return: ??
+###
+    def name_big(self, str_absnb, suffix = ''):
+        D_VAR = str_absnb[:-self._small_big_max_expo]
+        R_VAR = str_absnb[-self._small_big_max_expo:]
+
+        print("BIG:", R_VAR, D_VAR, suffix)
+
+        suffix = self.next_big_suffix(suffix)
+
+        if D_VAR:
+           self.name_big(D_VAR, suffix)
+
 
 
 
 ###
 # prototype::
-#     ?? : ???
+#     XXX :???
 #
 #     :return: ??
 ###
-    def name_very_big(self, absnb):
-        print("DU GROS")
+    def next_big_suffix(self, suffix):
+        if suffix:
+            suffix = suffix.replace('...', self._very_big_suffix)
+
+        else:
+            suffix = self._very_big_suffix
+
+
+        return suffix
+
+
 
 
 ###
 # prototype::
-#     ?? : ???
+#     XXX :???
 #
 #     :return: ??
 ###
-    def name_little_big(self, absnb):
-        print("PAS DU GROS")
+    def name_small_big(self, str_absnb):
+        ...

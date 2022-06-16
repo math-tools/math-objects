@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-03-03
+    date = 2022-06-16
 
 
 =================
@@ -11,25 +11,17 @@ Par défaut, la langue est l'anglais de Grande-Bretagne. C'est pour cela que le 
 python::
     from cvnum import textify
 
-    oneNumber = textify.Integer(number = 123)
-
-    print(oneNumber)
-
-
-info::
-    Le nom est stocké dans l'attribut ``name``, donc si vous souhaitez stocker le nom dans une variable, il suffit d'utiliser ``uneVariable = oneNumber.name``.
+    intname = IntName()
+    print(intname.nameof(123))
 
 
-Si vous souhaitez utiliser le français de France, vous pouvez faire comme ci-dessous où vous noterez la possibilité d'utiliser une chaîne de caractères au lieu d'un entier ¨python. Ce code produira "cent vingt-trois" puis "trois cent vingt-et-un".
+Si vous souhaitez utiliser le français de France, vous pouvez faire comme ci-dessous où vous noterez la possibilité d'utiliser une chaîne de caractères au lieu d'un entier ¨python. Ce code produira "cent vingt-trois".
 
 python::
     from cvnum import textify
 
-    oneNumber = textify.Integer(number = 123, lang = 'fr_FR')
-    print(oneNumber)
-
-    oneNumber.number = "321"
-    print(oneNumber)
+    intname = IntName("fr_FR")
+    print(intname.nameof("123"))
 
 
 Vous pouvez aussi juste changer la langue comme dans le code suivant.
@@ -37,24 +29,22 @@ Vous pouvez aussi juste changer la langue comme dans le code suivant.
 python::
     from cvnum import textify
 
-    oneNumber = textify.Integer(123)
-    print(oneNumber)
+    # En anglais de Grande-Bretagne, cas par défaut.
+    intname = IntName()
+    print(intname, ":", intname.nameof(123))
 
-    oneNumber.lang = "en_US"
-    print(oneNumber)
+    # En anglais américain.
+    intname.lang = "en_US"
+    print(intname, ":", intname.nameof(123))
 
-    oneNumber.lang = "es_ES"
-    print(oneNumber)
-
-    # The method ``reset`` is well named...
-    oneNumber.reset()
-    print(oneNumber)
+    # En espagnol.
+    intname.lang = "es_ES"
+    print(intname, ":", intname.nameof(123))
 
 
 Une fois lancé dans un terminal, le code produira ce qui suit.
 
 terminal::
-    one hundred and twenty-three
-    one hundred twenty-three
-    ciento veintitrés
-    one hundred and twenty-three
+    en_GB : one hundred and twenty-three
+    en_US : one hundred twenty-three
+    es_ES : ciento veintitrés

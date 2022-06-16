@@ -102,10 +102,10 @@ def pycode_naming(debug_coding, alltrans):
             specs[DSL_SPECS_SMALL][DSL_ACTION_MATCHING][length] = newspecs_small_matching
 
         if specs[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]:
-            specs[DSL_SPECS_GENE][DSL_TAG_GENE_BIG] = {
-                compile(k): v
-                for k, v in specs[DSL_SPECS_GENE][DSL_TAG_GENE_BIG].items()
-            }
+            specs[DSL_SPECS_GENE][DSL_TAG_GENE_BIG] = (
+                compile(specs[DSL_SPECS_GENE][DSL_TAG_GENE_BIG][0]),
+                specs[DSL_SPECS_GENE][DSL_TAG_GENE_BIG][1]
+            )
 
 
 # Translations code.

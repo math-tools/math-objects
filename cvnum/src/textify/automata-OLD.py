@@ -6,14 +6,7 @@ from ..config.detextify import *
 
 
 class IntNameAutomata:
-###
-# prototype::
-#     lang : the language used to name integers
-#          @ lang in ALL_LANGS
-###
     def __init__(self, lang: str) -> None:
-        self.lang = lang
-
         self._DIRECT_ACTIONS = {
             DSL_ACTION_EXTRACT_NUMBER_OF: self.extractnbof,
             DSL_ACTION_IF_ELSE          : self.ifelse,

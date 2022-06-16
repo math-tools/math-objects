@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2013-11-05
+    date = 2022-06-16
 
 
 ===================
@@ -11,12 +11,14 @@ Vous pouvez indiquer un signe comme dans le code ci-après. Nous avons utilisé 
 python::
     from cvnum import textify
 
-    oneNumber = textify.Integer("+ 123 456 789", lang = "fr_FR")
-    print(oneNumber)
+    intname = IntName("fr_FR")
+    print(intname.nameof("+ 123 456 789"))
 
 
-Le nom obtenu via ce code est le suivant.
+Le nom obtenu via ce code est le suivant (sans les retours à la ligne).
 
 terminal::
-    plus cent vingt-trois millions quatre cent cinquante-six mille sept cent
-    quatre-vingt-neuf
+    plus
+    cent vingt-trois millions
+    quatre cent cinquante-six mille
+    sept cent quatre-vingt-neuf

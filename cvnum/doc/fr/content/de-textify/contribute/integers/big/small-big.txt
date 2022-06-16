@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-06-01
+    date = 2022-06-16
 
 
 ==================================
@@ -34,7 +34,11 @@ cvnum::
 
 
 Commençons par cvnum::``sep = .`` dans le bloc cvnum::``general``.
-Ceci définit le séparateur décimal autorisé pour faciliter l'écriture chiffrée d'un ¨nbre à traduire.
+Ceci définit le séparateur de chiffres autorisé pour faciliter l'écriture chiffrée d'un ¨nbre à traduire.
+L'utilisateur pourra ainsi indiquer le ¨nbre ``"111,222,333,444,555,666"`` lors de la demande de traduction en nom.
+
+note::
+    Il est toujours possible d'utiliser des espaces comme dans ``"111 222 333 444 555 666"``.
 
 
 Passons maintenant au bloc cvnum::``group`` dont les clés correspondent à des exposants de puissances de `10`.

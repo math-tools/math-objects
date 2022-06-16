@@ -51,7 +51,7 @@ class ParserGene(BaseParserRules):
             bigname = bigname.replace(ELLIPSIS, '\S+')
             bigname = f"(?P<bname>{bigname})"
 
-            self.specs[DSL_TAG_GENE_BIG] = {bigname: verybigname}
+            self.specs[DSL_TAG_GENE_BIG] = (bigname, verybigname)
 
 # ! -- DEBUGGING -- ! #
         # print('--- GENE ---')

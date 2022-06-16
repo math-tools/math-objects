@@ -7,5 +7,5 @@ Nommer un nombre
 ================
 
 content::
-    ¨content/textify.txt        ????
+    ¨content/textify.txt
     ¨content/contibute.txt
