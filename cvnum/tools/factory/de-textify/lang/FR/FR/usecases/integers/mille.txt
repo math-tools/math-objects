@@ -1,0 +1,2 @@
+4000    = quatre mille
+300 000 = trois cent mille

@@ -2,29 +2,6 @@
 
 
 ==
-??????
-==
-
------
-:new:
------
-
-[[:api:]]
-Naming integers: the ¨new ¨python ¨api is now available.
-
-
--------
-:break:
--------
-
-[[:api:]]
-Naming integers: converting names to integers has been suppressed because the old implementation doesn't work with language like German (this feature should come back later).
-
-
-// ---------- //
-
-
-==
 16
 ==
 

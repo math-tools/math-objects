@@ -1,0 +1,21 @@
+// ---------- //
+
+
+==
+01
+==
+
+--------
+:fordev:
+--------
+
+[[:api:]]
+Configuration file path::``config/detextify/langint.py``: the special constants have different values such as to give precise error messages in case of a bug.
+
+
+-------
+:break:
+-------
+
+[[:api:]]
+Naming integers: the conversion from name to integer has been removed because the previous implementation doesn't work with languages like German (this feature should come back later).

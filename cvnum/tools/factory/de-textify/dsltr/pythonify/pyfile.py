@@ -24,6 +24,7 @@ def addnewlines(n):
 def pycode_spevars(spevars_used):
     spevars_code = []
     spevars_vals = {}
+    spevars_nb   = -1
 
     for spekind in sorted(spevars_used.keys()):
         spevars = spevars_used[spekind]
@@ -39,7 +40,6 @@ def pycode_spevars(spevars_used):
 
         spevars_code += addnewlines(1)
 
-        spevars_nb        = -1
         kind_spevars_code = []
         last_subkind      = ""
 

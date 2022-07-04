@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-06-16
+    date = 2022-07-02
 
 
 =================
@@ -15,7 +15,7 @@ python::
     print(intname.nameof(123))
 
 
-Si vous souhaitez utiliser le français de France, vous pouvez faire comme ci-dessous où vous noterez la possibilité d'utiliser une chaîne de caractères au lieu d'un entier ¨python. Ce code produira "cent vingt-trois".
+Si vous souhaitez utiliser le français académique, vous pouvez faire comme ci-dessous où vous noterez la possibilité d'utiliser une chaîne de caractères au lieu d'un entier ¨python. Ce code produira "cent vingt-trois".
 
 python::
     from cvnum import textify
@@ -29,17 +29,17 @@ Vous pouvez aussi juste changer la langue comme dans le code suivant.
 python::
     from cvnum import textify
 
-    # En anglais de Grande-Bretagne, cas par défaut.
+    # Par défaut, on utilise l'anglais de Grande-Bretagne "en_GB".
     intname = IntName()
-    print(intname, ":", intname.nameof(123))
+    print(intname.lang, ":", intname.nameof(123))
 
     # En anglais américain.
     intname.lang = "en_US"
-    print(intname, ":", intname.nameof(123))
+    print(intname.lang, ":", intname.nameof(123))
 
     # En espagnol.
     intname.lang = "es_ES"
-    print(intname, ":", intname.nameof(123))
+    print(intname.lang, ":", intname.nameof(123))
 
 
 Une fois lancé dans un terminal, le code produira ce qui suit.

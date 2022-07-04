@@ -7,7 +7,7 @@ from cbdevtools import *
 
 # ! -- DEBUGGING -- ! #
 # Clear the terminal.
-print("\033c", end="")
+print("\033c", end = "")
 # ! -- DEBUGGING -- ! #
 
 
@@ -21,97 +21,65 @@ MODULE_DIR = addfindsrc(
 )
 
 
+# ----------- #
+# -- TOOLS -- #
+# ----------- #
+
+def testandprint(intname, x):
+    print('---')
+    print()
+    print(x)
+    print(f'  --> {intname.nameof(x)}')
+    print()
+
+
 # -------------- #
 # -- LET'S GO -- #
 # -------------- #
 
 from src.textify import *
 
-# lang = 'ge_GE'
+lang = 'de_DE'
+lang = 'en_GB'
+lang = 'it_IT'
 lang = 'es_ES'
 lang = 'fr_FR'
 
-nbtests_by_slice = 1
+nbtests_by_slice = 2
 
 intname = IntName(lang)
 
+for x in [
+    0,
+    # 987,
+    # 999,
+    # - 435,
+    # 506,
+    # 4**3, # = 64
+    # - 23_456_789_012,
+    - 999_000_000_000_666_555_444_333_222_111,
+    # 123456789012345678901234567890,
+]:
+    testandprint(intname, x)
+
 print('---')
 
-x = - 999_888_777_000_666_555_444_333_222_111
-print(x)
-print(f'    -> {intname.nameof(x)}')
-print()
-
 exit()
 
-x = 0
-print(x)
-print(f'    -> {intname.nameof(x)}')
 print()
-
-exit()
-
-x = - 23_456_789_012
-print(x)
-print(f'    -> {intname.nameof(x)}')
-print()
-
-exit()
-
-x = 987
-print(x)
-print(f'    -> {intname.nameof(x)}')
-print()
-
-exit()
-
-x = 999
-print(x)
-print(f'    -> {intname.nameof(x)}')
-print()
-
-exit()
-
-x = -435
-print(x)
-print(f'    -> {intname.nameof(x)}')
-print()
-
-# exit()
-
-x = 4**3
-print(x)
-print(f'    -> {intname.nameof(x)}')
-print()
-
-exit()
-
-x = 123456789012345678901234567890
-print(x)
-print(f'    -> {intname.nameof(x)}')
-print()
-
-# exit()
-
-x = 506
-
-print(x)
-print(f'    -> {intname.nameof(x)}')
-print()
-
-# exit()
 
 powers = [2, 3, 6, 9, 12, 15]
 
 for i, n in enumerate(powers):
     x_tested = []
+    n_prev   = powers[i-1]
 
-    min = 0 if i == 0 else 10**powers[i-1]
+    min = 0 if i == 0 else 10**n_prev
     max = 10**powers[i]
 
-    min_txt = "0" if min == 0 else f"10*{powers[i-1]}"
+    min_txt = "0" if min == 0 else f"10**{n_prev}"
 
-    print(f'--- {min_txt} <= ... <= 10**{n} ---')
+    print(f'--- RANDOM -- {min_txt} <= ... <= 10**{n} -- RANDOM ---')
 
     for _ in range(nbtests_by_slice):
         while((x := randint(min, max)) in x_tested):
@@ -119,7 +87,6 @@ for i, n in enumerate(powers):
 
         x_tested.append(x)
 
-        print(x)
-        print(f'    -> {intname.nameof(x)}')
+        testandprint(intname, x)
 
-    print()
+print('---')
