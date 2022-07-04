@@ -1,13 +1,8 @@
-/***
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
     date   = 2022-04-01
+    desc   = Names of integers in academic Italian.
 
-
-refs::
-    * cf::``Compter de 100 à cent milliards ;
-            https://www.allemandfacile.com/exercices/exercice-allemand-2/exercice-allemand-14795.php``
-***/
 
 sign::
     + = più

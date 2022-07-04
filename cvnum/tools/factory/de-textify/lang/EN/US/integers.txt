@@ -1,11 +1,8 @@
-/***
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
     date   = 2022-03-12
+    desc   = Names of integers in academic American English.
 
-
-This file defines the rules for naming a natural in American English.
-***/
 
 extend::
     lang = en_GB

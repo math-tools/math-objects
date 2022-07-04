@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-06-16
+    date = 2022-07-04
 
 
 ==================
@@ -11,5 +11,5 @@ Supposons que nous souhaitions avoir le nom de `2*10**27`. En français usuel, l
 python::
     from cvnum import textify
 
-    intname = IntName("fr_FR")
+    intname = IntName(fr_FR)
     print(intname.nameof(2*10**27))

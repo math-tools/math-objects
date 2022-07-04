@@ -1,11 +1,8 @@
-/***
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
     date   = 2022-04-01
+    desc   = Names of integers in academic French.
 
-
-This file defines the rules for naming a natural in French.
-***/
 
 sign::
     + = plus

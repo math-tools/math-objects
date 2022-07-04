@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-06-16
+    date = 2022-07-04
 
 
 ===================
@@ -11,7 +11,7 @@ Vous pouvez indiquer un signe comme dans le code ci-après. Nous avons utilisé 
 python::
     from cvnum import textify
 
-    intname = IntName("fr_FR")
+    intname = IntName(fr_FR)
     print(intname.nameof("+ 123 456 789"))
 
 

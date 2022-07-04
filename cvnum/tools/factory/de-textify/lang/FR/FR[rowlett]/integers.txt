@@ -1,15 +1,15 @@
-/***
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
     date   = 2022-03-12
+    desc   = Names of very large integers in French using
+             the Rowlett's rules.
 
-
-This file extends the naming rules to the case of very large numbers by following the Rowlett's rules.
-
+/***
 refs::
     * cf::``Noms des grands nombres ;
             https://fr.wikipedia.org/wiki/Noms_des_grands_nombres``
 ***/
+
 
 extend::
     lang = fr_FR

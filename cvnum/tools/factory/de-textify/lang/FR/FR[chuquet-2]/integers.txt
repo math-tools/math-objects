@@ -1,11 +1,10 @@
-/***
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
     date   = 2022-03-12
+    desc   = Names of very large integers in French using
+             the full Chuquet's rules (without using "milliard").
 
-
-This file extends the naming rules to the case of very large numbers by following the full Chuquet's rules.
-
+/***
 refs::
     1) cf::``Noms des grands nombres ;
              https://fr.wikipedia.org/wiki/Noms_des_grands_nombres``
@@ -13,6 +12,7 @@ refs::
     2) cf::``Le nom des grands nombres - Échelles courtes et longues ;
              https://www.math93.com/histoire-des-maths/histoire-des-nombres/1019-noms-des-grands-nombres.html``
 ***/
+
 
 extend::
     lang = fr_FR

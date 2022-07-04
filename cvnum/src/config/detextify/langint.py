@@ -15,6 +15,47 @@ from collections import OrderedDict
 from re          import compile as __re_compile
 
 
+# -------------------- #
+# -- TAGS FOR LANGS -- #
+# -------------------- #
+
+# Names of integers in academic German.
+de_DE = "de_DE"
+
+# Names of integers in academic British English.
+en_GB = "en_GB"
+
+# Names of integers in academic American English.
+en_US = "en_US"
+
+# Names of integers in academic Spanish.
+es_ES = "es_ES"
+
+# Names of integers in academic Belgian.
+fr_BE = "fr_BE"
+
+# Names of integers in academic French.
+fr_FR = "fr_FR"
+
+# Names of very large integers in French using the short Chuquet's rules
+# (without using "milliard").
+fr_FR_chuquet_1 = "fr_FR_chuquet_1"
+
+# Names of very large integers in French using the full Chuquet's rules
+# (without using "milliard").
+fr_FR_chuquet_2 = "fr_FR_chuquet_2"
+
+# Names of very large integers in French using the Rowlett's rules.
+fr_FR_rowlett = "fr_FR_rowlett"
+
+# Names of integers in academic French using the "hyphens everywhere"
+# convention.
+fr_FR_tiret = "fr_FR_tiret"
+
+# Names of integers in academic Italian.
+it_IT = "it_IT"
+
+
 # ------------- #
 # -- PATTERN -- #
 # ------------- #
@@ -84,7 +125,7 @@ DSL_TAG_SIGN_PLUS  = 23  # --> '+'
 INT_2_NAME = {}
 
 
-INT_2_NAME["de_DE"] = {
+INT_2_NAME[de_DE] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
         DSL_TAG_GENE_BIG: (
@@ -260,7 +301,7 @@ INT_2_NAME["de_DE"] = {
 }
 
 
-INT_2_NAME["en_GB"] = {
+INT_2_NAME[en_GB] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ",",
         DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>billion)"), "... of billion"),
@@ -403,7 +444,7 @@ INT_2_NAME["en_GB"] = {
 }
 
 
-INT_2_NAME["en_US"] = {
+INT_2_NAME[en_US] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ",",
         DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>billion)"), "... of billion"),
@@ -530,7 +571,7 @@ INT_2_NAME["en_US"] = {
 }
 
 
-INT_2_NAME["es_ES"] = {
+INT_2_NAME[es_ES] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
         DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>mill\\S+)"), "... de millones"),
@@ -716,7 +757,7 @@ INT_2_NAME["es_ES"] = {
 }
 
 
-INT_2_NAME["fr_BE"] = {
+INT_2_NAME[fr_BE] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
         DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>milliard\\S+)"), "... de milliards"),
@@ -918,7 +959,7 @@ INT_2_NAME["fr_BE"] = {
 }
 
 
-INT_2_NAME["fr_FR"] = {
+INT_2_NAME[fr_FR] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
         DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>milliard\\S+)"), "... de milliards"),
@@ -1155,7 +1196,7 @@ INT_2_NAME["fr_FR"] = {
 }
 
 
-INT_2_NAME["fr_FR[chuquet-1]"] = {
+INT_2_NAME[fr_FR_chuquet_1] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
         DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>milliard\\S+)"), "... de milliards"),
@@ -1537,7 +1578,7 @@ INT_2_NAME["fr_FR[chuquet-1]"] = {
 }
 
 
-INT_2_NAME["fr_FR[chuquet-2]"] = {
+INT_2_NAME[fr_FR_chuquet_2] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
         DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>milliard\\S+)"), "... de milliards"),
@@ -2119,7 +2160,7 @@ INT_2_NAME["fr_FR[chuquet-2]"] = {
 }
 
 
-INT_2_NAME["fr_FR[rowlett]"] = {
+INT_2_NAME[fr_FR_rowlett] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
         DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>milliard\\S+)"), "... de milliards"),
@@ -2896,7 +2937,244 @@ INT_2_NAME["fr_FR[rowlett]"] = {
 }
 
 
-INT_2_NAME["it_IT"] = {
+INT_2_NAME[fr_FR_tiret] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>milliard\\S+)"), "... de milliards"),
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "-mille-"),
+            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, "-million"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "-"),
+            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, "-"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 5)),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "de"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "-milliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "-"),
+            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {"cents mille": "cent mille"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "moins"},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zéro"),),
+            "1": ((DSL_ACTION_VERBATIM, "un"),),
+            "2": ((DSL_ACTION_VERBATIM, "deux"),),
+            "3": ((DSL_ACTION_VERBATIM, "trois"),),
+            "4": ((DSL_ACTION_VERBATIM, "quatre"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinq"),),
+            "6": ((DSL_ACTION_VERBATIM, "six"),),
+            "7": ((DSL_ACTION_VERBATIM, "sept"),),
+            "8": ((DSL_ACTION_VERBATIM, "huit"),),
+            "9": ((DSL_ACTION_VERBATIM, "neuf"),),
+            "10": ((DSL_ACTION_VERBATIM, "dix"),),
+            "11": ((DSL_ACTION_VERBATIM, "onze"),),
+            "12": ((DSL_ACTION_VERBATIM, "douze"),),
+            "13": ((DSL_ACTION_VERBATIM, "treize"),),
+            "14": ((DSL_ACTION_VERBATIM, "quatorze"),),
+            "15": ((DSL_ACTION_VERBATIM, "quinze"),),
+            "16": ((DSL_ACTION_VERBATIM, "seize"),),
+            "20": ((DSL_ACTION_VERBATIM, "vingt"),),
+            "30": ((DSL_ACTION_VERBATIM, "trente"),),
+            "40": ((DSL_ACTION_VERBATIM, "quarante"),),
+            "50": ((DSL_ACTION_VERBATIM, "cinquante"),),
+            "60": ((DSL_ACTION_VERBATIM, "soixante"),),
+            "80": ((DSL_ACTION_VERBATIM, "quatre-vingts"),),
+            "71": ((DSL_ACTION_VERBATIM, "soixante-et-onze"),),
+            "100": ((DSL_ACTION_VERBATIM, "cent"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("8."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("7."),
+                        (
+                            (DSL_ACTION_VERBATIM, "soixante-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("9."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile(".1"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-et-un"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-cents"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_IF_ELSE,
+                                (
+                                    (
+                                        (DSL_COMPOPE_GREATER,),
+                                        (
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                            ((DSL_ACTION_VERBATIM, "1"),),
+                                        ),
+                                    ),
+                                    (
+                                        (
+                                            DSL_ACTION_NAME_IT,
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                        ),
+                                    ),
+                                    (),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-cent-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
+
+
+INT_2_NAME[it_IT] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
         DSL_TAG_GENE_BIG: (__re_compile("(?P<bname>miliard\\S+)"), "... di miliardi"),
@@ -3060,4 +3338,4 @@ INT_2_NAME["it_IT"] = {
 # -- LIST OF ALL LANGS SUPPORTED -- #
 # --------------------------------- #
 
-ALL_LANGS = list(INT_2_NAME.keys())
+ALL_LANGS = list(INT_2_NAME)

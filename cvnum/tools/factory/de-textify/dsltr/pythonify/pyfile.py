@@ -3,6 +3,7 @@
 from collections import defaultdict
 from pprint      import pformat
 from re          import compile
+from textwrap    import wrap
 
 import black
 
@@ -13,13 +14,40 @@ from pprint import pprint
 # ! -- DEBUGGING -- ! #
 
 
-# -------------------------------------- #
-# --  BUILD OF THE CONGIG PYTHON FILE -- #
-# -------------------------------------- #
+# ----------- #
+# -- TOOLS -- #
+# ----------- #
 
 def addnewlines(n):
     return ['']*n
 
+
+def taglang(lang):
+    for old in '-[]':
+        lang = lang.replace(old, "_")
+
+    if lang[-1] == "_":
+        lang = lang[:-1]
+
+    return lang
+
+
+def commentit(text):
+    comment = []
+
+    lines = wrap(text, width = 70)
+
+    for oneline in lines:
+        oneline = oneline.strip()
+
+        comment.append(f'# {oneline}')
+
+    return "\n".join(comment)
+
+
+# ------------------------------------- #
+# -- BUILD OF THE CONGIG PYTHON FILE -- #
+# ------------------------------------- #
 
 def pycode_spevars(spevars_used):
     spevars_code = []
@@ -109,7 +137,7 @@ def pycode_naming(debug_coding, alltrans):
 
 
 # Translations code.
-    code = []
+    code   = []
 
     for lang in sorted(alltrans.keys()):
         stdspecs = {
@@ -119,7 +147,7 @@ def pycode_naming(debug_coding, alltrans):
 
         code.append(
             f'''
-INT_2_NAME['{lang}'] = {stdspecs}
+INT_2_NAME[{taglang(lang)}] = {stdspecs}
             '''
         )
 
@@ -208,7 +236,7 @@ INT_2_NAME = {{}}
 # -- LIST OF ALL LANGS SUPPORTED -- #
 # --------------------------------- #
 
-ALL_LANGS = list(INT_2_NAME.keys())
+ALL_LANGS = list(INT_2_NAME)
         '''.strip()
 
 
@@ -216,40 +244,40 @@ ALL_LANGS = list(INT_2_NAME.keys())
     return code
 
 
-def pycode_digitize(alltrans):
-    return ''
+def tags_for_langs(all_langs, alldescs):
+    tags_langs = {}
+
+    for onelang in sorted(all_langs.keys()):
+        tags_langs[taglang(onelang)] = onelang
+        # print(all_langs[onelang])
+        # BUG
+
     code = []
 
-#! warning::
-#!     We can't change ``alltrans`` here !
+    for onetag, onelang in tags_langs.items():
+        onedesc = commentit(alldescs[onelang])
+        code += [
+            f'{onedesc}',
+            f'{onetag} = "{onetag}"',
+            '',
+        ]
 
-    digitspecs = {}
+    return "\n".join(code[:-1])
 
-    for lang, specs in alltrans.items():
-        print(lang)
-        pprint(specs)
-        exit()
 
-# Final code
-    code = '\n'.join(code)
 
-    code = f'''
-# ---------------------- #
-# -- NAME --> INTEGER -- #
-# ---------------------- #
-
-NAME_2_INT = {{}}
-
-{code}
-        '''.strip()
-
-    return code
-
-def pycode(debug_coding, alltrans):
-    code_digitize = pycode_digitize(alltrans)
-    code_naming   = pycode_naming(debug_coding, alltrans)
+def pycode(debug_coding, alltrans, alldescs):
+    code_tags_langs = tags_for_langs(alltrans, alldescs)
+    code_naming     = pycode_naming(debug_coding, alltrans)
 
     return f'''
+# -------------------- #
+# -- TAGS FOR LANGS -- #
+# -------------------- #
+
+{code_tags_langs}
+
+
 # ------------- #
 # -- PATTERN -- #
 # ------------- #
@@ -258,7 +286,4 @@ DSL_PATTERN_ELLIPSIS = __re_compile("(?P<bname>\.\.\.)")
 
 
 {code_naming}
-
-
-{code_digitize}
         '''.strip() + '\n'

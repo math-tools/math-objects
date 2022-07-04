@@ -2,6 +2,41 @@
 
 
 ==
+04
+==
+
+------
+:news:
+------
+
+[[:api:]]
+Naming integers.
+
+    1) A new transalation: the academic French using the convention "hyphens everywhere" has been added.
+
+    1) Tags for languages have been added to avoid typing errors.
+
+
+--------
+:update:
+--------
+
+[[:doc:]]
+Naming integers: explanations about the tags for languages have been added (all the langs available are automatically indicated in the ¨doc).
+
+
+--------
+:fordev:
+--------
+
+[[:api:]]
+¨DSL for translations: a short ¨desc, only in english, must be given for all languages for technical and human ¨docs.
+
+
+// ---------- //
+
+
+==
 01
 ==
 

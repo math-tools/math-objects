@@ -39,11 +39,11 @@ def testandprint(intname, x):
 
 from src.textify import *
 
-lang = 'de_DE'
-lang = 'en_GB'
-lang = 'it_IT'
-lang = 'es_ES'
-lang = 'fr_FR'
+lang = de_DE
+lang = en_GB
+lang = it_IT
+lang = es_ES
+lang = fr_FR
 
 nbtests_by_slice = 2
 

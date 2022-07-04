@@ -28,6 +28,8 @@ TYPE_YES_NO = "yes/no"
 
 TAG_LANG = "lang"
 
+DSL_SPECS_THIS = "this"
+
 DSL_SPECS_EXTEND = "extend"
 KEYS_EXTEND      = {
     TAG_LANG: (TYPE_STR, TAG_MANDATORY),
@@ -84,6 +86,7 @@ MODE_TRANS = {
         DSL_SPECS_GENE, DSL_SPECS_GROUP,
         DSL_SPECS_PATCH,
         DSL_SPECS_SIGN, DSL_SPECS_SMALL,
+        DSL_SPECS_THIS,
     ],
     "verbatim": [
         DSL_SPECS_IGNORE_SMALL,

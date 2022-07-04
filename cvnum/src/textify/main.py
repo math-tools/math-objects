@@ -14,7 +14,7 @@ from .automata import *
 # --------------------- #
 
 ###
-# This class builds names of integers in different languages.
+# This class names integers in different languages.
 ###
 class IntName(BaseAutomata):
 ###

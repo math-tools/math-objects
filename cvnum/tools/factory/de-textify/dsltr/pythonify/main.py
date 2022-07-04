@@ -2,6 +2,7 @@
 
 from ..rules import *
 
+from .desc    import *
 from .extend    import *
 from .normalize import *
 from .pyfile    import *
@@ -27,10 +28,11 @@ def pythonify(
     # pprint(alltrans['debug_DEBUG']);exit()
 # ! -- DEBUGGING -- ! #
 
+    alldescs = extracts_desc(alltrans)
     alltrans = manage_extend(alltrans)
     alltrans = normalize_rules(alltrans)
 
-    code = pycode(debug_coding, alltrans)
+    code = pycode(debug_coding, alltrans, alldescs)
 
     srcdir_file.create("file")
 

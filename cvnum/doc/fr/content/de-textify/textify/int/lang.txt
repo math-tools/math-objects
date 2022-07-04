@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-07-02
+    date = 2022-07-04
 
 
 =================
@@ -15,12 +15,16 @@ python::
     print(intname.nameof(123))
 
 
-Si vous souhaitez utiliser le français académique, vous pouvez faire comme ci-dessous où vous noterez la possibilité d'utiliser une chaîne de caractères au lieu d'un entier ¨python. Ce code produira "cent vingt-trois".
+Si vous souhaitez utiliser le français académique, vous pouvez faire comme ci-dessous où vous noterez l'utilisation de la constante spéciale ``fr_FR``
+((
+    On peut aussi utiliser la chaîne de caractères ``"fr_FR"``, mais nous déconseillons cette pratique car l'emploi de variables permet de vite repérer une erreur de saisie.
+)),
+ainsi que la possibilité d'utiliser une chaîne de caractères au lieu d'un entier ¨python. Ce code produira "cent vingt-trois".
 
 python::
     from cvnum import textify
 
-    intname = IntName("fr_FR")
+    intname = IntName(fr_FR)
     print(intname.nameof("123"))
 
 
@@ -29,16 +33,16 @@ Vous pouvez aussi juste changer la langue comme dans le code suivant.
 python::
     from cvnum import textify
 
-    # Par défaut, on utilise l'anglais de Grande-Bretagne "en_GB".
+    # Par défaut, on utilise l'anglais de Grande-Bretagne ``en_GB``.
     intname = IntName()
     print(intname.lang, ":", intname.nameof(123))
 
     # En anglais américain.
-    intname.lang = "en_US"
+    intname.lang = en_US
     print(intname.lang, ":", intname.nameof(123))
 
     # En espagnol.
-    intname.lang = "es_ES"
+    intname.lang = es_ES
     print(intname.lang, ":", intname.nameof(123))
 
 
@@ -48,3 +52,54 @@ terminal::
     en_GB : one hundred and twenty-three
     en_US : one hundred twenty-three
     es_ES : ciento veintitrés
+
+
+La constante ``ALL_LANGS`` contient toutes les identifiants des langues supportées, ces derniers étant définis comme suit dans le code ¨src.
+
+// -- ALL LANGS - START -- //
+
+python::
+    ---
+    file    = config/detextify/langint.py
+    extract = yes
+    ---
+
+    # Names of integers in academic German.
+    de_DE = "de_DE"
+    
+    # Names of integers in academic British English.
+    en_GB = "en_GB"
+    
+    # Names of integers in academic American English.
+    en_US = "en_US"
+    
+    # Names of integers in academic Spanish.
+    es_ES = "es_ES"
+    
+    # Names of integers in academic Belgian.
+    fr_BE = "fr_BE"
+    
+    # Names of integers in academic French.
+    fr_FR = "fr_FR"
+    
+    # Names of very large integers in French using the short Chuquet's rules
+    # (without using "milliard").
+    fr_FR_chuquet_1 = "fr_FR_chuquet_1"
+    
+    # Names of very large integers in French using the full Chuquet's rules
+    # (without using "milliard").
+    fr_FR_chuquet_2 = "fr_FR_chuquet_2"
+    
+    # Names of very large integers in French using the Rowlett's rules.
+    fr_FR_rowlett = "fr_FR_rowlett"
+    
+    # Names of integers in academic French using the "hyphens everywhere"
+    # convention.
+    fr_FR_tiret = "fr_FR_tiret"
+    
+    # Names of integers in academic Italian.
+    it_IT = "it_IT"
+
+// -- ALL LANGS - END -- //
+
+

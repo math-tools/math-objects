@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from http.client import OK
 from orpyste.data import RecuOrderedDict
 
 from .parsers   import *
@@ -43,13 +44,17 @@ class Parser(BaseParser):
         allrules = OrderedDict()
 
         for kind, rules in infos.items():
-            subparser = PARSERS[kind](
-                rules,
-                self.shortpathfile
-            )
-            subparser.build()
+            if kind == DSL_SPECS_THIS:
+                allrules[kind] = rules
 
-            allrules[kind] = subparser.specs
+            else:
+                subparser = PARSERS[kind](
+                    rules,
+                    self.shortpathfile
+                )
+                subparser.build()
+
+                allrules[kind] = subparser.specs
 
         if DSL_SPECS_SIGN not in allrules:
             allrules[DSL_SPECS_SIGN] = {
