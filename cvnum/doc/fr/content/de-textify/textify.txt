@@ -8,6 +8,7 @@ Nommer un entier relatif
 ========================
 
 content::
+    ¨content_int/nb-format.txt
     ¨content_int/lang.txt
     ¨content_int/sign.txt
     ¨content_int/separator.txt

@@ -19,123 +19,13 @@ from .automata import *
 class IntName(BaseAutomata):
 ###
 # prototype::
-#     nb : an integer to name
-#        @ str(nb) in str(ZZ)
-#
-#     :return: the name of ``nb`` in the language ``self.lang``
-#
-#     :see: self.name_big ,
-#           self.name_small_big ,
-#           self.name_small_slice
+#     :see: automata.BaseAutomata.name_small_big
 ###
-    def nameof(self, nb: Union[str, int]) -> str:
-# For error messages.
-        self._initial_nb = nb
-
-# Name of the sign, and the string version of the absolute value of the integer.
-        sign, str_absnb = self.sign_n_abs(nb)
-
-# Do big numbers are allowed?
-        if (
-            not self._very_big_allowed
-            and
-            len(str_absnb) > 2*self._small_big_expo_max
-        ):
-            raise ValueError(
-                 "number too big to be named. The maximal number of digits is "
-                f"{2*self._small_big_expo_max}"
-                 " < "
-                f"{len(str_absnb)}."
-            )
-
-# Let's go!
-#
-# warning::
-#     Zero is a very special case (thinks about slice with zero value).
-        if str_absnb == '0':
-            name = self.name_small_slice(str_absnb)
-
-        else:
-            name = self.name_big(str_absnb)
-
-# The "complete" name.
-        if sign:
-            name = f"{sign} {name}"
-
-# Patches to apply?
-        for old, new in self._patch.items():
-            name = name.replace(old, new)
-
-# Nothing left to do.
-        return name
-
-
-###
-# prototype::
-#     nb : an integer to name
-#        @ str(nb) in str(ZZ)
-#
-#     :return: the name of the sign, and just the string version of
-#              the absolute numerical value of ``nb``
-#            @ abs(return[1]) = abs(real(nb))
-###
-    def sign_n_abs(self, nb: Union[str, int]) -> Tuple[str, str]:
-# Normalization and sign of the number.
-        sign = ""
-
-        if isinstance(nb, int):
-            if nb < 0:
-                sign = "-"
-                nb   = -nb
-
-        elif isinstance(nb, str):
-            if nb[0] in "-+":
-                sign = nb[0]
-                nb   = nb[1:]
-
-            if not nb.isdigit():
-                raise ValueError(
-                    f'``nb = "{sign}{nb}"`` is not an integer'
-                )
-
-            nb = int(nb)
-
-        else:
-            raise ValueError(
-                "``nb`` must be an integer or a string"
-            )
-
-# Name of the sign
-        if sign:
-            if self._sign_name[sign] is None:
-                raise ValueError(
-                    f"the sign ``{sign}`` can't be used "
-                    f"with the language {self.lang}"
-                )
-
-            sign = self._sign_name[sign]
-
-# Nothing more to do.
-        return sign, str(nb)
-
-
-
-
-
-###
-# prototype::
-#     very_bigslice : a positive integer that can be named whatever
-#                     is its size
-#                   @ very_bigslice in str(NN) - {0}
-#     suffix        : a suffix to use fo very big integers (it is used
-#                     and build for recursive calls)
-#
-#     :return: the name of ``very_bigslice`` in the language ``self.lang``
-#
-#     :see: self.name_small_big ,
-#           self.name_small_slice
-###
-    def name_big(self, very_bigslice: str, suffix: str = '') -> None:
+    def name_big(
+        self,
+        very_bigslice: str,
+        suffix       : str = ''
+    ) -> None:
         D_VAR = very_bigslice[:-self._small_big_expo_max]
         R_VAR = very_bigslice[-self._small_big_expo_max:]
 
@@ -170,39 +60,48 @@ class IntName(BaseAutomata):
 
 ###
 # prototype::
-#     bigslice : a positive integer that can be named using only the rules
-#                for groups in the dictionnary ``INT_2_NAME[DSL_SPECS_GROUP]``
-#              @ bigslice in str(NN)
-#
-#     :return: the name of ``bigslice`` in the language ``self.lang``
-#
-#     :see: self.name_small_slice,
-#           INT_2_NAME
+#     :see: automata.BaseAutomata.name_small_big
 ###
     def name_small_big(self, bigslice: str) -> str:
-        i_right = 0
+# We name the first "none zero" biggest group.
+#
+# The remaining digits will be managed recursively via ``self.nameit_group``
+# that will call ``self.name_small_big``.
+        nbdigits = len(bigslice)
+        maxpower = 0
 
-        for i_left in self._small_big_expos:
-            smallslice = bigslice[i_right: i_left]
-            i_right    = i_left
-
-            if not smallslice:
+        for power in self._small_big_expos:
+            if power > nbdigits:
                 break
 
-            if int(smallslice) != 0:
-                print("SMALL BIG >", smallslice)#, ":", self.name_small_slice(smallslice))
+            maxpower = power
 
+        power_pos = self._small_big_expos.index(maxpower)
+
+        if power_pos == 0:
+            d_var = bigslice
+            r_var = ""
+
+        else:
+            prev_maxpower = self._small_big_expos[power_pos - 1]
+
+            d_var = bigslice[-maxpower: -prev_maxpower]
+            r_var = bigslice[-prev_maxpower:]
+
+        if r_var:
+            from pprint import pprint;pprint(self._small_big[prev_maxpower])
+            return self.apply(
+                actions = self._small_big[prev_maxpower],
+                d_var   = d_var,
+                r_var   = r_var
+            )
+
+        return self.name_small_slice(d_var)
 
 
 ###
 # prototype::
-#     smallslice : a positive integer that can be named using only the rules
-#                  for small in the dictionnary ``INT_2_NAME[DSL_SPECS_SMALL]``
-#                @ smallslice in str(NN)
-#
-#     :return: the name of ``smallslice`` in the language ``self.lang``
-#
-#     :see: INT_2_NAME
+#     :see: automata.BaseAutomata.name_small_slice
 ###
     def name_small_slice(self, smallslice: str) -> str:
 # As it.
@@ -232,11 +131,17 @@ class IntName(BaseAutomata):
 
             if actions is None:
                 raise Exception(
-                       'BUG: no matching found.'
-                    f'\n    + lang = {self.lang}'
-                    f'\n    + nb   = {self._initial_nb}'
+                       f'BUG: no matching found for ``{smallslice}``.'
+                    f'\n    + lang     = {self.lang}'
+                    f'\n    + nb       = {self._initial_nb}'
+                    f'\n    + type(nb) = {type(self._initial_nb)}'
                      '\nReport the message above to the developper'
                 )
 
 # Let's work!
-        return self.apply(smallslice, actions).strip()
+#
+# TODO: remove strip when :space: will be available in the DSL.
+        return self.apply(
+            actions = actions,
+            d_var   = smallslice,
+        ).strip()

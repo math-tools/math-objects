@@ -2,6 +2,41 @@
 
 
 ==
+05
+==
+
+-----
+:new:
+-----
+
+[[:api:]]
+Naming integers: the number to name can be any object with a string representation that is a "legal" integer.
+
+
+--------
+:update:
+--------
+
+[[:doc:]]
+Naming integers: the kinds of numbers that are nameable have been documented.
+
+
+[[:api:]]
+¨DSL for translations: a block peuf::``this`` must be used to indicated ¨infos about the translation (see the short ¨desc).
+
+
+--------
+:fordev:
+--------
+
+[[:tech:]]
+Naming integers: a specific method has been added to name the pieces of a group (that is not similar to an isolated small slices).
+
+
+// ---------- //
+
+
+==
 04
 ==
 
@@ -12,9 +47,9 @@
 [[:api:]]
 Naming integers.
 
-    1) A new transalation: the academic French using the convention "hyphens everywhere" has been added.
+    1) A new translation: the academic French using the convention "hyphens everywhere" has been added.
 
-    1) Tags for languages have been added to avoid typing errors.
+    1) Tags for ¨langs have been added to avoid typing errors.
 
 
 --------
@@ -22,7 +57,7 @@ Naming integers.
 --------
 
 [[:doc:]]
-Naming integers: explanations about the tags for languages have been added (all the langs available are automatically indicated in the ¨doc).
+Naming integers: explanations about the tags for ¨langs have been added (all the ¨langs available are automatically indicated in the ¨doc).
 
 
 --------
@@ -30,7 +65,7 @@ Naming integers: explanations about the tags for languages have been added (all 
 --------
 
 [[:api:]]
-¨DSL for translations: a short ¨desc, only in english, must be given for all languages for technical and human ¨docs.
+¨DSL for translations: a short ¨desc, only in english, must be given for all languages (this is used for the technical and the human ¨docs).
 
 
 // ---------- //
@@ -40,17 +75,17 @@ Naming integers: explanations about the tags for languages have been added (all 
 01
 ==
 
---------
-:fordev:
---------
-
-[[:api:]]
-Configuration file path::``config/detextify/langint.py``: the special constants have different values such as to give precise error messages in case of a bug.
-
-
 -------
 :break:
 -------
 
 [[:api:]]
 Naming integers: the conversion from name to integer has been removed because the previous implementation doesn't work with languages like German (this feature should come back later).
+
+
+--------
+:fordev:
+--------
+
+[[:api:]]
+Configuration file path::``config/detextify/langint.py``: the special constants have different values such as to give specific error messages in case of a bug.

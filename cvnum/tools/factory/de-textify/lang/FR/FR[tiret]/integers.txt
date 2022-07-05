@@ -1,6 +1,6 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2022-07-04
+    date   = 2022-07-05
     desc   = Names of integers in academic French using the "hyphens
              everywhere" convention.
 
@@ -12,13 +12,13 @@ general::
     big = milliard... -> ...-de-milliards
 
 group::
-    3 = [d :if: d > 1]-mille-[r]
-    6 = [d]-million{s}-[r]
-    9 = [d]-"de :if: d(0..5) = 0"-milliard{s}-[r]
+    3 = "[d]- :if: d > 1"mille"-[r] :if: r > 0"
+    6 = "[d]- :if: d > 0"million{s}"-[r] :if: r > 0"
+    9 = "[d]- :if: d > 0""de- :if: d(0..5) = 0"milliard{s}"-[r] :if: r > 0"
 
 patch::
     cents-mille = cent-mille
 
 small::
     *00 = [d(2)]-[100]s
-    *** = [d(2) :if: d(2) > 1]-[100]-[d(1)d(0)]
+    *** = "[d(2)]- :if: d(2) > 1"[100]"-[d(1)d(0)]"

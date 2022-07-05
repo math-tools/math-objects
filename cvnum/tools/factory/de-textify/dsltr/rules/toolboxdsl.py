@@ -27,6 +27,7 @@ TAG_CONTENT_QUOTES = "quotes"
 TAG_CONTENT_GROUP  = "group"
 
 DSL_ACTION_NAME_IT           = "name-it"
+DSL_ACTION_NAME_IT_GROUP     = "name-it-group"
 DSL_ACTION_VERBATIM          = "verbatim"
 DSL_ACTION_EXTRACT_NUMBER_OF = "d(m..n)"
 DSL_ACTION_EXTRACT_REMAIN    = "r(m..n)"

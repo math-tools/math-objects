@@ -69,12 +69,34 @@ class ParserGroup(BaseParserRules):
     def build(self):
         super().build_keyvals(KEYS_GROUP)
 
+# We must use a specieifc "bame it" method for groups!
+        self.__spe_name_it()
+
 # ! -- DEBUGGING -- ! #
         # print('--- GROUP ---')
         # from pprint import pprint
         # pprint(self.specs)
         # exit()
 # ! -- DEBUGGING -- ! #
+
+# We must use a specieifc "bame it" method for groups!
+    def __spe_name_it(self):
+        for power, actions in self.specs.items():
+            self.specs[power] = self.__recu_spe_name_it(actions)
+
+    def __recu_spe_name_it(self, actions):
+        if not isinstance(actions, (list, tuple)):
+            if actions == DSL_ACTION_NAME_IT:
+                actions = DSL_ACTION_NAME_IT_GROUP
+
+            return actions
+
+        iterator = (self.__recu_spe_name_it(a) for a in actions)
+
+        if isinstance(actions, list):
+            return list(iterator)
+
+        return tuple(iterator)
 
 
 # ---------------------- #

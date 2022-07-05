@@ -9,6 +9,8 @@ from mistool.string_use import between
 print("\033c", end="")
 # ! -- DEBUGGING -- ! #
 
+print(f"   * Updating the list of langs in the doc.")
+
 
 # --------------- #
 # -- CONSTANTS -- #
@@ -35,14 +37,6 @@ with LANG_CONFIG_FILE.open(
     encoding = "utf-8",
 ) as f:
     pycontent = f.read()
-
-_, langsfordoc, _ = between(
-    text = pycontent,
-    seps = [
-        "# -- TAGS FOR LANGS -- #",
-        "# -- ",
-    ],
-)
 
 _, codefromconfig, _ = between(
     text = pycontent,
@@ -92,7 +86,7 @@ with LANG_DOC_FILE.open(
 ) as f:
     txtcontent = f.read()
 
-print(txtcontent)
+# print(txtcontent)
 
 before, _, after = between(
     text = txtcontent,

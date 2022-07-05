@@ -185,6 +185,7 @@ def normalize_rules(alltrans):
 # Small rules are ok now.
         specs[DSL_SPECS_SMALL] = newspecs_small
 
+# Let's finish...
         for formatter in [
             shorten,
             simplify,

@@ -3,6 +3,7 @@
 from collections import defaultdict
 from pprint      import pformat
 from re          import compile
+from string      import ascii_letters, digits
 from textwrap    import wrap
 
 import black
@@ -22,14 +23,18 @@ def addnewlines(n):
     return ['']*n
 
 
+LEGAL_CHARS = ascii_letters + digits
+
 def taglang(lang):
-    for old in '-[]':
-        lang = lang.replace(old, "_")
+    tag = ""
 
-    if lang[-1] == "_":
-        lang = lang[:-1]
+    for c in lang:
+        tag += c if c in LEGAL_CHARS else "_"
 
-    return lang
+    if tag[-1] == "_":
+        tag = tag[:-1]
+
+    return tag
 
 
 def commentit(text):
@@ -249,14 +254,12 @@ def tags_for_langs(all_langs, alldescs):
 
     for onelang in sorted(all_langs.keys()):
         tags_langs[taglang(onelang)] = onelang
-        # print(all_langs[onelang])
-        # BUG
 
     code = []
 
     for onetag, onelang in tags_langs.items():
-        onedesc = commentit(alldescs[onelang])
-        code += [
+        onedesc  = commentit(alldescs[onelang])
+        code    += [
             f'{onedesc}',
             f'{onetag} = "{onetag}"',
             '',

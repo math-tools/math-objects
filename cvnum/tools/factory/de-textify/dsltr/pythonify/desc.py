@@ -13,7 +13,15 @@ from pprint import pprint
 # -------------------------------- #
 
 def extracts_desc(alltrans):
-    return {
-        lang: specs[DSL_SPECS_THIS]['desc']['value']
-        for lang, specs in alltrans.items()
-    }
+    alldescs = {}
+
+    for lang, specs in alltrans.items():
+        if not 'desc' in specs[DSL_SPECS_THIS]:
+            raise Exception(
+                 'missing key "desc" in the "this block". '
+                f'See the translation "{lang}".'
+            )
+
+        alldescs[lang]= specs[DSL_SPECS_THIS]['desc']['value']
+
+    return alldescs

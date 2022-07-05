@@ -72,50 +72,51 @@ DSL_ACTION_EXTRACT_NUMBER_OF = 1  # --> 'd(m..n)'
 DSL_ACTION_IF_ELSE           = 2  # --> 'if-else'
 DSL_ACTION_MATCHING          = 3  # --> 'matching'
 DSL_ACTION_NAME_IT           = 4  # --> 'name-it'
-DSL_ACTION_SPEVAR            = 5  # --> 'special-var'
-DSL_ACTION_VERBATIM          = 6  # --> 'verbatim'
+DSL_ACTION_NAME_IT_GROUP     = 5  # --> 'name-it-group'
+DSL_ACTION_SPEVAR            = 6  # --> 'special-var'
+DSL_ACTION_VERBATIM          = 7  # --> 'verbatim'
 
 
 # ------------- #
 # -- COMPOPE -- #
 # ------------- #
 
-DSL_COMPOPE_EQ         = 7   # --> '='
-DSL_COMPOPE_GREATER    = 8   # --> '>'
-DSL_COMPOPE_GREATER_EQ = 9   # --> '>='
-DSL_COMPOPE_LOWER      = 10  # --> '<'
-DSL_COMPOPE_LOWER_EQ   = 11  # --> '<='
-DSL_COMPOPE_NOT_EQ     = 12  # --> '!='
+DSL_COMPOPE_EQ         = 8   # --> '='
+DSL_COMPOPE_GREATER    = 9   # --> '>'
+DSL_COMPOPE_GREATER_EQ = 10  # --> '>='
+DSL_COMPOPE_LOWER      = 11  # --> '<'
+DSL_COMPOPE_LOWER_EQ   = 12  # --> '<='
+DSL_COMPOPE_NOT_EQ     = 13  # --> '!='
 
 
 # ----------- #
 # -- SPECS -- #
 # ----------- #
 
-DSL_SPECS_GENE  = 13  # --> 'general'
-DSL_SPECS_GROUP = 14  # --> 'group'
-DSL_SPECS_PATCH = 15  # --> 'patch'
-DSL_SPECS_SIGN  = 16  # --> 'sign'
-DSL_SPECS_SMALL = 17  # --> 'small'
+DSL_SPECS_GENE  = 14  # --> 'general'
+DSL_SPECS_GROUP = 15  # --> 'group'
+DSL_SPECS_PATCH = 16  # --> 'patch'
+DSL_SPECS_SIGN  = 17  # --> 'sign'
+DSL_SPECS_SMALL = 18  # --> 'small'
 
 
 # ------------ #
 # -- SPEVAR -- #
 # ------------ #
 
-DSL_SPEVAR_NUMBER_OF = 18  # --> 'd'
-DSL_SPEVAR_REMAINING = 19  # --> 'r'
+DSL_SPEVAR_NUMBER_OF = 19  # --> 'd'
+DSL_SPEVAR_REMAINING = 20  # --> 'r'
 
 
 # --------- #
 # -- TAG -- #
 # --------- #
 
-DSL_TAG_GENE_BIG   = 20  # --> 'big'
-DSL_TAG_GENE_SEP   = 21  # --> 'sep'
+DSL_TAG_GENE_BIG   = 21  # --> 'big'
+DSL_TAG_GENE_SEP   = 22  # --> 'sep'
 
-DSL_TAG_SIGN_MINUS = 22  # --> '-'
-DSL_TAG_SIGN_PLUS  = 23  # --> '+'
+DSL_TAG_SIGN_MINUS = 23  # --> '-'
+DSL_TAG_SIGN_PLUS  = 24  # --> '+'
 
 
 # ---------------------- #
@@ -147,7 +148,7 @@ INT_2_NAME[de_DE] = {
                     ),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
                         ),
                     ),
@@ -155,10 +156,10 @@ INT_2_NAME[de_DE] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, "tausend"),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " Million"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -175,10 +176,10 @@ INT_2_NAME[de_DE] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         9: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " Milliarde"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -195,7 +196,7 @@ INT_2_NAME[de_DE] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {},
@@ -308,7 +309,7 @@ INT_2_NAME[en_GB] = {
     },
     DSL_SPECS_GROUP: {
         3: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " thousand "),
             (
                 DSL_ACTION_IF_ELSE,
@@ -326,17 +327,17 @@ INT_2_NAME[en_GB] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " million "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         9: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " billion "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {},
@@ -451,19 +452,19 @@ INT_2_NAME[en_US] = {
     },
     DSL_SPECS_GROUP: {
         3: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " thousand "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " million "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         9: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " billion "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {},
@@ -590,7 +591,7 @@ INT_2_NAME[es_ES] = {
                     ),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
                         ),
                     ),
@@ -598,7 +599,7 @@ INT_2_NAME[es_ES] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " mil "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
             (
@@ -614,7 +615,7 @@ INT_2_NAME[es_ES] = {
                     ((DSL_ACTION_VERBATIM, "un"),),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
                         ),
                     ),
@@ -636,7 +637,7 @@ INT_2_NAME[es_ES] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {},
@@ -776,7 +777,7 @@ INT_2_NAME[fr_BE] = {
                     ),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
                         ),
                     ),
@@ -784,10 +785,10 @@ INT_2_NAME[fr_BE] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " mille "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " million"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -804,10 +805,10 @@ INT_2_NAME[fr_BE] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         9: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " "),
             (
                 DSL_ACTION_IF_ELSE,
@@ -839,7 +840,7 @@ INT_2_NAME[fr_BE] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
@@ -978,7 +979,7 @@ INT_2_NAME[fr_FR] = {
                     ),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
                         ),
                     ),
@@ -986,10 +987,10 @@ INT_2_NAME[fr_FR] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " mille "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " million"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1006,10 +1007,10 @@ INT_2_NAME[fr_FR] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         9: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " "),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1041,7 +1042,7 @@ INT_2_NAME[fr_FR] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
@@ -1215,7 +1216,7 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                     ),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
                         ),
                     ),
@@ -1223,10 +1224,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " mille "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " million"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1243,10 +1244,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         12: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " billion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1263,10 +1264,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         18: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " trillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1283,10 +1284,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         24: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " quadrillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1303,10 +1304,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         30: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " quintillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1323,10 +1324,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         36: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " sextillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1343,10 +1344,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         42: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " septillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1363,10 +1364,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         48: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " octillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1383,10 +1384,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         54: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " nonillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1403,10 +1404,10 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         60: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " decillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1423,7 +1424,7 @@ INT_2_NAME[fr_FR_chuquet_1] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
@@ -1597,7 +1598,7 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                     ),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
                         ),
                     ),
@@ -1605,10 +1606,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " mille "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " million"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1625,10 +1626,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         9: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " milliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1645,10 +1646,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         12: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " billion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1665,10 +1666,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         15: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " billiard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1685,10 +1686,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         18: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " trillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1705,10 +1706,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         21: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " trilliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1725,10 +1726,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         24: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " quadrillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1745,10 +1746,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         27: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " quintilliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1765,10 +1766,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         30: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " quintillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1785,10 +1786,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         33: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " quintilliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1805,10 +1806,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         36: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " sextillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1825,10 +1826,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         39: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " sextilliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1845,10 +1846,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         42: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " septillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1865,10 +1866,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         45: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " septilliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1885,10 +1886,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         48: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " octillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1905,10 +1906,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         51: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " octilliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1925,10 +1926,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         54: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " nonillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1945,10 +1946,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         57: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " nonilliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1965,10 +1966,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         60: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " decillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1985,10 +1986,10 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         63: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " decilliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2005,7 +2006,7 @@ INT_2_NAME[fr_FR_chuquet_2] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
@@ -2179,7 +2180,7 @@ INT_2_NAME[fr_FR_rowlett] = {
                     ),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
                         ),
                     ),
@@ -2187,10 +2188,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " mille "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " million"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2207,10 +2208,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         9: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " "),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2242,10 +2243,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         12: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " tetrillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2262,10 +2263,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         15: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " pentillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2282,10 +2283,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         18: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " hexillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2302,10 +2303,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         21: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " eptillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2322,10 +2323,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         24: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " oktillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2342,10 +2343,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         27: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " ennillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2362,10 +2363,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         30: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " dekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2382,10 +2383,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         33: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " hendekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2402,10 +2403,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         36: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " dodekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2422,10 +2423,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         39: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " trisdekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2442,10 +2443,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         42: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " tetradekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2462,10 +2463,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         45: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " pentadekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2482,10 +2483,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         48: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " hexadekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2502,10 +2503,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         51: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " heptadekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2522,10 +2523,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         54: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " oktadekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2542,10 +2543,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         57: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " enneadekillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2562,10 +2563,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         60: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icosillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2582,10 +2583,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         63: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icosihenillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2602,10 +2603,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         66: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icosidillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2622,10 +2623,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         69: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icositrillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2642,10 +2643,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         72: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icositetrillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2662,10 +2663,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         75: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icosipentillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2682,10 +2683,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         78: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icosihexillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2702,10 +2703,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         81: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icosiheptillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2722,10 +2723,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         84: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icosioktillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2742,10 +2743,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         87: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " icosiennillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2762,10 +2763,10 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         90: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " triacontillion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -2782,7 +2783,7 @@ INT_2_NAME[fr_FR_rowlett] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
@@ -2956,19 +2957,58 @@ INT_2_NAME[fr_FR_tiret] = {
                     ),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                        (DSL_ACTION_VERBATIM, "-"),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "mille"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (DSL_ACTION_VERBATIM, "-"),
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
                         ),
                     ),
                     (),
                 ),
             ),
-            (DSL_ACTION_VERBATIM, "-mille-"),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
-            (DSL_ACTION_VERBATIM, "-million"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                        (DSL_ACTION_VERBATIM, "-"),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "million"),
             (
                 DSL_ACTION_IF_ELSE,
                 (
@@ -2983,12 +3023,48 @@ INT_2_NAME[fr_FR_tiret] = {
                     (),
                 ),
             ),
-            (DSL_ACTION_VERBATIM, "-"),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (DSL_ACTION_VERBATIM, "-"),
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
         ),
         9: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
-            (DSL_ACTION_VERBATIM, "-"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                        (DSL_ACTION_VERBATIM, "-"),
+                    ),
+                    (),
+                ),
+            ),
             (
                 DSL_ACTION_IF_ELSE,
                 (
@@ -2999,11 +3075,11 @@ INT_2_NAME[fr_FR_tiret] = {
                             ((DSL_ACTION_VERBATIM, "0"),),
                         ),
                     ),
-                    ((DSL_ACTION_VERBATIM, "de"),),
+                    ((DSL_ACTION_VERBATIM, "de-"),),
                     (),
                 ),
             ),
-            (DSL_ACTION_VERBATIM, "-milliard"),
+            (DSL_ACTION_VERBATIM, "milliard"),
             (
                 DSL_ACTION_IF_ELSE,
                 (
@@ -3018,8 +3094,26 @@ INT_2_NAME[fr_FR_tiret] = {
                     (),
                 ),
             ),
-            (DSL_ACTION_VERBATIM, "-"),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (DSL_ACTION_VERBATIM, "-"),
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
@@ -3153,11 +3247,12 @@ INT_2_NAME[fr_FR_tiret] = {
                                             DSL_ACTION_NAME_IT,
                                             ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
                                         ),
+                                        (DSL_ACTION_VERBATIM, "-"),
                                     ),
                                     (),
                                 ),
                             ),
-                            (DSL_ACTION_VERBATIM, "-cent-"),
+                            (DSL_ACTION_VERBATIM, "cent-"),
                             (
                                 DSL_ACTION_NAME_IT,
                                 (
@@ -3193,7 +3288,7 @@ INT_2_NAME[it_IT] = {
                     ),
                     (
                         (
-                            DSL_ACTION_NAME_IT,
+                            DSL_ACTION_NAME_IT_GROUP,
                             ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
                         ),
                     ),
@@ -3215,10 +3310,10 @@ INT_2_NAME[it_IT] = {
                     ((DSL_ACTION_VERBATIM, "le"),),
                 ),
             ),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         6: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " milion"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -3235,10 +3330,10 @@ INT_2_NAME[it_IT] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
         9: (
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
             (DSL_ACTION_VERBATIM, " miliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -3255,7 +3350,7 @@ INT_2_NAME[it_IT] = {
                 ),
             ),
             (DSL_ACTION_VERBATIM, " "),
-            (DSL_ACTION_NAME_IT, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
         ),
     },
     DSL_SPECS_PATCH: {},
