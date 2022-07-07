@@ -19,6 +19,7 @@ group::
 patch::
     cents-mille = cent-mille
 
+// No rules to ignore here!
 small::
     *00 = [d(2)]-[100]s
     *** = "[d(2)]- :if: d(2) > 1"[100]"-[d(1)d(0)]"

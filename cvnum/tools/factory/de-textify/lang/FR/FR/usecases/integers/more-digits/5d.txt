@@ -1,0 +1,3 @@
+39 100 = trente-neuf mille cent
+
+63 000 = soixante-trois mille

@@ -1,0 +1,2 @@
+61 = soixante-et-un
+67 = soixante-sept

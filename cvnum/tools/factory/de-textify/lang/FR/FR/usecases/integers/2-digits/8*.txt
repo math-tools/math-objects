@@ -1,0 +1,2 @@
+80 = quatre-vingts
+81 = quatre-vingt-un

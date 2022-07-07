@@ -1,0 +1,3 @@
++ 111 = plus cent obtiendrez
+
+- 999 = moins neuf cent quatre-vingt-dix-neuf

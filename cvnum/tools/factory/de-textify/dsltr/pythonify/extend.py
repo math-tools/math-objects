@@ -78,7 +78,7 @@ def manage_extend(alltrans):
 
 # Let's copy block from the initial lang.
             for kind in _REMAINING_KINDS_TO_KEEP:
-                pyspecs_onelang[kind] = alltrans[lang_ext].get(kind, {})
+                pyspecs_onelang[kind] = alltrans[lang_ext].get(kind, {}).copy()
 
 # Take care of changes in the block ``general``.
             for k, v in alltrans[lang].get(DSL_SPECS_GENE, {}).items():

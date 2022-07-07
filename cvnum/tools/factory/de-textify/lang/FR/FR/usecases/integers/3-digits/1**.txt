@@ -1,0 +1,2 @@
+100 = cent
+154 = cent cinquante-quatre

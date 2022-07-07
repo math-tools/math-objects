@@ -1,0 +1,2 @@
+21 = vingt-et-un
+25 = vingt-cinq

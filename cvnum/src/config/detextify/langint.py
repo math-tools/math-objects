@@ -763,8 +763,8 @@ INT_2_NAME[es_ES] = {
 
 INT_2_NAME[fr_BE] = {
     DSL_SPECS_GENE: {
-        DSL_TAG_GENE_SEP: "",
-        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "...-de-milliards"),
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "... de milliards"),
         DSL_TAG_GENE_DIR: DSL_DIR_L2R,
     },
     DSL_SPECS_GROUP: {
@@ -966,8 +966,8 @@ INT_2_NAME[fr_BE] = {
 
 INT_2_NAME[fr_FR] = {
     DSL_SPECS_GENE: {
-        DSL_TAG_GENE_SEP: "",
-        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "...-de-milliards"),
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "... de milliards"),
         DSL_TAG_GENE_DIR: DSL_DIR_L2R,
     },
     DSL_SPECS_GROUP: {
@@ -1204,8 +1204,8 @@ INT_2_NAME[fr_FR] = {
 
 INT_2_NAME[fr_FR_chuquet_1] = {
     DSL_SPECS_GENE: {
-        DSL_TAG_GENE_SEP: "",
-        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "...-de-milliards"),
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "... de milliards"),
         DSL_TAG_GENE_DIR: DSL_DIR_L2R,
     },
     DSL_SPECS_GROUP: {
@@ -1587,8 +1587,8 @@ INT_2_NAME[fr_FR_chuquet_1] = {
 
 INT_2_NAME[fr_FR_chuquet_2] = {
     DSL_SPECS_GENE: {
-        DSL_TAG_GENE_SEP: "",
-        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "...-de-milliards"),
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "... de milliards"),
         DSL_TAG_GENE_DIR: DSL_DIR_L2R,
     },
     DSL_SPECS_GROUP: {
@@ -2170,8 +2170,8 @@ INT_2_NAME[fr_FR_chuquet_2] = {
 
 INT_2_NAME[fr_FR_rowlett] = {
     DSL_SPECS_GENE: {
-        DSL_TAG_GENE_SEP: "",
-        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "...-de-milliards"),
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "... de milliards"),
         DSL_TAG_GENE_DIR: DSL_DIR_L2R,
     },
     DSL_SPECS_GROUP: {
