@@ -131,11 +131,11 @@ Converting numbers.
 21
 ==
 
---------
-:fordev:
---------
+-----
+:new:
+-----
 
-[[:new:]]
+[[:api:]]
 Direct translations: one new file path::``GE/GE/integers.txt``.
 
 

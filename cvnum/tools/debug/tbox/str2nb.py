@@ -17,7 +17,7 @@ MODULE_DIR = addfindsrc(
 # -- LET'S GO -- #
 # -------------- #
 
-from src.toolbox import *
+from src.tbox import *
 
 class fakeINT:
     def __init__(self, n):

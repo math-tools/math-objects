@@ -10,7 +10,7 @@
 ------
 
 [[:api:]]
-Here are all the new features.
+Here are all the new features to name integers.
 
     1) Naming integers: the new ¨python ¨api is now "fully functional" (tests will be added soon, so it should remain some insidious bugs).
 
@@ -18,7 +18,7 @@ Here are all the new features.
 
 
 [[:doc:]]
-Naming integers: the new way followed to analyse very big numbers has been explained.
+Naming integers: the new way followed to analyze very big numbers has been explained (¨doc for the users, and the ¨DSL).
 
 
 --------
@@ -26,12 +26,11 @@ Naming integers: the new way followed to analyse very big numbers has been expla
 --------
 
 [[:bug:]]
-Naming integers: building the tests shows that `63,005` was translated into "sixty-three thousand and zero hundred and five" with an unwanted "zero hundred". This has been fixed.
+Naming integers.
 
+    1) The work on the unit tests has shown that `63,005` was translated into "sixty-three thousand and zero hundred and five" with an unwanted "zero hundred". This has been fixed.
 
-[[:doc:]]     ??????
-
-Naming integers: patch non extensible contrairement à general !!! faires les deux !!!!
+    1) The remove of spaces and decimal separators was not implemented. This has been added.
 
 
 // ---------- //
@@ -64,9 +63,9 @@ Naming integers: the "kinds" of numbers that can be converted have been document
 04
 ==
 
-------
-:news:
-------
+-----
+:new:
+-----
 
 [[:api:]]
 Naming integers.

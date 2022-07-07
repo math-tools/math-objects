@@ -1,1 +1,1 @@
-51 = fifty-two
+52 = fifty-two
