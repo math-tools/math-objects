@@ -56,10 +56,16 @@ def commentit(text):
 
 def pycode_spevars(spevars_used):
     spevars_code = []
-    spevars_vals = {}
     spevars_nb   = -1
+    spevars_vals = {
+        'DSL_DIR_L2R': DSL_DIR_L2R,
+        'DSL_DIR_R2L': DSL_DIR_R2L,
+    }
 
     for spekind in sorted(spevars_used.keys()):
+        if spekind == 'DIR':
+            continue
+
         spevars = spevars_used[spekind]
 
         deco = '-'*(len(spekind) + 6)
@@ -211,16 +217,19 @@ INT_2_NAME[{taglang(lang)}] = {stdspecs}
 # Hard coding
     if not debug_coding:
         for name, hardcode in spevars_vals.items():
+            if isinstance(hardcode, str):
+                hardcode = f'"{hardcode}"'
+
             for sep in ":,":
                 code = code.replace(
                     f"{name}{sep}",
                     f"{hardcode}{sep}",
                 )
 
-            code = code.replace(
-                f", {name}",
-                f", {hardcode}",
-            )
+                code = code.replace(
+                    f"{sep} {name}",
+                    f"{sep} {hardcode}",
+                )
 
 # Final code
     code = f'''
@@ -281,11 +290,12 @@ def pycode(debug_coding, alltrans, alldescs):
 {code_tags_langs}
 
 
-# ------------- #
-# -- PATTERN -- #
-# ------------- #
+# ---------------- #
+# -- DIRECTIONS -- #
+# ---------------- #
 
-DSL_PATTERN_ELLIPSIS = __re_compile("(?P<bname>\.\.\.)")
+DSL_DIR_L2R = "{DSL_DIR_L2R}"
+DSL_DIR_R2L = "{DSL_DIR_R2L}"
 
 
 {code_naming}

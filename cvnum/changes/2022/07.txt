@@ -2,6 +2,29 @@
 
 
 ==
+07
+==
+
+--------
+:update:
+--------
+
+[[:api:]]
+Here are all the new features.
+
+    1) Naming integers: the ¨new ¨python ¨api is now "fully functional" (tests will be added soon, so it should remain some insidious bugs).
+
+    1) ¨DSL for translations: the analysis of very big numbers follows a simpler logic. This implies the creation of a new optional key cvnum::``dir`` for the block peuf::``general``.
+
+
+[[:doc:]]
+Naming integers: the new way followed to analyse very big numbers has been explained.
+
+
+// ---------- //
+
+
+==
 05
 ==
 
@@ -18,19 +41,11 @@ Naming integers: the number to name can be any object with a string representati
 --------
 
 [[:doc:]]
-Naming integers: the kinds of numbers that are nameable have been documented.
+Naming integers: the "kinds" of numbers that can be converted have been documented.
 
 
 [[:api:]]
 ¨DSL for translations: a block peuf::``this`` must be used to indicated ¨infos about the translation (see the short ¨desc).
-
-
---------
-:fordev:
---------
-
-[[:tech:]]
-Naming integers: a specific method has been added to name the pieces of a group (that is not similar to an isolated small slices).
 
 
 // ---------- //

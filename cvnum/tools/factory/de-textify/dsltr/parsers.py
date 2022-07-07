@@ -27,6 +27,20 @@ class ParserGene(BaseParserRules):
     def build(self):
         super().build_keyvals(KEYS_GENE)
 
+# Normalize the value of the direction.
+        if not self.specs[DSL_TAG_GENE_DIR]:
+            self.specs[DSL_TAG_GENE_DIR] = DSL_DIR_L2R
+
+        elif not self.specs[DSL_TAG_GENE_DIR] in [
+            DSL_DIR_L2R,
+            DSL_DIR_R2L,
+        ]:
+            raise Exception(
+                f"illegal value for ``{DSL_TAG_GENE_DIR}``. "
+                f"You can use ``{DSL_DIR_L2R}`` (default value), "
+                f"or ``{DSL_DIR_R2L}``."
+            )
+
 # Preparing regex rules for very big names.
         if self.specs[DSL_TAG_GENE_BIG]:
             bigname, sep, verybigname = self.specs[
@@ -48,8 +62,8 @@ class ParserGene(BaseParserRules):
                      "(see the key ``big`` of the block ``gene``)."
                 )
 
-            bigname = bigname.replace(ELLIPSIS, '\S+')
-            bigname = f"(?P<bname>{bigname})"
+            bigname = bigname.replace(ELLIPSIS, '\S*')
+            bigname = f"{bigname}"
 
             self.specs[DSL_TAG_GENE_BIG] = (bigname, verybigname)
 

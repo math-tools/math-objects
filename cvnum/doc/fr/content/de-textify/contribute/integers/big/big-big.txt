@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-06-04
+    date = 2022-07-07
 
 
 ===============================
@@ -11,7 +11,11 @@ Prenons le cas de l'espagnol qui permet de parler de "millones de millones de mi
 ((
     Nous ne répondrons pas à la question épineuse de l'utilité de ceci.
 )).
-Cette régle est indiquée comme suit via la clé optionnelle cvnum::``big`` du bloc cvnum::``general``.
+Cette régle est indiquée comme suit via la clé **optionnelle**
+((
+    Voir la note en fin de section.
+))
+cvnum::``big`` du bloc cvnum::``general``.
 
 cvnum::
     ---
@@ -30,13 +34,44 @@ cvnum::
             [r]
 
 
-Le mécanisme disponible est basique.
+Commençons par expliquer la règle cvnum::``big = mill... -> ... de millones``. Un exemple est donné un peu plus bas pour clarifier les explications ci-dessous.
 
-    1) cvnum::``big = mill...`` dans cvnum::``big = mill... -> ... de millones`` indique de capturer tout mot commençant par "mill" dans le nom du nombre. Ici les trois ¨pts de suspension indiquent toute séquence de caractères sans espace.
+    1) cvnum::``mill...`` avant cvnum::``->`` indique de capturer tout mot commençant par "mill" dans le nom du nombre.
+    Ici les trois ¨pts de suspension indiquent toute séquence, éventuellement vide, de caractères autre qu'un espace.
+    Pour l'espagnol, "millones" ou "millón" sont les seuls mots produits par les règles de nommage qui commencent par "mill".
 
-    1) cvnum::``... de millones`` dans cvnum::``big = mill... -> ... de millones`` demande de compléter les "millones" et "millón" repérés par autant de "de millones" que nécessaire.
-    Ici les trois ¨pts de suspension indiquent toute occurence de "millones" ou "millón" (car ce sont les seuls mots produits par les règles de nommage qui commencent par "mill").
+    1) cvnum::``... de millones`` après cvnum::``->`` demande de compléter les "millones" et "millón" capturés par autant de "de millones" que nécessaire.
+
+
+Voici ce qu'il se passe en coulisse pour le très grand ¨nbre `11,222,333,444,555,666,777` que nous utilisons tous les jours. Ceci va permettre de lever toute ambiguïté...
+
+    1) Comme la plus grande puissance pour les ¨grpes en espagnol est `6`, on commence par faire des blocs de `6` chiffres
+    ((
+        Pour le français et l'anglais, on ferait des blocs de `9` chiffres car la plus grande puissance est `9` dans ces cas.
+    )).
+
+        * `11`
+        * `222,333`
+        * `444,555`
+        * `666,777`
+
+    1) De façon récursive, on nomme `11` puis `222,333,444,555,666,777`.
+    Ceci donne bêtement quelque chose du type "`11` millones `222,333,444,555,666,777`" où `222,333,444,555,666,777` est en fait nommé récursivement sous une forme du type "`222,333` millones `444,555,666,777`", ¨etc.
+    On obtient finalement un texte ressemblant à "`11` millones `222,333` millones `444,555` millones `666,777`".
+
+    1) Pour finir, la transformation des "millones" en "... de millones" se fait de gauche à droite par défaut (voir la note ci-dessous à propos de la clé **optionnelle** cvnum::``dir``).
+    C'est ainsi que l'on obtient le texte attendu du type "`11` millones de millones de millones `222,333` millones de millones `444,555` millones `666,777`".
 
 
 note::
-    Si la clé cvnum::``big`` n'est pas utilisée alors la ¨trad sera refusée pour les ¨nbres trop grands.
+    La clé optionnelle cvnum::``dir`` donne le sens d'analyse pour nommer les très grands nombres.
+    Par défaut, nous avons cvnum::``dir = l2r`` pour "left to right", soit "de gauche à droite" en anglais.
+    On peut aussi utiliser cvnum::``dir = r2l`` pour "right to left", soit "de droite à gauche"
+    ((
+        A priori, l'option "right to left" semble inutile pour les cas usuels.
+        Ceci est tout de même utilisé en coulisse pour des tests unitaires.
+    )).
+
+
+note::
+    Si la clé optionnelle cvnum::``big`` n'est pas utilisée, alors la ¨trad des ¨nbres trop grands sera refusée.

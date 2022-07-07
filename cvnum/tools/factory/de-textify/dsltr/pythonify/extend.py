@@ -56,7 +56,7 @@ def manage_extend(alltrans):
                 DSL_SPECS_SMALL: specs.get(DSL_SPECS_IGNORE_SMALL, []),
             }
 
-            lang_ext = specs[DSL_SPECS_EXTEND][TAG_LANG]
+            lang_ext = specs[DSL_SPECS_EXTEND][DSL_TAG_LANG]
 
             for kind in [DSL_SPECS_GROUP, DSL_SPECS_SMALL]:
                 ignoreme = ignored_keys[kind]
@@ -79,6 +79,10 @@ def manage_extend(alltrans):
 # Let's copy block from the initial lang.
             for kind in _REMAINING_KINDS_TO_KEEP:
                 pyspecs_onelang[kind] = alltrans[lang_ext].get(kind, {})
+
+# Take care of changes in the block ``general``.
+            for k, v in alltrans[lang].get(DSL_SPECS_GENE, {}).items():
+                pyspecs_onelang[DSL_SPECS_GENE][k] = v
 
 # Nothing more to do.
         pyspecs_alltrans[lang] = pyspecs_onelang

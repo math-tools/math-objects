@@ -15,8 +15,8 @@ TAG_VALUE  = 'value'
 ELLIPSIS     = "..."
 REPLACE_WITH = "->"
 
-YES    = "yes"
 NO     = "no"
+YES    = "yes"
 YES_NO = [YES, NO]
 
 TAG_MANDATORY = "mandatory"
@@ -26,30 +26,40 @@ TYPE_INT    = "integer"
 TYPE_STR    = "string"
 TYPE_YES_NO = "yes/no"
 
-TAG_LANG = "lang"
 
 DSL_SPECS_THIS = "this"
 
+
 DSL_SPECS_EXTEND = "extend"
+DSL_TAG_LANG     = "lang"
 KEYS_EXTEND      = {
-    TAG_LANG: (TYPE_STR, TAG_MANDATORY),
+    DSL_TAG_LANG: (TYPE_STR, TAG_MANDATORY),
 }
 
+
+DSL_DIR_L2R = "l2r"
+DSL_DIR_R2L = "r2l"
+
 DSL_SPECS_GENE    = "general"
-DSL_TAG_GENE_SEP  = "sep"
 DSL_TAG_GENE_BIG  = "big"
+DSL_TAG_GENE_DIR  = "dir"
+DSL_TAG_GENE_SEP  = "sep"
 KEYS_GENE         = {
-    DSL_TAG_GENE_SEP: (TYPE_STR, ''),
     DSL_TAG_GENE_BIG: (TYPE_STR, ''),
+    DSL_TAG_GENE_DIR: (TYPE_STR, ''),
+    DSL_TAG_GENE_SEP: (TYPE_STR, ''),
 }
+
 
 DSL_SPECS_GROUP = "group"
 KEYS_GROUP      = {
     TYPE_INT: (TYPE_DSL, ''),
 }
 
+
 DSL_SPECS_IGNORE_GROUP = "ignore-group"
 KEYS_IGNORE_GROUP      = KEYS_GROUP
+
 
 DSL_SPECS_PATCH = "patch"
 KEYS_PATCH      = {
@@ -64,13 +74,16 @@ KEYS_SIGN          = {
     DSL_TAG_SIGN_MINUS: (TYPE_STR, TAG_MANDATORY),
 }
 
+
 DSL_SPECS_SMALL = "small"
 KEYS_SMALL      = {
     TYPE_DSL: (TYPE_DSL, ''),
 }
 
+
 DSL_SPECS_IGNORE_SMALL = "ignore-small"
 KEYS_IGNORE_SMALL      = KEYS_SMALL
+
 
 DSL_ALL_FINAL_SPECS = [
     DSL_SPECS_GENE,
@@ -79,6 +92,7 @@ DSL_ALL_FINAL_SPECS = [
     DSL_SPECS_SMALL,
     DSL_SPECS_SIGN,
 ]
+
 
 MODE_TRANS = {
     "keyval:: =": [

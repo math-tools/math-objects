@@ -1,5 +1,5 @@
 this::
-    date = 2022-03-31
+    date = 2022-07-05
 
 
 ==================
@@ -38,10 +38,11 @@ Comment cela fonctionne-t-il ? Il se trouve que l'on peut utiliser un petit lang
 
         * Dans cvnum::``8* = [4]-[20]-[d(0)]``, l'emploi de cvnum::``[d(0)]`` demande de remplacer cvnum::``[d(0)]`` par le nom du chiffre des unités.
         Par exemple, pour `86`, le code cvnum::``[d(0)]`` fait référence à "six" le nom de `6`.
-        Notons que cvnum::``[d(1)0]`` fait référence à "quatre-vingt" le nom de `80`, et cvnum::``[1d(0)]`` à "seize" celui de `16`.
+        En fait, cvnum::``d`` est le petit ¨nbre à nommer, tandis que cvnum::``d(0)`` fait référence au chiffre des unités correspondant à `1 = 10^0`.
+        De même, cvnum::``d(1)`` est le chiffre des dizaines puisque `10 = 10^1`.
 
 
-Il devient maintenant facile de comprendre les lignes suivantes.
+Il devient maintenant facile de comprendre les lignes suivantes où notamment cvnum::``[d(1)0]`` permet de nommer en mettant à zéro le chiffre des unités.
 
 cvnum::
     ---
@@ -51,6 +52,9 @@ cvnum::
 
     small::
     // ... etc.
+
+        80 = [4]-[20]s
+        8* = [4]-[20]-[d(0)]
 
         71 = [60]-et-[11]
         7* = [60]-[1d(0)]
@@ -62,10 +66,11 @@ cvnum::
     // ... etc.
 
 
-Une version précédente du fichier path::``FR/FR/integers.txt`` utilisait les règes suivantes au lieu des précédentes (ceci était moins explicite mais fonctionnel).
+Une ancienne version du fichier path::``FR/FR/integers.txt`` utilisait les règes suivantes au lieu des précédentes (ceci était moins explicite bien que fonctionnel).
 
 cvnum::
     ---
+    title   = Une ancienne version
     file    = FR/FR/integers.txt
     extract = yes
     ---
@@ -83,23 +88,21 @@ cvnum::
     // ... etc.
 
 
-Ce qui précède contient les commandes suivantes qui pourront peut-ête s'avérer pratiques dans certaines situations
+Ce qui précède contient les commandes suivantes qui pourront peut-être s'avérer pratiques dans certaines situations
 ((
     Si à l'usage il est inutile de se servir d'alternatives de recherche, cette fonctionnalité disparaîtra dans le cimétière des FBI (Fausses Bonnes Idées).
 )).
 
-    1) La règle cvnum::``[2..6]1 = [d(1)0]-et-[1]`` s'applique aux naturels `21`, `31`, `41`, `51` et `61` en prenant ¨resp les noms de `20`, `30`, `40`, `50` et `60` suivis de" -et-" puis du nom de `1`. Voici ce qu'il faut retenir.
-
-        * cvnum::``2..6`` indique un naturel allant de `2` à `6`.
-
-        * cvnum::``[d(1)0]`` permet d'avoir le nom en mettant à zéro le chiffre des unités.
+    1) La règle cvnum::``[2..6]1 = [d(1)0]-et-[1]`` s'applique aux naturels `21`, `31`, `41`, `51` et `61` en prenant ¨resp les noms de `20`, `30`, `40`, `50` et `60` suivis de "-et-" puis du nom de `1`.
+    En fait, cvnum::``2..6`` indique un naturel allant de `2` à `6`.
 
     1) cvnum::``1..6 | 8`` indique `8` ou un naturel allant de `1` à `6`. En fait, cvnum::``1..6`` est un raccourci pour cvnum::``1 | 2 | 3 | 4 | 5 | 6``.
 
-    1) Rappelons que `21` est traité par cvnum::``[2..6]1 = ...`` , et non par cvnum::``[1..6 | 8]* = ...`` car cette règle est définie après dans le fichier.
+    1) Rappelons que `21` était traité par cvnum::``[2..6]1 = ...`` , et non par cvnum::``[1..6 | 8]* = ...`` car cette règle est définie après dans le fichier.
 
 
-Pour finir, voici quelque chose très pratique. Le code ci-dessous utilise une alternative simple afin d'obtenir "deux cents", "trois cent quatre", ou "sept cent mille", mais pas "un cent deux" ou "sept cents mille" (noter le "s" non souhaité).
+Finissons avec quelque chose très pratique.
+Le code ci-dessous utilise une alternative simple afin d'obtenir "deux cents", "trois cent quatre", ou "sept cent mille", mais pas "un cent deux" ou "sept cents mille" (noter le "s" non souhaité).
 
 cvnum::
     ---
@@ -119,12 +122,13 @@ cvnum::
     // ... etc.
 
 
-La chose intéressante dans ce code est cvnum::``[d(2) :if: d(2) > 1]`` demande de n'ajouter le nom du nombre de centaines que si ce dernier dépasse `1`.
-Voici deux autres utilisations d'alternatives où l'usage de cvnum::``"..."`` au lieu de cvnum::``[...]`` permet de choisir du texte directement.
+La chose intéressante dans ce code est cvnum::``[d(2) :if: d(2) > 1]`` demandant de n'ajouter le nom du nombre de centaines que si ce dernier dépasse `1`.
+Voici deux autres utilisations d'alternatives où l'usage de cvnum::``"..."`` au lieu de cvnum::``[...]`` permet d'indiquer directement du texte à utiliser.
 
     1) Dans path::``EN/GN/integers.txt``, on trouve cvnum::``thousand "and :if: 0 < r < 100"`` afin de n'ajouter "and" après "thousand" que s'il reste après les milliers va de 1 à 99 (nous verrons plus tard l'usage de la variable spéciale cvnum::``r`` pour les milliers, les millions...).
 
-    1) Dans path::``ES/ES/integers.txt``, on trouve cvnum::``mill"ones :if: d > 1 :else: ón"`` avec un cvnum::``:else:`` pour accorder correctement "millón" en "millones" au pluriel.
+    1) Dans path::``ES/ES/integers.txt``, on trouve cvnum::``mill"ones :if: d > 1 :else: ón"`` avec un cvnum::``:else:``.
+    Cette régele sert à accorder correctement "millón" en "millones" au pluriel.
 
 
 warning::

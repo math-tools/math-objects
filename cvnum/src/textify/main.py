@@ -6,6 +6,8 @@
 
 from typing import *
 
+from re import findall
+
 from .automata import *
 
 
@@ -19,91 +21,219 @@ from .automata import *
 class IntName(BaseAutomata):
 ###
 # prototype::
-#     :see: automata.BaseAutomata.name_small_big
-###
-    def name_big(
-        self,
-        very_bigslice: str,
-        suffix       : str = ''
-    ) -> None:
-        D_VAR = very_bigslice[:-self._small_big_expo_max]
-        R_VAR = very_bigslice[-self._small_big_expo_max:]
-
-        if D_VAR:
-            print("BIG:", R_VAR, ' Before:', D_VAR, f' >>> {suffix}' if suffix else '')
-        else:
-            print("BIG:", R_VAR)
-
-        R_NAME = self.name_small_big(R_VAR)
-
-        suffix = self.next_big_suffix(suffix)
-
-        if D_VAR:
-           D_NAME = self.name_big(D_VAR, suffix)
-
-
-###
-# prototype::
-#     suffix : a suffix to use fo very big integers used for recursive calls
+#     nb : an object having a string representation equal to an integer
+#        @ str(nb) in str(ZZ)
 #
-#     :return: the suffix for the next very big slice
-###
-    def next_big_suffix(self, suffix: str) -> str:
-        if suffix:
-            suffix = suffix.replace('...', self._very_big_suffix)
-
-        else:
-            suffix = self._very_big_suffix
-
-        return suffix
-
-
-###
-# prototype::
-#     :see: automata.BaseAutomata.name_small_big
-###
-    def name_small_big(self, bigslice: str) -> str:
-# We name the first "none zero" biggest group.
+#     :return: the name of ``nb`` in the language ``self.lang``
 #
-# The remaining digits will be managed recursively via ``self.nameit_group``
-# that will call ``self.name_small_big``.
-        nbdigits = len(bigslice)
-        maxpower = 0
+#     :see: self.name_big ,
+#           self.name_small
+###
+    def nameof(self, nb: Any) -> str:
+# For error messages.
+        self._initial_nb = nb
 
-        for power in self._small_big_expos:
-            if power > nbdigits:
-                break
+# Name of the sign, and the string version of the absolute value of the integer.
+        sign, str_absnb = self.sign_n_abs(nb)
+        nb_digits       = len(str_absnb)
 
-            maxpower = power
-
-        power_pos = self._small_big_expos.index(maxpower)
-
-        if power_pos == 0:
-            d_var = bigslice
-            r_var = ""
-
-        else:
-            prev_maxpower = self._small_big_expos[power_pos - 1]
-
-            d_var = bigslice[-maxpower: -prev_maxpower]
-            r_var = bigslice[-prev_maxpower:]
-
-        if r_var:
-            from pprint import pprint;pprint(self._small_big[prev_maxpower])
-            return self.apply(
-                actions = self._small_big[prev_maxpower],
-                d_var   = d_var,
-                r_var   = r_var
+# Do big numbers are allowed?
+        if (
+            not self._very_big_allowed
+            and
+            nb_digits > self._small_big_max_len
+        ):
+            raise ValueError(
+                 "number too big to be named. The maximal number of digits is "
+                f"{self._small_big_max_len}  < {nb_digits}."
             )
 
-        return self.name_small_slice(d_var)
+# Let's go!
+#
+# warning::
+#     Zero is a very special case (thinks about d_var with zero value).
+        if str_absnb == '0':
+            name = self.name_small(str_absnb)
+
+        else:
+            name = self.name_big(str_absnb)
+
+# Suffixes for very big integers.
+            if nb_digits > self._small_big_max_len:
+                name = self.build_suffixes(name)
+
+# TODO Remove the following ugly hack!
+            name = name.replace('--', '-')
+
+            while('  ' in name):
+                name = name.replace('  ', ' ')
+
+            name = name.strip()
+
+# The "complete" name.
+        if sign:
+            name = f"{sign} {name}"
+
+# Patches to apply?
+        for old, new in self._patch.items():
+            name = name.replace(old, new)
+
+# Nothing left to do.
+        return name
 
 
 ###
 # prototype::
-#     :see: automata.BaseAutomata.name_small_slice
+#     nb : an object having a string representation equal to an integer
+#        @ str(nb) in str(ZZ)
+#
+#     :return: the name of the sign,
+#              and just the string version of the absolute numerical value
+#              of ``nb``
+#            @ let rnb = real(nb) ;
+#              abs(return[1]) = abs(rnb) ;
+#              return[0] = '-' if rnb < 0 ;
+#              return[0] in ['', '+'] if rnb >= 0
 ###
-    def name_small_slice(self, smallslice: str) -> str:
+    def sign_n_abs(self, nb: Any) -> Tuple[str, str]:
+# String version of the object ``nb``.
+        nb = str(nb)
+
+# Normalization and sign of the number.
+        if nb[0] in "-+":
+            sign = nb[0]
+            nb   = nb[1:]
+
+        else:
+            sign = ""
+
+        nb = nb.strip()
+
+        if not nb.isdigit():
+            raise ValueError(
+                f'``nb = "{sign}{nb}"`` is not an integer'
+            )
+
+# Name of the sign
+        if sign:
+            if self._sign_name[sign] is None:
+                raise ValueError(
+                    f"the sign ``{sign}`` can't be used "
+                    f"with the language {self.lang}"
+                )
+
+            sign = self._sign_name[sign]
+
+# Nothing more to do.
+        return sign, nb
+
+
+###
+# prototype::
+#     bigslice : a positive integer that can be named whatever is its size
+#              @ bigslice in str(NN) - {0}
+#
+#     :return: the name of ``bigslice`` in the language ``self.lang`` **without
+#              applying the suffixes for very big integers**
+#
+#     :see: self.name_small,
+#           self.build_DnR_vars
+###
+    def name_big(self, bigslice: str,) -> str:
+
+# The big slice is not zero.
+        nbdigits = len(bigslice)
+
+# A small number.
+        if nbdigits <= self._small_big_min_len:
+            return self.name_small(bigslice)
+
+# The special variables ``d`` and ``r``.
+        d_var, r_var, grppower = self.build_DnR_vars(bigslice)
+
+# We must take care of "small" final groups that are equal to zero!
+        if (
+            grppower < self._small_big_expo_max
+            and
+            d_var == '0'
+            and
+            int(r_var) == 0
+        ):
+            return ''
+
+# We have something to name.
+        return self.apply(
+            actions = self._small_big[grppower],
+            d_var   = d_var,
+            r_var   = r_var
+        )
+
+
+###
+# prototype::
+#     bigslice : a positive integer that can be named whatever is its size
+#              @ bigslice in str(NN) - {0}
+#
+#     :return: the string representation of the special variable ``d``,
+#              the string representation of the special variable ``r``
+#              and the power of the group to be named
+###
+    def build_DnR_vars(self, bigslice: str,) -> Tuple[str, str, int]:
+        bigslice  = str((bigslice))
+        nb_digits = len(bigslice)
+
+# A "real" big number?
+        nb_digits_left = nb_digits % self._small_big_expo_max
+
+        if nb_digits_left == 0:
+            if nb_digits <= self._small_big_expo_max:
+                d_var = bigslice
+                r_var = ""
+
+            else:
+                d_var = bigslice[:self._small_big_expo_max]
+                r_var = bigslice[self._small_big_expo_max:]
+
+        else:
+            d_var = bigslice[:nb_digits_left]
+            r_var = bigslice[nb_digits_left:]
+
+# A "small" big number?
+        if r_var:
+            grppower = self._small_big_expo_max
+
+        else:
+            grppower = 0
+
+            for power in self._small_big:
+                if power >= nb_digits:
+                    break
+
+                grppower = power
+
+            d_var = bigslice[:-grppower]
+            r_var = bigslice[-grppower:]
+
+# We must always remove useless zero in ``d_var``.
+#
+# This is not true for ``r_var``. Think about 10*27 for example.
+        d_var = str(int(d_var))
+
+# Nothing left to do...
+        return d_var, r_var, grppower
+
+
+###
+# prototype::
+#     smallslice : a positive integer that can be named using only the rules
+#                  for small in the dictionnary ``INT_2_NAME[DSL_SPECS_SMALL]``
+#                @ smallslice in str(NN)
+#
+#     :return: the name of ``smallslice`` in the language ``self.lang``
+#
+#     :see: INT_2_NAME
+###
+    def name_small(self, smallslice: str) -> str:
 # As it.
         if smallslice in self._small_asit:
             actions = self._small_asit[smallslice]
@@ -139,9 +269,90 @@ class IntName(BaseAutomata):
                 )
 
 # Let's work!
-#
-# TODO: remove strip when :space: will be available in the DSL.
         return self.apply(
             actions = actions,
             d_var   = smallslice,
+        )
+
+
+###
+# prototype::
+#     name : the name built by ``self.name_big`` without applying the suffixes
+#            for very big integers
+#
+#     :return: the name of a very big integer obtained by **applying the
+#              suffixes for very big integers**
+#
+#     :see: self.name_big
+###
+    def build_suffixes(self, name: str) -> str:
+# We must look for consecutive zeros for big groups that will not be in
+# the final name.
+#
+# TODO Remove the following ugly strip!
+        zerobigname = self.apply(
+            actions = self._small_big[self._small_big_expo_max],
+            d_var   = '0',
+            r_var   = '0'*self._small_big_expo_max
         ).strip()
+
+# Let's look for the groups that will stay in the name.
+        grpnames = []
+        end      = 0
+
+        for _ in findall(zerobigname, name):
+            start = name.index(zerobigname, end)
+
+            grpnames += list(
+                findall(
+                    self._very_big_matching,
+                    name[end: start]
+                )
+            )
+
+            grpnames.append(zerobigname)
+
+            end = start + len(zerobigname)
+
+# The suffixes (we have to take care of the direction used).
+        suffix   = ''
+        suffixes = []
+
+        for _ in range(len(grpnames)):
+            if suffixes:
+                if suffix:
+                    suffix = suffix.replace('...', self._very_big_suffix)
+
+                else:
+                    suffix = self._very_big_suffix
+
+            suffixes.append(suffix)
+
+        if self._very_big_dir == DSL_DIR_L2R:
+            suffixes.reverse()
+
+# Let's apply the suffixes.
+        newname = []
+        end  = 0
+
+        for i, onegrpname in enumerate(grpnames):
+            start = name.index(onegrpname, end)
+
+            newname.append(name[end: start])
+
+            end = start + len(onegrpname)
+
+            if onegrpname == zerobigname:
+                continue
+
+            suffix = suffixes[i]
+
+            if suffix:
+                onegrpname = suffix.replace('...', onegrpname)
+
+            newname.append(onegrpname)
+
+        newname.append(name[end:])
+
+# Job finished. That's great!
+        return ''.join(newname)
