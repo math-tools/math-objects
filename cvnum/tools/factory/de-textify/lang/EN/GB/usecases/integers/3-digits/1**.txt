@@ -1,0 +1,2 @@
+100 = one hundred
+108 = one hundred and eight

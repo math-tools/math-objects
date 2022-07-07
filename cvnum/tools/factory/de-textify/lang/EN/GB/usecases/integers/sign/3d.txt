@@ -1,0 +1,3 @@
++ 111 = plus one hundred and eleven
+
+- 999 = minus nine hundred and ninety-nine

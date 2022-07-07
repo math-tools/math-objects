@@ -5,20 +5,33 @@
 07
 ==
 
---------
-:update:
---------
+------
+:news:
+------
 
 [[:api:]]
 Here are all the new features.
 
-    1) Naming integers: the ¨new ¨python ¨api is now "fully functional" (tests will be added soon, so it should remain some insidious bugs).
+    1) Naming integers: the new ¨python ¨api is now "fully functional" (tests will be added soon, so it should remain some insidious bugs).
 
     1) ¨DSL for translations: the analysis of very big numbers follows a simpler logic. This implies the creation of a new optional key cvnum::``dir`` for the block peuf::``general``.
 
 
 [[:doc:]]
 Naming integers: the new way followed to analyse very big numbers has been explained.
+
+
+--------
+:update:
+--------
+
+[[:bug:]]
+Naming integers: building the tests shows that `63,005` was translated into "sixty-three thousand and zero hundred and five" with an unwanted "zero hundred". This has been fixed.
+
+
+[[:doc:]]     ??????
+
+Naming integers: patch non extensible contrairement à general !!! faires les deux !!!!
 
 
 // ---------- //
@@ -28,17 +41,13 @@ Naming integers: the new way followed to analyse very big numbers has been expla
 05
 ==
 
------
-:new:
------
+------
+:news:
+------
 
 [[:api:]]
 Naming integers: the number to name can be any object with a string representation that is a "legal" integer.
 
-
---------
-:update:
---------
 
 [[:doc:]]
 Naming integers: the "kinds" of numbers that can be converted have been documented.

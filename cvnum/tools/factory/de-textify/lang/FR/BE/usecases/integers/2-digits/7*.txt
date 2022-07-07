@@ -1,0 +1,3 @@
+70 = septante
+71 = septante-et-un
+73 = septante-trois

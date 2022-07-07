@@ -11,7 +11,7 @@ from math import (
     log
 )
 
-from ..toolbox.str2nb import (
+from ..tbox.str2nb import (
     intnonneg,
     intbase
 )

@@ -99,6 +99,10 @@ class IntName(BaseAutomata):
 # String version of the object ``nb``.
         nb = str(nb)
 
+# Remove spaces and decimal separators.
+        for toremove in [' ', self._groups_sep]:
+            nb = nb.replace(toremove, '')
+
 # Normalization and sign of the number.
         if nb[0] in "-+":
             sign = nb[0]
@@ -145,13 +149,22 @@ class IntName(BaseAutomata):
         nbdigits = len(bigslice)
 
 # A small number.
+#
+# warning::
+#     We have to transform ``"005"`` into ``"5"``.
         if nbdigits <= self._small_big_min_len:
+            bigslice = str(int(bigslice))
+
             return self.name_small(bigslice)
 
 # The special variables ``d`` and ``r``.
         d_var, r_var, grppower = self.build_DnR_vars(bigslice)
 
 # We must take care of "small" final groups that are equal to zero!
+        # print(f"{d_var    = }")
+        # print(f"{r_var    = }")
+        # print(f"{grppower = }")
+
         if (
             grppower < self._small_big_expo_max
             and

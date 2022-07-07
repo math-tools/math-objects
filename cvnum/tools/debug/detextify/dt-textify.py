@@ -45,12 +45,17 @@ USE_RAND = False
 RAND_POWERS = [2, 3, 6, 9, 12, 15]
 RAND_POWERS = [2, 3, 4, 5]
 
-lang = de_DE
-lang = en_GB
-lang = it_IT
-lang = es_ES
-lang = fr_FR
+# lang = de_DE
+lang = en_GB # TESTS OK
+# lang = en_US
+# lang = es_ES
+# lang = fr_FR # TESTS OK
+# lang = fr_BE # TESTS OK
+# lang = fr_FR_chuquet_1
+# lang = fr_FR_chuquet_2
+# lang = fr_FR_rowlet
 # lang = fr_FR_tiret
+# lang = it_IT
 
 nbtests_by_slice = 2
 
@@ -58,13 +63,14 @@ intname = IntName(lang)
 
 if not USE_RAND:
     for x in [
+        "63 005", #" BUG "
         # 0,
         # 1,
         # 11,
         # 111,
         # 2111,
         # 22111,
-        222111,
+        # 222111,
         # 3222111,
         # 33222111,
         # 333222111,
@@ -91,7 +97,7 @@ if not USE_RAND:
         # - 999_000000000_666555444_333222111,
         # 10**9,
         # 2*10**18,
-        # 3*10**36 + 10**18,
+        3*10**36 + 10**18,
         # 4*10**36,
         # 123456789012345678901234567890,
     ]:

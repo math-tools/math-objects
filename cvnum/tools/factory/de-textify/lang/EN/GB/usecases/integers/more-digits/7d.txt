@@ -1,0 +1,5 @@
+1 000000 = one million
+
+2 000000 = two million
+
+3 240500 = three million two hundred and forty thousand five hindred
