@@ -66,38 +66,39 @@ python::
 
     # Names of integers in academic German.
     de_DE = "de_DE"
-
+    
     # Names of integers in academic British English.
     en_GB = "en_GB"
-
+    
     # Names of integers in academic American English.
     en_US = "en_US"
-
+    
     # Names of integers in academic Spanish.
     es_ES = "es_ES"
-
+    
     # Names of integers in academic Belgian.
     fr_BE = "fr_BE"
-
+    
     # Names of integers in academic French.
     fr_FR = "fr_FR"
-
+    
     # Names of very large integers in French using the short Chuquet's rules
     # (without using "milliard").
     fr_FR_chuquet_1 = "fr_FR_chuquet_1"
-
+    
     # Names of very large integers in French using the full Chuquet's rules
-    # (without using "milliard").
+    # (using "milliard").
     fr_FR_chuquet_2 = "fr_FR_chuquet_2"
-
+    
     # Names of very large integers in French using the Rowlett's rules.
     fr_FR_rowlett = "fr_FR_rowlett"
-
+    
     # Names of integers in academic French using the "hyphens everywhere"
     # convention.
     fr_FR_tiret = "fr_FR_tiret"
-
+    
     # Names of integers in academic Italian.
     it_IT = "it_IT"
 
 // -- ALL LANGS - END -- //
+

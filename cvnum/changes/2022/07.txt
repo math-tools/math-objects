@@ -10,7 +10,7 @@
 ------
 
 [[:api:]]
-Here are all the new features to name integers.
+Here are the new features to name integers.
 
     1) Naming integers: the new ¨python ¨api is now "fully functional" (tests will be added soon, so it should remain some insidious bugs).
 
@@ -18,7 +18,7 @@ Here are all the new features to name integers.
 
 
 [[:doc:]]
-Naming integers: the new way followed to analyze very big numbers has been explained (¨doc for the users, and the ¨DSL).
+Naming integers: the new way followed to analyze very big numbers has been explained (¨docs for the users, and the ¨DSL).
 
 
 --------
