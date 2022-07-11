@@ -1,0 +1,2 @@
+500 = quinientos
+515 = quinientos quince

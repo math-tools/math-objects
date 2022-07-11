@@ -1,0 +1,59 @@
+this::
+    date = 2022-07-11
+
+
+==================================
+Rédiger les exemples d'utilisation
+==================================
+
+Les cas d'utilisation servent à tester le "bon calclul" des noms, il est donc inutile de tester les règles du type cvnum::``1 = un`` sans calcul
+((
+    Ces cas sont déjà testés via des comparaisons avec d'autres ¨api de nommage d'entiers.
+)).
+Ceci étant indiqué, voyons des cas d'utilisation tirés du dossier path::``FR/FR/usecases/integers`` ayant le contenu "partiel" suivant.
+
+dirtree::
+    ---
+    folder  = FR/FR/usecases/integers
+    extract = yes
+    ---
+    + group
+        * 3p.txt
+        * ...
+    + sign
+        * minus.txt
+        * plus.txt
+    + small
+        * 1*.txt
+        * 2**.txt
+        * ...
+    + verybig
+        * 36p.txt
+        * ...
+
+
+Regardons ce contient chaque dossier en expliquant au passage les **conventions conseillées pour nommer les dossiers**.
+
+    1) Dans path::``sign``, le mieux est d'utiliser un fichier path::``minus.txt`` pour le signe `-`, et path::``plus.txt`` pour le signe `+`.
+    Dans le cas de la langue ``fr_FR``, on propose juste verb::``- 999 = moins neuf cent quatre-vingt-dix-neuf`` et verb::``+ 111 = plus cent onze`` au format verb::``nombre = nom attendu.``
+    Comme on souhaite juste vérifier le bon emploi des mots "moins" et "plus", il n'est pas utile de multiplier les cas (le bon nommage de ce qui suit les signes est testé dans les autres dossiers).
+
+    1) Dans path::``small``, on se concentre sur les petits ¨nbres positifs ne faisant pas appel aux règles pour les ¨gpes.
+    Les noms de fichiers donnent des motifs. Par exemple, path::``1*.txt`` contient des ¨nbres à deux chiffres commençant par `1`, et path::``2**.txt`` à ceux à trois chiffres commençant par `2`.
+    Voici certains des choix retenus pour tester les "petits" ¨nbres pour la langue ``fr_FR``.
+
+        * Dans path::``1*.txt``, on trouve juste verb::``17 = dix-sept``. Par contre, cvnum::``15 = quinze`` n'est pas proposé car cette règle ne demande aucun calcul.
+
+        * Dans path::``2**.txt``, on propose verb::``200 = deux cents`` et verb::``210 = deux cent dix`` afin de valider la bonne gestion du "s" à la fin du mot "cent".
+
+        * Pour finir, il y a aussi, mais pas que, un fichier path::``7*.txt`` servant à valider les cas verb::``71 = soixante-et-onze`` et verb::``73 = soixante-treize``.
+
+    1) Dans path::``group``, les fichiers ont des nomes du types path::``3p.txt``, path::``6p.txt`` et path::``9p.txt`` pour les puissances `3`, `6` et `9` ¨resp.
+    Par exemple, dans le fichier path::``3p.txt``, on trouve verb::``1000 = mille`` et verb::``1097 = mille quatre-vingt-dix-sept`` pour valider la bonne gestion des groupes de chiffres pour les milliers.
+
+    1) Dans path::``verybig``, la convention pour nommer les fichiers est similaire à celle du dossier path::``group``.
+    Par exemple, dans le fichier path::``36p.txt`` se trouve verb:: ``3*10**36 + 10**18 = trois milliards de milliards de milliards de milliards un milliard de milliards``.
+
+
+note::
+    Bien retenir qu'il faut donner des exemples pour les nombres demandant un peu de réflexion, et donc de calcul pour ¨cvnum, comme par exemple `21`, `25`, `71`, `73`, `80` ou encore `81` pour les "petits" ¨nbres avec la langue ``fr_FR``.

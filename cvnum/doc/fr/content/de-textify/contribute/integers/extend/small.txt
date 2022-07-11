@@ -1,0 +1,44 @@
+﻿this::
+    date = 2022-07-09
+
+
+=====================================================
+Les blocs cvnum::``small`` et cvnum::``ignore-small``
+=====================================================
+
+Voici un autre exemple qui adapte le système académique français au système bien plus simple, et bien plus logique, utilisé en Belgique.
+Dans le fichier suivant a été de nouveau omis le bloc cvnum::``this``.
+La logique d'utilisation étant identique à celle explqiuée pour les groupes, il ne semble pas utile d'expliquer ce qui suit.
+
+cvnum::
+    ---
+    file    = FR/BE/integers.txt
+    extract = yes
+    ---
+
+    extend::
+        lang = fr_FR
+
+    ignore-small::
+        80
+        8*
+
+        71
+        7*
+        9*
+
+        *1
+        **
+
+    small::
+        70 = septante
+        80 = octante
+        90 = nonante
+
+        *1 = [d(1)0]-et-[1]
+        ** = [d(1)0]-[d(0)]
+
+
+warning::
+    Dans le code précédent, il faut veiller au principe du "premier arrivé, premier servi", d'où la écessité de définir d'abord les noms de `80`, `70` et `90`.
+    De plus, il faut se souvenir que les règles avec des motifs d'une taille donnée sont d'abord testées dans le langage à étendre : ceci implique ici de n'oublier aucune règle à ignorer pour les nombres à deux chiffres !

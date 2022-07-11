@@ -1,0 +1,2 @@
+800 = ochocientos
+815 = ochocientos quince

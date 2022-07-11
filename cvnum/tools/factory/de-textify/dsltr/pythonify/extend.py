@@ -80,6 +80,10 @@ def manage_extend(alltrans):
             for kind in _REMAINING_KINDS_TO_KEEP:
                 pyspecs_onelang[kind] = alltrans[lang_ext].get(kind, {}).copy()
 
+# Do the the ``patch`` block has been redefined?
+            if DSL_SPECS_PATCH in alltrans[lang]:
+                pyspecs_onelang[DSL_SPECS_PATCH] = alltrans[lang][DSL_SPECS_PATCH].copy()
+
 # Take care of changes in the block ``general``.
             for k, v in alltrans[lang].get(DSL_SPECS_GENE, {}).items():
                 pyspecs_onelang[DSL_SPECS_GENE][k] = v

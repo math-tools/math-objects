@@ -4,15 +4,16 @@
 # This module proposes one class to convert integers between different bases.
 ###
 
+
 from typing import *
 
-from .base2dec import (
+from .base2int import (
     bnb2int,
     bnumerals2int,
     bdigits2int
 )
 
-from .dec2base import (
+from .int2base import (
     int2bnb,
     int2bnumerals,
     int2bdigits,

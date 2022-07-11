@@ -1,0 +1,5 @@
+1 000000 = un millón
+
+2 000000 = dos millones
+
+3 240500 = tres millones doscientos carienta mil quinientos

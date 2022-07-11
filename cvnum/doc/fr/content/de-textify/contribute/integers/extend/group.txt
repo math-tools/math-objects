@@ -1,0 +1,45 @@
+﻿this::
+    date = 2022-07-09
+
+
+=====================================================
+Les blocs cvnum::``group`` et cvnum::``ignore-group``
+=====================================================
+
+Nicolas Chuquet a proposé détendre le système académique français de nommage des ¨nbres naturels pour prendre en compte de très grandes valeurs.
+L'une des versions proposées par Nicolas Chuquet ne garde par le nom milliard et s'appuie sur des groupes de `6` chiffres au lieu de `3`.
+La définition de ce système est très rapidement faite via le fichier suivant sans le bloc cvnum::``this``.
+Des explications sont données juste après.
+
+cvnum::
+    ---
+    file    = FR/FR[chuquet-1]/integers.txt
+    extract = yes
+    ---
+
+    extend::
+        lang = fr_FR
+
+    ignore-group::
+        9
+
+    group::
+        12 => billion{s}
+        18 => trillion{s}
+        24 => quadrillion{s}
+        30 => quintillion{s}
+        36 => sextillion{s}
+        42 => septillion{s}
+        48 => octillion{s}
+        54 => nonillion{s}
+        60 => decillion{s}
+
+
+Dans le code précédent, nous avons procédé comme suit.
+
+    1) Le bloc cvnum::``extend`` sert à indiquer de reprendre toutes les règles de la variante ``FR`` de la langue ``fr``.
+
+    1) Grâce au bloc **optionnel** cvnum::``ignore-group``, on peut retirer la règle pour les groupes de chiffres correspondant aux milliards (on peut retirer autant de règles que nécessaires).
+
+    1) Pour finir, l'ajout de ¨nelles règles se fait très simplement ici via le bloc cvnum::``group``.
+    On peut ainsi aussi redéfinir une règle utilisée par la langue qui sert de base à celle étendue.

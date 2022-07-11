@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-03-23
+    date = 2022-07-11
 
 
 =========================================
@@ -16,7 +16,7 @@ et aussi que les listes de chiffres vont du poids le plus élevé à celui le pl
 )).
 
 python-term::
-    >>> from cvnum.convert.dec2base import *
+    >>> from cvnum.convert.int2base import *
     >>> n = 4 + 15*16 + 10*16**2 + 3*16**4
     >>> b = 16
     >>> print(int2bdigits(n, b))

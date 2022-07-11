@@ -1,40 +1,12 @@
-this::
-    date = 2022-03-07
+abrev::
+    content = /usecases
 
 
 =================================
 Des cas d'utilisation pour tester
 =================================
 
-Le dossier path::``FR/FR`` est organisé comme suit où le dossier path::``usecases`` permet de donner des exemples d'utilisation.
-
-dirtree:
-    * integers.txt
-    + usecases
-        * integers-01.txt
-        * integers-02.txt
-        * ...
-
-
-Les fichiers d'exemples sont nommés en faisant ¨ref au type de nombres documentés. Ici path::``integers-...`` fait référence au fichier de ¨trad path::``integers.txt``. Après le tiret, vous êtes libre de choisir ce que vous voulez comme caractères.
-Il nous reste à voir le contenu des fichiers path::``integers-...``.
-
-verbatim::
-    ---
-    file = integers-01.txt
-    ---
-
-    17 = dix-sept
-    73 = soixante-treize
-    91 = quatre-vingt-onze
-
-    21 = vingt-et-un
-    81 = quatre-vingt-un
-
-
-On constate qu'il suffit de donner l'écriture décimale d'un entier suivie de ``=`` est du nom complet du nombre (les espaces autour de ``=`` sont facultatifs). Noter qu'il est possible d'utiliser des lignes vides pour structurer les fichiers d'exemples.
-
-
-tip::
-    Penser à donner des exemples pour les nombres demandant un peu de réflexion, et donc de calcul pour ¨cvnum, comme `73` dans le code ci-dessus.
-    Ne pas oublier d'indiquer des cas problématiques comme `21` et `81` dans le cas du français académique.
+content::
+    ¨content/folders.txt
+    ¨content/datas.txt
+    ¨content/extended.txt

@@ -1,0 +1,26 @@
+﻿this::
+    date = 2022-07-09
+
+
+==========================
+Le bloc cvnum::``general``
+==========================
+
+Pour le bloc cvnum::``general``, il est possible de redéfinir certaines valeurs.
+Par exemple, dans le code suivant, on utilise le même séparateur que la langue ``fr_FR``, mais on change la règle pour les très ¨grds ¨nbres.
+
+cvnum::
+    ---
+    file    = FR/FR[tiret]/integers.txt
+    extract = yes
+    ---
+
+    // ...
+
+    extend::
+        lang = fr_FR
+
+    general::
+        big = milliard... -> ...-de-milliards
+
+    // ...

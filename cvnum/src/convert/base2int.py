@@ -4,6 +4,7 @@
 # This module converts specific base writings to decimal writings.
 ###
 
+
 from typing import *
 
 from math import (
@@ -11,7 +12,7 @@ from math import (
     log
 )
 
-from .dec2base import (
+from .int2base import (
     intnonneg,
     intbase,
     int2bnb

@@ -51,7 +51,7 @@ def isroman(rnb: str) -> bool:
     return (
          rnb.isupper()
          and
-         bool(PATTERN_ROMAN_NUMERAL.search(nb))
+         bool(PATTERN_ROMAN_NUMERAL.search(rnb))
     )
 
 

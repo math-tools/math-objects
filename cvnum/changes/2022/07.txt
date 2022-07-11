@@ -2,6 +2,53 @@
 
 
 ==
+11
+==
+
+--------
+:update:
+--------
+
+[[:bugs:]]
+Naming integers: the work on the unit tests has shown the following bugs that have been fixed.
+
+    1) `400,000` was translated into "four hundred thousand zero" with an unwanted "zero" at the end.
+
+    1) `200_000*10**18` was translated into "two hundred thousand" with the ¨lang ``en_GB``, but "deux cent mille milliards de milliards" with the ¨lang ``fr_FR`` as expected. The bug was also met with the ¨langs ``de_DE``, ``en_US`` and ``it_IT``. That was so violent! :-)
+
+
+------
+:news:
+------
+
+[[:api:]]
+Here are the changes.
+
+    1) ¨DSL for translations: extended ¨langs can have their own patches.
+
+    1) The file path::``convert.base2dec`` and path::``convert.dec2base`` have been renamed path::``convert.base2int`` and path::``convert.int2base``.
+
+
+[[:doc:]]
+¨DSL for translations.
+
+    1) Some important clarifications have been made about extensions of ¨langs.
+
+    1) Some rules and conventions must be followed to write usecases.
+
+
+--------
+:fordev:
+--------
+
+[[:misc:]]
+¨Tech ¨doc in the ¨src code: all the prototypes have been updated in the module ``detextify``.
+
+
+// ---------- //
+
+
+==
 07
 ==
 
@@ -12,20 +59,20 @@
 [[:api:]]
 Here are the new features to name integers.
 
-    1) Naming integers: the new ¨python ¨api is now "fully functional" (tests will be added soon, so it should remain some insidious bugs).
+    1) Naming integers: the new ¨python ¨api is now "fully functional" (tests will be added soon, so it should remain some insidious and serious bugs).
 
     1) ¨DSL for translations: the analysis of very big numbers follows a simpler logic. This implies the creation of a new optional key cvnum::``dir`` for the block peuf::``general``.
 
 
 [[:doc:]]
-Naming integers: the new way followed to analyze very big numbers has been explained (¨docs for the users, and the ¨DSL).
+Naming integers: the new way used to analyze very big numbers has been explained (¨docs for the users, and also for the ¨DSL).
 
 
 --------
 :update:
 --------
 
-[[:bug:]]
+[[:bugs:]]
 Naming integers.
 
     1) The work on the unit tests has shown that `63,005` was translated into "sixty-three thousand and zero hundred and five" with an unwanted "zero hundred". This has been fixed.

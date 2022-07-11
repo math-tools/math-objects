@@ -1,27 +1,36 @@
 #!/usr/bin/env python3
 
+###
+# This module defines a class which implements the automaton (but not
+# the whole analyzer of numbers).
+###
+
+
 from typing import *
 
 from ..config.detextify import *
 
 
-# ------------------------- #
-# -- BASE AUTOMATA CLASS -- #
-# ------------------------- #
+# -------------------------- #
+# -- BASE AUTOMATON CLASS -- #
+# -------------------------- #
 
-### TODO  revoir tous les prototypes!!!
-# This class gives the common methods to apply automata rules.
+###
+# This class defines the methods to apply the automaton's rules.
 #
 #
 # note::
 #     We prefer to implement the main logic of building names in a dedicated
-#     class. This motivates the choice to propose this unimplemented method.
+#     class. This motivates the choice to propose an interface like class.
 ###
-class BaseAutomata:
+class BaseAutomaton:
 ###
 # prototype::
 #     lang : the language used to name integers
 #          @ lang in ALL_LANGS
+#
+#       :action: this method builds the ¨dict ``self.ACTIONS_IMPLEMENTED``
+#                that associates each ¨DSL tag to an effective method.
 ###
     def __init__(self, lang: str = "en_GB") -> None:
         self.lang = lang
@@ -46,7 +55,7 @@ class BaseAutomata:
 
     @lang.setter
     def lang(self, lang: str) -> None:
-        assert lang in ALL_LANGS
+        assert lang in ALL_LANGS, f"illegal lang ``{lang}``"
 
         self._lang = lang
         self._update_internals()
@@ -54,34 +63,20 @@ class BaseAutomata:
 
 ###
 # prototype::
-#     :action: update of the values of private attributes used to name integers.
+#     :action: update of the values of private attributes used to name
+#              integers.
 ###
     def _update_internals(self) -> None:
         rulestouse = INT_2_NAME[self.lang]
+
+# Patch
+        self._patch = rulestouse[DSL_SPECS_PATCH]
 
 # Signs
         self._sign_name = {
             '+': rulestouse[DSL_SPECS_SIGN][DSL_TAG_SIGN_PLUS],
             '-': rulestouse[DSL_SPECS_SIGN][DSL_TAG_SIGN_MINUS],
         }
-
-# General
-        self._groups_sep = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_SEP]
-
-        self._very_big_dir = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_DIR]
-
-        self._very_big_allowed = bool(
-            rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
-        )
-
-        self._very_big_matching, \
-        self._very_big_suffix    = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
-
-# Groups
-        self._small_big          = rulestouse[DSL_SPECS_GROUP]
-        self._small_big_expo_max = max(self._small_big)
-        self._small_big_max_len  = 2*self._small_big_expo_max
-        self._small_big_min_len  = min(self._small_big)
 
 # Small
         self._small_asit = rulestouse[DSL_SPECS_SMALL][
@@ -92,8 +87,24 @@ class BaseAutomata:
             DSL_ACTION_MATCHING
         ]
 
-# Patch
-        self._patch = rulestouse[DSL_SPECS_PATCH]
+# Groups
+        self._big_rules    = rulestouse[DSL_SPECS_GROUP]
+        self._big_expo_max = max(self._big_rules)
+        self._big_len_max  = 2*self._big_expo_max
+        self._big_len_min  = min(self._big_rules)
+
+# General & Big groups
+        self._groups_sep = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_SEP]
+
+        self._very_big_allowed = bool(
+            rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
+        )
+
+        self._very_big_dir = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_DIR]
+
+        self._very_big_matching, \
+        self._very_big_suffix    = \
+        rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
 
 
 ###
@@ -140,11 +151,18 @@ class BaseAutomata:
 
 ###
 # prototype::
-#     d_var   : the string decimal representation of a natural integer
-#             @ d_var in str(NN)
 #     actions : a list of actions to use to name ``d_var``
+#     d_var   : the string decimal representation of a natural integer
+#               smallest than the biggest group
+#             @ d_var in str(NN) ;
+#               len(d_var) <= self._big_expo_max
+#     r_var   : the string decimal representation of the remaining digits
+#               of a group, or an empty string if such digits don't exist
+#             @ r_var in str(NN)
+#               or r_var = ''
 #
-#     :return: the name of ``d_var``
+#     :return: the name obtained by applying the actions of the list
+#              ``actions`` by using the values of ``d_var`` and ``r_var``
 ###
     def apply(
         self,
@@ -173,11 +191,14 @@ class BaseAutomata:
 
 ###
 # prototype::
-#     d_var    : the string decimal representation of a natural integer
-#                (not used here)
-#     verbtext : just a text
+#     actions : just a text
+#     d_var   : :see: self.apply
+#     r_var   : :see: self.apply
 #
 #     :return: the value of ``verbtext``
+#
+# note::
+#     The variables ``d_var`` and ``r_var`` are useless here.
 ###
     def verbatim(
         self,
@@ -188,6 +209,19 @@ class BaseAutomata:
         return actions
 
 
+###
+# prototype::
+#     actions : a tag to select the good kind of special variable
+#             @ actions in [DSL_SPEVAR_NUMBER_OF, DSL_SPEVAR_REMAINING]
+#     d_var   : :see: self.apply
+#     r_var   : the string decimal representation of the remaining digits
+#               of a group (here the value can't be empty)
+#             @ r_var in str(NN)
+#     :return: the string value of either ``d_var``, or ``r_var``
+#            @ if actions == DSL_SPEVAR_NUMBER_OF
+#              then return = d_var
+#              else return = r_var
+###
     def spevar(
         self,
         actions: Any,
@@ -197,24 +231,22 @@ class BaseAutomata:
         if actions == DSL_SPEVAR_NUMBER_OF:
             return d_var
 
-        if actions == DSL_SPEVAR_REMAINING:
-            return r_var
+        return r_var
 
-        raise Exception(
-            f'BUG: unknown code ``{actions}`` for a special var.'
-            +
-            self._error_about()
-        )
 
 ###
 # prototype::
-#     d_var     : the string decimal representation of a natural integer
-#               @ d_var in str(NN)
-#     start_end : a couple of two integers ``(start, end)``
+#     actions : a couple of integers ``(start, end)``
+#             @ actions in [NN, NN]
+#     d_var   : :see: self.apply
+#     r_var   : :see: self.apply
 #
-#     :return: the string representatin of the numbers obtain by extracting
-#              consecutive digits ``d_var`` from the position ``start`` to
-#              the position ``end``.
+#     :return: the string representatin of the numbers obtained by extracting
+#              consecutive digits of ``d_var`` from the position ``start``
+#              to the position ``end`` (the case of a too big end is managed).
+#
+# note::
+#     The variable ``r_var`` is useless here.
 ###
     def extractnbof(
         self,
@@ -241,12 +273,14 @@ class BaseAutomata:
 
 ###
 # prototype::
-#     d_var     : the string decimal representation of a natural integer
-#               @ d_var in str(NN)
-#     actions   : a list of actions to construct the name of ``d_var``,
-#                 or a new integer (cf. tests used to name d_vars)
-#     justnewnb : ``True`` asks to returns a string decimal representation, but
-#                 ``False`` asks to return a name.
+#     actions : a couple of variables to indicate which "big" integers
+#               bewtween ``d_var`` and ``r_var``  must be named
+#             @ actions[0] = DSL_ACTION_SPEVAR ;
+#               actions[1] in [DSL_SPEVAR_NUMBER_OF, DSL_SPEVAR_REMAINING]
+#     d_var   : :see: self.apply
+#     r_var   : the string decimal representation of the remaining digits
+#               of a group (here the value can't be empty)
+#             @ r_var in str(NN)
 #
 #     :return: the name of natural d_var, or the string decimal representation
 #              of natural integer build using some actions
@@ -257,31 +291,41 @@ class BaseAutomata:
         d_var  : str,
         r_var  : str,
     ) -> str:
+        # ! -- DEBUGGING -- ! #
+        # print(">>> nameit_group <<<")
+        # print(f"{actions = }")
+        # print(f"{d_var   = }")
+        # print(f"{r_var   = }")
+        # ! -- DEBUGGING -- ! #
+
         _, var_to_name = actions[0]
 
         if var_to_name == DSL_SPEVAR_NUMBER_OF:
             return self.name_big(d_var)
+
+# Do we have remaining none zero digits?
+        if int(r_var) == 0:
+            return ''
 
         return self.name_big(r_var)
 
 
 ###
 # prototype::
-#     d_var     : the string decimal representation of a natural integer
-#               @ d_var in str(NN)
-#     actions   : a list of actions to construct the name of ``d_var``,
-#                 or a new integer (cf. tests used to name d_vars)
-#     justnewnb : ``True`` asks to returns a string decimal representation, but
-#                 ``False`` asks to return a name.
+#     actions   : :see: self.apply
+#     d_var     : :see: self.apply
+#     r_var     : :see: self.apply
+#     justnewnb : ``True`` asks to returns a string decimal representation,
+#                 whereas ``False`` is to obtain a name.
 #
-#     :return: the name of natural d_var, or the string decimal representation
-#              of natural integer build using some actions
+#     :return: the name of the natural ``d_var``, or its string decimal
+#              representation
 ###
     def nameit(
         self,
-        actions: Any,
-        d_var  : str,
-        r_var  : str,
+        actions  : Any,
+        d_var    : str,
+        r_var    : str,
         justnewnb: bool = False
     ) -> str:
         newnb = ''
@@ -307,9 +351,9 @@ class BaseAutomata:
 
 ###
 # prototype::
-#     d_var  : the string decimal representation of a natural integer
-#            @ d_var in str(NN)
-#     actions: the actions that define an ``if-else`` alternative
+#     actions : the actions that define an ``if-else`` alternative
+#     d_var   : :see: self.apply
+#     r_var   : :see: self.apply
 #
 #     :return: the result of the ``if-else`` alternative
 ###
@@ -341,11 +385,11 @@ class BaseAutomata:
 
 ###
 # prototype::
-#     d_var  : the string decimal representation of a natural integer
-#            @ d_var in str(NN)
-#     actions: the actions that define an ``if-else`` alternative
+#     actions : the actions that define a boolean test to do
+#     d_var   : :see: self.apply
+#     r_var   : :see: self.apply
 #
-#     :return: the result of the ``if-else`` alternative
+#     :return: the boolean result of the test
 ###
     def testok(
         self,
@@ -355,7 +399,9 @@ class BaseAutomata:
     ) -> bool:
         compopes, args = actions
 
+# We work on AND tests on several comparison operators.
         for i, onecompo in enumerate(compopes):
+# We need to have the integer values of the variables.
             a = int(
                 self.nameit(
                     actions = args[i],
@@ -374,6 +420,7 @@ class BaseAutomata:
                 )
             )
 
+# We can do the test expected.
             if onecompo == DSL_COMPOPE_EQ:
                 result = (a == b)
 
@@ -392,8 +439,9 @@ class BaseAutomata:
             elif onecompo == DSL_COMPOPE_LOWER_EQ:
                 result = (a <= b)
 
-# We want that all tests succed.
+# We want that all tests succed. No need to do more job.
             if not result:
                 return result
 
-        return result
+# All the tests have been passed.
+        return True

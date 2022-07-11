@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-03-23
+    date = 2022-07-11
 
 
 ========================================
@@ -10,7 +10,7 @@ On peut inverser le travail fait par les fonctions ``int2bdigits``, ``int2bnumer
 Ceci se fait simplement comme suit où nous utilisons `199412 = 4 + 15*16 + 10*16**2 + 3*16**4 = [30AF4]_16`.
 
 python-term::
-    >>> from cvnum.convert.base2dec import *
+    >>> from cvnum.convert.base2int import *
     >>> b = 16
     >>> print(bnb2int('30AF4', b))
     199412
@@ -34,7 +34,7 @@ Ceci fonctionne aussi sans souci avec des bases `b > 36`. Ci-après, nous avons 
 
 
 warning::
-    Ne pas oublier de faux zéros inutiles à gauche. Par exemple, le code suivant renvoie une erreur comme attendue car `[0A]_40` indique un chiffre, un symbole, écrit obligatoirement avec deux caractères.
+    Ne pas oublier de faux zéros inutiles à gauche. Par exemple, le code suivant renvoie une erreur comme attendue car `[0A]_40` indique un chiffre, ¨cad un symbole, écrit obligatoirement avec deux caractères.
 
     ...python-term::
         >>> print(bnb2int("A.13", 40))

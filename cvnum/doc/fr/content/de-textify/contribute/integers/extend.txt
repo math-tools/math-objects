@@ -1,76 +1,13 @@
-﻿this::
-    date = 2022-03-16
+﻿abrev::
+    content = /extend
 
 
 =================================
 Partir d'une traduction existante
 =================================
 
-Nicolas Chuquet a proposé détendre le système académique de nommage des ¨nbres pour prendre en compte de très grandes valeurs.
-L'une des versions proposées par Nicolas Chuquet ne garde par le nom milliard et utilise des groupes de `6` chiffres au lieu de `3`.
-La définition de ce système est très rapidement fait via le fichier suivant.
-
-cvnum::
-    ---
-    file = FR/FR[chuquet-1]/integers.txt
-    ---
-
-    extend::
-        lang = FR_FR
-
-    ignore-group::
-        9
-
-    group::
-        12 => billion{s}
-        18 => trillion{s}
-        24 => quadrillion{s}
-        30 => quintillion{s}
-        36 => sextillion{s}
-        42 => septillion{s}
-        48 => octillion{s}
-        54 => nonillion{s}
-        60 => decillion{s}
-
-
-Dans le code précédent, nous avons procédé comme suit.
-
-    1) Le bloc cvnum::``extend`` sert juste à indiquer de reprendre toutes les règles de la variante ``FR`` de la langue ``FR``.
-
-    1) Grâce au bloc cvnum::``ignore-group``, on peut retirer la règle demandant d'utiliser des milliards.
-
-    1) Ensuite l'ajout de nouvelles règles se fait très simplement ici.
-
-
-Voici un autre exemple qui adapte le système académique français au système bien plus simple, et bien plus logique, utilisé en Belgique.
-
-cvnum::
-    ---
-    file = FR/BE/integers.txt
-    ---
-
-    extend::
-        lang = fr_FR
-
-    ignore-small::
-        80
-        8*
-
-        71
-        7*
-        9*
-
-        *1
-        **
-
-    small::
-        70 = septante
-        80 = octante
-        90 = nonante
-
-        *1 = [d(1)0]-et-[1]
-        ** = [d(1)0]-[d(0)]
-
-
-warning::
-    Dans le code précédent, il faut veiller au principe du "premier arrivé, premier servi", et aussi savoir que les règles avec des motifs d'une taille donnée sont d'abord testées dans le langage à étendre. Ceci implique ici de n'oublier aucune règle à ignorer pour les nombres à deux chiffres !
+content::
+    ¨content/general.txt
+    ¨content/group.txt
+    ¨content/small.txt
+    ¨content/patch.txt

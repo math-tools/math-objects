@@ -1,0 +1,8 @@
+1000 = mil
+1007 = mil siete
+
+4000 = cuatro mil
+
+5020 = cinco mil viente
+
+200 000 = doscientos mil

@@ -17,7 +17,7 @@ print("\033c", end="")
 # --------------- #
 
 DEBUG_CODING = False
-# DEBUG_CODING = True
+DEBUG_CODING = True
 
 THIS_DIR = PPath(__file__).parent
 DIR_LANG = THIS_DIR / "lang"

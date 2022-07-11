@@ -1,0 +1,9 @@
+﻿this::
+    date = 2022-07-09
+
+
+========================
+Le bloc cvnum::``patch``
+========================
+
+Les patchs ne sont pas extensibles. Autrement dit, il faut tout définir dans un bloc cvnum::``patch``.

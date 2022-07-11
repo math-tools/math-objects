@@ -1,0 +1,6 @@
+1000 = tausend
+1001 = eintausendeins
+
+2000 = zweitausend
+
+9539 = neuntausendfünfhundertneununddreißig
