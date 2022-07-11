@@ -1,3 +1,6 @@
-35 104300109 = thirty-five billion one hundred and four million three hundred thousand one hundred and nine
+35 104 300 109 = thirty-five billion
+                 one hundred and four million
+                 three hundred thousand
+                 one hundred and nine
 
 3*10**15 = three million billion

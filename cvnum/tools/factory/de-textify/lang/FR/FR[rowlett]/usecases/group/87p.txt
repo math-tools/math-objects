@@ -1,0 +1,2 @@
+10**87   = un icosiennillion
+3*10**87 = trois icosiennillions

@@ -1,0 +1,2 @@
+10**54   = un oktadekillion
+3*10**54 = trois oktadekillions

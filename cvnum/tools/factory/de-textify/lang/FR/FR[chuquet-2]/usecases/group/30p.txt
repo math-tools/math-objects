@@ -1,0 +1,2 @@
+10**30   = un quintillion
+3*10**30 = trois quintillions

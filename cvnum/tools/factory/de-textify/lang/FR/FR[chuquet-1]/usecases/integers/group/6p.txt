@@ -1,0 +1,2 @@
+10**3 * 10**6   = mille millions
+3*10**3 * 10**6 = trois mille millions

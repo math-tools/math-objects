@@ -1,0 +1,2 @@
+10**39   = un sextilliard
+3*10**39 = trois sextilliards

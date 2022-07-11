@@ -1,0 +1,2 @@
+10**57   = un enneadekillion
+3*10**57 = trois enneadekillions

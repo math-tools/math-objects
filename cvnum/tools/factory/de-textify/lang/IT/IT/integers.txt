@@ -1,0 +1,66 @@
+this::
+    author = Christophe, Bal [projetmbc@gmail.com]
+    date   = 2022-07-11
+    desc   = Names of integers in academic Italian.
+
+
+sign::
+    + = più
+    - = meno
+
+general::
+    sep = .
+    big = miliard... -> ... di miliardi
+
+group::
+    3 =  [d :if: d > 1]mil"a :if: d > 1 :else: le"[r]
+    6 => milion"e :if: d=1 :else: i"
+    9 => miliard"o :if: d=1 :else: i"
+
+patch::
+    auno  = uno
+    iuno  = uno
+
+    atre = atré
+    itre = itré
+
+    aott = ott
+    iott = ott
+    oott = ott
+
+small::
+    0 = zero
+    1 = uno
+    2 = due
+    3 = tre
+    4 = quattro
+    5 = cinque
+    6 = sei
+    7 = sette
+    8 = otto
+    9 = nove
+
+    10 = dieci
+    11 = undici
+    12 = dodici
+    13 = tredici
+    14 = quattordici
+    15 = quindici
+    16 = sedici
+    17 = diciassette
+    18 = diciotto
+    19 = diciannove
+
+    20 = venti
+    30 = trenta
+    40 = quaranta
+    50 = cinquanta
+    60 = sessanta
+    70 = settanta
+    80 = ottanta
+    90 = novanta
+
+    ** = [d(1)0][d(0)]
+
+    100 = cento
+    *** = [d(2) :if: d(2) > 1][100][d(1)d(0)]

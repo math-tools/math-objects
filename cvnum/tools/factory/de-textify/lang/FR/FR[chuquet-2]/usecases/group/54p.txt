@@ -1,0 +1,2 @@
+10**54   = un nonillion
+3*10**54 = trois nonillions

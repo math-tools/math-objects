@@ -1,0 +1,2 @@
+10**66   = un icosidillion
+3*10**66 = trois icosidillions

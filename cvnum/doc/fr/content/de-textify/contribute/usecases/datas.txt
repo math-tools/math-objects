@@ -52,7 +52,11 @@ Regardons ce contient chaque dossier en expliquant au passage les **conventions 
     Par exemple, dans le fichier path::``3p.txt``, on trouve verb::``1000 = mille`` et verb::``1097 = mille quatre-vingt-dix-sept`` pour valider la bonne gestion des groupes de chiffres pour les milliers.
 
     1) Dans path::``verybig``, la convention pour nommer les fichiers est similaire à celle du dossier path::``group``.
-    Par exemple, dans le fichier path::``36p.txt`` se trouve verb:: ``3*10**36 + 10**18 = trois milliards de milliards de milliards de milliards un milliard de milliards``.
+    Par exemple, dans le fichier path::``36p.txt`` se trouvent les lignes suivantes où il faut **noter l'usage possible de retours à la ligne** facilitant la rédaction des cas d'utilisation.
+
+    verb::
+        3*10**36 + 10**18 = trois milliards de milliards de milliards de milliards
+                            un milliard de milliards
 
 
 note::

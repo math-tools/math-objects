@@ -28,3 +28,18 @@ dirtree::
                 * plus.txt
             + small
                 * 2**.txt
+
+
+La situation est encore plus radicale pour la langue ``fr_BE`` vis à vis de ``fr_FR``.
+
+dirtree::
+    ---
+    folder  = FR/BE
+    extract = yes
+    ---
+
+    * integers.txt
+    + usecases
+        + integers
+            + small
+                * 7*.txt

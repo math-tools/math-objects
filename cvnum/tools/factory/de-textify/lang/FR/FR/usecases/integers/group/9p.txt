@@ -1,3 +1,6 @@
-35 104300109 = trente-cinq milliards cent quatre millions trois cent mille cent neuf
+35 104 300 109 = trente-cinq milliards
+                 cent quatre millions
+                 trois cent mille
+                 cent neuf
 
 3*10**15 = trois millions de milliards

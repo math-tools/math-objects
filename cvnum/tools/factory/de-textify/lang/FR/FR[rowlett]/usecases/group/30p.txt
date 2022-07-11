@@ -1,0 +1,2 @@
+10**30   = un dekillion
+3*10**30 = trois dekillions

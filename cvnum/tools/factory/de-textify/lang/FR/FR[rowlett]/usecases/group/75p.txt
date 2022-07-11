@@ -1,0 +1,2 @@
+10**75   = un icosipentillion
+3*10**75 = trois icosipentillions

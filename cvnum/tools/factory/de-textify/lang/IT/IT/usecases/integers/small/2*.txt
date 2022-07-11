@@ -1,0 +1,4 @@
+21 = ventuno
+23 = ventitré
+25 = venticinque
+28 = ventotto

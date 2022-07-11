@@ -1,0 +1,2 @@
+10**36   = un sextillion
+3*10**36 = trois sextillions

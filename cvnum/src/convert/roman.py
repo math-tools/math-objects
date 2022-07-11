@@ -10,8 +10,8 @@ from typing import *
 
 import re
 
-from ..config.digit   import ROMAN_2_NUMERAL
-from ..tbox.str2nb import intnonneg
+from ..config.digit import ROMAN_2_NUMERAL
+from ..tbox.str2nb  import intnonneg
 
 
 # ---------------------- #

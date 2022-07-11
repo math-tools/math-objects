@@ -1,0 +1,2 @@
+10**78   = un icosihexillion
+3*10**78 = trois icosihexillions

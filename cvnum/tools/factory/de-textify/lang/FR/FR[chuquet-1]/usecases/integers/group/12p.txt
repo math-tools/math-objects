@@ -1,0 +1,2 @@
+10**3 * 10**12   = mille billions
+3*10**3 * 10**12 = trois mille billions

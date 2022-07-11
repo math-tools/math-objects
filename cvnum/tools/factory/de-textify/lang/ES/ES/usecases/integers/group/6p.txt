@@ -2,4 +2,6 @@
 
 2 000000 = dos millones
 
-3 240500 = tres millones doscientos carienta mil quinientos
+3 240 500 = tres millones
+            doscientos carienta mil
+            quinientos

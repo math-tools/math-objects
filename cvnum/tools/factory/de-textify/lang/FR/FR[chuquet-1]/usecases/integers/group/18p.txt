@@ -1,0 +1,2 @@
+10**3 * 10**18   = mille trillions
+3*10**3 * 10**18 = trois mille trillions

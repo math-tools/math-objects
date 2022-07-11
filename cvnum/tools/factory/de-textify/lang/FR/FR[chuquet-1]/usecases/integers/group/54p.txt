@@ -1,0 +1,2 @@
+10**3 * 10**54   = mille nonillions
+3*10**3 * 10**54 = trois mille nonillions

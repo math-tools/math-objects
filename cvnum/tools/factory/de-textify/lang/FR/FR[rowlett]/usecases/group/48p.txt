@@ -1,0 +1,2 @@
+10**48   = un hexadekillion
+3*10**48 = trois hexadekillions

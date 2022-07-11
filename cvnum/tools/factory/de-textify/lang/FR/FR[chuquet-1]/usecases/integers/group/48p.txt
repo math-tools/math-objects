@@ -1,0 +1,2 @@
+10**3 * 10**48   = mille octillions
+3*10**3 * 10**48 = trois mille octillions

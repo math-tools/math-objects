@@ -1,0 +1,2 @@
+10**63   = un icosihenillion
+3*10**63 = trois icosihenillions

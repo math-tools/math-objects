@@ -1,0 +1,2 @@
+10**81   = un icosiheptillion
+3*10**81 = trois icosiheptillions

@@ -1,0 +1,2 @@
+10**57   = un nonilliard
+3*10**57 = trois nonilliards

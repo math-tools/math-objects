@@ -1,0 +1,2 @@
+10**27   = un ennillion
+3*10**27 = trois ennillions

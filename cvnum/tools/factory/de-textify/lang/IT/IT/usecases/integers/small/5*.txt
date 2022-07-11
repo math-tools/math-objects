@@ -1,0 +1,4 @@
+51 = cinquantuno
+52 = cinquantadue
+53 = cinquantatré
+58 = cinquantotto

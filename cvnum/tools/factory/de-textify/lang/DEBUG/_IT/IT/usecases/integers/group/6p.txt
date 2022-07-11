@@ -1,5 +1,0 @@
-1 000000 = un million
-
-2 000000 = deux millions
-
-3 240500 = trois millions deux cent quarante mille cinq cents

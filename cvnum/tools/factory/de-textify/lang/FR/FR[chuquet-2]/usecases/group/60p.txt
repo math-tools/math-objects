@@ -1,0 +1,2 @@
+10**60   = un decillion
+3*10**60 = trois decillions

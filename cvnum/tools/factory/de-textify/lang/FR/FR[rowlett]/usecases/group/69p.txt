@@ -1,0 +1,2 @@
+10**69   = un icositrillion
+3*10**69 = trois icositrillions

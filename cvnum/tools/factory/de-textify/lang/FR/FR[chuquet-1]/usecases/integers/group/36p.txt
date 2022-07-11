@@ -1,0 +1,2 @@
+10**3 * 10**36   = mille sextillions
+3*10**3 * 10**36 = trois mille sextillions

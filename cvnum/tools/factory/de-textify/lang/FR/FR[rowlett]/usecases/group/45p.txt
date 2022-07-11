@@ -1,0 +1,2 @@
+10**45   = un pentadekillion
+3*10**45 = trois pentadekillions

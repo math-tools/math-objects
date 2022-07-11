@@ -1,0 +1,2 @@
+10**3 * 10**30   = mille quintillions
+3*10**3 * 10**30 = trois mille quintillions

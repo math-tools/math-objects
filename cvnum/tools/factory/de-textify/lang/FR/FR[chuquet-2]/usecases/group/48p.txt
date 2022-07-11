@@ -1,0 +1,2 @@
+10**48   = un octillion
+3*10**48 = trois octillions

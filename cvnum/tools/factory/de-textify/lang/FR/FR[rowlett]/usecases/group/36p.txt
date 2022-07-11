@@ -1,0 +1,2 @@
+10**36   = un dodekillion
+3*10**36 = trois dodekillions

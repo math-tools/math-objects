@@ -1,0 +1,2 @@
+10**15   = un pentillion
+3*10**15 = trois pentillions

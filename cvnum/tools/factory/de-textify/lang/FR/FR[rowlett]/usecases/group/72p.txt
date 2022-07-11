@@ -1,0 +1,2 @@
+10**72   = un icositetrillion
+3*10**72 = trois icositetrillions

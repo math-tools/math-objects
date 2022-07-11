@@ -1,0 +1,5 @@
+1000 = mille
+1002 = milledue
+
+2000 = duemila
+2005 = duemilacinque

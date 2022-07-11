@@ -1,0 +1,2 @@
+10**18   = un trillion
+3*10**18 = trois trillions
