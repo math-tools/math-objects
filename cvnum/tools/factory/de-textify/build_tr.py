@@ -50,7 +50,7 @@ for onepath in DIR_LANG.walk("dir::*"):
     # if mainlang != "fr":
     # if variant != "BE":
     # if not(mainlang == "fr" and variant == "FR"):
-        # continue
+    #     continue
 # ! -- DEBUGGING -- ! #
 
     for onefile in onepath.walk("file::*.txt"):
@@ -74,7 +74,7 @@ for onepath in DIR_LANG.walk("dir::*"):
                 #     continue
 # ! -- DEBUGGING -- ! #
 
-                ALL_TRANS[f"{mainlang}_{variant}"] = Parser(
+                ALL_TRANS[taglang(f"{mainlang}_{variant}")] = Parser(
                     datas.treedict,
                     shortpathfile
                 ).build()

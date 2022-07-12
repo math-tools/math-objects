@@ -93,18 +93,23 @@ class BaseAutomaton:
         self._big_len_max  = 2*self._big_expo_max
         self._big_len_min  = min(self._big_rules)
 
-# General & Big groups
+# Big groups
         self._groups_sep = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_SEP]
 
-        self._very_big_allowed = bool(
+        if rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG] is None:
+            self._very_big_allowed  = False
+            self._very_big_dir      = None
+            self._very_big_matching = None
+            self._very_big_suffix   = None
+
+        else:
+            self._very_big_allowed = True
+
+            self._very_big_dir = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_DIR]
+
+            self._very_big_matching,   \
+            self._very_big_suffix    = \
             rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
-        )
-
-        self._very_big_dir = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_DIR]
-
-        self._very_big_matching, \
-        self._very_big_suffix    = \
-        rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
 
 
 ###

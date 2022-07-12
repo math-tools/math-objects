@@ -1,6 +1,6 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2022-03-12
+    date   = 2022-07-12
     desc   = Names of very large integers in French using
              the Rowlett's rules.
 
@@ -13,6 +13,9 @@ refs::
 
 extend::
     lang = fr_FR
+
+general::
+    big = no
 
 group::
     12 => tetrillion{s}

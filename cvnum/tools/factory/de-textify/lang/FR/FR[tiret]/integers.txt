@@ -1,12 +1,16 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2022-07-05
+    date   = 2022-07-12
     desc   = Names of integers in academic French using the "hyphens
              everywhere" convention.
 
 
 extend::
     lang = fr_FR
+
+sign::
+    + = plus-...
+    - = moins-...
 
 general::
     big = milliard... -> ...-de-milliards

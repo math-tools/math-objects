@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-07-09
+    date = 2022-07-12
 
 
 ==========================
@@ -24,3 +24,7 @@ cvnum::
         big = milliard... -> ...-de-milliards
 
     // ...
+
+
+note::
+    Pour interdir le nommage de grands ¨nbres, il suffit d'utiliser cvnumm::``big = no``.

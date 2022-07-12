@@ -1,0 +1,22 @@
+﻿this::
+    date = 2022-07-12
+
+
+==================
+Par où commencer ?
+==================
+
+Pour indiquer que l'on souhaite partir d'une ¨lang existante, il suffit de passer via le bloc cvnum::``extend`` comme ci-dessous.
+
+cvnum::
+    ---
+    file    = FR/FR[tiret]/integers.txt
+    extract = yes
+    ---
+
+    extend::
+        lang = fr_FR
+
+
+note::
+    Il est autorisé d'étendre une ¨lang qui elle-même en étend une autre, et d'empiler autant d'extensions que nécessaires.

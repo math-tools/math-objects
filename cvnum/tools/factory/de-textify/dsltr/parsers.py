@@ -42,7 +42,10 @@ class ParserGene(BaseParserRules):
             )
 
 # Preparing regex rules for very big names.
-        if self.specs[DSL_TAG_GENE_BIG]:
+        if self.specs[DSL_TAG_GENE_BIG] == 'no':
+            self.specs[DSL_TAG_GENE_BIG] = None
+
+        elif self.specs[DSL_TAG_GENE_BIG]:
             bigname, sep, verybigname = self.specs[
                 DSL_TAG_GENE_BIG
             ].partition(REPLACE_WITH)
@@ -172,6 +175,11 @@ class ParserPatch(BaseParserRules):
 class ParserSign(BaseParserRules):
     def build(self):
         super().build_keyvals(KEYS_SIGN)
+
+# We must add ``...`` if needed.
+        for tag in [DSL_TAG_SIGN_PLUS, DSL_TAG_SIGN_MINUS]:
+            if not ELLIPSIS in self.specs[tag]:
+                self.specs[tag] += f' {ELLIPSIS}'
 
 # ! -- DEBUGGING -- ! #
         # print('--- SIGN ---')

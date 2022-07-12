@@ -41,10 +41,10 @@ def testandprint(intname, x):
 from src.textify import *
 
 STEP_BY_STEP = True
-# STEP_BY_STEP = False
+STEP_BY_STEP = False
 
 USE_RAND = True
-# USE_RAND = False
+USE_RAND = False
 
 RAND_POWERS = [2, 3, 6, 9, 12, 15]
 RAND_POWERS = [2, 3, 4, 5]
@@ -56,7 +56,7 @@ lang = en_GB    # TESTS OK
 lang = fr_FR    # TESTS OK
 # lang = fr_BE    # TESTS OK
 # lang = fr_FR_chuquet_1
-# lang = fr_FR_chuquet_2
+lang = fr_FR_chuquet_2
 # lang = fr_FR_rowlet
 # lang = fr_FR_tiret
 # lang = it_IT
@@ -83,7 +83,6 @@ if not USE_RAND:
         # "444_333_222_111",
         # "5_444_333_222_111",
         # "55_444_333_222_111",
-        # "   123  ",
         # "-   321",
         # "200",
         # "200*10**3",
@@ -94,8 +93,8 @@ if not USE_RAND:
         # "200*10**18",
         # "200*10**21",
         # "200*10**24",
-        # "200*10**27",
-        "200_000*10**27 + 200_000*10**18",
+        "200*10**27",
+        # "200_000*10**27 + 200_000*10**18",
         # "123*10**27 + 123*10**18",
         # 1,
         # 22,

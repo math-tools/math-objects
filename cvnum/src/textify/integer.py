@@ -95,7 +95,7 @@ class IntName(BaseAutomaton):
 
 # The "complete" name.
         if sign:
-            name = f"{sign} {name}"
+            name = sign.replace(ELLIPSIS, name)
 
 # Patches to apply?
         for old, new in self._patch.items():
@@ -381,7 +381,7 @@ class IntName(BaseAutomaton):
         for _ in range(len(grpnames)):
             if suffixes:
                 if suffix:
-                    suffix = suffix.replace('...', self._very_big_suffix)
+                    suffix = suffix.replace(ELLIPSIS, self._very_big_suffix)
 
                 else:
                     suffix = self._very_big_suffix
@@ -408,7 +408,7 @@ class IntName(BaseAutomaton):
             suffix = suffixes[i]
 
             if suffix:
-                onegrpname = suffix.replace('...', onegrpname)
+                onegrpname = suffix.replace(ELLIPSIS, onegrpname)
 
             newname.append(onegrpname)
 

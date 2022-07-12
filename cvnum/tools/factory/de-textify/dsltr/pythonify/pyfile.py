@@ -158,7 +158,7 @@ def pycode_naming(debug_coding, alltrans):
 
         code.append(
             f'''
-INT_2_NAME[{taglang(lang)}] = {stdspecs}
+INT_2_NAME[{lang}] = {stdspecs}
             '''
         )
 
@@ -262,7 +262,7 @@ def tags_for_langs(all_langs, alldescs):
     tags_langs = {}
 
     for onelang in sorted(all_langs.keys()):
-        tags_langs[taglang(onelang)] = onelang
+        tags_langs[onelang] = onelang
 
     code = []
 
@@ -283,6 +283,13 @@ def pycode(debug_coding, alltrans, alldescs):
     code_naming     = pycode_naming(debug_coding, alltrans)
 
     return f'''
+# -------------------------------------------- #
+# -- JUST AN ELLIPSIS BEFORE A SERIOUS TALK -- #
+# -------------------------------------------- #
+
+ELLIPSIS = "..."
+
+
 # -------------------- #
 # -- TAGS FOR LANGS -- #
 # -------------------- #

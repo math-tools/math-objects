@@ -2,36 +2,21 @@
 
 
 ==
-????
+12
 ==
 
 ------
 :news:
 ------
 
-[[:api:]]    ????
-¨DSL for translations
+[[:api:]]
+¨DSL for translations.
 
-    ???? 1) It is now possible to chain extensions of ¨langs (this has allowed to simplify the definition of ``fr_FR_chuquet_1`` from ``fr_FR_chuquet_2``, this last one being an extension of ``fr_FR``).
+    1) It is now possible to chain extensions of ¨langs (this has allowed to simplify the definition of ``fr_FR_chuquet_1`` by using ``fr_FR_chuquet_2``, this last one being an extension of ``fr_FR``).
 
-    ???? 1) The possibility to forbid naming of very big numbers was a missing feature. This has been added (it is used by the ¨langs ``fr_FR_chuquet_1``, ``fr_FR_chuquet_2`` and ``fr_FR_rowlett``).
+    1) The possibility to forbid naming of very big numbers was a missing feature. This has been added (it is used by the ¨langs ``fr_FR_chuquet_1``, ``fr_FR_chuquet_2`` and ``fr_FR_rowlett``).
 
-    ???? 1) For the signs, it is possible to indicate a pattern to follow (this has been used to complete the ¨lang ``fr_FR_tiret``).
-
-        -->   signe : gestion plus fine du nommeage et non automatique via un simple espace !
-              on passe via
-              + = plus ... PAR DEFAUT SI ... pas utilisé !
-              ou
-              - = moins-...
-
-
-
-
-
-
-
-
-
+    1) For the signs, it is possible to indicate a pattern to follow (this has been used to complete the ¨lang ``fr_FR_tiret``).
 
 
 // ---------- //

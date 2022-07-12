@@ -15,6 +15,13 @@ from collections import OrderedDict
 from re          import compile as __re_compile
 
 
+# -------------------------------------------- #
+# -- JUST AN ELLIPSIS BEFORE A SERIOUS TALK -- #
+# -------------------------------------------- #
+
+ELLIPSIS = "..."
+
+
 # -------------------- #
 # -- TAGS FOR LANGS -- #
 # -------------------- #
@@ -51,6 +58,9 @@ fr_FR_rowlett = "fr_FR_rowlett"
 # Names of integers in academic French using the "hyphens everywhere"
 # convention.
 fr_FR_tiret = "fr_FR_tiret"
+
+# Names of integers in academic Italian.
+it_IT = "it_IT"
 
 
 # ---------------- #
@@ -197,7 +207,7 @@ INT_2_NAME[de_DE] = {
         ),
     },
     DSL_SPECS_PATCH: {},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "minus"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "minus ..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "null"),),
@@ -339,7 +349,7 @@ INT_2_NAME[en_GB] = {
         ),
     },
     DSL_SPECS_PATCH: {},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "minus"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "minus ..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "zero"),),
@@ -467,7 +477,7 @@ INT_2_NAME[en_US] = {
         ),
     },
     DSL_SPECS_PATCH: {},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "minus"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "minus ..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "zero"),),
@@ -641,7 +651,7 @@ INT_2_NAME[es_ES] = {
         ),
     },
     DSL_SPECS_PATCH: {},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "más", DSL_TAG_SIGN_MINUS: "menos"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "más ...", DSL_TAG_SIGN_MINUS: "menos ..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "cero"),),
@@ -845,7 +855,7 @@ INT_2_NAME[fr_BE] = {
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "moins"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "zéro"),),
@@ -1048,7 +1058,7 @@ INT_2_NAME[fr_FR] = {
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "moins"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "zéro"),),
@@ -1202,7 +1212,7 @@ INT_2_NAME[fr_FR] = {
 INT_2_NAME[fr_FR_chuquet_1] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
-        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "... de milliards"),
+        DSL_TAG_GENE_BIG: None,
         DSL_TAG_GENE_DIR: DSL_DIR_L2R,
     },
     DSL_SPECS_GROUP: {
@@ -1431,7 +1441,7 @@ INT_2_NAME[fr_FR_chuquet_1] = {
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "moins"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "zéro"),),
@@ -1585,7 +1595,7 @@ INT_2_NAME[fr_FR_chuquet_1] = {
 INT_2_NAME[fr_FR_chuquet_2] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
-        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "... de milliards"),
+        DSL_TAG_GENE_BIG: None,
         DSL_TAG_GENE_DIR: DSL_DIR_L2R,
     },
     DSL_SPECS_GROUP: {
@@ -1634,6 +1644,21 @@ INT_2_NAME[fr_FR_chuquet_2] = {
         ),
         9: (
             (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " "),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 5)),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "de"),),
+                    (),
+                ),
+            ),
             (DSL_ACTION_VERBATIM, " milliard"),
             (
                 DSL_ACTION_IF_ELSE,
@@ -1754,7 +1779,7 @@ INT_2_NAME[fr_FR_chuquet_2] = {
         ),
         27: (
             (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
-            (DSL_ACTION_VERBATIM, " quintilliard"),
+            (DSL_ACTION_VERBATIM, " quadrilliard"),
             (
                 DSL_ACTION_IF_ELSE,
                 (
@@ -2014,7 +2039,7 @@ INT_2_NAME[fr_FR_chuquet_2] = {
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "moins"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "zéro"),),
@@ -2168,7 +2193,7 @@ INT_2_NAME[fr_FR_chuquet_2] = {
 INT_2_NAME[fr_FR_rowlett] = {
     DSL_SPECS_GENE: {
         DSL_TAG_GENE_SEP: ".",
-        DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "... de milliards"),
+        DSL_TAG_GENE_BIG: None,
         DSL_TAG_GENE_DIR: DSL_DIR_L2R,
     },
     DSL_SPECS_GROUP: {
@@ -2792,7 +2817,7 @@ INT_2_NAME[fr_FR_rowlett] = {
         ),
     },
     DSL_SPECS_PATCH: {"cents mille": "cent mille"},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "moins"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "zéro"),),
@@ -2945,7 +2970,7 @@ INT_2_NAME[fr_FR_rowlett] = {
 
 INT_2_NAME[fr_FR_tiret] = {
     DSL_SPECS_GENE: {
-        DSL_TAG_GENE_SEP: "",
+        DSL_TAG_GENE_SEP: ".",
         DSL_TAG_GENE_BIG: (__re_compile("milliard\\S*"), "...-de-milliards"),
         DSL_TAG_GENE_DIR: DSL_DIR_L2R,
     },
@@ -3123,7 +3148,7 @@ INT_2_NAME[fr_FR_tiret] = {
         ),
     },
     DSL_SPECS_PATCH: {"cents-mille": "cent-mille"},
-    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus", DSL_TAG_SIGN_MINUS: "moins"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus-...", DSL_TAG_SIGN_MINUS: "moins-..."},
     DSL_SPECS_SMALL: {
         DSL_ACTION_ASIT: {
             "0": ((DSL_ACTION_VERBATIM, "zéro"),),
@@ -3268,6 +3293,195 @@ INT_2_NAME[fr_FR_tiret] = {
                             ),
                         ),
                     ),
+                ]
+            ),
+        },
+    },
+}
+
+
+INT_2_NAME[it_IT] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("miliard\\S*"), "... di miliardi"),
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "mil"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "a"),),
+                    ((DSL_ACTION_VERBATIM, "le"),),
+                ),
+            ),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " milion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "e"),),
+                    ((DSL_ACTION_VERBATIM, "i"),),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " miliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "o"),),
+                    ((DSL_ACTION_VERBATIM, "i"),),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {
+        "auno": "uno",
+        "iuno": "uno",
+        "atre": "atré",
+        "itre": "itré",
+        "aott": "ott",
+        "iott": "ott",
+        "oott": "ott",
+    },
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "più ...", DSL_TAG_SIGN_MINUS: "meno ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zero"),),
+            "1": ((DSL_ACTION_VERBATIM, "uno"),),
+            "2": ((DSL_ACTION_VERBATIM, "due"),),
+            "3": ((DSL_ACTION_VERBATIM, "tre"),),
+            "4": ((DSL_ACTION_VERBATIM, "quattro"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinque"),),
+            "6": ((DSL_ACTION_VERBATIM, "sei"),),
+            "7": ((DSL_ACTION_VERBATIM, "sette"),),
+            "8": ((DSL_ACTION_VERBATIM, "otto"),),
+            "9": ((DSL_ACTION_VERBATIM, "nove"),),
+            "10": ((DSL_ACTION_VERBATIM, "dieci"),),
+            "11": ((DSL_ACTION_VERBATIM, "undici"),),
+            "12": ((DSL_ACTION_VERBATIM, "dodici"),),
+            "13": ((DSL_ACTION_VERBATIM, "tredici"),),
+            "14": ((DSL_ACTION_VERBATIM, "quattordici"),),
+            "15": ((DSL_ACTION_VERBATIM, "quindici"),),
+            "16": ((DSL_ACTION_VERBATIM, "sedici"),),
+            "17": ((DSL_ACTION_VERBATIM, "diciassette"),),
+            "18": ((DSL_ACTION_VERBATIM, "diciotto"),),
+            "19": ((DSL_ACTION_VERBATIM, "diciannove"),),
+            "20": ((DSL_ACTION_VERBATIM, "venti"),),
+            "30": ((DSL_ACTION_VERBATIM, "trenta"),),
+            "40": ((DSL_ACTION_VERBATIM, "quaranta"),),
+            "50": ((DSL_ACTION_VERBATIM, "cinquanta"),),
+            "60": ((DSL_ACTION_VERBATIM, "sessanta"),),
+            "70": ((DSL_ACTION_VERBATIM, "settanta"),),
+            "80": ((DSL_ACTION_VERBATIM, "ottanta"),),
+            "90": ((DSL_ACTION_VERBATIM, "novanta"),),
+            "100": ((DSL_ACTION_VERBATIM, "cento"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    )
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_IF_ELSE,
+                                (
+                                    (
+                                        (DSL_COMPOPE_GREATER,),
+                                        (
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                            ((DSL_ACTION_VERBATIM, "1"),),
+                                        ),
+                                    ),
+                                    (
+                                        (
+                                            DSL_ACTION_NAME_IT,
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                        ),
+                                    ),
+                                    (),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "cento"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    )
                 ]
             ),
         },

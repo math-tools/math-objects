@@ -24,13 +24,18 @@ def pythonify(
     alltrans,
     srcdir_file
 ):
-# ! -- DEBUGGING -- ! #
+    # ! -- DEBUGGING -- ! #
     # pprint(alltrans['debug_DEBUG']);exit()
-# ! -- DEBUGGING -- ! #
+    # ! -- DEBUGGING -- ! #
 
     alldescs = extracts_desc(alltrans)
     alltrans = manage_extend(alltrans)
     alltrans = normalize_rules(alltrans)
+    # ! -- DEBUGGING -- ! #
+    # for v in alltrans.values():
+    #     pprint(v.get('extend', None))
+    # exit()
+    # ! -- DEBUGGING -- ! #
 
     code = pycode(debug_coding, alltrans, alldescs)
 

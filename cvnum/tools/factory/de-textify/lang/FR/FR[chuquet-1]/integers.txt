@@ -1,6 +1,6 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2022-07-11
+    date   = 2022-07-12
     desc   = Names of very large integers in French using
              the short Chuquet's rules (without using "milliard").
 
@@ -16,6 +16,9 @@ refs::
 
 extend::
     lang = fr_FR_chuquet_2
+
+general::
+    big = no
 
 ignore-group::
     9

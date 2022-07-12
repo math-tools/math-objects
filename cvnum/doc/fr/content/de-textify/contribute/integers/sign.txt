@@ -1,12 +1,12 @@
 this::
-    date = 2022-03-06
+    date = 2022-07-12
 
 
 ============================
 Nommer les signes `+` et `-`
 ============================
 
-Tout se passe dans le bloc cvnum::``sign`` comme dans l'exemple suivant.
+Tout se passe dans le bloc cvnum::``sign`` comme dans l'exemple suivant qui demande d'ajouter le nom du signe suivi d'un espace puis dun nom de la valeur absolue de l'entier à nommer.
 
 cvnum::
     ---
@@ -17,3 +17,21 @@ cvnum::
     sign::
         + = plus
         - = moins
+
+
+Dans certains rares cas, il peut être indispensable d'imposer une ¨mef plus fine pour les signes comme dans le code suivant qui permet d'obtenir par exemple "moins-quatre" et "plus-huit" au lieu de "moins quatre" et "plus huit" ¨resp.
+Noter l'usage de cvnum::``...`` qui symbolise le nom de la valeur absolue du ¨nbre à nommer.
+
+cvnum::
+    ---
+    file    = FR/FR[tiret]/integers.txt
+    extract = yes
+    ---
+
+    sign::
+        + = plus-...
+        - = moins-...
+
+
+note::
+    Les règles cvnum::``+ = plus`` et cvnum::``- = moins`` sont en fait des raccourcis pour cvnum::``+ = plus ...`` et cvnum::``- = moins ...`` ¨resp.

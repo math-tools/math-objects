@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-07-09
+    date = 2022-07-12
 
 
 =====================================================
@@ -8,7 +8,7 @@ Les blocs cvnum::``group`` et cvnum::``ignore-group``
 
 Nicolas Chuquet a proposé détendre le système académique français de nommage des ¨nbres naturels pour prendre en compte de très grandes valeurs.
 L'une des versions proposées par Nicolas Chuquet ne garde par le nom milliard et s'appuie sur des groupes de `6` chiffres au lieu de `3`.
-La définition de ce système est très rapidement faite via le fichier suivant sans le bloc cvnum::``this``.
+La définition de ce système est très rapidement faite via le fichier (où le le bloc cvnum::``this`` a été omis).
 Des explications sont données juste après.
 
 cvnum::
@@ -18,10 +18,19 @@ cvnum::
     ---
 
     extend::
-        lang = fr_FR
+        lang = fr_FR_chuquet_2
 
     ignore-group::
         9
+        15
+        21
+        27
+        33
+        39
+        45
+        51
+        57
+        63
 
     group::
         12 => billion{s}
@@ -37,9 +46,8 @@ cvnum::
 
 Dans le code précédent, nous avons procédé comme suit.
 
-    1) Le bloc cvnum::``extend`` sert à indiquer de reprendre toutes les règles de la variante ``FR`` de la langue ``fr``.
+    1) Le bloc cvnum::``extend`` sert à indiquer de reprendre toutes les règles de la variante ``FR_chuquet_2`` de la langue ``fr``.
 
-    1) Grâce au bloc **optionnel** cvnum::``ignore-group``, on peut retirer la règle pour les groupes de chiffres correspondant aux milliards (on peut retirer autant de règles que nécessaires).
+    1) Grâce au bloc **optionnel** cvnum::``ignore-group``, on peut retirer des règles pour les groupes.
 
-    1) Pour finir, l'ajout de ¨nelles règles se fait très simplement ici via le bloc cvnum::``group``.
-    On peut ainsi aussi redéfinir une règle utilisée par la langue qui sert de base à celle étendue.
+    1) Pour finir, l'ajout de ¨nelles règles, ou la redéfinition de certaines existantes, se fait très simplement via le bloc cvnum::``group``.

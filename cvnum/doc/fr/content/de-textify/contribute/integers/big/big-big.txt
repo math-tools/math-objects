@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-07-07
+    date = 2022-07-12
 
 
 ===============================
@@ -74,4 +74,9 @@ note::
 
 
 note::
-    Si la clé optionnelle cvnum::``big`` n'est pas utilisée, alors la ¨trad des ¨nbres trop grands sera refusée.
+    Il est possible d'étendre un langage. Si tel est le cas, il peut arriver que le langage de départ autorise le nommage de grands ¨nbres, mais pas celui étendu.
+    Dans ce cas, il suffit d'utiliser cvnumm::``big = no`` dans le fichier de ¨spec du ¨lang étendu.
+
+
+note::
+    Pour une ¨lang n'étendant pas une autre, si la clé optionnelle cvnum::``big`` n'est pas utilisée, alors la ¨trad des ¨nbres trop grands sera refusée.
