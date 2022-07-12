@@ -2,6 +2,7 @@
     title   = Lire et écrire des nombres avec ¨cvnum
     author  = Christophe, BAL
     mail    = projetmbc@gmail.com
+    lang    = fr
 
     licence = cc by nc sa 4.0
     out     = html | pdf

@@ -17,17 +17,17 @@ print("\033c", end="")
 # --------------- #
 
 DEBUG_CODING = False
-DEBUG_CODING = True
+# DEBUG_CODING = True
 
 THIS_DIR = PPath(__file__).parent
-DIR_LANG = THIS_DIR / "lang"
 
-SRC_DIR_CONFIG = THIS_DIR
+SRC_DIR = THIS_DIR
 
-while(SRC_DIR_CONFIG.name != "cvnum"):
-    SRC_DIR_CONFIG = SRC_DIR_CONFIG.parent
+while(SRC_DIR.name != "cvnum"):
+    SRC_DIR = SRC_DIR.parent
 
-SRC_DIR_CONFIG = SRC_DIR_CONFIG / "src" / "config"
+SRC_DIR_CONFIG = SRC_DIR / "src" / "config"
+DIR_LANG       = SRC_DIR / "contribute" / "api" / "de-textify" / "lang"
 
 
 # --------------------------- #

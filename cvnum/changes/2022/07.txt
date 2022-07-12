@@ -2,6 +2,33 @@
 
 
 ==
+13   ????
+==
+
+--------
+:fordev:
+--------
+
+[[:facto:]]  manuqe la doc !!!!
+dossier contributions pour tout ce qui trad !!!
+
+    ---> tools/factory/de-textify/lang
+         vers
+         contribute/api/de-textify/lang
+
+    ---> doc/fr/content
+         vers
+         doc/content
+
+         +
+
+         fr idiqué dans le main
+
+
+// ---------- //
+
+
+==
 12
 ==
 
