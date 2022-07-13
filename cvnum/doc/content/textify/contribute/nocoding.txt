@@ -1,0 +1,9 @@
+this::
+    date = 2022-07-13
+
+
+============================
+Pas besoin de savoir coder !
+============================
+
+Avant d'entrer dans les détails ¨techs, il faut savoir que le système de ¨trad s'appuie sur des fichiers faciles à prendre en main sans aucune connaissance de codage informatique.

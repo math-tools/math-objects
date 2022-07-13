@@ -1,9 +1,0 @@
-this::
-    date = 2022-03-06
-
-
-============================
-Pas besoin de savoir coder !
-============================
-
-Avant d'entrer dans les détails ¨techs, il faut savoir que le système de traduction s'appuie sur des fichiers faciles à prendre en main sans aucune connaissance de codage informatique.

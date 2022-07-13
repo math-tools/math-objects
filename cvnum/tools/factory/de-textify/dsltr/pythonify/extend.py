@@ -23,14 +23,19 @@ _REMAINING_KINDS_TO_KEEP = _KINDS_TO_KEEP - set([
 ])
 
 
-def manage_extend(alltrans):
-# Chaining extensions
+def extend_deps(alltrans):
     deps = {}
 
     for lang, specs in alltrans.items():
         if DSL_SPECS_EXTEND in specs:
             deps[lang] = specs[DSL_SPECS_EXTEND][DSL_TAG_LANG]
 
+    return deps
+
+
+def manage_extend(alltrans):
+# Chaining extensions
+    deps        = extend_deps(alltrans)
     sortedlangs = [lang for lang in alltrans if not lang in deps]
 
     # ! -- DEBUGGING -- ! #

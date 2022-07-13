@@ -1,5 +1,5 @@
 this::
-    date = 2022-07-11
+    date = 2022-07-13
 
 
 ==================================
@@ -10,7 +10,7 @@ Les cas d'utilisation servent à tester le "bon calclul" des noms, il est donc i
 ((
     Ces cas sont déjà testés via des comparaisons avec d'autres ¨api de nommage d'entiers.
 )).
-Ceci étant indiqué, voyons des cas d'utilisation tirés du dossier path::``FR/FR/usecases/integers`` ayant le contenu "partiel" suivant.
+Voyons par exemple des cas d'utilisation tirés du dossier path::``FR/FR/usecases/integers`` ayant le contenu "partiel" suivant.
 
 dirtree::
     ---
@@ -61,3 +61,9 @@ Regardons ce contient chaque dossier en expliquant au passage les **conventions 
 
 note::
     Bien retenir qu'il faut donner des exemples pour les nombres demandant un peu de réflexion, et donc de calcul pour ¨cvnum, comme par exemple `21`, `25`, `71`, `73`, `80` ou encore `81` pour les "petits" ¨nbres avec la langue ``fr_FR``.
+
+
+warning::
+    Les calculs "avancés" sont testés via la langue ``fr_FR`` : par exemple, les bugs nourissent les cas d'utilisation de cette langue.
+    Ceci explique que les exemples proposés pour ``fr_FR`` soient très nombreux !
+    Il est donc vivement conseillé de **s'insiprer des cas d'utilisantion pour les langues ``en_GB`` et ``en_US``**, et non de la langue ``fr_FR``.

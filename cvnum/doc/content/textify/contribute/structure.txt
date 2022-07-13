@@ -1,12 +1,12 @@
 this::
-    date = 2022-03-07
+    date = 2022-07-13
 
 
 ==============================
 Comment organiser ses ¨trads ?
 ==============================
 
-Le code source de ¨cvnum contient un dossier path::``tools/factory/de-textify/lang`` avec toutes les ¨trads prises en compte.
+Le code source de ¨cvnum contient un dossier path::``contribute/api/textify/lang`` avec toutes les ¨trads prises en compte.
 Par exemple, la langue anglaise est gérée dans le dossier path::``EN`` qui a la structure suivante.
 
 dirtree::
@@ -27,16 +27,16 @@ Cette structure indique plusieurs choses.
     ((
         Ici c'est pour l'anglais de Grande-Bretagne et celui des États Unis d'Amérique.
     )).
-    On peut utiliser le même nom pour le dossier principal et un sous-dossier. Par exemple, le dossier path::``FR`` contient un sous-dossier path::``FR`` pour le français de France
+    On peut utiliser le même nom pour le dossier principal et un sous-dossier. Par exemple, le dossier path::``FR`` contient un sous-dossier path::``FR`` pour le français académique de France
     ((
         Ne voyez aucun nationalisme dans cet exemple...
     )).
 
     1) Les dossiers path::``usecases`` permettent de proposer des exemples d'utilisation qui serviront à tester la ¨trad proposée. Nous verrons comment indiquer des exemples dans cf::``usecases.txt``.
 
-    1) Les fichiers path::``integers.txt`` sont pour définir toutes les règles de ¨trad liées aux entiers
+    1) Les fichiers path::``integers.txt`` permettent de définir toutes les règles de ¨trad liées aux entiers
     ((
-        Plus tard seront disponibles d'autres traductions pour les fractions et les nombres décimaux qui se feront dans des fichiers path::``decimals.txt`` et path::``fractions.txt`` ¨resp.
+        Plus tard, d'autres traductions seront disponibles pour les fractions et les nombres décimaux qui se feront dans des fichiers path::``decimals.txt`` et path::``fractions.txt`` ¨resp.
     )).
 
 

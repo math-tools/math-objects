@@ -28,9 +28,17 @@ MODULE_DIR = addfindsrc(
 def testandprint(intname, x):
     print('---')
     print()
-    print(x)
-    x = eval(str(x))
-    print(f'  --> {intname.nameof(x)}')
+
+    x_eval = eval(str(x))
+
+    if isinstance(x,int) or x.isdigit():
+        print(f"{x_eval:_}")
+
+    else:
+        print(f"  {x}")
+        print(f"= {x_eval:_}")
+
+    print(f'  --> {intname.nameof(x_eval)}')
     print()
 
 
@@ -46,22 +54,24 @@ STEP_BY_STEP = False
 USE_RAND = True
 USE_RAND = False
 
-RAND_POWERS = [2, 3, 6, 9, 12, 15]
-RAND_POWERS = [2, 3, 4, 5]
+RAND_POWERS      = [2, 3, 6, 9, 12, 15, 27]
+NBTESTS_BY_SLICE = 1
+
+# RAND_POWERS      = [2, 3, 4, 5]
+# NBTESTS_BY_SLICE = 3
 
 lang = de_DE
 lang = en_GB    # TESTS OK
 # lang = en_US    # TESTS OK
-# lang = es_ES
+lang = es_ES
 lang = fr_FR    # TESTS OK
 # lang = fr_BE    # TESTS OK
-# lang = fr_FR_chuquet_1
-lang = fr_FR_chuquet_2
+lang = fr_FR_chuquet_1
+# lang = fr_FR_chuquet_2
 # lang = fr_FR_rowlet
 # lang = fr_FR_tiret
 # lang = it_IT
 
-nbtests_by_slice = 2
 
 intname = IntName(lang)
 
@@ -72,7 +82,7 @@ if not USE_RAND:
         # 1,
         # 11,
         # 111,
-        # 2111,
+        2111,
         # "22_111",
         # "222_111",
         # "3_222_111",
@@ -82,7 +92,8 @@ if not USE_RAND:
         # "44_333_222_111",
         # "444_333_222_111",
         # "5_444_333_222_111",
-        # "55_444_333_222_111",
+        "55_444_333_222_111",
+        "5_000_000_000_001",
         # "-   321",
         # "200",
         # "200*10**3",
@@ -93,8 +104,11 @@ if not USE_RAND:
         # "200*10**18",
         # "200*10**21",
         # "200*10**24",
-        "200*10**27",
-        # "200_000*10**27 + 200_000*10**18",
+        # "200*10**27",
+        # "200*10**27 + 200*10**18",
+        # "200*10**30",
+        "200*10**30 + 200*10**21",
+        "200*10**30 + 200*10**15",
         # "123*10**27 + 123*10**18",
         # 1,
         # 22,
@@ -143,7 +157,7 @@ else:
         print(deco)
         print()
 
-        for _ in range(nbtests_by_slice):
+        for _ in range(NBTESTS_BY_SLICE):
             while((x := randint(min, max)) in x_tested):
                 continue
 

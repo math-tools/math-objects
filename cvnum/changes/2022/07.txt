@@ -2,19 +2,63 @@
 
 
 ==
-13   ????
+13    ?????
 ==
 
 --------
-:fordev:
+:update:
 --------
 
-[[:facto:]]  manuqe la doc !!!!
+[[:bugs:]]
+bug avec fr_FR_tiret pour les très gros nbres
+pb avec la regex regex::``\S*`` qui capturerait aussi des titrets tiret !!!
+
+    --> on utilise maintenant regex::``[^\s-]`` à la place de regex::``\S``
+
+    --> self._zerobigname : au passage, def revu car là on avait "de-milliards" à cause de "[d]- :if: d > 0"
+    et de plus mis à None si self._very_big_allowed = False
+
+    --> bugs si group inter nul ! Aïe !!!! avec fr_FR
+
+        5000000000001
+        --> cinq mille milliards zéro million mille un
+
+
+[[:doc:]]
+contribute/api/textify/lang
+
++
+
+warning:: usecase FAIT !!!
+    Les calculs "avancés" sont testés via la langue ``fr_FR`` : par exemple, les bugs nourissent les cas d'utilisation de cette langue.
+    Ceci explique que les exemples proposés pour ``fr_FR`` soient très nombreux !
+    Il est donc vivement conseillé de **s'insiprer des cas d'utilisantion pour les langues ``en_GB`` et ``en_US``**, et non de la langue ``fr_FR``.
+
+
+--------
+:fordev:    ?????
+--------
+
+[[:api:]]   ??????
+Testing the naming of integers: unit tests have been added. The usecases of the translations in the folder path::``factory`` are automatically added to the tests.
+
+    ??????   + gestion auto des extensions (on teste auto les règles non redéfinies pour ne pas avoir à doubler les tests, & on repère les règles redéfinies aussi)
+
+    ??????   + bug snas usecases de fr_FR (ou autre si besoin à l'avenir)
+
+    ??????   + usecases : leiu des tests unitaires fixés et ajoutés suite à des bugs !
+
+
+[[:facto:]]
+usage de assert au lieu de if PAS BON then raise Exception
+
++
+
 dossier contributions pour tout ce qui trad !!!
 
-    ---> tools/factory/de-textify/lang
+    ---> tools/factory/textify/lang
          vers
-         contribute/api/de-textify/lang
+         contribute/api/textify/lang
 
     ---> doc/fr/content
          vers
@@ -23,6 +67,20 @@ dossier contributions pour tout ce qui trad !!!
          +
 
          fr idiqué dans le main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // ---------- //

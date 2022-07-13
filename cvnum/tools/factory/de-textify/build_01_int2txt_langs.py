@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from mistool.os_use import PPath
-from orpyste.data import ReadBlock
+from orpyste.data   import ReadBlock
 
 from dsltr import *
 
@@ -17,7 +17,7 @@ print("\033c", end="")
 # --------------- #
 
 DEBUG_CODING = False
-# DEBUG_CODING = True
+DEBUG_CODING = True
 
 THIS_DIR = PPath(__file__).parent
 
@@ -26,8 +26,8 @@ SRC_DIR = THIS_DIR
 while(SRC_DIR.name != "cvnum"):
     SRC_DIR = SRC_DIR.parent
 
+DIR_LANG       = SRC_DIR / "contribute" / "api" / "textify" / "lang"
 SRC_DIR_CONFIG = SRC_DIR / "src" / "config"
-DIR_LANG       = SRC_DIR / "contribute" / "api" / "de-textify" / "lang"
 
 
 # --------------------------- #

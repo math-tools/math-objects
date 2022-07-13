@@ -23,7 +23,7 @@ python::
 
 
 Plus généralement, on peut utiliser tout objet ¨python dont la représentation via python::``str(...)`` est une écriture valide d'un entier relatif.
-Voici un code "farfelue" qui affichera le texte "minus one hundred and twenty-four".
+Voici un code "farfelu" qui affichera le texte "minus one hundred and twenty-four".
 
 python::
     from cvnum import textify

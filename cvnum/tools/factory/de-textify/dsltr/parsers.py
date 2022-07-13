@@ -41,7 +41,7 @@ class ParserGene(BaseParserRules):
                 f"or ``{DSL_DIR_R2L}``."
             )
 
-# Preparing regex rules for very big names.
+# Preparing rules for very big names.
         if self.specs[DSL_TAG_GENE_BIG] == 'no':
             self.specs[DSL_TAG_GENE_BIG] = None
 
@@ -65,7 +65,7 @@ class ParserGene(BaseParserRules):
                      "(see the key ``big`` of the block ``gene``)."
                 )
 
-            bigname = bigname.replace(ELLIPSIS, '\S*')
+            bigname = bigname.replace(ELLIPSIS, '[^\s-]*')
             bigname = f"{bigname}"
 
             self.specs[DSL_TAG_GENE_BIG] = (bigname, verybigname)

@@ -82,8 +82,8 @@ def basenumerals(
 
 # Legal numerals?
     for n in numerals:
-        if not n in base_numerals:
-            raise ValueError(f"illegal numeral << {n} >> found")
+        assert n in base_numerals, \
+               f"illegal numeral << {n} >> found"
 
 # The job is finished.
     return numerals
@@ -144,10 +144,8 @@ def bdigits2int(
     for n in reversed(bdigits):
         n = intnonneg(n, "digit")
 
-        if n >= base:
-            raise ValueError(
-                f"digit << {n} >> is bigger than the base << {base} >>."
-            )
+        assert n < base, \
+               f"digit << {n} >> is bigger than the base << {base} >>."
 
         intval += n*bpower
         bpower *= base
@@ -180,8 +178,8 @@ def bnumerals2int(
     bpower = 1
 
     for n in reversed(bnumerals):
-        if not n in base_digits:
-            raise ValueError('unknown numeral << {0} >>.'.format(n))
+        assert n in base_digits, \
+               'unknown numeral << {0} >>.'.format(n)
 
         intval += base_digits[n]*bpower
         bpower *= base

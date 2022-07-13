@@ -24,24 +24,18 @@ def intnonneg(
     tryconvert: bool = False
 ) -> int:
     if not isinstance(number, int):
-        if not tryconvert:
-            raise ValueError(
-                f"``{name} = {repr(number)}`` is not an integer."
-            )
+        assert tryconvert, \
+               f"``{name} = {repr(number)}`` is not an integer."
 
         strnumber = str(number)
 
-        if not strnumber.isdigit():
-            raise ValueError(
-                f"``{name} = {repr(number)}`` is not printed as an integer."
-            )
+        assert strnumber.isdigit(), \
+               f"``{name} = {repr(number)}`` is not printed as an integer."
 
         number = int(strnumber)
 
-    if number < 0:
-        raise ValueError(
-            f"``{name} = {number}`` is not a natural integer."
-        )
+    assert number >= 0, \
+           f"``{name} = {number}`` is not a natural integer."
 
     return number
 
@@ -63,9 +57,7 @@ def intbase(
 ) -> int:
     base = intnonneg(base, name, tryconvert)
 
-    if base in [0, 1]:
-        raise ValueError(
-            f"``{name} = {base}`` is not greater than one."
-        )
+    assert not base in [0, 1], \
+           f"``{name} = {base}`` is not greater than one."
 
     return base

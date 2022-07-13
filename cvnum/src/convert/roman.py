@@ -71,10 +71,8 @@ def int2roman(nb: int) -> str:
     nb = intnonneg(nb)
 
 # We must have ``1 <= nb <= 4999``.
-    if not 0 < nb < 5000:
-        raise ValueError(
-            'the natural integer ``nb`` must go from 1 to 4999.'
-        )
+    assert 0 < nb < 5000, \
+           'the natural integer ``nb`` must go from 1 to 4999.'
 
 # We first build the upper version of the roman nb by adding the biggest
 # roman numerals first (here, we use the fact that ``ROMAN_2_NUMERAL`` is
@@ -103,10 +101,8 @@ def int2roman(nb: int) -> str:
 ###
 def roman2int(rnb: str) -> int:
 # ``nb`` must be a legal roman nb.
-    if not isroman(rnb):
-        raise ValueError(
-            f"<< {rnb} >> is not a legal roman nb."
-        )
+    assert isroman(rnb), \
+           f"<< {rnb} >> is not a legal roman nb."
 
 # Just eat the upper roman digits from left to right by taking care of
 # couple of roman digits like IX (9), IV (4) and CM (900) for example.

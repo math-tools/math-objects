@@ -55,7 +55,8 @@ class BaseAutomaton:
 
     @lang.setter
     def lang(self, lang: str) -> None:
-        assert lang in ALL_LANGS, f"illegal lang ``{lang}``"
+        assert lang in ALL_LANGS, \
+               f"illegal lang ``{lang}``"
 
         self._lang = lang
         self._update_internals()
@@ -92,6 +93,10 @@ class BaseAutomaton:
         self._big_expo_max = max(self._big_rules)
         self._big_len_max  = 2*self._big_expo_max
         self._big_len_min  = min(self._big_rules)
+
+        # ! -- DEBUGGING -- ! #
+        # print(f"{self._big_expo_max = }")
+        # ! -- DEBUGGING -- ! #
 
 # Big groups
         self._groups_sep = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_SEP]

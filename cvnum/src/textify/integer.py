@@ -28,11 +28,27 @@ class IntName(BaseAutomaton):
         super().__init__(lang)
 
 # TODO Remove the following ugly strip!
-        self._zerobigname = self.apply(
-            actions = self._big_rules[self._big_expo_max],
-            d_var   = '0',
-            r_var   = '0'*self._big_expo_max
-        ).strip()
+
+        if self._very_big_allowed:
+            self._zerobigname = self.apply(
+                actions = self._big_rules[self._big_expo_max],
+                d_var   = '1',
+                r_var   = '0'*self._big_expo_max
+            ).strip()
+
+            self._zerobigname = ' ' + self._zerobigname.replace(
+                self.name_small('1'),
+                self.name_small('0')
+            )
+
+        else:
+            self._zerobigname = None
+
+        # ! -- DEBUGGING -- ! #
+        # print(f"{self._very_big_allowed = }")
+        # print(f"{self._zerobigname      = }")
+        # exit()
+        # ! -- DEBUGGING -- ! #
 
 
 ###
@@ -54,16 +70,15 @@ class IntName(BaseAutomaton):
         nb_digits       = len(str_absnb)
 
 # Do big numbers are allowed?
-        if (
-            not self._very_big_allowed
-            and
-            nb_digits > self._big_len_max
-        ):
-            raise ValueError(
+        assert (
+                self._very_big_allowed
+                or
+                nb_digits <= self._big_len_max
+               ), (
                  "number too big to be named. "
-                 "The maximal number of digits is "
+                "The maximal number of digits is "
                 f"{self._big_len_max}  < {nb_digits}."
-            )
+               )
 
 # Let's go!
 #
@@ -136,18 +151,16 @@ class IntName(BaseAutomaton):
 
         nb = nb.strip()
 
-        if not nb.isdigit():
-            raise ValueError(
-                f'``nb = "{sign}{nb}"`` is not an integer'
-            )
+        assert nb.isdigit(), \
+               f'``nb = "{sign}{nb}"`` is not an integer'
 
 # Name of the sign
         if sign:
-            if self._sign_name[sign] is None:
-                raise ValueError(
+            assert not self._sign_name[sign] is None, \
+                   (
                     f"the sign ``{sign}`` can't be used "
                     f"with the language {self.lang}"
-                )
+                   )
 
             sign = self._sign_name[sign]
 
@@ -166,8 +179,9 @@ class IntName(BaseAutomaton):
 #     :see: self.name_small,
 #           self.build_DnR_vars
 ###
-    def name_big(self, bigslice: str,) -> str:
+    def name_big(self, bigslice: str) -> str:
         # ! -- DEBUGGING -- ! #
+        # print()
         # print(">>> name_big <<<")
         # print(f"{bigslice = }")
         # print(f"{self._big_len_min = }")
@@ -190,31 +204,46 @@ class IntName(BaseAutomaton):
         # print("self.apply used")
         # ! -- DEBUGGING -- ! #
 
-        name = self.apply(
-            actions = self._big_rules[grppower],
-            d_var   = d_var,
-            r_var   = r_var
-        )
+# A null intermediate group.
+#
+# We must take care of a biggest null group.
+        if d_var == '0':
+            name = ''
 
-# We must take care of "small" final groups that are equal to zero!
-        # ! -- DEBUGGING -- ! #
-        # print(f"{d_var    = }")
-        # print(f"{r_var    = }")
-        # print(f"{grppower = }")
-        # ! -- DEBUGGING -- ! #
+            if grppower == self._big_expo_max:
+                name += self._zerobigname
 
-        nb_r_digits = len(r_var)
+            name += self.name_big(r_var)
 
-        if (
-            int(r_var) == 0
-            and
-            nb_r_digits >= self._big_expo_max
-        ):
-            name += self._zerobigname*(
-                nb_r_digits // self._big_expo_max - 1
+# A not null intermediate group.
+        else:
+            name = self.apply(
+                actions = self._big_rules[grppower],
+                d_var   = d_var,
+                r_var   = r_var
             )
 
-# Nothing left to do...
+# For very by numbers, we must take care of "small" final groups
+# that are equal to zero!
+        if self._very_big_allowed:
+            # ! -- DEBUGGING -- ! #
+            # print(f"{d_var    = }")
+            # print(f"{r_var    = }")
+            # print(f"{grppower = }")
+            # ! -- DEBUGGING -- ! #
+
+            nb_r_digits = len(r_var)
+
+            if (
+                int(r_var) == 0
+                and
+                nb_r_digits >= self._big_expo_max
+            ):
+                name += self._zerobigname*(
+                    nb_r_digits // self._big_expo_max - 1
+                )
+
+# Nothing left to do.
         return name
 
 
@@ -308,14 +337,14 @@ class IntName(BaseAutomaton):
                 if not actions is None:
                     break
 
-            if actions is None:
-                raise Exception(
-                       f'BUG: no matching found for ``{smallslice}``.'
+            assert not actions is None, \
+                   (
+                    f'BUG: no matching found for ``{smallslice}``.'
                     f'\n    + lang     = {self.lang}'
                     f'\n    + nb       = {self._initial_nb}'
                     f'\n    + type(nb) = {type(self._initial_nb)}'
-                     '\nReport the message above to the developper'
-                )
+                    '\nReport the message above to the developper'
+                   )
 
 # Let's work!
         return self.apply(

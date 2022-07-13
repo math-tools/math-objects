@@ -204,11 +204,11 @@ class Base2Base:
 # Legal format?
         assert format in FORMAT_ALLOWED, f'invalid << format = {format} >>'
 
-        if format == FORMAT_INT and self.bases[1] != 10:
-            raise ValueError(
+        assert format != FORMAT_INT or self.bases[1] == 10, \
+               (
                 f" format << {FORMAT_INT} >> used with "
                 f"<< base_2 = {self.bases[1]} >> , use << base_2 = 10 >>"
-            )
+               )
 
 # Legal value?
         assert bool(x), f'invalid << x = {repr(x)} >>'
@@ -220,11 +220,11 @@ class Base2Base:
                 fromkind = FORMAT_NUMERALS
 
         elif isinstance(x, int):
-            if self.bases[0] != 10:
-                raise ValueError(
+            assert self.bases[0] == 10, \
+                   (
                     f" integer << {x} >> used with "
                     f"<< base_1 = {self.bases[0]} != 10 >>"
-                )
+                   )
 
             fromkind = FORMAT_INT
 
