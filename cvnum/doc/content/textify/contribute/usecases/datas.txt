@@ -64,6 +64,5 @@ note::
 
 
 warning::
-    Les calculs "avancés" sont testés via la langue ``fr_FR`` : par exemple, les bugs nourissent les cas d'utilisation de cette langue.
-    Ceci explique que les exemples proposés pour ``fr_FR`` soient très nombreux !
-    Il est donc vivement conseillé de **s'insiprer des cas d'utilisantion pour les langues ``en_GB`` et ``en_US``**, et non de la langue ``fr_FR``.
+    Les calculs "avancés" sont testés via la langue ``fr_FR`` dans un fichier dédié path::``special.txt``.
+    Ne pas tenir compte de ce dernier lors de la création d'un nouveau ¨lang.

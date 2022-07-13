@@ -2,7 +2,7 @@
 
 
 ==
-13    ?????
+13
 ==
 
 --------
@@ -10,77 +10,36 @@
 --------
 
 [[:bugs:]]
-bug avec fr_FR_tiret pour les très gros nbres
-pb avec la regex regex::``\S*`` qui capturerait aussi des titrets tiret !!!
+Naming integers: the work on the unit tests has shown the following bugs.
 
-    --> on utilise maintenant regex::``[^\s-]`` à la place de regex::``\S``
+    1) Testing ``fr_FR_tiret`` has shown the need to change the pattern regex::``\S*`` to regex::``[^\s-]*`` (the first one catched the hyphens).
+    The fix of this bug has also shown the necessity to build ``self._zerobigname`` differently (see the piece of a rule cvnum::``"[d]- :if: d > 0"``).
 
-    --> self._zerobigname : au passage, def revu car là on avait "de-milliards" à cause de "[d]- :if: d > 0"
-    et de plus mis à None si self._very_big_allowed = False
+    1) Another "stupid" bug fixed: with ``fr_FR``, the integer `5000000000001` was printed "cinq mille milliards zéro million mille un" with an unexpected "zéro million".
 
-    --> bugs si group inter nul ! Aïe !!!! avec fr_FR
 
-        5000000000001
-        --> cinq mille milliards zéro million mille un
+[[:appi:]]
+Contributions.
+
+    1) The folder path::``tools/factory/textify/lang`` has been moved to become path::``contribute/api/textify/lang``.
+
+    1) Creation of the directory path::``contribute/doc`` for the translations of the "human" ¨doc (the ¨lang used for the ¨doc written by the developer is indicated in the file path::``doc/main.txt``)
 
 
 [[:doc:]]
-contribute/api/textify/lang
+The following changes have been made.
 
-+
+    1) Folder with the ¨langs supported by the module ``textify``: the new path path::``contribute/api/textify/lang`` has been indicated.
 
-warning:: usecase FAIT !!!
-    Les calculs "avancés" sont testés via la langue ``fr_FR`` : par exemple, les bugs nourissent les cas d'utilisation de cette langue.
-    Ceci explique que les exemples proposés pour ``fr_FR`` soient très nombreux !
-    Il est donc vivement conseillé de **s'insiprer des cas d'utilisantion pour les langues ``en_GB`` et ``en_US``**, et non de la langue ``fr_FR``.
+    1) One warning has been added about the very special file path::``FR/FR/usecases/integers/special.txt``.
 
 
 --------
-:fordev:    ?????
+:fordev:
 --------
-
-[[:api:]]   ??????
-Testing the naming of integers: unit tests have been added. The usecases of the translations in the folder path::``factory`` are automatically added to the tests.
-
-    ??????   + gestion auto des extensions (on teste auto les règles non redéfinies pour ne pas avoir à doubler les tests, & on repère les règles redéfinies aussi)
-
-    ??????   + bug snas usecases de fr_FR (ou autre si besoin à l'avenir)
-
-    ??????   + usecases : leiu des tests unitaires fixés et ajoutés suite à des bugs !
-
 
 [[:facto:]]
-usage de assert au lieu de if PAS BON then raise Exception
-
-+
-
-dossier contributions pour tout ce qui trad !!!
-
-    ---> tools/factory/textify/lang
-         vers
-         contribute/api/textify/lang
-
-    ---> doc/fr/content
-         vers
-         doc/content
-
-         +
-
-         fr idiqué dans le main
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Semantic coding: ``assert WHAT_IS_WANTED, ERROR_MESSAGE`` is always used instead of something like ``if not WHAT_IS_WANTED: raise Exception(ERROR_MESSAGE)``.
 
 
 // ---------- //

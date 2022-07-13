@@ -11,9 +11,8 @@ About `math-objects`
 
 This monorepo contains series of tools to manipulate mathematical objects.
 
-<!-- :monorepo-content-START: -->
-<!-- :monorepo-content-END: -->
-
-
 <!-- :version-START: -->
 <!-- :version-END: -->
+
+<!-- :monorepo-content-START: -->
+<!-- :monorepo-content-END: -->
