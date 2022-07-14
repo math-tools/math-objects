@@ -1,3 +1,25 @@
+> ---------------------------- <
+
+==
+15
+==
+
+--------
+:update:
+--------
+
+[[:bugs:]]
+¨DSL for translations: the usecases tested have revealed some small bugs in the ¨specs of the ¨lang ``it_IT`` and ``de_DE``.
+
+
+--------
+:fordev:
+--------
+
+[[:api:]]
+Testing the naming of integers: datas for unit tests automatically build from usecases.
+
+
 // ---------- //
 
 

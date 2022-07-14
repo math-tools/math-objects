@@ -1,6 +1,6 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2022-04-01
+    date   = 2022-07-15
     desc   = Names of integers in academic German.
 
 /***
@@ -22,6 +22,10 @@ group::
     3 =  [d :if: d > 1]tausend[r]
     6 => Million{en}
     9 => Milliarde{n}
+
+patch::
+    einsund = einund
+    eins M  = eine M
 
 small::
     0 = null
@@ -51,5 +55,5 @@ small::
     ** = [d(0)]und[d(1)0]
 
     100 = hundert
-    *00 = [d(2)]hundert
-    *** = [d(2)][100][d(1)d(0)]
+    *00 = [d(2)][100]
+    *** = [d(2)00][d(1)d(0)]

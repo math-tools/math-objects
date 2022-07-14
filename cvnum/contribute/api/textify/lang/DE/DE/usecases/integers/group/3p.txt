@@ -1,5 +1,5 @@
 1000 = tausend
-1001 = eintausendeins
+1001 = tausendeins
 
 2000 = zweitausend
 

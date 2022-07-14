@@ -1,2 +1,2 @@
-10**27   = un quadrillion
-3*10**27 = trois quadrillions
+10**24   = un quadrillion
+3*10**24 = trois quadrillions

@@ -1,6 +1,6 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2022-07-11
+    date   = 2022-07-15
     desc   = Names of integers in academic Italian.
 
 
@@ -62,5 +62,5 @@ small::
 
     ** = [d(1)0][d(0)]
 
-    100 = cento
-    *** = [d(2) :if: d(2) > 1][100][d(1)d(0)]
+    *00 = [d(2) :if: d(2) > 1]cento
+    *** = [d(2)00][d(1)d(0)]

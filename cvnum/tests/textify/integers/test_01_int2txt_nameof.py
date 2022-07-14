@@ -5,7 +5,6 @@
 # --------------------- #
 
 import json
-import toml
 
 from cbdevtools     import *
 from mistool.os_use import PPath
@@ -30,14 +29,38 @@ from src.textify import *
 THIS_DIR  = PPath(__file__).parent
 DATAS_DIR = THIS_DIR / "usecases"
 
+TAG_TEST_WHERE   = 'where'
+TAG_TEST_INTEGER = 'integer'
+TAG_TEST_INITIAL = 'initial'
+TAG_TEST_NAME    = 'name'
+
+LANGS_SORTED = ['fr_FR', 'it_IT', 'de_DE', 'en_GB', 'es_ES', 'en_US', 'fr_BE', 'fr_FR_chuquet_1', 'fr_FR_chuquet_2', 'fr_FR_rowlett', 'fr_FR_tiret']
+
 
 # -------------- #
 # -- USECASES -- #
 # -------------- #
 
-def test_int2txt_usecases_fr_FR():
-    nameof = IntName(fr_FR).nameof
-    assert nameof(0) == 0, "OKI?"
+def test_int2txt_usecases():
+    for lang in LANGS_SORTED:
+        nameof = IntName(lang).nameof
 
-def test_int2txt_usecases_AAA():
-    assert 4 == 4, "D'ACC?"
+        with (DATAS_DIR / f"{lang}.json").open(
+            encoding = 'utf-8',
+            mode = 'r'
+        ) as f:
+            datas = json.load(f)
+
+        for onedata in datas:
+            int_val     = onedata[TAG_TEST_INTEGER]
+            name_wanted = onedata[TAG_TEST_NAME]
+
+            assert nameof(int_val) == name_wanted, \
+                   (
+                    "\n"
+                    f"LANG   : {lang}"
+                    "\n"
+                    f"INITIAL: {onedata[TAG_TEST_INITIAL]}"
+                    "\n"
+                    f"WHERE  : {onedata[TAG_TEST_WHERE]}"
+                   )

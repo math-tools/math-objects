@@ -3,6 +3,6 @@
 
 4000 = cuatro mil
 
-5020 = cinco mil viente
+5020 = cinco mil veinte
 
 200 000 = doscientos mil

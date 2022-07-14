@@ -49,16 +49,11 @@ def pythonify(
             f"""
 #!/usr/bin/env python3
 
-# ---------------------------------------------------------------- #
-# --  This code was automatically build by the following file.  -- #
-# --                                                            -- #
-# --      + ``tools/factory/de-textify/build_tr.py``            -- #
-# --                                                            -- #
-# --  See the project ``cvnum`` in the mono repository          -- #
-# --  ``math-objects`` for more informations.                   -- #
-# --                                                            -- #
-# --      + https://github.com/math-tools/math-objects          -- #
-# ---------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
+# --  This code was automatically build by the following file.            -- #
+# --                                                                      -- #
+# --      + ``tools/factory/textify/build_01_int2txt_automaton_rules.py`` -- #
+# -------------------------------------------------------------------------- #
 
 from collections import OrderedDict
 from re          import compile as __re_compile

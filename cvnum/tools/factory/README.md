@@ -3,7 +3,6 @@ How to use this factory?
 
 The factory needs all the following packages. You can use ``pip`` to install them.
 
-
   1. [misTool](https://pypi.org/project/mistool)
 
   1. [orPyste](https://pypi.org/project/orpyste)

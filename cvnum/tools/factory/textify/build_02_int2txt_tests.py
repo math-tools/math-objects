@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 
-from collections import defaultdict
+from mistool.os_use     import PPath
+from mistool.string_use import between
 
-from mistool.os_use import PPath
-from orpyste.data   import ReadBlock
-
-from dsltr    import *
 from usecases import *
 
 # ! -- DEBUGGING -- ! #
@@ -26,61 +23,24 @@ while(SRC_DIR.name != "cvnum"):
     SRC_DIR = SRC_DIR.parent
 
 DIR_LANG         = SRC_DIR / "contribute" / "api" / "textify" / "lang"
-TEST_USECASE_DIR = SRC_DIR / "tests" / "textify" / "integers" / "usecases"
-
-
-TAGS_FOR_IGNORED_TESTS = [
-    DSL_SPECS_IGNORE_GROUP,
-    DSL_SPECS_IGNORE_SMALL,
-]
-
-EMPTY_PATH   = '.'
-SPECIAL_FILE = "special.txt"
-
-TAGS_FOR_IGNORED_TESTS = [
-    DSL_SPECS_IGNORE_GROUP,
-    DSL_SPECS_IGNORE_SMALL,
-]
-
-KINDS_FOR_TESTS = [
-    "group",
-    "sign",
-    "small",
-    "verybig",
-]
-
+PYTEST_DIR       = SRC_DIR / "tests" / "textify" / "integers"
+TEST_USECASE_DIR = PYTEST_DIR / "usecases"
+TEST_PYFILE      = PYTEST_DIR / "test_01_int2txt_nameof.py"
 
 # ------------------ #
-# -- LANGS & DEPS -- #
+# -- RULES & DEPS -- #
 # ------------------ #
 
-print(f"   * Preparing specs to build the tests.")
+print(f"   * Preparing specs to build the tests...")
 
-RULES_TO_IGNORE = langdefs(DIR_LANG)
-DEPENDENCIES    = extend_deps(RULES_TO_IGNORE)
-
-# Just keep the tags useful for testing.
-for specs in RULES_TO_IGNORE.values():
-    tags = list(specs)
-
-    for onetag in tags:
-        if not onetag in TAGS_FOR_IGNORED_TESTS:
-            del specs[onetag]
-            continue
-
-        if onetag == DSL_SPECS_IGNORE_SMALL:
-            specs[onetag] = [
-                pattern
-                for kind, pattern in specs[onetag]
-                if kind == DSL_ACTION_MATCHING
-            ]
+RULES_TO_IGNORE, DEPENDENCIES = usecases_deps(DIR_LANG)
 
 # ! -- DEBUGGING -- ! #
 # print(f"{DEPENDENCIES = }")
 # print()
-# print(f"{LANG_TO_IGNORE['fr_FR'].keys()           = }")
-# print(f"{LANG_TO_IGNORE['fr_BE'].keys()           = }")
-# print(f"{LANG_TO_IGNORE['fr_FR_chuquet_1'].keys() = }")
+# print(f"{RULES_TO_IGNORE['fr_FR'].keys()           = }")
+# print(f"{RULES_TO_IGNORE['fr_BE'].keys()           = }")
+# print(f"{RULES_TO_IGNORE['fr_FR_chuquet_1'].keys() = }")
 # exit()
 # ! -- DEBUGGING -- ! #
 
@@ -89,59 +49,12 @@ for specs in RULES_TO_IGNORE.values():
 # -- USECASES -- #
 # -------------- #
 
-print("   * Looking for usecases.")
+print("   * Looking for usecases...")
 
-USECASES     = {}
-WITH_SPECIAL = []
-
-for onepath in DIR_LANG.walk("dir::*"):
-    shortpath = onepath - DIR_LANG
-
-    if shortpath.depth != 1:
-        continue
-
-    mainlang = shortpath.parent.name
-    mainlang = mainlang.lower()
-    variant  = shortpath.name
-    lang     = taglang(mainlang, variant)
-
-    usecases_lang = defaultdict(list)
-
-    path_usecases_int = onepath / "usecases" / "integers"
-
-    assert path_usecases_int.is_dir(), \
-           (
-             "Missing folder ``usecases/integers`` "
-            f"in ``{mainlang}/{variant}``."
-           )
-
-    for onefile in path_usecases_int.walk("file::**.txt"):
-        kind = onefile - path_usecases_int
-        kind = str(kind.parent)
-
-        usecases_lang[kind].append(onefile.name)
-
-    for kind, filesfound in usecases_lang.items():
-        if kind == EMPTY_PATH:
-            assert usecases_lang[EMPTY_PATH] == [SPECIAL_FILE], \
-                   (
-                    f"only the file ``{SPECIAL_FILE}`` can be used "
-                    "directly in the folder ``usecases/integers``."
-                   )
-
-            usecases_lang[kind] = SPECIAL_FILE
-            WITH_SPECIAL.append(lang)
-
-        else:
-            assert kind in KINDS_FOR_TESTS, \
-                   f"unkown kind ``{kind}`` not in {KINDS_FOR_TESTS}"
-
-            usecases_lang[kind] = sorted(
-                filesfound,
-                key = lambda x: (len(x), x)
-            )
-
-    USECASES[lang] = usecases_lang
+USECASES_PATHS, WITH_SPECIAL = usecases_files(
+    DIR_LANG,
+    DEPENDENCIES
+)
 
 # ! -- DEBUGGING -- ! #
 # from pprint import pprint
@@ -156,21 +69,71 @@ for onepath in DIR_LANG.walk("dir::*"):
 # -- BUILD THE TESTS -- #
 # --------------------- #
 
-print("   * Let's build the tests.")
+print("   * Let's build the tests...")
+
+TAG_SPE     = 'with spe cases and no dep'
+TAG_DEP_NO  = 'no dep'
+TAG_DEP_YES = 'some deps'
+
+langs_met    = WITH_SPECIAL.copy()
+langs_categos = {
+    TAG_SPE    : WITH_SPECIAL.copy(),
+    TAG_DEP_NO : [],
+    TAG_DEP_YES: [],
+}
+
+for lang in USECASES_PATHS:
+    if(
+        not lang in DEPENDENCIES
+        and
+        not lang in langs_met
+    ):
+        langs_met.append(lang)
+        langs_categos[TAG_DEP_NO].append(lang)
+
+for lang in USECASES_PATHS:
+    if not lang in langs_met:
+        langs_met.append(lang)
+        langs_categos[TAG_DEP_YES].append(lang)
 
 
-for lang in WITH_SPECIAL:
-    print(f"   * Tests for ``{lang}`` (that uses special cases).")
+langs_sorted = []
 
-    buildtestsforlang(
-        lang         = lang,
-        testdir      = TEST_USECASE_DIR,
-        usecases     = USECASES,
-        deps         = DEPENDENCIES,
-        rulesignored = RULES_TO_IGNORE,
-    )
-    del USECASES[lang]
+for about, langsfound in langs_categos.items():
+    langsfound.sort()
+
+    for lang in langsfound:
+        langs_sorted.append(lang)
+
+        print(
+            f"   * Tests for ``{lang}`` ({about})")
+
+        buildtests_json(
+            lang         = lang,
+            testdir      = TEST_USECASE_DIR,
+            usecases     = USECASES_PATHS[lang],
+        )
 
 
-for lang, usecases_lang in USECASES.items():
-    print(f"   * Tests for ``{lang}``.")
+with TEST_PYFILE.open(
+    encoding = "utf-8",
+    mode     = "r",
+) as f:
+    pycode = f.read()
+
+before, _, after = between(
+    text     = pycode,
+    seps     = ['LANGS_SORTED', '# --'],
+    keepseps = True
+)
+
+pycode = f"""{before} = {langs_sorted}
+
+
+{after}"""
+
+with TEST_PYFILE.open(
+    encoding = "utf-8",
+    mode     = "w",
+) as f:
+    f.write(pycode)
