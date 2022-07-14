@@ -60,7 +60,7 @@ La constante ``ALL_LANGS`` est la liste de tous les identifiants des langues sup
 
 python::
     ---
-    file    = config/detextify/langint.py
+    file    = config/textify/langint.py
     extract = yes
     ---
 

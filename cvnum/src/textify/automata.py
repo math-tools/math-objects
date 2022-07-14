@@ -8,7 +8,7 @@
 
 from typing import *
 
-from ..config.detextify import *
+from ..config.textify import *
 
 
 # -------------------------- #

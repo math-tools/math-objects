@@ -1,6 +1,6 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2022-03-12
+    date   = 2022-07-14
     desc   = Names of integers in academic American English.
 
 
@@ -9,6 +9,9 @@ extend::
 
 group::
     3 => thousand
+
+ignore-small::
+    *00
 
 small::
     *** = [d(2)] hundred [d(1)d(0)]

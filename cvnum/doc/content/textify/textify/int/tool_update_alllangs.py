@@ -25,7 +25,7 @@ while(LANG_CONFIG_FILE.name != "cvnum"):
     LANG_CONFIG_FILE = LANG_CONFIG_FILE.parent
 
 LANG_CONFIG_FILE = \
-LANG_CONFIG_FILE / "src" / "config" / "detextify" / "langint.py"
+LANG_CONFIG_FILE / "src" / "config" / "textify" / "langint.py"
 
 
 # ----------------------- #
@@ -101,7 +101,7 @@ txtcontent = f"""
 {before}
 {codefordoc}
 {after}
-""".lstrip()
+""".strip() + "\n"
 
 with LANG_DOC_FILE.open(
     mode     = "w",

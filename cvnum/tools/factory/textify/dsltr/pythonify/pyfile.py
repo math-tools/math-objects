@@ -25,7 +25,9 @@ def addnewlines(n):
 
 LEGAL_CHARS = ascii_letters + digits
 
-def taglang(lang):
+def taglang(mainlang, variant):
+    lang = f"{mainlang}_{variant}"
+
     tag = ""
 
     for c in lang:

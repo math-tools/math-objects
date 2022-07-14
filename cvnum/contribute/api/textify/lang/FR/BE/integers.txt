@@ -1,6 +1,6 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2013-10-16
+    date   = 2022-07-14
     desc   = Names of integers in academic Belgian.
 
 

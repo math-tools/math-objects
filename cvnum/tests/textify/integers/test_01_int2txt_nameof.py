@@ -5,7 +5,9 @@
 # --------------------- #
 
 import json
+import toml
 
+from cbdevtools     import *
 from mistool.os_use import PPath
 
 
@@ -18,50 +20,24 @@ MODULE_DIR = addfindsrc(
     project = 'cvnum',
 )
 
+from src.textify import *
+
 
 # ----------------------- #
 # -- GENERAL CONSTANTS -- #
 # ----------------------- #
 
 THIS_DIR  = PPath(__file__).parent
-DATAS_DIR = THIS_DIR / "datas-lang"
-
-READ_SECTION_CLASS = section.Read
+DATAS_DIR = THIS_DIR / "usecases"
 
 
-# --------------- #
-# -- CLEANINGS -- #
-# --------------- #
+# -------------- #
+# -- USECASES -- #
+# -------------- #
 
-def test_data_read_all():
-    for jsonpath in DATAS_DIR.walk("file::read/**.json"):
-        with jsonpath.open() as f:
-            mode = json.load(f)
+def test_int2txt_usecases_fr_FR():
+    nameof = IntName(fr_FR).nameof
+    assert nameof(0) == 0, "OKI?"
 
-        with jsonpath.with_ext("txt").open(
-            encoding = "utf-8",
-            mode     = "r"
-        ) as f:
-            output = f.read().strip()
-
-        with READ_SECTION_CLASS(
-            content = jsonpath.with_ext("peuf"),
-            mode    = mode
-        ) as data_infos:
-            outputfound = []
-
-            for oneinfo in data_infos:
-                if oneinfo.isblock():
-                    outputfound.append(
-                        'QUERYPATH:{0}'.format(oneinfo.querypath)
-                    )
-                    outputfound.append(
-                        'MODE:{0}'.format(oneinfo.mode)
-                    )
-
-                elif oneinfo.isdata():
-                    outputfound.append('{0}'.format(oneinfo.rtu))
-
-            outputfound = "\n".join(outputfound)
-
-        assert output == outputfound
+def test_int2txt_usecases_AAA():
+    assert 4 == 4, "D'ACC?"

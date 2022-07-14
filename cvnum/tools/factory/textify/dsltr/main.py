@@ -8,6 +8,26 @@ from .pythonify import *
 
 
 # ---------------- #
+# -- RAISING... -- #
+# ---------------- #
+
+def stopall(
+    error_message,
+    shortpathfile,
+    nbline = 0
+):
+    if nbline > 0:
+        extra = f" line {nbline} in "
+    else:
+        extra = " "
+
+    raise Exception(f"""
+look at{extra}file << {shortpathfile} >> :
+{error_message}
+    """.strip())
+
+
+# ---------------- #
 # -- MAIN CLASS -- #
 # ---------------- #
 

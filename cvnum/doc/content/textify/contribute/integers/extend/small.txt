@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-07-09
+    date = 2022-07-14
 
 
 =====================================================
@@ -27,9 +27,6 @@ cvnum::
         7*
         9*
 
-        *1
-        **
-
     small::
         70 = septante
         80 = octante
@@ -40,5 +37,5 @@ cvnum::
 
 
 warning::
-    Dans le code précédent, il faut veiller au principe du "premier arrivé, premier servi", d'où la écessité de définir d'abord les noms de `80`, `70` et `90`.
+    Dans le code précédent, il faut veiller au principe du "premier arrivé, premier servi", d'où la nécessité de définir d'abord les noms de `80`, `70` et `90`.
     De plus, il faut se souvenir que les règles avec des motifs d'une taille donnée sont d'abord testées dans le langage à étendre : ceci implique ici de n'oublier aucune règle à ignorer pour les nombres à deux chiffres !

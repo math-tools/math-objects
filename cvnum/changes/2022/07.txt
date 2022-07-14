@@ -5,6 +5,14 @@
 13
 ==
 
+-------
+:break:
+-------
+
+[[:api:]]
+The module ``detextify`` has been renamed ``textify``, and the folder path::``config/detextify`` has become path::``config/textify``.
+
+
 --------
 :update:
 --------
@@ -18,7 +26,7 @@ Naming integers: the work on the unit tests has shown the following bugs.
     1) Another "stupid" bug fixed: with ``fr_FR``, the integer `5000000000001` was printed "cinq mille milliards zéro million mille un" with an unexpected "zéro million".
 
 
-[[:appi:]]
+[[:api:]]
 Contributions.
 
     1) The folder path::``tools/factory/textify/lang`` has been moved to become path::``contribute/api/textify/lang``.
@@ -31,7 +39,7 @@ The following changes have been made.
 
     1) Folder with the ¨langs supported by the module ``textify``: the new path path::``contribute/api/textify/lang`` has been indicated.
 
-    1) One warning has been added about the very special file path::``FR/FR/usecases/integers/special.txt``.
+    1) One warning has been added about the new special file path::``FR/FR/usecases/integers/special.txt``.
 
 
 --------

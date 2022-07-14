@@ -86,7 +86,7 @@ The new way to work with two bases via ``base2base`` has been documented.
 --------
 
 [[:fix:]]
-Factory: the method ``dsltr.parsers.ParserSmall.__no_spevar_r`` modified a ref-like variable (this implied unwanted changes for all the ``if-else`` rules). Please don't laugh too hard!
+Factory: the method ``dsltr.parsers.ParserSmall.__no_spevar_r`` modified a ref-like variable (this implied unwanted changes for all the ``if-else`` rules). Please don't laugh too loud!
 
 
 // ---------- //
