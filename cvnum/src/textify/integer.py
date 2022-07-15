@@ -76,8 +76,8 @@ class IntName(BaseAutomaton):
                 nb_digits <= self._big_len_max
                ), (
                  "number too big to be named. "
-                "The maximal number of digits is "
-                f"{self._big_len_max}  < {nb_digits}."
+                 "The maximal number of digits is "
+                f"{self._big_len_max} < {nb_digits}."
                )
 
 # Let's go!
@@ -149,10 +149,13 @@ class IntName(BaseAutomaton):
         else:
             sign = ""
 
-        nb = nb.strip()
+        try:
+            nb = str(int(nb))
 
-        assert nb.isdigit(), \
-               f'``nb = "{sign}{nb}"`` is not an integer'
+        except Exception:
+            raise ValueError(
+                f'``str(nb) = "{self._initial_nb}"`` is not an integer'
+            )
 
 # Name of the sign
         if sign:

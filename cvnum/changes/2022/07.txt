@@ -9,7 +9,14 @@
 --------
 
 [[:bugs:]]
+Class ``textify.integer.IntName``: the underscores was not treated by the method ``sign_n_abs``.
+
+
 ¨DSL for translations: the usecases tested have revealed some small bugs in the ¨specs of the ¨lang ``it_IT`` and ``de_DE``.
+
+
+[[:doc:]]
+¨DSL for translations: the block cvnum::``patch`` has been clearly indicated to be used for exceptions in naming.
 
 
 --------
@@ -17,7 +24,11 @@
 --------
 
 [[:api:]]
-Testing the naming of integers: datas for unit tests automatically build from usecases.
+Testing the naming of integers.
+
+    1) Some tests added by hands.
+
+    1) Datas for unit tests automatically build from the usecases in the folder of the contributions.
 
 
 // ---------- //

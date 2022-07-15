@@ -1,19 +1,20 @@
 this::
-    date = 2022-03-12
+    date = 2022-03-15
 
 
-====================================
-Combler brutalement certains manques
-====================================
+===========================================
+Gestion des exceptions, une méthode brutale
+===========================================
 
-Dans certaines situations, le langage de ¨trad ne permet pas de tout gérer. Dans ce cas, l'usage du bloc cvnum::``patch`` sert à indiquer des changements **brutaux** de textes.
-Par exemple, le code ci-dessous demande de remplacer dans la ¨trad "calculée" toute occurence de "cents mille" par "cent mille".
+Certaines langues ont des exceptions de nommage. Dans ce type de situation, il faut faire appel au bloc cvnum::``patch``.
+Par exemple, le code ci-dessous gère les exceptions liées au nom "eins", ¨cad `1` en allemand.
 
 cvnum::
     ---
-    file    = FR/FR/integers.txt
+    file    = DE/DE/integers.txt
     extract = yes
     ---
 
     patch::
-        cents mille = cent mille
+        einsund = einund
+        eins M  = eine M

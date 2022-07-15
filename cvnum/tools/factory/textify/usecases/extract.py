@@ -94,3 +94,18 @@ def usecases_files(
         usecases_paths[lang] = usecases_lang
 
     return usecases_paths, withspecial
+
+
+def nobig_langs(dirlang):
+    langs_nobig = []
+
+    all_langs = langdefs(dirlang)
+
+    for lang, specs in all_langs.items():
+        if not DSL_SPECS_GENE in specs:
+            continue
+
+        if specs[DSL_SPECS_GENE][DSL_TAG_GENE_BIG] is None:
+            langs_nobig.append(lang)
+
+    return langs_nobig

@@ -27,6 +27,7 @@ PYTEST_DIR       = SRC_DIR / "tests" / "textify" / "integers"
 TEST_USECASE_DIR = PYTEST_DIR / "usecases"
 TEST_PYFILE      = PYTEST_DIR / "test_01_int2txt_nameof.py"
 
+
 # ------------------ #
 # -- RULES & DEPS -- #
 # ------------------ #
@@ -38,7 +39,7 @@ RULES_TO_IGNORE, DEPENDENCIES = usecases_deps(DIR_LANG)
 # ! -- DEBUGGING -- ! #
 # print(f"{DEPENDENCIES = }")
 # print()
-# print(f"{RULES_TO_IGNORE['fr_FR'].keys()           = }")
+# print(f"{RULES_TO_IGNORE['fr_FR'] = }")
 # print(f"{RULES_TO_IGNORE['fr_BE'].keys()           = }")
 # print(f"{RULES_TO_IGNORE['fr_FR_chuquet_1'].keys() = }")
 # exit()
@@ -59,17 +60,16 @@ USECASES_PATHS, WITH_SPECIAL = usecases_files(
 # ! -- DEBUGGING -- ! #
 # from pprint import pprint
 # print(f"{WITH_SPECIAL = }")
-# pprint(USECASES["en_GB"])
-# pprint(USECASES["fr_FR"])
+# pprint(USECASES_PATHS["en_GB"])
 # exit()
 # ! -- DEBUGGING -- ! #
 
 
-# --------------------- #
-# -- BUILD THE TESTS -- #
-# --------------------- #
+# -------------------------------- #
+# -- DATAS FOR TESTS - USECASES -- #
+# -------------------------------- #
 
-print("   * Let's build the tests...")
+print("   * Let's build the datas for the tests...")
 
 TAG_SPE     = 'with spe cases and no dep'
 TAG_DEP_NO  = 'no dep'
@@ -105,8 +105,7 @@ for about, langsfound in langs_categos.items():
     for lang in langsfound:
         langs_sorted.append(lang)
 
-        print(
-            f"   * Tests for ``{lang}`` ({about})")
+        print(f"   * Datas for ``{lang}`` ({about})")
 
         buildtests_json(
             lang         = lang,
@@ -114,6 +113,21 @@ for about, langsfound in langs_categos.items():
             usecases     = USECASES_PATHS[lang],
         )
 
+
+# -------------------- #
+# -- "NO BIG" LANGS -- #
+# -------------------- #
+
+print('   * Looking for the langs without any "very big" rules.')
+
+langs_nobig = nobig_langs(DIR_LANG)
+
+
+# ------------------------------------ #
+# -- UPDATE THE PYTHON TESTING FILE -- #
+# ------------------------------------ #
+
+print("   * Updating the source code of the Python testing file.")
 
 with TEST_PYFILE.open(
     encoding = "utf-8",
@@ -123,12 +137,18 @@ with TEST_PYFILE.open(
 
 before, _, after = between(
     text     = pycode,
-    seps     = ['LANGS_SORTED', '# --'],
-    keepseps = True
+    keepseps = True,
+    seps     = [
+        '# -- CONSTANTS "AUTO" - START -- #',
+        '# -- CONSTANTS "AUTO" - END -- #'
+    ],
 )
 
-pycode = f"""{before} = {langs_sorted}
+pycode = f"""{before}
 
+LANGS_SORTED = {langs_sorted}
+
+LANGS_NOBIG = {langs_nobig}
 
 {after}"""
 

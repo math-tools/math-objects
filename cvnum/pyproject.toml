@@ -1,0 +1,19 @@
+[tool.poetry]
+name        = "cvnum"
+version     = "0.0.0"
+description = 'This module is for writing and reading numbers in several formats.'
+readme       = "README.md"
+authors      = ["Christophe BAL"]
+maintainers  = ["Christophe BAL"]
+license      = "GNU License Version 3"
+repository   = "https://github.com/math-tools/math-objects/tree/main/cvnum"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+src2prod = "^0.0.8-beta.0"
+
+[build-system]
+requires      = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -5,6 +5,8 @@
 # --------------------- #
 
 import json
+import pytest
+from   random import randint
 
 from cbdevtools     import *
 from mistool.os_use import PPath
@@ -26,6 +28,23 @@ from src.textify import *
 # -- GENERAL CONSTANTS -- #
 # ----------------------- #
 
+NB_RAND_TESTS = 50
+
+BAD_INPUTS = [
+    '_112345',
+    '112345_',
+    '1+2+3*5',
+]
+
+# -- CONSTANTS "AUTO" - START -- #
+
+LANGS_SORTED = ['fr_FR', 'it_IT', 'de_DE', 'en_GB', 'es_ES', 'en_US', 'fr_BE', 'fr_FR_chuquet_1', 'fr_FR_chuquet_2', 'fr_FR_rowlett', 'fr_FR_tiret']
+
+LANGS_NOBIG = ['fr_FR_chuquet_1', 'fr_FR_chuquet_2', 'fr_FR_rowlett']
+
+# -- CONSTANTS "AUTO" - END -- #
+
+
 THIS_DIR  = PPath(__file__).parent
 DATAS_DIR = THIS_DIR / "usecases"
 
@@ -34,14 +53,98 @@ TAG_TEST_INTEGER = 'integer'
 TAG_TEST_INITIAL = 'initial'
 TAG_TEST_NAME    = 'name'
 
-LANGS_SORTED = ['fr_FR', 'it_IT', 'de_DE', 'en_GB', 'es_ES', 'en_US', 'fr_BE', 'fr_FR_chuquet_1', 'fr_FR_chuquet_2', 'fr_FR_rowlett', 'fr_FR_tiret']
+
+# ------------------------------------ #
+# -- SPACES/UNDERSCORES IGNORED BIG -- #
+# ------------------------------------ #
+
+def test_nameof_spaces_underscores_ignored():
+    for lang in LANGS_SORTED:
+        mynamer = IntName(lang)
+        nameof  = mynamer.nameof
+        maxpos  = 10**(2*mynamer._big_expo_max) - 1
+        minneg  = - maxpos
+
+        for _ in range(NB_RAND_TESTS):
+            randnb          = randint(minneg, maxpos)
+            randnb_polluted = ''
+
+            for c in str(randnb):
+                if (
+                    c != '-'
+                    and
+                    randnb_polluted not in ['', '-']
+                    and
+                    randint(0, 10) <= 7
+                ):
+                    if randint(0, 1) == 0:
+                        randnb_polluted += " "
+
+                    else:
+                        randnb_polluted += "_"
+
+                randnb_polluted += c
+
+            assert nameof(randnb) == nameof(randnb_polluted)
+
+
+# --------------- #
+# -- BAD INPUT -- #
+# --------------- #
+
+def test_nameof_badinput():
+    for lang in LANGS_SORTED:
+        nameof = IntName(lang).nameof
+
+        for badinput in BAD_INPUTS:
+            with pytest.raises(
+                ValueError,
+                match = r".*not an integer.*"
+            ):
+                nameof(badinput)
+
+
+# ------------ #
+# -- BIGGEST -- #
+# ------------ #
+
+def test_nameof_biggest():
+    for lang in LANGS_NOBIG:
+        mynamer = IntName(lang)
+        maxpos  = 10**(2*mynamer._big_expo_max) - 1
+        minneg  = - maxpos
+
+        assert mynamer.nameof(maxpos)
+        assert mynamer.nameof(minneg)
+
+
+# ------------ #
+# -- NO BIG -- #
+# ------------ #
+
+def test_nameof_nobig():
+    for lang in LANGS_NOBIG:
+        mynamer  = IntName(lang)
+        maxpower = mynamer._big_expo_max
+
+        for _ in range(NB_RAND_TESTS):
+            rnd_big = 10**(2*maxpower) + randint(0, 10**6)
+
+            if randint(0, 1) == 0:
+                rnd_big *= -1
+
+            with pytest.raises(
+                AssertionError,
+                match = r".*number too big.*"
+            ):
+                mynamer.nameof(rnd_big)
 
 
 # -------------- #
 # -- USECASES -- #
 # -------------- #
 
-def test_int2txt_usecases():
+def test_nameof_usecases():
     for lang in LANGS_SORTED:
         nameof = IntName(lang).nameof
 
