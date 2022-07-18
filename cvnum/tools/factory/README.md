@@ -13,4 +13,4 @@ The factory needs all the following packages. You can use ``pip`` to install the
 No style of coding
 ==================
 
-The codes used here can be very uggly (here we just want to do speed coding).
+The codes used here can be very ugly (here we just want to do speed coding).

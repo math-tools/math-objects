@@ -9,7 +9,7 @@ from .main import *
 # -- TRANSLATIONS TO BUILD -- #
 # --------------------------- #
 
-def langdefs(dirlang):
+def langdefs(dirlang, verbose = True):
     alltrans = {}
 
     for onepath in dirlang.walk("dir::*"):
@@ -35,7 +35,8 @@ def langdefs(dirlang):
             if onefile.parent.name.startswith("_"):
                 continue
 
-            print(f"   * Working on << {shortpathfile} >>.")
+            if verbose:
+                print(f"   * Working on << {shortpathfile} >>.")
 
             try:
                 with ReadBlock(

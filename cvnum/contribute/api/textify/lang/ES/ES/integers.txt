@@ -1,6 +1,6 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2022-04-01
+    date   = 2022-07-17
     desc   = Names of integers in academic Spanish.
 
 
@@ -45,6 +45,7 @@ small::
     21 = veintiuno
     22 = veintidós
     23 = veintitrés
+    26 = veintiséis 
     2* = veinti[d(0)]
 
     30 = treinta

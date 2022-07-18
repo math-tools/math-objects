@@ -29,8 +29,19 @@ def pythonify(
     # ! -- DEBUGGING -- ! #
 
     alldescs = extracts_desc(alltrans)
+
+    # ! -- DEBUGGING -- ! #
+    # pprint(alltrans['en_US']['small'].keys());exit()
+    # ! -- DEBUGGING -- ! #
+
     alltrans = manage_extend(alltrans)
+
+    # ! -- DEBUGGING -- ! #
+    # pprint(alltrans['en_US']['small'].keys());exit()
+    # ! -- DEBUGGING -- ! #
+
     alltrans = normalize_rules(alltrans)
+
     # ! -- DEBUGGING -- ! #
     # for v in alltrans.values():
     #     pprint(v.get('extend', None))

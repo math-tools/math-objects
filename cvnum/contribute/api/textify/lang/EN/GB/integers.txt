@@ -1,6 +1,6 @@
 this::
     author = Christophe, Bal [projetmbc@gmail.com]
-    date   = 2022-04-01
+    date   = 2022-07-17
     desc   = Names of integers in academic British English.
 
 
@@ -33,7 +33,6 @@ small::
     11 = eleven
     12 = twelve
     13 = thirteen
-    14 = forteen
     15 = fifteen
     18 = eighteen
     1* = [d(0)]teen

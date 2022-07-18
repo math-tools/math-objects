@@ -23,20 +23,12 @@ _REMAINING_KINDS_TO_KEEP = _KINDS_TO_KEEP - set([
 ])
 
 
-def extend_deps(alltrans):
+def sortlangs(alltrans):
     deps = {}
 
     for lang, specs in alltrans.items():
         if DSL_SPECS_EXTEND in specs:
             deps[lang] = specs[DSL_SPECS_EXTEND][DSL_TAG_LANG]
-
-    return deps
-
-
-def manage_extend(alltrans):
-# Chaining extensions
-    deps        = extend_deps(alltrans)
-    sortedlangs = [lang for lang in alltrans if not lang in deps]
 
     # ! -- DEBUGGING -- ! #
     # del deps['fr_BE']
@@ -45,16 +37,17 @@ def manage_extend(alltrans):
     # deps['fr_FR_rowlett']   = 'fr_FR_chuquet_1'
 
     # print(deps)
+    # exit()
     # ! -- DEBUGGING -- ! #
 
-    for lang, langused in deps.items():
-# ``lang`` is used by another language.
-#
+    sortedlangs = [lang for lang in alltrans if not lang in deps]
+
+    for lang, langtoextend in deps.items():
 # Do we have a circular use of languages ?
         if lang in sortedlangs:
             i = sortedlangs.index(lang)
 
-            if langused in sortedlangs[i+1:]:
+            if langtoextend in sortedlangs[i+1:]:
                 circular = []
 
                 while(not lang in circular):
@@ -71,12 +64,12 @@ def manage_extend(alltrans):
                     f"{circular}"
                 )
 
-            if not langused in sortedlangs[:i]:
-                sortedlangs[i:i] = [langused]
+            if not langtoextend in sortedlangs[:i]:
+                sortedlangs[i:i] = [langtoextend]
 
         else:
-            if not langused in sortedlangs:
-                sortedlangs.append(langused)
+            if not langtoextend in sortedlangs:
+                sortedlangs.append(langtoextend)
 
             sortedlangs.append(lang)
 
@@ -85,10 +78,16 @@ def manage_extend(alltrans):
     # exit()
     # ! -- DEBUGGING -- ! #
 
+    return sortedlangs
+
+
+def manage_extend(alltrans):
+# Chaining extensions
+    sortedlangs      = sortlangs(alltrans)
     pyspecs_alltrans = {}
 
     for lang in sortedlangs:
-        specs = alltrans[lang]
+        specs           = alltrans[lang]
         pyspecs_onelang = {}
 
 # Illegal use of IGNORE blocks.
@@ -121,11 +120,13 @@ def manage_extend(alltrans):
             lang_ext = specs[DSL_SPECS_EXTEND][DSL_TAG_LANG]
 
             # ! -- DEBUGGING -- ! #
-            # print (f"alltrans['{lang_ext}']")
-            # pprint(alltrans[lang_ext])
-            # print()
-            # print (f"pyspecs_alltrans['{lang_ext}']")
-            # pprint(pyspecs_alltrans[lang_ext])
+            # if lang_ext == "en_GB":
+            #     print (f"alltrans['{lang_ext}']['small']")
+            #     pprint(alltrans[lang_ext]['small'])
+            #     print()
+            #     print (f"pyspecs_alltrans['{lang_ext}']['small']")
+            #     pprint(pyspecs_alltrans[lang_ext]['small'])
+            #     exit()
             # ! -- DEBUGGING -- ! #
 
 # The rules wanted from the initial lang.
@@ -147,12 +148,33 @@ def manage_extend(alltrans):
 
                     all_rules[k] = v
 
-# We add the rules for the extended lang.
+                # ! -- DEBUGGING -- ! #
+                # if kind == 'small' and lang == "en_US":
+                #     print (f"all_rules for small")
+                #     pprint(all_rules)
+                #     exit()
+                # ! -- DEBUGGING -- ! #
+
+# We add the rules from the extended lang.
                 for k, v in specs.get(kind, {}).items():
                     all_rules[k] = v
 
+                # ! -- DEBUGGING -- ! #
+                # if kind == 'small' and lang == "en_US":
+                #     print (f"all_rules for small")
+                #     pprint(all_rules)
+                #     exit()
+                # ! -- DEBUGGING -- ! #
+
 # We store all the rules.
                 pyspecs_onelang[kind] = all_rules
+
+            # ! -- DEBUGGING -- ! #
+            # if lang == "en_US":
+            #     print (f"pyspecs_onelang['small']")
+            #     pprint(pyspecs_onelang['small'])
+            #     exit()
+            # ! -- DEBUGGING -- ! #
 
 # Let's copy block from the initial lang.
             for kind in _REMAINING_KINDS_TO_KEEP:

@@ -1,0 +1,49 @@
+// bad = good
+
+en_US::
+    hundred and:s: = hundred:s:
+
+
+es_ES::
+    :s:cientos = cientos
+    cientos y  = cientos
+
+fr_FR::
+    dix:s:     = dix-
+
+    dix-quatre = quatorze
+
+    quatre vingt  = quatre-vingt
+    quatre-vingt^ = quatre-vingts
+    vingt:s:      = vingt-
+
+    nte:s: = nte-
+
+    cents et un^ = cents un
+    cents:s:     = cent:s:
+    :s:cent^     = :s:cents
+
+    :s:et un^    = -et-un
+    -et un^      = -et-un
+
+    te-onze = te-et-onze
+
+    :s:ans^ =
+
+
+it_IT::
+    - =
+    ' = :s:
+
+    oo = o
+
+    :s:anni^ =
+
+    atre^    = atré
+    centotré = centotre
+
+    anta:s: = anta
+    ant:s:  = ant
+
+    cento e  = cento
+    cento:s: = cento

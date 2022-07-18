@@ -130,37 +130,3370 @@ DSL_TAG_SIGN_PLUS  = 25  # --> '+'
 INT_2_NAME = {}
 
 
-INT_2_NAME[de_DE] = {14: {23: '.', 21: (__re_compile('Milliarde[^\\s-]*'), '... von Milliarden'), 22: "l2r"}, 15: {3: ((2, (((9,), (((6, 19),), ((7, '1'),))), ((5, ((6, 19),)),), ())), (7, 'tausend'), (5, ((6, 20),))), 6: ((5, ((6, 19),)), (7, ' Million'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 'en'),), ())), (7, ' '), (5, ((6, 20),))), 9: ((5, ((6, 19),)), (7, ' Milliarde'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 'n'),), ())), (7, ' '), (5, ((6, 20),)))}, 16: {'einsund': 'einund', 'eins M': 'eine M'}, 17: {25: 'plus ...', 24: 'minus ...'}, 18: {0: {'0': ((7, 'null'),), '1': ((7, 'eins'),), '2': ((7, 'zwei'),), '3': ((7, 'drei'),), '4': ((7, 'vier'),), '5': ((7, 'fünf'),), '6': ((7, 'sechs'),), '7': ((7, 'sieben'),), '8': ((7, 'acht'),), '9': ((7, 'neun'),), '10': ((7, 'zehn'),), '11': ((7, 'elf'),), '12': ((7, 'zwölf'),), '16': ((7, 'sechzehn'),), '17': ((7, 'siebzehn'),), '20': ((7, 'zwanzig'),), '30': ((7, 'dreißig'),), '60': ((7, 'sechzig'),), '70': ((7, 'siebzig'),), '100': ((7, 'hundert'),)}, 3: {2: OrderedDict([(__re_compile('1.'), ((4, ((1, (0, 0)),)), (7, 'zehn'))), (__re_compile('.0'), ((4, ((1, (1, 1)),)), (7, 'zig'))), (__re_compile('..'), ((4, ((1, (0, 0)),)), (7, 'und'), (4, ((1, (1, 1)), (7, '0')))))]), 3: OrderedDict([(__re_compile('.00'), ((4, ((1, (2, 2)),)), (7, 'hundert'))), (__re_compile('...'), ((4, ((1, (2, 2)), (7, '00'))), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
-            
+INT_2_NAME[de_DE] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("Milliarde[^\\s-]*"), "... von Milliarden"),
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "tausend"),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " Million"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "en"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " Milliarde"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "n"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {"einsund": "einund", "eins M": "eine M"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "minus ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "null"),),
+            "1": ((DSL_ACTION_VERBATIM, "eins"),),
+            "2": ((DSL_ACTION_VERBATIM, "zwei"),),
+            "3": ((DSL_ACTION_VERBATIM, "drei"),),
+            "4": ((DSL_ACTION_VERBATIM, "vier"),),
+            "5": ((DSL_ACTION_VERBATIM, "fünf"),),
+            "6": ((DSL_ACTION_VERBATIM, "sechs"),),
+            "7": ((DSL_ACTION_VERBATIM, "sieben"),),
+            "8": ((DSL_ACTION_VERBATIM, "acht"),),
+            "9": ((DSL_ACTION_VERBATIM, "neun"),),
+            "10": ((DSL_ACTION_VERBATIM, "zehn"),),
+            "11": ((DSL_ACTION_VERBATIM, "elf"),),
+            "12": ((DSL_ACTION_VERBATIM, "zwölf"),),
+            "16": ((DSL_ACTION_VERBATIM, "sechzehn"),),
+            "17": ((DSL_ACTION_VERBATIM, "siebzehn"),),
+            "20": ((DSL_ACTION_VERBATIM, "zwanzig"),),
+            "30": ((DSL_ACTION_VERBATIM, "dreißig"),),
+            "60": ((DSL_ACTION_VERBATIM, "sechzig"),),
+            "70": ((DSL_ACTION_VERBATIM, "siebzig"),),
+            "100": ((DSL_ACTION_VERBATIM, "hundert"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("1."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "zehn"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".0"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "zig"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "und"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "hundert"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),
+                                    (DSL_ACTION_VERBATIM, "00"),
+                                ),
+                            ),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
 
-INT_2_NAME[en_GB] = {14: {23: ',', 21: (__re_compile('billion'), '... of billion'), 22: "l2r"}, 15: {3: ((5, ((6, 19),)), (7, ' thousand '), (2, (((11, 11), (((7, '0'),), ((6, 20),), ((7, '100'),))), ((7, 'and'),), ())), (7, ' '), (5, ((6, 20),))), 6: ((5, ((6, 19),)), (7, ' million '), (5, ((6, 20),))), 9: ((5, ((6, 19),)), (7, ' billion '), (5, ((6, 20),)))}, 16: {}, 17: {25: 'plus ...', 24: 'minus ...'}, 18: {0: {'0': ((7, 'zero'),), '1': ((7, 'one'),), '2': ((7, 'two'),), '3': ((7, 'three'),), '4': ((7, 'four'),), '5': ((7, 'five'),), '6': ((7, 'six'),), '7': ((7, 'seven'),), '8': ((7, 'eight'),), '9': ((7, 'nine'),), '10': ((7, 'ten'),), '11': ((7, 'eleven'),), '12': ((7, 'twelve'),), '13': ((7, 'thirteen'),), '14': ((7, 'forteen'),), '15': ((7, 'fifteen'),), '18': ((7, 'eighteen'),), '20': ((7, 'twenty'),), '30': ((7, 'thirty'),), '40': ((7, 'forty'),), '50': ((7, 'fifty'),), '80': ((7, 'eighty'),)}, 3: {2: OrderedDict([(__re_compile('1.'), ((4, ((1, (0, 0)),)), (7, 'teen'))), (__re_compile('.0'), ((4, ((1, (1, 1)),)), (7, 'ty'))), (__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (7, "-"), (4, ((1, (0, 0)),))))]), 3: OrderedDict([(__re_compile('.00'), ((4, ((1, (2, 2)),)), (7, ' hundred'))), (__re_compile('...'), ((4, ((1, (2, 2)),)), (7, ' hundred and '), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
-            
 
-INT_2_NAME[en_US] = {14: {23: ',', 21: (__re_compile('billion'), '... of billion'), 22: "l2r"}, 15: {3: ((5, ((6, 19),)), (7, ' thousand '), (5, ((6, 20),))), 6: ((5, ((6, 19),)), (7, ' million '), (5, ((6, 20),))), 9: ((5, ((6, 19),)), (7, ' billion '), (5, ((6, 20),)))}, 16: {}, 17: {25: 'plus ...', 24: 'minus ...'}, 18: {0: {'0': ((7, 'zero'),), '1': ((7, 'one'),), '2': ((7, 'two'),), '3': ((7, 'three'),), '4': ((7, 'four'),), '5': ((7, 'five'),), '6': ((7, 'six'),), '7': ((7, 'seven'),), '8': ((7, 'eight'),), '9': ((7, 'nine'),), '10': ((7, 'ten'),), '11': ((7, 'eleven'),), '12': ((7, 'twelve'),), '13': ((7, 'thirteen'),), '14': ((7, 'forteen'),), '15': ((7, 'fifteen'),), '18': ((7, 'eighteen'),), '20': ((7, 'twenty'),), '30': ((7, 'thirty'),), '40': ((7, 'forty'),), '50': ((7, 'fifty'),), '80': ((7, 'eighty'),)}, 3: {2: OrderedDict([(__re_compile('1.'), ((4, ((1, (0, 0)),)), (7, 'teen'))), (__re_compile('.0'), ((4, ((1, (1, 1)),)), (7, 'ty'))), (__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (7, "-"), (4, ((1, (0, 0)),))))]), 3: OrderedDict([(__re_compile('...'), ((4, ((1, (2, 2)),)), (7, ' hundred '), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
-            
+INT_2_NAME[en_GB] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ",",
+        DSL_TAG_GENE_BIG: (__re_compile("billion"), "... of billion"),
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " thousand "),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_LOWER, DSL_COMPOPE_LOWER),
+                        (
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                            ((DSL_ACTION_VERBATIM, "100"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "and"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " million "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " billion "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "minus ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zero"),),
+            "1": ((DSL_ACTION_VERBATIM, "one"),),
+            "2": ((DSL_ACTION_VERBATIM, "two"),),
+            "3": ((DSL_ACTION_VERBATIM, "three"),),
+            "4": ((DSL_ACTION_VERBATIM, "four"),),
+            "5": ((DSL_ACTION_VERBATIM, "five"),),
+            "6": ((DSL_ACTION_VERBATIM, "six"),),
+            "7": ((DSL_ACTION_VERBATIM, "seven"),),
+            "8": ((DSL_ACTION_VERBATIM, "eight"),),
+            "9": ((DSL_ACTION_VERBATIM, "nine"),),
+            "10": ((DSL_ACTION_VERBATIM, "ten"),),
+            "11": ((DSL_ACTION_VERBATIM, "eleven"),),
+            "12": ((DSL_ACTION_VERBATIM, "twelve"),),
+            "13": ((DSL_ACTION_VERBATIM, "thirteen"),),
+            "15": ((DSL_ACTION_VERBATIM, "fifteen"),),
+            "18": ((DSL_ACTION_VERBATIM, "eighteen"),),
+            "20": ((DSL_ACTION_VERBATIM, "twenty"),),
+            "30": ((DSL_ACTION_VERBATIM, "thirty"),),
+            "40": ((DSL_ACTION_VERBATIM, "forty"),),
+            "50": ((DSL_ACTION_VERBATIM, "fifty"),),
+            "80": ((DSL_ACTION_VERBATIM, "eighty"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("1."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "teen"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".0"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "ty"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, " hundred"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, " hundred and "),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
 
-INT_2_NAME[es_ES] = {14: {23: '.', 21: (__re_compile('mill[^\\s-]*'), '... de millones'), 22: "l2r"}, 15: {3: ((2, (((9,), (((6, 19),), ((7, '1'),))), ((5, ((6, 19),)),), ())), (7, ' mil '), (5, ((6, 20),))), 6: ((2, (((8,), (((6, 19),), ((7, '1'),))), ((7, 'un'),), ((5, ((6, 19),)),))), (7, ' mill'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 'ones'),), ((7, 'ón'),))), (7, ' '), (5, ((6, 20),)))}, 16: {}, 17: {25: 'más ...', 24: 'menos ...'}, 18: {0: {'0': ((7, 'cero'),), '1': ((7, 'uno'),), '2': ((7, 'dos'),), '3': ((7, 'tres'),), '4': ((7, 'cuatro'),), '5': ((7, 'cinco'),), '6': ((7, 'seis'),), '7': ((7, 'siete'),), '8': ((7, 'ocho'),), '9': ((7, 'nueve'),), '10': ((7, 'diez'),), '11': ((7, 'once'),), '12': ((7, 'doce'),), '13': ((7, 'trece'),), '14': ((7, 'catorce'),), '15': ((7, 'quince'),), '16': ((7, 'dieciséis'),), '20': ((7, 'veinte'),), '21': ((7, 'veintiuno'),), '22': ((7, 'veintidós'),), '23': ((7, 'veintitrés'),), '30': ((7, 'treinta'),), '40': ((7, 'cuarenta'),), '50': ((7, 'cincuenta'),), '60': ((7, 'sesenta'),), '70': ((7, 'setenta'),), '80': ((7, 'ochenta'),), '90': ((7, 'noventa'),), '100': ((7, 'ciento'),), '500': ((7, 'quinientos'),), '700': ((7, 'setecientos'),), '900': ((7, 'novecientos'),)}, 3: {2: OrderedDict([(__re_compile('1.'), ((7, 'dieci'), (4, ((1, (0, 0)),)))), (__re_compile('2.'), ((7, 'veinti'), (4, ((1, (0, 0)),)))), (__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (7, ' y '), (4, ((1, (0, 0)),))))]), 3: OrderedDict([(__re_compile('.00'), ((4, ((1, (2, 2)),)), (7, 'cientos'))), (__re_compile('...'), ((4, ((1, (2, 2)), (7, '00'))), (7, ' '), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
-            
 
-INT_2_NAME[fr_BE] = {14: {23: '.', 21: (__re_compile('milliard[^\\s-]*'), '... de milliards'), 22: "l2r"}, 15: {3: ((2, (((9,), (((6, 19),), ((7, '1'),))), ((5, ((6, 19),)),), ())), (7, ' mille '), (5, ((6, 20),))), 6: ((5, ((6, 19),)), (7, ' million'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 9: ((5, ((6, 19),)), (7, ' '), (2, (((8,), (((1, (0, 5)),), ((7, '0'),))), ((7, 'de'),), ())), (7, ' milliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),)))}, 16: {'cents mille': 'cent mille'}, 17: {25: 'plus ...', 24: 'moins ...'}, 18: {0: {'0': ((7, 'zéro'),), '1': ((7, 'un'),), '2': ((7, 'deux'),), '3': ((7, 'trois'),), '4': ((7, 'quatre'),), '5': ((7, 'cinq'),), '6': ((7, 'six'),), '7': ((7, 'sept'),), '8': ((7, 'huit'),), '9': ((7, 'neuf'),), '10': ((7, 'dix'),), '11': ((7, 'onze'),), '12': ((7, 'douze'),), '13': ((7, 'treize'),), '14': ((7, 'quatorze'),), '15': ((7, 'quinze'),), '16': ((7, 'seize'),), '20': ((7, 'vingt'),), '30': ((7, 'trente'),), '40': ((7, 'quarante'),), '50': ((7, 'cinquante'),), '60': ((7, 'soixante'),), '100': ((7, 'cent'),), '70': ((7, 'septante'),), '80': ((7, 'octante'),), '90': ((7, 'nonante'),)}, 3: {3: OrderedDict([(__re_compile('.00'), ((4, ((1, (2, 2)),)), (7, ' cents'))), (__re_compile('...'), ((2, (((9,), (((1, (2, 2)),), ((7, '1'),))), ((4, ((1, (2, 2)),)),), ())), (7, ' cent '), (4, ((1, (1, 1)), (1, (0, 0))))))]), 2: OrderedDict([(__re_compile('.1'), ((4, ((1, (1, 1)), (7, '0'))), (7, '-et-un'))), (__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (7, "-"), (4, ((1, (0, 0)),))))])}}}
-            
+INT_2_NAME[en_US] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ",",
+        DSL_TAG_GENE_BIG: (__re_compile("billion"), "... of billion"),
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " thousand "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " million "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " billion "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "minus ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zero"),),
+            "1": ((DSL_ACTION_VERBATIM, "one"),),
+            "2": ((DSL_ACTION_VERBATIM, "two"),),
+            "3": ((DSL_ACTION_VERBATIM, "three"),),
+            "4": ((DSL_ACTION_VERBATIM, "four"),),
+            "5": ((DSL_ACTION_VERBATIM, "five"),),
+            "6": ((DSL_ACTION_VERBATIM, "six"),),
+            "7": ((DSL_ACTION_VERBATIM, "seven"),),
+            "8": ((DSL_ACTION_VERBATIM, "eight"),),
+            "9": ((DSL_ACTION_VERBATIM, "nine"),),
+            "10": ((DSL_ACTION_VERBATIM, "ten"),),
+            "11": ((DSL_ACTION_VERBATIM, "eleven"),),
+            "12": ((DSL_ACTION_VERBATIM, "twelve"),),
+            "13": ((DSL_ACTION_VERBATIM, "thirteen"),),
+            "15": ((DSL_ACTION_VERBATIM, "fifteen"),),
+            "18": ((DSL_ACTION_VERBATIM, "eighteen"),),
+            "20": ((DSL_ACTION_VERBATIM, "twenty"),),
+            "30": ((DSL_ACTION_VERBATIM, "thirty"),),
+            "40": ((DSL_ACTION_VERBATIM, "forty"),),
+            "50": ((DSL_ACTION_VERBATIM, "fifty"),),
+            "80": ((DSL_ACTION_VERBATIM, "eighty"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("1."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "teen"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".0"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "ty"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, " hundred"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, " hundred "),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
 
-INT_2_NAME[fr_FR] = {14: {23: '.', 21: (__re_compile('milliard[^\\s-]*'), '... de milliards'), 22: "l2r"}, 15: {3: ((2, (((9,), (((6, 19),), ((7, '1'),))), ((5, ((6, 19),)),), ())), (7, ' mille '), (5, ((6, 20),))), 6: ((5, ((6, 19),)), (7, ' million'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 9: ((5, ((6, 19),)), (7, ' '), (2, (((8,), (((1, (0, 5)),), ((7, '0'),))), ((7, 'de'),), ())), (7, ' milliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),)))}, 16: {'cents mille': 'cent mille'}, 17: {25: 'plus ...', 24: 'moins ...'}, 18: {0: {'0': ((7, 'zéro'),), '1': ((7, 'un'),), '2': ((7, 'deux'),), '3': ((7, 'trois'),), '4': ((7, 'quatre'),), '5': ((7, 'cinq'),), '6': ((7, 'six'),), '7': ((7, 'sept'),), '8': ((7, 'huit'),), '9': ((7, 'neuf'),), '10': ((7, 'dix'),), '11': ((7, 'onze'),), '12': ((7, 'douze'),), '13': ((7, 'treize'),), '14': ((7, 'quatorze'),), '15': ((7, 'quinze'),), '16': ((7, 'seize'),), '20': ((7, 'vingt'),), '30': ((7, 'trente'),), '40': ((7, 'quarante'),), '50': ((7, 'cinquante'),), '60': ((7, 'soixante'),), '80': ((7, 'quatre-vingts'),), '71': ((7, 'soixante-et-onze'),), '100': ((7, 'cent'),)}, 3: {2: OrderedDict([(__re_compile('8.'), ((7, 'quatre-vingt-'), (4, ((1, (0, 0)),)))), (__re_compile('7.'), ((7, 'soixante-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('9.'), ((7, 'quatre-vingt-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('.1'), ((4, ((1, (1, 1)), (7, '0'))), (7, '-et-un'))), (__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (7, "-"), (4, ((1, (0, 0)),))))]), 3: OrderedDict([(__re_compile('.00'), ((4, ((1, (2, 2)),)), (7, ' cents'))), (__re_compile('...'), ((2, (((9,), (((1, (2, 2)),), ((7, '1'),))), ((4, ((1, (2, 2)),)),), ())), (7, ' cent '), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
-            
 
-INT_2_NAME[fr_FR_chuquet_1] = {14: {23: '.', 21: None, 22: "l2r"}, 15: {3: ((2, (((9,), (((6, 19),), ((7, '1'),))), ((5, ((6, 19),)),), ())), (7, ' mille '), (5, ((6, 20),))), 6: ((5, ((6, 19),)), (7, ' million'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 12: ((5, ((6, 19),)), (7, ' billion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 18: ((5, ((6, 19),)), (7, ' trillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 24: ((5, ((6, 19),)), (7, ' quadrillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 30: ((5, ((6, 19),)), (7, ' quintillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 36: ((5, ((6, 19),)), (7, ' sextillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 42: ((5, ((6, 19),)), (7, ' septillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 48: ((5, ((6, 19),)), (7, ' octillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 54: ((5, ((6, 19),)), (7, ' nonillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 60: ((5, ((6, 19),)), (7, ' decillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),)))}, 16: {'cents mille': 'cent mille'}, 17: {25: 'plus ...', 24: 'moins ...'}, 18: {0: {'0': ((7, 'zéro'),), '1': ((7, 'un'),), '2': ((7, 'deux'),), '3': ((7, 'trois'),), '4': ((7, 'quatre'),), '5': ((7, 'cinq'),), '6': ((7, 'six'),), '7': ((7, 'sept'),), '8': ((7, 'huit'),), '9': ((7, 'neuf'),), '10': ((7, 'dix'),), '11': ((7, 'onze'),), '12': ((7, 'douze'),), '13': ((7, 'treize'),), '14': ((7, 'quatorze'),), '15': ((7, 'quinze'),), '16': ((7, 'seize'),), '20': ((7, 'vingt'),), '30': ((7, 'trente'),), '40': ((7, 'quarante'),), '50': ((7, 'cinquante'),), '60': ((7, 'soixante'),), '80': ((7, 'quatre-vingts'),), '71': ((7, 'soixante-et-onze'),), '100': ((7, 'cent'),)}, 3: {2: OrderedDict([(__re_compile('8.'), ((7, 'quatre-vingt-'), (4, ((1, (0, 0)),)))), (__re_compile('7.'), ((7, 'soixante-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('9.'), ((7, 'quatre-vingt-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('.1'), ((4, ((1, (1, 1)), (7, '0'))), (7, '-et-un'))), (__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (7, "-"), (4, ((1, (0, 0)),))))]), 3: OrderedDict([(__re_compile('.00'), ((4, ((1, (2, 2)),)), (7, ' cents'))), (__re_compile('...'), ((2, (((9,), (((1, (2, 2)),), ((7, '1'),))), ((4, ((1, (2, 2)),)),), ())), (7, ' cent '), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
-            
+INT_2_NAME[es_ES] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("mill[^\\s-]*"), "... de millones"),
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " mil "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "un"),),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " mill"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "ones"),),
+                    ((DSL_ACTION_VERBATIM, "ón"),),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "más ...", DSL_TAG_SIGN_MINUS: "menos ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "cero"),),
+            "1": ((DSL_ACTION_VERBATIM, "uno"),),
+            "2": ((DSL_ACTION_VERBATIM, "dos"),),
+            "3": ((DSL_ACTION_VERBATIM, "tres"),),
+            "4": ((DSL_ACTION_VERBATIM, "cuatro"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinco"),),
+            "6": ((DSL_ACTION_VERBATIM, "seis"),),
+            "7": ((DSL_ACTION_VERBATIM, "siete"),),
+            "8": ((DSL_ACTION_VERBATIM, "ocho"),),
+            "9": ((DSL_ACTION_VERBATIM, "nueve"),),
+            "10": ((DSL_ACTION_VERBATIM, "diez"),),
+            "11": ((DSL_ACTION_VERBATIM, "once"),),
+            "12": ((DSL_ACTION_VERBATIM, "doce"),),
+            "13": ((DSL_ACTION_VERBATIM, "trece"),),
+            "14": ((DSL_ACTION_VERBATIM, "catorce"),),
+            "15": ((DSL_ACTION_VERBATIM, "quince"),),
+            "16": ((DSL_ACTION_VERBATIM, "dieciséis"),),
+            "20": ((DSL_ACTION_VERBATIM, "veinte"),),
+            "21": ((DSL_ACTION_VERBATIM, "veintiuno"),),
+            "22": ((DSL_ACTION_VERBATIM, "veintidós"),),
+            "23": ((DSL_ACTION_VERBATIM, "veintitrés"),),
+            "26": ((DSL_ACTION_VERBATIM, "veintiséis"),),
+            "30": ((DSL_ACTION_VERBATIM, "treinta"),),
+            "40": ((DSL_ACTION_VERBATIM, "cuarenta"),),
+            "50": ((DSL_ACTION_VERBATIM, "cincuenta"),),
+            "60": ((DSL_ACTION_VERBATIM, "sesenta"),),
+            "70": ((DSL_ACTION_VERBATIM, "setenta"),),
+            "80": ((DSL_ACTION_VERBATIM, "ochenta"),),
+            "90": ((DSL_ACTION_VERBATIM, "noventa"),),
+            "100": ((DSL_ACTION_VERBATIM, "ciento"),),
+            "500": ((DSL_ACTION_VERBATIM, "quinientos"),),
+            "700": ((DSL_ACTION_VERBATIM, "setecientos"),),
+            "900": ((DSL_ACTION_VERBATIM, "novecientos"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("1."),
+                        (
+                            (DSL_ACTION_VERBATIM, "dieci"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("2."),
+                        (
+                            (DSL_ACTION_VERBATIM, "veinti"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, " y "),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "cientos"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),
+                                    (DSL_ACTION_VERBATIM, "00"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, " "),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
 
-INT_2_NAME[fr_FR_chuquet_2] = {14: {23: '.', 21: None, 22: "l2r"}, 15: {3: ((2, (((9,), (((6, 19),), ((7, '1'),))), ((5, ((6, 19),)),), ())), (7, ' mille '), (5, ((6, 20),))), 6: ((5, ((6, 19),)), (7, ' million'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 9: ((5, ((6, 19),)), (7, ' '), (2, (((8,), (((1, (0, 5)),), ((7, '0'),))), ((7, 'de'),), ())), (7, ' milliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 12: ((5, ((6, 19),)), (7, ' billion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 15: ((5, ((6, 19),)), (7, ' billiard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 18: ((5, ((6, 19),)), (7, ' trillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 21: ((5, ((6, 19),)), (7, ' trilliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 24: ((5, ((6, 19),)), (7, ' quadrillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 27: ((5, ((6, 19),)), (7, ' quadrilliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 30: ((5, ((6, 19),)), (7, ' quintillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 33: ((5, ((6, 19),)), (7, ' quintilliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 36: ((5, ((6, 19),)), (7, ' sextillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 39: ((5, ((6, 19),)), (7, ' sextilliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 42: ((5, ((6, 19),)), (7, ' septillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 45: ((5, ((6, 19),)), (7, ' septilliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 48: ((5, ((6, 19),)), (7, ' octillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 51: ((5, ((6, 19),)), (7, ' octilliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 54: ((5, ((6, 19),)), (7, ' nonillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 57: ((5, ((6, 19),)), (7, ' nonilliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 60: ((5, ((6, 19),)), (7, ' decillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 63: ((5, ((6, 19),)), (7, ' decilliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),)))}, 16: {'cents mille': 'cent mille'}, 17: {25: 'plus ...', 24: 'moins ...'}, 18: {0: {'0': ((7, 'zéro'),), '1': ((7, 'un'),), '2': ((7, 'deux'),), '3': ((7, 'trois'),), '4': ((7, 'quatre'),), '5': ((7, 'cinq'),), '6': ((7, 'six'),), '7': ((7, 'sept'),), '8': ((7, 'huit'),), '9': ((7, 'neuf'),), '10': ((7, 'dix'),), '11': ((7, 'onze'),), '12': ((7, 'douze'),), '13': ((7, 'treize'),), '14': ((7, 'quatorze'),), '15': ((7, 'quinze'),), '16': ((7, 'seize'),), '20': ((7, 'vingt'),), '30': ((7, 'trente'),), '40': ((7, 'quarante'),), '50': ((7, 'cinquante'),), '60': ((7, 'soixante'),), '80': ((7, 'quatre-vingts'),), '71': ((7, 'soixante-et-onze'),), '100': ((7, 'cent'),)}, 3: {2: OrderedDict([(__re_compile('8.'), ((7, 'quatre-vingt-'), (4, ((1, (0, 0)),)))), (__re_compile('7.'), ((7, 'soixante-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('9.'), ((7, 'quatre-vingt-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('.1'), ((4, ((1, (1, 1)), (7, '0'))), (7, '-et-un'))), (__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (7, "-"), (4, ((1, (0, 0)),))))]), 3: OrderedDict([(__re_compile('.00'), ((4, ((1, (2, 2)),)), (7, ' cents'))), (__re_compile('...'), ((2, (((9,), (((1, (2, 2)),), ((7, '1'),))), ((4, ((1, (2, 2)),)),), ())), (7, ' cent '), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
-            
 
-INT_2_NAME[fr_FR_rowlett] = {14: {23: '.', 21: None, 22: "l2r"}, 15: {3: ((2, (((9,), (((6, 19),), ((7, '1'),))), ((5, ((6, 19),)),), ())), (7, ' mille '), (5, ((6, 20),))), 6: ((5, ((6, 19),)), (7, ' million'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 9: ((5, ((6, 19),)), (7, ' '), (2, (((8,), (((1, (0, 5)),), ((7, '0'),))), ((7, 'de'),), ())), (7, ' milliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 12: ((5, ((6, 19),)), (7, ' tetrillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 15: ((5, ((6, 19),)), (7, ' pentillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 18: ((5, ((6, 19),)), (7, ' hexillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 21: ((5, ((6, 19),)), (7, ' eptillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 24: ((5, ((6, 19),)), (7, ' oktillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 27: ((5, ((6, 19),)), (7, ' ennillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 30: ((5, ((6, 19),)), (7, ' dekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 33: ((5, ((6, 19),)), (7, ' hendekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 36: ((5, ((6, 19),)), (7, ' dodekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 39: ((5, ((6, 19),)), (7, ' trisdekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 42: ((5, ((6, 19),)), (7, ' tetradekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 45: ((5, ((6, 19),)), (7, ' pentadekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 48: ((5, ((6, 19),)), (7, ' hexadekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 51: ((5, ((6, 19),)), (7, ' heptadekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 54: ((5, ((6, 19),)), (7, ' oktadekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 57: ((5, ((6, 19),)), (7, ' enneadekillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 60: ((5, ((6, 19),)), (7, ' icosillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 63: ((5, ((6, 19),)), (7, ' icosihenillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 66: ((5, ((6, 19),)), (7, ' icosidillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 69: ((5, ((6, 19),)), (7, ' icositrillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 72: ((5, ((6, 19),)), (7, ' icositetrillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 75: ((5, ((6, 19),)), (7, ' icosipentillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 78: ((5, ((6, 19),)), (7, ' icosihexillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 81: ((5, ((6, 19),)), (7, ' icosiheptillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 84: ((5, ((6, 19),)), (7, ' icosioktillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 87: ((5, ((6, 19),)), (7, ' icosiennillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),))), 90: ((5, ((6, 19),)), (7, ' triacontillion'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (7, ' '), (5, ((6, 20),)))}, 16: {'cents mille': 'cent mille'}, 17: {25: 'plus ...', 24: 'moins ...'}, 18: {0: {'0': ((7, 'zéro'),), '1': ((7, 'un'),), '2': ((7, 'deux'),), '3': ((7, 'trois'),), '4': ((7, 'quatre'),), '5': ((7, 'cinq'),), '6': ((7, 'six'),), '7': ((7, 'sept'),), '8': ((7, 'huit'),), '9': ((7, 'neuf'),), '10': ((7, 'dix'),), '11': ((7, 'onze'),), '12': ((7, 'douze'),), '13': ((7, 'treize'),), '14': ((7, 'quatorze'),), '15': ((7, 'quinze'),), '16': ((7, 'seize'),), '20': ((7, 'vingt'),), '30': ((7, 'trente'),), '40': ((7, 'quarante'),), '50': ((7, 'cinquante'),), '60': ((7, 'soixante'),), '80': ((7, 'quatre-vingts'),), '71': ((7, 'soixante-et-onze'),), '100': ((7, 'cent'),)}, 3: {2: OrderedDict([(__re_compile('8.'), ((7, 'quatre-vingt-'), (4, ((1, (0, 0)),)))), (__re_compile('7.'), ((7, 'soixante-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('9.'), ((7, 'quatre-vingt-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('.1'), ((4, ((1, (1, 1)), (7, '0'))), (7, '-et-un'))), (__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (7, "-"), (4, ((1, (0, 0)),))))]), 3: OrderedDict([(__re_compile('.00'), ((4, ((1, (2, 2)),)), (7, ' cents'))), (__re_compile('...'), ((2, (((9,), (((1, (2, 2)),), ((7, '1'),))), ((4, ((1, (2, 2)),)),), ())), (7, ' cent '), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
-            
+INT_2_NAME[fr_BE] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("milliard[^\\s-]*"), "... de milliards"),
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " mille "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " million"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " "),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 5)),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "de"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " milliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {"cents mille": "cent mille"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zéro"),),
+            "1": ((DSL_ACTION_VERBATIM, "un"),),
+            "2": ((DSL_ACTION_VERBATIM, "deux"),),
+            "3": ((DSL_ACTION_VERBATIM, "trois"),),
+            "4": ((DSL_ACTION_VERBATIM, "quatre"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinq"),),
+            "6": ((DSL_ACTION_VERBATIM, "six"),),
+            "7": ((DSL_ACTION_VERBATIM, "sept"),),
+            "8": ((DSL_ACTION_VERBATIM, "huit"),),
+            "9": ((DSL_ACTION_VERBATIM, "neuf"),),
+            "10": ((DSL_ACTION_VERBATIM, "dix"),),
+            "11": ((DSL_ACTION_VERBATIM, "onze"),),
+            "12": ((DSL_ACTION_VERBATIM, "douze"),),
+            "13": ((DSL_ACTION_VERBATIM, "treize"),),
+            "14": ((DSL_ACTION_VERBATIM, "quatorze"),),
+            "15": ((DSL_ACTION_VERBATIM, "quinze"),),
+            "16": ((DSL_ACTION_VERBATIM, "seize"),),
+            "20": ((DSL_ACTION_VERBATIM, "vingt"),),
+            "30": ((DSL_ACTION_VERBATIM, "trente"),),
+            "40": ((DSL_ACTION_VERBATIM, "quarante"),),
+            "50": ((DSL_ACTION_VERBATIM, "cinquante"),),
+            "60": ((DSL_ACTION_VERBATIM, "soixante"),),
+            "100": ((DSL_ACTION_VERBATIM, "cent"),),
+            "70": ((DSL_ACTION_VERBATIM, "septante"),),
+            "80": ((DSL_ACTION_VERBATIM, "octante"),),
+            "90": ((DSL_ACTION_VERBATIM, "nonante"),),
+        },
+        DSL_ACTION_MATCHING: {
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cents"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_IF_ELSE,
+                                (
+                                    (
+                                        (DSL_COMPOPE_GREATER,),
+                                        (
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                            ((DSL_ACTION_VERBATIM, "1"),),
+                                        ),
+                                    ),
+                                    (
+                                        (
+                                            DSL_ACTION_NAME_IT,
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                        ),
+                                    ),
+                                    (),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cent "),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile(".1"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-et-un"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
 
-INT_2_NAME[fr_FR_tiret] = {14: {23: '.', 21: (__re_compile('milliard[^\\s-]*'), '...-de-milliards'), 22: "l2r"}, 15: {3: ((2, (((9,), (((6, 19),), ((7, '1'),))), ((5, ((6, 19),)), (7, "-")), ())), (7, 'mille'), (2, (((9,), (((6, 20),), ((7, '0'),))), ((7, "-"), (5, ((6, 20),))), ()))), 6: ((2, (((9,), (((6, 19),), ((7, '0'),))), ((5, ((6, 19),)), (7, "-")), ())), (7, 'million'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (2, (((9,), (((6, 20),), ((7, '0'),))), ((7, "-"), (5, ((6, 20),))), ()))), 9: ((2, (((9,), (((6, 19),), ((7, '0'),))), ((5, ((6, 19),)), (7, "-")), ())), (2, (((8,), (((1, (0, 5)),), ((7, '0'),))), ((7, 'de-'),), ())), (7, 'milliard'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 's'),), ())), (2, (((9,), (((6, 20),), ((7, '0'),))), ((7, "-"), (5, ((6, 20),))), ())))}, 16: {'cents-mille': 'cent-mille'}, 17: {25: 'plus-...', 24: 'moins-...'}, 18: {0: {'0': ((7, 'zéro'),), '1': ((7, 'un'),), '2': ((7, 'deux'),), '3': ((7, 'trois'),), '4': ((7, 'quatre'),), '5': ((7, 'cinq'),), '6': ((7, 'six'),), '7': ((7, 'sept'),), '8': ((7, 'huit'),), '9': ((7, 'neuf'),), '10': ((7, 'dix'),), '11': ((7, 'onze'),), '12': ((7, 'douze'),), '13': ((7, 'treize'),), '14': ((7, 'quatorze'),), '15': ((7, 'quinze'),), '16': ((7, 'seize'),), '20': ((7, 'vingt'),), '30': ((7, 'trente'),), '40': ((7, 'quarante'),), '50': ((7, 'cinquante'),), '60': ((7, 'soixante'),), '80': ((7, 'quatre-vingts'),), '71': ((7, 'soixante-et-onze'),), '100': ((7, 'cent'),)}, 3: {2: OrderedDict([(__re_compile('8.'), ((7, 'quatre-vingt-'), (4, ((1, (0, 0)),)))), (__re_compile('7.'), ((7, 'soixante-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('9.'), ((7, 'quatre-vingt-'), (4, ((7, '1'), (1, (0, 0)))))), (__re_compile('.1'), ((4, ((1, (1, 1)), (7, '0'))), (7, '-et-un'))), (__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (7, "-"), (4, ((1, (0, 0)),))))]), 3: OrderedDict([(__re_compile('.00'), ((4, ((1, (2, 2)),)), (7, '-cents'))), (__re_compile('...'), ((2, (((9,), (((1, (2, 2)),), ((7, '1'),))), ((4, ((1, (2, 2)),)), (7, "-")), ())), (7, 'cent-'), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
-            
 
-INT_2_NAME[it_IT] = {14: {23: '.', 21: (__re_compile('miliard[^\\s-]*'), '... di miliardi'), 22: "l2r"}, 15: {3: ((2, (((9,), (((6, 19),), ((7, '1'),))), ((5, ((6, 19),)),), ())), (7, 'mil'), (2, (((9,), (((6, 19),), ((7, '1'),))), ((7, 'a'),), ((7, 'le'),))), (5, ((6, 20),))), 6: ((5, ((6, 19),)), (7, ' milion'), (2, (((8,), (((6, 19),), ((7, '1'),))), ((7, 'e'),), ((7, 'i'),))), (7, ' '), (5, ((6, 20),))), 9: ((5, ((6, 19),)), (7, ' miliard'), (2, (((8,), (((6, 19),), ((7, '1'),))), ((7, 'o'),), ((7, 'i'),))), (7, ' '), (5, ((6, 20),)))}, 16: {'auno': 'uno', 'iuno': 'uno', 'atre': 'atré', 'itre': 'itré', 'aott': 'ott', 'iott': 'ott', 'oott': 'ott'}, 17: {25: 'più ...', 24: 'meno ...'}, 18: {0: {'0': ((7, 'zero'),), '1': ((7, 'uno'),), '2': ((7, 'due'),), '3': ((7, 'tre'),), '4': ((7, 'quattro'),), '5': ((7, 'cinque'),), '6': ((7, 'sei'),), '7': ((7, 'sette'),), '8': ((7, 'otto'),), '9': ((7, 'nove'),), '10': ((7, 'dieci'),), '11': ((7, 'undici'),), '12': ((7, 'dodici'),), '13': ((7, 'tredici'),), '14': ((7, 'quattordici'),), '15': ((7, 'quindici'),), '16': ((7, 'sedici'),), '17': ((7, 'diciassette'),), '18': ((7, 'diciotto'),), '19': ((7, 'diciannove'),), '20': ((7, 'venti'),), '30': ((7, 'trenta'),), '40': ((7, 'quaranta'),), '50': ((7, 'cinquanta'),), '60': ((7, 'sessanta'),), '70': ((7, 'settanta'),), '80': ((7, 'ottanta'),), '90': ((7, 'novanta'),)}, 3: {2: OrderedDict([(__re_compile('..'), ((4, ((1, (1, 1)), (7, '0'))), (4, ((1, (0, 0)),))))]), 3: OrderedDict([(__re_compile('.00'), ((2, (((9,), (((1, (2, 2)),), ((7, '1'),))), ((4, ((1, (2, 2)),)),), ())), (7, 'cento'))), (__re_compile('...'), ((4, ((1, (2, 2)), (7, '00'))), (4, ((1, (1, 1)), (1, (0, 0))))))])}}}
+INT_2_NAME[fr_FR] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("milliard[^\\s-]*"), "... de milliards"),
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " mille "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " million"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " "),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 5)),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "de"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " milliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {"cents mille": "cent mille"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zéro"),),
+            "1": ((DSL_ACTION_VERBATIM, "un"),),
+            "2": ((DSL_ACTION_VERBATIM, "deux"),),
+            "3": ((DSL_ACTION_VERBATIM, "trois"),),
+            "4": ((DSL_ACTION_VERBATIM, "quatre"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinq"),),
+            "6": ((DSL_ACTION_VERBATIM, "six"),),
+            "7": ((DSL_ACTION_VERBATIM, "sept"),),
+            "8": ((DSL_ACTION_VERBATIM, "huit"),),
+            "9": ((DSL_ACTION_VERBATIM, "neuf"),),
+            "10": ((DSL_ACTION_VERBATIM, "dix"),),
+            "11": ((DSL_ACTION_VERBATIM, "onze"),),
+            "12": ((DSL_ACTION_VERBATIM, "douze"),),
+            "13": ((DSL_ACTION_VERBATIM, "treize"),),
+            "14": ((DSL_ACTION_VERBATIM, "quatorze"),),
+            "15": ((DSL_ACTION_VERBATIM, "quinze"),),
+            "16": ((DSL_ACTION_VERBATIM, "seize"),),
+            "20": ((DSL_ACTION_VERBATIM, "vingt"),),
+            "30": ((DSL_ACTION_VERBATIM, "trente"),),
+            "40": ((DSL_ACTION_VERBATIM, "quarante"),),
+            "50": ((DSL_ACTION_VERBATIM, "cinquante"),),
+            "60": ((DSL_ACTION_VERBATIM, "soixante"),),
+            "80": ((DSL_ACTION_VERBATIM, "quatre-vingts"),),
+            "71": ((DSL_ACTION_VERBATIM, "soixante-et-onze"),),
+            "100": ((DSL_ACTION_VERBATIM, "cent"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("8."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("7."),
+                        (
+                            (DSL_ACTION_VERBATIM, "soixante-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("9."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile(".1"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-et-un"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cents"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_IF_ELSE,
+                                (
+                                    (
+                                        (DSL_COMPOPE_GREATER,),
+                                        (
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                            ((DSL_ACTION_VERBATIM, "1"),),
+                                        ),
+                                    ),
+                                    (
+                                        (
+                                            DSL_ACTION_NAME_IT,
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                        ),
+                                    ),
+                                    (),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cent "),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
+
+
+INT_2_NAME[fr_FR_chuquet_1] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: None,
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " mille "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " million"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        12: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " billion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        18: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " trillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        24: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " quadrillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        30: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " quintillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        36: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " sextillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        42: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " septillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        48: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " octillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        54: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " nonillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        60: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " decillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {"cents mille": "cent mille"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zéro"),),
+            "1": ((DSL_ACTION_VERBATIM, "un"),),
+            "2": ((DSL_ACTION_VERBATIM, "deux"),),
+            "3": ((DSL_ACTION_VERBATIM, "trois"),),
+            "4": ((DSL_ACTION_VERBATIM, "quatre"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinq"),),
+            "6": ((DSL_ACTION_VERBATIM, "six"),),
+            "7": ((DSL_ACTION_VERBATIM, "sept"),),
+            "8": ((DSL_ACTION_VERBATIM, "huit"),),
+            "9": ((DSL_ACTION_VERBATIM, "neuf"),),
+            "10": ((DSL_ACTION_VERBATIM, "dix"),),
+            "11": ((DSL_ACTION_VERBATIM, "onze"),),
+            "12": ((DSL_ACTION_VERBATIM, "douze"),),
+            "13": ((DSL_ACTION_VERBATIM, "treize"),),
+            "14": ((DSL_ACTION_VERBATIM, "quatorze"),),
+            "15": ((DSL_ACTION_VERBATIM, "quinze"),),
+            "16": ((DSL_ACTION_VERBATIM, "seize"),),
+            "20": ((DSL_ACTION_VERBATIM, "vingt"),),
+            "30": ((DSL_ACTION_VERBATIM, "trente"),),
+            "40": ((DSL_ACTION_VERBATIM, "quarante"),),
+            "50": ((DSL_ACTION_VERBATIM, "cinquante"),),
+            "60": ((DSL_ACTION_VERBATIM, "soixante"),),
+            "80": ((DSL_ACTION_VERBATIM, "quatre-vingts"),),
+            "71": ((DSL_ACTION_VERBATIM, "soixante-et-onze"),),
+            "100": ((DSL_ACTION_VERBATIM, "cent"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("8."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("7."),
+                        (
+                            (DSL_ACTION_VERBATIM, "soixante-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("9."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile(".1"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-et-un"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cents"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_IF_ELSE,
+                                (
+                                    (
+                                        (DSL_COMPOPE_GREATER,),
+                                        (
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                            ((DSL_ACTION_VERBATIM, "1"),),
+                                        ),
+                                    ),
+                                    (
+                                        (
+                                            DSL_ACTION_NAME_IT,
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                        ),
+                                    ),
+                                    (),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cent "),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
+
+
+INT_2_NAME[fr_FR_chuquet_2] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: None,
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " mille "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " million"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " "),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 5)),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "de"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " milliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        12: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " billion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        15: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " billiard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        18: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " trillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        21: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " trilliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        24: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " quadrillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        27: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " quadrilliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        30: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " quintillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        33: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " quintilliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        36: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " sextillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        39: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " sextilliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        42: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " septillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        45: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " septilliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        48: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " octillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        51: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " octilliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        54: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " nonillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        57: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " nonilliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        60: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " decillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        63: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " decilliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {"cents mille": "cent mille"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zéro"),),
+            "1": ((DSL_ACTION_VERBATIM, "un"),),
+            "2": ((DSL_ACTION_VERBATIM, "deux"),),
+            "3": ((DSL_ACTION_VERBATIM, "trois"),),
+            "4": ((DSL_ACTION_VERBATIM, "quatre"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinq"),),
+            "6": ((DSL_ACTION_VERBATIM, "six"),),
+            "7": ((DSL_ACTION_VERBATIM, "sept"),),
+            "8": ((DSL_ACTION_VERBATIM, "huit"),),
+            "9": ((DSL_ACTION_VERBATIM, "neuf"),),
+            "10": ((DSL_ACTION_VERBATIM, "dix"),),
+            "11": ((DSL_ACTION_VERBATIM, "onze"),),
+            "12": ((DSL_ACTION_VERBATIM, "douze"),),
+            "13": ((DSL_ACTION_VERBATIM, "treize"),),
+            "14": ((DSL_ACTION_VERBATIM, "quatorze"),),
+            "15": ((DSL_ACTION_VERBATIM, "quinze"),),
+            "16": ((DSL_ACTION_VERBATIM, "seize"),),
+            "20": ((DSL_ACTION_VERBATIM, "vingt"),),
+            "30": ((DSL_ACTION_VERBATIM, "trente"),),
+            "40": ((DSL_ACTION_VERBATIM, "quarante"),),
+            "50": ((DSL_ACTION_VERBATIM, "cinquante"),),
+            "60": ((DSL_ACTION_VERBATIM, "soixante"),),
+            "80": ((DSL_ACTION_VERBATIM, "quatre-vingts"),),
+            "71": ((DSL_ACTION_VERBATIM, "soixante-et-onze"),),
+            "100": ((DSL_ACTION_VERBATIM, "cent"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("8."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("7."),
+                        (
+                            (DSL_ACTION_VERBATIM, "soixante-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("9."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile(".1"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-et-un"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cents"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_IF_ELSE,
+                                (
+                                    (
+                                        (DSL_COMPOPE_GREATER,),
+                                        (
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                            ((DSL_ACTION_VERBATIM, "1"),),
+                                        ),
+                                    ),
+                                    (
+                                        (
+                                            DSL_ACTION_NAME_IT,
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                        ),
+                                    ),
+                                    (),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cent "),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
+
+
+INT_2_NAME[fr_FR_rowlett] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: None,
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " mille "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " million"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " "),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 5)),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "de"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " milliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        12: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " tetrillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        15: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " pentillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        18: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " hexillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        21: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " eptillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        24: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " oktillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        27: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " ennillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        30: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " dekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        33: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " hendekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        36: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " dodekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        39: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " trisdekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        42: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " tetradekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        45: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " pentadekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        48: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " hexadekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        51: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " heptadekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        54: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " oktadekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        57: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " enneadekillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        60: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icosillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        63: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icosihenillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        66: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icosidillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        69: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icositrillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        72: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icositetrillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        75: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icosipentillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        78: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icosihexillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        81: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icosiheptillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        84: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icosioktillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        87: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " icosiennillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        90: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " triacontillion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {"cents mille": "cent mille"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus ...", DSL_TAG_SIGN_MINUS: "moins ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zéro"),),
+            "1": ((DSL_ACTION_VERBATIM, "un"),),
+            "2": ((DSL_ACTION_VERBATIM, "deux"),),
+            "3": ((DSL_ACTION_VERBATIM, "trois"),),
+            "4": ((DSL_ACTION_VERBATIM, "quatre"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinq"),),
+            "6": ((DSL_ACTION_VERBATIM, "six"),),
+            "7": ((DSL_ACTION_VERBATIM, "sept"),),
+            "8": ((DSL_ACTION_VERBATIM, "huit"),),
+            "9": ((DSL_ACTION_VERBATIM, "neuf"),),
+            "10": ((DSL_ACTION_VERBATIM, "dix"),),
+            "11": ((DSL_ACTION_VERBATIM, "onze"),),
+            "12": ((DSL_ACTION_VERBATIM, "douze"),),
+            "13": ((DSL_ACTION_VERBATIM, "treize"),),
+            "14": ((DSL_ACTION_VERBATIM, "quatorze"),),
+            "15": ((DSL_ACTION_VERBATIM, "quinze"),),
+            "16": ((DSL_ACTION_VERBATIM, "seize"),),
+            "20": ((DSL_ACTION_VERBATIM, "vingt"),),
+            "30": ((DSL_ACTION_VERBATIM, "trente"),),
+            "40": ((DSL_ACTION_VERBATIM, "quarante"),),
+            "50": ((DSL_ACTION_VERBATIM, "cinquante"),),
+            "60": ((DSL_ACTION_VERBATIM, "soixante"),),
+            "80": ((DSL_ACTION_VERBATIM, "quatre-vingts"),),
+            "71": ((DSL_ACTION_VERBATIM, "soixante-et-onze"),),
+            "100": ((DSL_ACTION_VERBATIM, "cent"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("8."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("7."),
+                        (
+                            (DSL_ACTION_VERBATIM, "soixante-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("9."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile(".1"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-et-un"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cents"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_IF_ELSE,
+                                (
+                                    (
+                                        (DSL_COMPOPE_GREATER,),
+                                        (
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                            ((DSL_ACTION_VERBATIM, "1"),),
+                                        ),
+                                    ),
+                                    (
+                                        (
+                                            DSL_ACTION_NAME_IT,
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                        ),
+                                    ),
+                                    (),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, " cent "),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
+
+
+INT_2_NAME[fr_FR_tiret] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("milliard[^\\s-]*"), "...-de-milliards"),
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                        (DSL_ACTION_VERBATIM, "-"),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "mille"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (DSL_ACTION_VERBATIM, "-"),
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+        ),
+        6: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                        (DSL_ACTION_VERBATIM, "-"),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "million"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (DSL_ACTION_VERBATIM, "-"),
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+        ),
+        9: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                        (DSL_ACTION_VERBATIM, "-"),
+                    ),
+                    (),
+                ),
+            ),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 5)),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "de-"),),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "milliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "s"),),
+                    (),
+                ),
+            ),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                            ((DSL_ACTION_VERBATIM, "0"),),
+                        ),
+                    ),
+                    (
+                        (DSL_ACTION_VERBATIM, "-"),
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+        ),
+    },
+    DSL_SPECS_PATCH: {"cents-mille": "cent-mille"},
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "plus-...", DSL_TAG_SIGN_MINUS: "moins-..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zéro"),),
+            "1": ((DSL_ACTION_VERBATIM, "un"),),
+            "2": ((DSL_ACTION_VERBATIM, "deux"),),
+            "3": ((DSL_ACTION_VERBATIM, "trois"),),
+            "4": ((DSL_ACTION_VERBATIM, "quatre"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinq"),),
+            "6": ((DSL_ACTION_VERBATIM, "six"),),
+            "7": ((DSL_ACTION_VERBATIM, "sept"),),
+            "8": ((DSL_ACTION_VERBATIM, "huit"),),
+            "9": ((DSL_ACTION_VERBATIM, "neuf"),),
+            "10": ((DSL_ACTION_VERBATIM, "dix"),),
+            "11": ((DSL_ACTION_VERBATIM, "onze"),),
+            "12": ((DSL_ACTION_VERBATIM, "douze"),),
+            "13": ((DSL_ACTION_VERBATIM, "treize"),),
+            "14": ((DSL_ACTION_VERBATIM, "quatorze"),),
+            "15": ((DSL_ACTION_VERBATIM, "quinze"),),
+            "16": ((DSL_ACTION_VERBATIM, "seize"),),
+            "20": ((DSL_ACTION_VERBATIM, "vingt"),),
+            "30": ((DSL_ACTION_VERBATIM, "trente"),),
+            "40": ((DSL_ACTION_VERBATIM, "quarante"),),
+            "50": ((DSL_ACTION_VERBATIM, "cinquante"),),
+            "60": ((DSL_ACTION_VERBATIM, "soixante"),),
+            "80": ((DSL_ACTION_VERBATIM, "quatre-vingts"),),
+            "71": ((DSL_ACTION_VERBATIM, "soixante-et-onze"),),
+            "100": ((DSL_ACTION_VERBATIM, "cent"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile("8."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("7."),
+                        (
+                            (DSL_ACTION_VERBATIM, "soixante-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile("9."),
+                        (
+                            (DSL_ACTION_VERBATIM, "quatre-vingt-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_VERBATIM, "1"),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                    (
+                        __re_compile(".1"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-et-un"),
+                        ),
+                    ),
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                            ),
+                            (DSL_ACTION_VERBATIM, "-cents"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_IF_ELSE,
+                                (
+                                    (
+                                        (DSL_COMPOPE_GREATER,),
+                                        (
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                            ((DSL_ACTION_VERBATIM, "1"),),
+                                        ),
+                                    ),
+                                    (
+                                        (
+                                            DSL_ACTION_NAME_IT,
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                        ),
+                                        (DSL_ACTION_VERBATIM, "-"),
+                                    ),
+                                    (),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "cent-"),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
+
+
+INT_2_NAME[it_IT] = {
+    DSL_SPECS_GENE: {
+        DSL_TAG_GENE_SEP: ".",
+        DSL_TAG_GENE_BIG: (__re_compile("miliard[^\\s-]*"), "... di miliardi"),
+        DSL_TAG_GENE_DIR: DSL_DIR_L2R,
+    },
+    DSL_SPECS_GROUP: {
+        3: (
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    (
+                        (
+                            DSL_ACTION_NAME_IT_GROUP,
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                        ),
+                    ),
+                    (),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, "mil"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_GREATER,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "a"),),
+                    ((DSL_ACTION_VERBATIM, "le"),),
+                ),
+            ),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        6: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " milion"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "e"),),
+                    ((DSL_ACTION_VERBATIM, "i"),),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+        9: (
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),)),
+            (DSL_ACTION_VERBATIM, " miliard"),
+            (
+                DSL_ACTION_IF_ELSE,
+                (
+                    (
+                        (DSL_COMPOPE_EQ,),
+                        (
+                            ((DSL_ACTION_SPEVAR, DSL_SPEVAR_NUMBER_OF),),
+                            ((DSL_ACTION_VERBATIM, "1"),),
+                        ),
+                    ),
+                    ((DSL_ACTION_VERBATIM, "o"),),
+                    ((DSL_ACTION_VERBATIM, "i"),),
+                ),
+            ),
+            (DSL_ACTION_VERBATIM, " "),
+            (DSL_ACTION_NAME_IT_GROUP, ((DSL_ACTION_SPEVAR, DSL_SPEVAR_REMAINING),)),
+        ),
+    },
+    DSL_SPECS_PATCH: {
+        "auno": "uno",
+        "iuno": "uno",
+        "atre": "atré",
+        "itre": "itré",
+        "aott": "ott",
+        "iott": "ott",
+        "oott": "ott",
+    },
+    DSL_SPECS_SIGN: {DSL_TAG_SIGN_PLUS: "più ...", DSL_TAG_SIGN_MINUS: "meno ..."},
+    DSL_SPECS_SMALL: {
+        DSL_ACTION_ASIT: {
+            "0": ((DSL_ACTION_VERBATIM, "zero"),),
+            "1": ((DSL_ACTION_VERBATIM, "uno"),),
+            "2": ((DSL_ACTION_VERBATIM, "due"),),
+            "3": ((DSL_ACTION_VERBATIM, "tre"),),
+            "4": ((DSL_ACTION_VERBATIM, "quattro"),),
+            "5": ((DSL_ACTION_VERBATIM, "cinque"),),
+            "6": ((DSL_ACTION_VERBATIM, "sei"),),
+            "7": ((DSL_ACTION_VERBATIM, "sette"),),
+            "8": ((DSL_ACTION_VERBATIM, "otto"),),
+            "9": ((DSL_ACTION_VERBATIM, "nove"),),
+            "10": ((DSL_ACTION_VERBATIM, "dieci"),),
+            "11": ((DSL_ACTION_VERBATIM, "undici"),),
+            "12": ((DSL_ACTION_VERBATIM, "dodici"),),
+            "13": ((DSL_ACTION_VERBATIM, "tredici"),),
+            "14": ((DSL_ACTION_VERBATIM, "quattordici"),),
+            "15": ((DSL_ACTION_VERBATIM, "quindici"),),
+            "16": ((DSL_ACTION_VERBATIM, "sedici"),),
+            "17": ((DSL_ACTION_VERBATIM, "diciassette"),),
+            "18": ((DSL_ACTION_VERBATIM, "diciotto"),),
+            "19": ((DSL_ACTION_VERBATIM, "diciannove"),),
+            "20": ((DSL_ACTION_VERBATIM, "venti"),),
+            "30": ((DSL_ACTION_VERBATIM, "trenta"),),
+            "40": ((DSL_ACTION_VERBATIM, "quaranta"),),
+            "50": ((DSL_ACTION_VERBATIM, "cinquanta"),),
+            "60": ((DSL_ACTION_VERBATIM, "sessanta"),),
+            "70": ((DSL_ACTION_VERBATIM, "settanta"),),
+            "80": ((DSL_ACTION_VERBATIM, "ottanta"),),
+            "90": ((DSL_ACTION_VERBATIM, "novanta"),),
+        },
+        DSL_ACTION_MATCHING: {
+            2: OrderedDict(
+                [
+                    (
+                        __re_compile(".."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_VERBATIM, "0"),
+                                ),
+                            ),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                ((DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),),
+                            ),
+                        ),
+                    )
+                ]
+            ),
+            3: OrderedDict(
+                [
+                    (
+                        __re_compile(".00"),
+                        (
+                            (
+                                DSL_ACTION_IF_ELSE,
+                                (
+                                    (
+                                        (DSL_COMPOPE_GREATER,),
+                                        (
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                            ((DSL_ACTION_VERBATIM, "1"),),
+                                        ),
+                                    ),
+                                    (
+                                        (
+                                            DSL_ACTION_NAME_IT,
+                                            ((DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),),
+                                        ),
+                                    ),
+                                    (),
+                                ),
+                            ),
+                            (DSL_ACTION_VERBATIM, "cento"),
+                        ),
+                    ),
+                    (
+                        __re_compile("..."),
+                        (
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (2, 2)),
+                                    (DSL_ACTION_VERBATIM, "00"),
+                                ),
+                            ),
+                            (
+                                DSL_ACTION_NAME_IT,
+                                (
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (1, 1)),
+                                    (DSL_ACTION_EXTRACT_NUMBER_OF, (0, 0)),
+                                ),
+                            ),
+                        ),
+                    ),
+                ]
+            ),
+        },
+    },
+}
 
 
 # --------------------------------- #

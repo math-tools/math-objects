@@ -45,8 +45,9 @@ LANGS_NOBIG = ['fr_FR_chuquet_1', 'fr_FR_chuquet_2', 'fr_FR_rowlett']
 # -- CONSTANTS "AUTO" - END -- #
 
 
-THIS_DIR  = PPath(__file__).parent
-DATAS_DIR = THIS_DIR / "usecases"
+THIS_DIR              = PPath(__file__).parent
+DATAS_USECASES_DIR    = THIS_DIR / "usecases"
+DATAS_TRANSLATORS_DIR = THIS_DIR / "translators"
 
 TAG_TEST_WHERE   = 'where'
 TAG_TEST_INTEGER = 'integer'
@@ -148,7 +149,7 @@ def test_nameof_usecases():
     for lang in LANGS_SORTED:
         nameof = IntName(lang).nameof
 
-        with (DATAS_DIR / f"{lang}.json").open(
+        with (DATAS_USECASES_DIR / f"{lang}.json").open(
             encoding = 'utf-8',
             mode = 'r'
         ) as f:
@@ -166,4 +167,37 @@ def test_nameof_usecases():
                     f"INITIAL: {onedata[TAG_TEST_INITIAL]}"
                     "\n"
                     f"WHERE  : {onedata[TAG_TEST_WHERE]}"
+                   )
+
+
+# ----------------- #
+# -- TRANSLATORS -- #
+# ----------------- #
+
+def test_nameof_translators_small():
+    for lang in LANGS_SORTED:
+        nameof = IntName(lang).nameof
+
+        gtrad_json_file = DATAS_TRANSLATORS_DIR / "small" / f"{lang}.json"
+
+        if not gtrad_json_file.is_file():
+            continue
+
+        with gtrad_json_file.open(
+            encoding = 'utf-8',
+            mode = 'r'
+        ) as f:
+            datas = json.load(f)
+
+        allnbs = list(datas)
+
+        for nb in allnbs:
+            gtrad = datas[nb]
+
+            assert nameof(nb) == gtrad, \
+                   (
+                    "\n"
+                    f"LANG: {lang}"
+                    "\n"
+                    f"NB  : {nb}"
                    )

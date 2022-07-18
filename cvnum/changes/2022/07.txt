@@ -1,12 +1,57 @@
-> ---------------------------- <
+// ---------- //
 
 ==
-15
+18
 ==
 
 --------
 :update:
 --------
+
+[[:bugs:]]
+¨DSL for translations: the work on the new unit tests via *googletrad has revealed two stupid bugs with the ¨lang ``en_US``.
+
+    1) The ignored rule cvnum::``*00`` was not redefined in the block cvnum::``small`` suchas to obtain the good naming of `100`.
+
+    1) The rule cvnum::``***`` was not indicated to be ignored.
+
+
+--------
+:fordev:
+--------
+
+[[:api:]]
+Testing the naming of integers: use of the library ``translators`` to test all integers from `0` to `999` via ¨googletrad (we keep the usecases to verify that ``translators`` does a good job and for tricky names). **The method used is to do some "manual" checkings, and then trust ¨cvnum for some patterns if ¨googletrad is wrong, so some tricky errors could remain inside ¨cvnum.** If needed, some new usecases will be added in the ¨DSL files.
+
+
+// ---------- //
+
+==
+17
+==
+
+--------
+:update:
+--------
+
+[[:bugs:]]
+¨DSL for translations: the work on some new unit tests have revealed two bad rules.
+
+    1) With the ¨lang ``en_GB``, `14` was translated to "forteen" instead of "fourteen".
+
+    1) With the ¨lang ``es_ES``, `26` was translated to "veintiseis" instead of "veintiséis".
+
+
+// ---------- //
+
+
+==
+15
+==
+
+---------
+:updates:
+---------
 
 [[:bugs:]]
 Class ``textify.integer.IntName``: the underscores was not treated by the method ``sign_n_abs``.
