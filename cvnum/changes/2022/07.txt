@@ -4,21 +4,33 @@
 18
 ==
 
---------
+-------
 :break:
---------
+-------
 
 [[:api:]]
 Here are the breaking new features.
 
     1) Conversions of integers: one package ``convert.integer`` has been created to gather all the features already available (conversions of other kinds of ¨nbs will be added later).
 
-    1) Naming integers: the method ``IntName.nameof`` only accepts strings.
+    1) Naming integers: the method ``IntName.nameof`` only accepts a string.
+
+    1) Toolbox: this package is to share features useful for the packages of  ``cvnum``. This implies the following changes.
+
+        * The package ``tbox.str2nb`` has been deleted.
+
+        * Creation of a new package ``tbox.var2nb`` with the following functions.
+
+            + ``intify`` can transform one variable into a legal integer (for example, this new function allows the use of ¨_s between digits).
+
+            + ``intify_notneg`` can transform one variable into a legal non negtaive integer.
+
+            + ``basify`` can transform one variable into a legal integer that can be used as a base.
 
 
---------
+---------
 :updates:
---------
+---------
 
 [[:doc:]]
 Here the new things added.
@@ -33,7 +45,7 @@ Here the new things added.
 [[:bugs:]]
 ¨DSL for translations: the work on the new unit tests via *googletrad has revealed two stupid bugs with the ¨lang ``en_US``.
 
-    1) The ignored rule cvnum::``*00`` was not redefined in the block cvnum::``small`` suchas to obtain the good naming of `100`.
+    1) The ignored rule cvnum::``*00`` was not redefined in the block cvnum::``small`` such as to obtain the good naming of `100`.
 
     1) The rule cvnum::``***`` was not indicated to be ignored.
 
@@ -42,43 +54,20 @@ Here the new things added.
 :fordev:
 --------
 
-[[:facto:]]
-Toolbox: this package is to share features useful for the packages of  ``cvnum``. This implies the following changes.
-
-    1) The package ``tbox.str2nb`` has been deleted.
-
-    1) Creation of a new package ``tbox.var2nb`` with the following functions.
-
-        * ``intify`` can transform one variable into a legal integer (for example, this new function allows the use of ¨_s between digits).
-
-        * ``intify_notneg`` can transform one variable into a legal non negtaive integer.
-
-        * ``basify`` can transform one variable into a legal integer that can be used as a base.
-
-
 [[:api:]]
-Some new tests.
+New tests with some of them that use of the excellent package ``hypothesis``.
 
-    1) Naming integers: use of the library ``translators`` to test all integers from `0` to `999` via ¨googletrad (we keep the usecases to verify that ``translators`` does a good job and for tricky names). **The method used is to do some "manual" checkings, and then trust ¨cvnum for some patterns if ¨googletrad is wrong, so some tricky errors could remain inside ¨cvnum.** If needed, some new usecases will be added in the ¨DSL files.
+    1) Naming integers: two new things.
 
+        * Use of the library ``translators`` to test all integers from `0` to `999` via ¨googletrad (we keep the usecases to verify that ``translators`` does a good job and for tricky names). **The method used is to do some "manual" checkings, and then trust ¨cvnum for some patterns if ¨googletrad is wrong, so some tricky errors could remain inside ¨cvnum.** If needed, some new usecases will be added in the ¨DSL files.
 
+        * The method ``sign_n_abs`` is tested using ``hypothesis``.
 
-    ??????????
-
-    1) Conversion of integers:
-    Tests unitiares de conversion et/ou BDT via hypothesis
-
-    Testing the conversions in different bases: via du BTD ???
-
-    1) tbox aussi !!!
-
-
-
-
-
+    1) Toolbox: the only function tested is ``var2nb.intify`` (that is normal).
 
 
 // ---------- //
+
 
 ==
 17
@@ -108,10 +97,11 @@ Some new tests.
 ---------
 
 [[:bugs:]]
-Class ``textify.integer.IntName``: the underscores was not treated by the method ``sign_n_abs``.
+Three bugs have been fixed.
 
+    1) Class ``textify.integer.IntName``: the underscores was not treated by the method ``sign_n_abs``.
 
-¨DSL for translations: the usecases tested have revealed some small bugs in the ¨specs of the ¨lang ``it_IT`` and ``de_DE``.
+    1) ¨DSL for translations: the usecases tested have revealed some small bugs in the ¨specs of the ¨lang ``it_IT`` and ``de_DE``.
 
 
 [[:doc:]]

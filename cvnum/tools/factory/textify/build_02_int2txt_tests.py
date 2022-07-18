@@ -25,7 +25,7 @@ while(SRC_DIR.name != "cvnum"):
 DIR_LANG         = SRC_DIR / "contribute" / "api" / "textify" / "lang"
 PYTEST_DIR       = SRC_DIR / "tests" / "textify" / "integers"
 TEST_USECASE_DIR = PYTEST_DIR / "usecases"
-TEST_PYFILE      = PYTEST_DIR / "test_01_int2txt_nameof.py"
+TEST_PYFILE      = PYTEST_DIR / "test_02_int2txt_nameof.py"
 
 
 # ------------------ #

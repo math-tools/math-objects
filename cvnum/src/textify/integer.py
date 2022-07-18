@@ -29,8 +29,7 @@ class IntName(BaseAutomaton):
     def __init__(self, lang: str = "en_GB") -> None:
         super().__init__(lang)
 
-# TODO Remove the following ugly strip!
-
+# TODO UGGLY: Remove the following ugly strip! It's a shame...
         if self._very_big_allowed:
             self._zerobigname = self.apply(
                 actions = self._big_rules[self._big_expo_max],
@@ -106,7 +105,7 @@ class IntName(BaseAutomaton):
             if nb_digits > self._big_len_max:
                 name = self.build_suffixes(name)
 
-# TODO Remove the following ugly hacks! It's a shame...
+# TODO UGGLY: Remove the following ugly hacks! It's a shame...
             name = name.replace('--', '-')
 
             while('  ' in name):
@@ -116,7 +115,7 @@ class IntName(BaseAutomaton):
 
 # The "complete" name.
         if sign:
-            name = sign.replace(ELLIPSIS, name)
+            name = self._sign_name[sign].replace(ELLIPSIS, name)
 
 # Patches to apply?
         for old, new in self._patch.items():
@@ -130,11 +129,11 @@ class IntName(BaseAutomaton):
 # prototype::
 #     nb : a string that represents a "legal" integer
 #
-#     :return: the name of the sign or an empty string,
+#     :return: the sign or an empty string,
 #              and the string version of the absolute numerical value
 #              of ``str(nb)``
 #            @ let intnb = int(nb) ;
-#              abs(return[1]) = abs(intnb) ;
+#              int(return[1]) = abs(intnb) ;
 #              return[0] = '-' if intnb < 0 ;
 #              return[0] in ['', '+'] if intnb >= 0
 #
@@ -170,8 +169,6 @@ class IntName(BaseAutomaton):
                     f"the sign ``{sign}`` can't be used "
                     f"with the language {self.lang}"
                    )
-
-            sign = self._sign_name[sign]
 
 # Nothing more to do.
         return sign, nb

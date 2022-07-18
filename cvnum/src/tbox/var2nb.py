@@ -24,8 +24,7 @@ from typing import *
 #     name       : the name used in case of error message
 #
 #     :return: a ¨python integer respecting the boundary constraints
-#            @ return in ZZ ;
-#              mini <= return <= maxi
+#            @ mini <= return <= maxi
 ###
 def intify(
     nb        : Any,
@@ -74,6 +73,7 @@ def intify(
 #                @ str(nb) in str(ZZ)
 #     tryconvert : to allow, or not, the use of the printed version of
 #                  ``nb`` such as to try to convert it to an integer
+#     name       : the name used in case of error message
 #
 #     :return: a ¨python integer greater than `1``
 #            @ return in 2..+inf
@@ -97,8 +97,9 @@ def basify(
 #                @ str(nb) in str(ZZ)
 #     tryconvert : to allow, or not, the use of the printed version of
 #                  ``nb`` such as to try to convert it to an integer
+#     name       : the name used in case of error message
 #
-#     :return: a ¨python not negative integer
+#     :return: a ¨python non-negative integer
 #            @ return in 0..+inf
 ###
 def intify_notneg(

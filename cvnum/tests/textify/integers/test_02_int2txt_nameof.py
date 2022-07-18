@@ -6,7 +6,7 @@
 
 import json
 import pytest
-from   random import randint
+from   random import randint, choice
 
 from cbdevtools     import *
 from mistool.os_use import PPath
@@ -65,32 +65,38 @@ TAG_TEST_NAME    = 'name'
 # -- SPACES/UNDERSCORES IGNORED BIG -- #
 # ------------------------------------ #
 
+# TODO Create a new strategy!
+def build_removable(nb, toremove, atleastone = True):
+    nb          = str(nb)
+    nb_polluted = ''
+
+    for c in nb:
+        if (
+            nb_polluted
+            and
+            not nb_polluted[-1] in toremove
+            and
+            randint(0, 10) <= 7
+        ):
+            nb_polluted += choice(toremove)
+
+        nb_polluted += c
+
+    if atleastone and nb_polluted == nb:
+        nb_polluted = nb_polluted[:1] + choice(toremove) + nb_polluted[1:]
+
+    return nb_polluted
+
+
 def test_nameof_spaces_underscores_ignored():
     for lang in LANGS_SORTED:
         mynamer = IntName(lang)
         nameof  = mynamer.nameof
         maxpos  = 10**(2*mynamer._big_expo_max) - 1
-        minneg  = - maxpos
 
         for _ in range(NB_RAND_TESTS):
-            randnb          = str(randint(minneg, maxpos))
-            randnb_polluted = ''
-
-            for c in str(randnb):
-                if (
-                    c != '-'
-                    and
-                    randnb_polluted not in ['', '-']
-                    and
-                    randint(0, 10) <= 7
-                ):
-                    if randint(0, 1) == 0:
-                        randnb_polluted += " "
-
-                    else:
-                        randnb_polluted += "_"
-
-                randnb_polluted += c
+            randnb          = str(randint(0, maxpos))
+            randnb_polluted = build_removable(randnb, [' ', '_'])
 
             assert nameof(randnb) == nameof(randnb_polluted)
 
