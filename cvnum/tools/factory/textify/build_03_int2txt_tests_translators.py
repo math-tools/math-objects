@@ -126,7 +126,7 @@ TEXTS_TESTED = []
 nameof_TRUSTED = IntName(TRUSTED_LANG).nameof
 
 for i in range(MIN_NB_TESTED, MAX_NB_TESTED + 1):
-    totrans = f"{nameof_TRUSTED(i)}"
+    totrans = f"{nameof_TRUSTED(str(i))}"
 
     if i == 1:
         totrans += f" {TAG_BUS}"

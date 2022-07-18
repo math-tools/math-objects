@@ -39,8 +39,8 @@ for n in [
     print('--- intnonneg ---')
     print(f"{n} with type = {type(n)}")
 
-    # print(intify(n))
-    print(intify(n, mini = 10))
+    print(intify(n))
+    # print(intify(n, mini = 10))
     # print(intify(n, tryconvert = True))
 
 

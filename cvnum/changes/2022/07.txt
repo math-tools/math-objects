@@ -70,6 +70,8 @@ Some new tests.
 
     Testing the conversions in different bases: via du BTD ???
 
+    1) tbox aussi !!!
+
 
 
 

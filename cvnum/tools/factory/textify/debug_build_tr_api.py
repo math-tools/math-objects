@@ -19,7 +19,7 @@ print("\033c", end="")
 LANG_TESTED = 'de_DE'
 
 TO_ANALYSE = [
-    50 + x*100
+    str(50 + x*100)
     for x in range(2, 10)
     # if
 ]

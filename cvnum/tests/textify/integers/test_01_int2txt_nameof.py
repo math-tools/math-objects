@@ -127,7 +127,7 @@ def test_nameof_badinput_TYPE():
 # -- BIGGEST -- #
 # ------------- #
 
-def test_nameof_biggest_exception():
+def test_nameof_biggest_no_exception():
     for lang in LANGS_NOBIG:
         mynamer = IntName(lang)
         nameof  = lambda x: IntName(lang).nameof(str(x))
