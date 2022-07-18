@@ -12,9 +12,9 @@ from math import (
     log
 )
 
-from ..tbox.str2nb import (
-    intnonneg,
-    intbase
+from .common import (
+    basify,
+    intify
 )
 
 
@@ -33,7 +33,7 @@ from ..tbox.str2nb import (
 ###
 def intnumerals(nb: int) -> List[str]:
 # Is ``nb`` a natural ?
-    nb = intnonneg(nb)
+    nb = intify(nb)
 
 # We can do the conversion.
     return [d for d in str(nb)]
@@ -50,7 +50,7 @@ def intnumerals(nb: int) -> List[str]:
 ###
 def intdigits(nb: int) -> List[int]:
 # Is ``nb`` a natural ?
-    nb = intnonneg(nb)
+    nb = intify(nb)
 
 # We can do the conversion.
     return [int(d) for d in str(nb)]
@@ -81,10 +81,10 @@ def int2bdigits(
     base: int,
 ) -> List[int]:
 # Is ``nb`` a natural ?
-    nb = intnonneg(nb)
+    nb = intify(nb)
 
 # Is ``base`` a natural greater than one ?
-    base = intbase(base)
+    base = basify(base)
 
 # Let's go.
     bdigits = []
@@ -195,8 +195,8 @@ def int2bnumerals(
     nb  : int,
     base: int,
 ) -> List[int]:
-    nb   = intnonneg(nb)
-    base = intbase(base)
+    nb   = intify(nb)
+    base = basify(base)
 
     return numeralize(base)(nb)
 
@@ -225,8 +225,8 @@ def int2bnb(
     base: int,
     sep : str = "."
 ) -> str:
-    nb   = intnonneg(nb)
-    base = intbase(base)
+    nb   = intify(nb)
+    base = basify(base)
 
     if base < 37:
         sep = ""

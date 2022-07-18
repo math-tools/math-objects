@@ -10,8 +10,8 @@ from typing import *
 
 import re
 
-from ..config.digit import ROMAN_2_NUMERAL
-from ..tbox.str2nb  import intnonneg
+from ...config.digit import ROMAN_2_NUMERAL
+from ...tbox.str2nb  import intify
 
 
 # ---------------------- #
@@ -68,7 +68,7 @@ def isroman(rnb: str) -> bool:
 ###
 def int2roman(nb: int) -> str:
 # ``nb`` must be a natural integer.
-    nb = intnonneg(nb)
+    nb = intify(nb)
 
 # We must have ``1 <= nb <= 4999``.
     assert 0 < nb < 5000, \

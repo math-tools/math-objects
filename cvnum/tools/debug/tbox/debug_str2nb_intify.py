@@ -34,7 +34,7 @@ for n in [
     print()
     print('--- intnonneg ---')
     print(f"{n} with type = {type(n)}")
-    print(intnonneg(n, tryconvert = True))
+    print(intify(n, tryconvert = True))
 
 
 for n in [
@@ -45,4 +45,4 @@ for n in [
     print()
     print('--- intbase ---')
     print(f"{n} with type = {type(n)}")
-    print(intbase(n, tryconvert = True))
+    print(intify(n, tryconvert = True))

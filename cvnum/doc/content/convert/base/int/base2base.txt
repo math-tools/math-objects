@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-03-23
+    date = 2022-07-18
 
 
 =================================
@@ -12,7 +12,7 @@ Pour pouvoir faire tout type de transformations entre deux bases, il faut passer
 )).
 
 python-term::
-    >>> from cvnum.convert.base2base import *
+    >>> from cvnum.convert.integer.base2base import *
     >>> base2base = Base2Base(bases = (16, 2))
     >>> print(base2base.convert('A4', FORMAT_DIGITS))
     [1, 0, 1, 0, 0, 1, 0, 0]

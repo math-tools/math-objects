@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-03-06
+    date = 2022-07-18
 
 
 =============================
@@ -16,7 +16,7 @@ Voici un exemple d'utilisation
 )).
 
 python-term::
-    >>> from cvnum.convert.roman import *
+    >>> from cvnum.convert.integer.roman import *
     >>> print(repr(int2roman(23)))
     'XXIII'
     >>> print(repr(int2roman(4888)))

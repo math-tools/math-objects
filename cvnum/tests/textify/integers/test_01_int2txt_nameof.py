@@ -62,7 +62,7 @@ TAG_TEST_NAME    = 'name'
 def test_nameof_spaces_underscores_ignored():
     for lang in LANGS_SORTED:
         mynamer = IntName(lang)
-        nameof  = mynamer.nameof
+        nameof  = lambda x: mynamer.nameof(x, tryconvert = True)
         maxpos  = 10**(2*mynamer._big_expo_max) - 1
         minneg  = - maxpos
 
@@ -95,7 +95,7 @@ def test_nameof_spaces_underscores_ignored():
 
 def test_nameof_badinput():
     for lang in LANGS_SORTED:
-        nameof = IntName(lang).nameof
+        nameof = lambda x: IntName(lang).nameof(x, tryconvert = True)
 
         for badinput in BAD_INPUTS:
             with pytest.raises(
@@ -105,9 +105,9 @@ def test_nameof_badinput():
                 nameof(badinput)
 
 
-# ------------ #
+# ------------- #
 # -- BIGGEST -- #
-# ------------ #
+# ------------- #
 
 def test_nameof_biggest():
     for lang in LANGS_NOBIG:
@@ -147,7 +147,7 @@ def test_nameof_nobig():
 
 def test_nameof_usecases():
     for lang in LANGS_SORTED:
-        nameof = IntName(lang).nameof
+        nameof = lambda x: IntName(lang).nameof(x, tryconvert = True)
 
         with (DATAS_USECASES_DIR / f"{lang}.json").open(
             encoding = 'utf-8',
@@ -176,7 +176,7 @@ def test_nameof_usecases():
 
 def test_nameof_translators_small():
     for lang in LANGS_SORTED:
-        nameof = IntName(lang).nameof
+        nameof = lambda x: IntName(lang).nameof(x, tryconvert = True)
 
         gtrad_json_file = DATAS_TRANSLATORS_DIR / "small" / f"{lang}.json"
 

@@ -17,7 +17,7 @@ MODULE_DIR = addfindsrc(
 # -- LET'S GO -- #
 # -------------- #
 
-from src.convert import *
+from src.convert.integer import *
 
 for i in [1, 4, 49, 51, 4428, 4500, 4999]:
     print('---')

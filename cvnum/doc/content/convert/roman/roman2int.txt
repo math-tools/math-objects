@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-03-06
+    date = 2022-07-18
 
 
 ===========================================
@@ -9,6 +9,6 @@ De l'écriture romaine à la valeur naturelle
 La fonction ``roman2int`` fait le travail inverse de la fonction ``int2roman`` en renvoyant un entier ¨python, et non une chaîne de caractères. Voici un cas d'utilisation.
 
 python-term::
-    >>> from cvnum.convert.roman import *
+    >>> from cvnum.convert.integer.roman import *
     >>> print(roman2int("CDXLV"))
     445

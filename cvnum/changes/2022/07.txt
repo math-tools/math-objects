@@ -5,6 +5,35 @@
 ==
 
 --------
+:break:
+--------
+
+[[:api:]]
+
+Conversions of integers: one package ``convert.integer`` has been created to gather all the features already available (conversions of other kinds of ¨nbs will be added later).
+
+
+-----
+:new:
+-----
+
+????
+
+tryconvert accesible partout (à False par défaut !)
+
+(in backstage, the new function ``tbox.str2nb.intify`` is used)
+
+doc a jour ????
+
+
+doc pour str2nb et aussi parler de common/basify !!!
+
+
+
+
+
+
+--------
 :update:
 --------
 
@@ -20,8 +49,29 @@
 :fordev:
 --------
 
+[[:facto:]]
+Tool box: from now, this package is to share features for ``convert`` and ``textify``. This implies the following changes.
+
+    1) A new function ``tbox.str2nb.intify`` allows to do the same jobs as the old ``tbox.str2nb.intnonneg`` and ``tbox.str2nb.intbase``. This new function allows the use of ¨_s betwwen digits.
+
+    1) The functions ``tbox.str2nb.intnonneg`` and ``tbox.str2nb.intbase`` has been deleted.
+
+    1) A new function ``convert.integer.common.basify`` transforms one variable into a legal integer base.
+
+
 [[:api:]]
-Testing the naming of integers: use of the library ``translators`` to test all integers from `0` to `999` via ¨googletrad (we keep the usecases to verify that ``translators`` does a good job and for tricky names). **The method used is to do some "manual" checkings, and then trust ¨cvnum for some patterns if ¨googletrad is wrong, so some tricky errors could remain inside ¨cvnum.** If needed, some new usecases will be added in the ¨DSL files.
+Some new tests.
+
+    1) Naming integers: use of the library ``translators`` to test all integers from `0` to `999` via ¨googletrad (we keep the usecases to verify that ``translators`` does a good job and for tricky names). **The method used is to do some "manual" checkings, and then trust ¨cvnum for some patterns if ¨googletrad is wrong, so some tricky errors could remain inside ¨cvnum.** If needed, some new usecases will be added in the ¨DSL files.
+
+
+
+    ??????????
+
+    1) Conversion of integers:
+    Tests unitiares de conversion et/ou BDT via hypothesis
+
+    Testing the conversions in different bases: via du BTD ???
 
 
 // ---------- //

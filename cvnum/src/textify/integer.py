@@ -11,6 +11,8 @@ from re import findall
 
 from .automata import *
 
+from ..tbox.str2nb import intify
+
 
 # --------------------- #
 # -- NAMING INTEGERS -- #
@@ -53,20 +55,26 @@ class IntName(BaseAutomaton):
 
 ###
 # prototype::
-#     nb : an object having a string representation equal to an integer
-#        @ str(nb) in str(ZZ)
+#     nb         : any object that is printable as an integer
+#                @ str(nb) in str(ZZ)
+#     tryconvert : to allow, or not, the use of the printed version of
+#                  ``number`` such as to try to convert it to an integer
 #
 #     :return: the name of ``str(nb)`` in the language ``self.lang``
 #
 #     :see: self.name_big ,
 #           self.name_small
 ###
-    def nameof(self, nb: Any) -> str:
+    def nameof(
+        self,
+        nb        : Any,
+        tryconvert: bool = False
+    ) -> str:
 # For error messages.
         self._initial_nb = nb
 
 # Name of the sign, and the string version of the absolute value of the integer.
-        sign, str_absnb = self.sign_n_abs(nb)
+        sign, str_absnb = self.sign_n_abs(nb, tryconvert)
         nb_digits       = len(str_absnb)
 
 # Do big numbers are allowed?
@@ -122,8 +130,10 @@ class IntName(BaseAutomaton):
 
 ###
 # prototype::
-#     nb : an object having a string representation equal to an integer
-#        @ str(nb) in str(ZZ)
+#     nb         : any object that is printable as an integer
+#                @ str(nb) in str(ZZ)
+#     tryconvert : to allow, or not, the use of the printed version of
+#                  ``number`` such as to try to convert it to an integer
 #
 #     :return: the name of the sign or an empty string,
 #              and the string version of the absolute numerical value
@@ -133,29 +143,35 @@ class IntName(BaseAutomaton):
 #              return[0] = '-' if intnb < 0 ;
 #              return[0] in ['', '+'] if intnb >= 0
 ###
-    def sign_n_abs(self, nb: Any) -> Tuple[str, str]:
-# String version of the object ``nb``.
-        nb = str(nb)
+    def sign_n_abs(
+        self,
+        nb        : Any,
+        tryconvert: bool,
+    ) -> Tuple[str, str]:
+# A plus sign?
+        strnb = str(nb)
 
-# Remove spaces and decimal separators.
-        for toremove in [' ', self._groups_sep]:
-            nb = nb.replace(toremove, '')
-
-# Normalization and sign of the number.
-        if nb[0] in "-+":
-            sign = nb[0]
-            nb   = nb[1:]
+        if strnb[0] == "+":
+            sign = strnb[0]
+            nb   = strnb[1:]
 
         else:
             sign = ""
 
-        try:
-            nb = str(int(nb))
-
-        except Exception:
-            raise ValueError(
-                f'``str(nb) = "{self._initial_nb}"`` is not an integer'
+# Integer version of nb.
+        nb = str(
+            intify(
+                number     = nb,
+                tryconvert = tryconvert,
+                toremove   = [' ', self._groups_sep],
+                name       = "absolute value"
             )
+        )
+
+# A minus sign?
+        if nb[0] == "-":
+            sign = nb[0]
+            nb   = nb[1:]
 
 # Name of the sign
         if sign:

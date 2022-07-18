@@ -16,9 +16,10 @@ from .base2int import (
 from .int2base import (
     int2bnb,
     int2bnumerals,
-    int2bdigits,
-    intbase
+    int2bdigits
 )
+
+from .common import basify
 
 
 # --------------- #
@@ -88,8 +89,8 @@ class Base2Base:
     @bases.setter
     def bases(self, bases: Tuple[int, int]) -> None:
         self._bases = (
-            intbase(bases[0]),
-            intbase(bases[1]),
+            basify(bases[0]),
+            basify(bases[1]),
         )
 
 

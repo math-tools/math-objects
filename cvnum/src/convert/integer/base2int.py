@@ -13,10 +13,12 @@ from math import (
 )
 
 from .int2base import (
-    intnonneg,
-    intbase,
+    basify,
+    intify,
     int2bnb
 )
+
+
 
 
 # ---------------------------- #
@@ -53,7 +55,7 @@ def basenumerals(
     base: int,
     sep : str = "."
 ) -> List[str]:
-    base          = intbase(base)
+    base          = basify(base)
     base_numerals = list(bdigitize(base))
 
 # No need to use a separator.
@@ -137,12 +139,15 @@ def bdigits2int(
     bdigits: List[int],
     base   : int,
 ) -> int:
-    base   = intbase(base)
+    base   = basify(base)
     intval = 0
     bpower = 1
 
     for n in reversed(bdigits):
-        n = intnonneg(n, "digit")
+        n = intify(
+            number = n,
+            name   = "digit"
+        )
 
         assert n < base, \
                f"digit << {n} >> is bigger than the base << {base} >>."

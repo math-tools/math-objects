@@ -17,7 +17,7 @@ MODULE_DIR = addfindsrc(
 # -- LET'S GO -- #
 # -------------- #
 
-from src.convert import *
+from src.convert.integer import *
 
 print('---')
 bnb = '30AF4'
