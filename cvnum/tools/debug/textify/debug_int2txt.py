@@ -40,7 +40,7 @@ lang = "en_US"    # TESTS OK
 # lang = "it_IT"
 
 FIXED_INTS = [
-    100, # Pour extend
+    "100", # Pour extend
     # "63_005",
     # 0,
     # 1,
@@ -91,7 +91,7 @@ FIXED_INTS = [
     # "- 999_000000000_666555444_333222111",
     # "10**9",
     # "2*10**18",
-    # "3*10**36 + 10**18",
+    "3*10**36 + 10**18",
     # "4*10**36",
     # "123_456_789_012_345_678_901_234_567_890",
 ]
@@ -111,7 +111,7 @@ MODULE_DIR = addfindsrc(
 # -- TOOLS -- #
 # ----------- #
 
-def testandprint(intname, x):
+def testandprint(nameof, x):
     print('---')
     print()
 
@@ -131,7 +131,9 @@ def testandprint(intname, x):
         print(f"  {x}")
         print(f"= {x_eval:_}")
 
-    print(f'  --> {intname.nameof(x_eval)}')
+    x_eval = str(x_eval)
+
+    print(f'  --> {nameof(x_eval)}')
     print()
 
 
@@ -141,11 +143,13 @@ def testandprint(intname, x):
 
 from src.textify import *
 
-intname = IntName(lang)
+nameof = IntName(lang).nameof
+
+# nameof(666);exit()
 
 if not USE_RAND:
     for x in FIXED_INTS:
-        testandprint(intname, x)
+        testandprint(nameof, x)
 
         if STEP_BY_STEP:
             input("Next one?")
@@ -177,7 +181,7 @@ else:
 
             x_tested.append(x)
 
-            testandprint(intname, x)
+            testandprint(nameof, x)
 
         if STEP_BY_STEP:
             input("Next one?")

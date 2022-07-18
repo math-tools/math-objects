@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-07-07
+    date = 2022-07-18
 
 
 ==================
@@ -16,4 +16,5 @@ python::
     from cvnum import textify
 
     intname = IntName(fr_FR)
-    print(intname.nameof(2*10**27))
+    bignb   = str(int(2*10**27))
+    print(intname.nameof(bignb))

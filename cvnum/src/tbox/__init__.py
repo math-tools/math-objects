@@ -2,4 +2,4 @@
 
 from typing import *
 
-from .str2nb import *
+from .var2nb import *

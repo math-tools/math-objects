@@ -1,0 +1,23 @@
+﻿this::
+    date = 2022-07-18
+
+
+===============================
+Transformer en un base numérale
+===============================
+
+Une base numérale est un entier appartenant à `2..+inf`. Travailler avec ce type de valeur attendue se fait simplement grâce à la fonction ``basify`` qui est définie comme suit. Noter au passage la possibilité d'user des paramètres ``tryconvert`` et ``name``, mais pas du paramètre ``toremove``.
+
+
+python::
+    def basify(
+        nb        : Any,
+        tryconvert: bool  = False,
+        name      : str  = "number"
+    ) -> int:
+        return intify(
+            nb         = nb,
+            mini       = 2,
+            tryconvert = tryconvert,
+            name       = name
+        )

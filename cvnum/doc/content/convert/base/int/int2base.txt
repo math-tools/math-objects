@@ -14,6 +14,7 @@ et aussi que les listes de chiffres vont du poids le plus élevé à celui le pl
 ((
     Ceci est en accord avec l'écriture alphanumérique.
 )).
+Notez l'appel au module ``int2base`` du package ``cvnum.convert.integer``.
 
 python-term::
     >>> from cvnum.convert.integer.int2base import *

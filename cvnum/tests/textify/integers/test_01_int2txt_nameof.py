@@ -30,11 +30,17 @@ from src.textify import *
 
 NB_RAND_TESTS = 50
 
-BAD_INPUTS = [
+
+BAD_TYPE_INPUTS = [
+    123,
+]
+
+BAD_STR_INPUTS = [
     '_112345',
     '112345_',
     '1+2+3*5',
 ]
+
 
 # -- CONSTANTS "AUTO" - START -- #
 
@@ -62,12 +68,12 @@ TAG_TEST_NAME    = 'name'
 def test_nameof_spaces_underscores_ignored():
     for lang in LANGS_SORTED:
         mynamer = IntName(lang)
-        nameof  = lambda x: mynamer.nameof(x, tryconvert = True)
+        nameof  = mynamer.nameof
         maxpos  = 10**(2*mynamer._big_expo_max) - 1
         minneg  = - maxpos
 
         for _ in range(NB_RAND_TESTS):
-            randnb          = randint(minneg, maxpos)
+            randnb          = str(randint(minneg, maxpos))
             randnb_polluted = ''
 
             for c in str(randnb):
@@ -93,39 +99,53 @@ def test_nameof_spaces_underscores_ignored():
 # -- BAD INPUT -- #
 # --------------- #
 
-def test_nameof_badinput():
+def test_nameof_badinput_STR():
     for lang in LANGS_SORTED:
-        nameof = lambda x: IntName(lang).nameof(x, tryconvert = True)
+        nameof = IntName(lang).nameof
 
-        for badinput in BAD_INPUTS:
+        for bad in BAD_STR_INPUTS:
             with pytest.raises(
-                ValueError,
+                (AssertionError, ValueError),
                 match = r".*not an integer.*"
             ):
-                nameof(badinput)
+                nameof(bad)
+
+
+def test_nameof_badinput_TYPE():
+    for lang in LANGS_SORTED:
+        nameof = IntName(lang).nameof
+
+        for bad in BAD_TYPE_INPUTS:
+            with pytest.raises(
+                (AssertionError, ValueError),
+                match = r".*illegal type.*"
+            ):
+                nameof(bad)
 
 
 # ------------- #
 # -- BIGGEST -- #
 # ------------- #
 
-def test_nameof_biggest():
+def test_nameof_biggest_exception():
     for lang in LANGS_NOBIG:
         mynamer = IntName(lang)
+        nameof  = lambda x: IntName(lang).nameof(str(x))
         maxpos  = 10**(2*mynamer._big_expo_max) - 1
         minneg  = - maxpos
 
-        assert mynamer.nameof(maxpos)
-        assert mynamer.nameof(minneg)
+        assert nameof(maxpos)
+        assert nameof(minneg)
 
 
 # ------------ #
 # -- NO BIG -- #
 # ------------ #
 
-def test_nameof_nobig():
+def test_nameof_nobig_exception():
     for lang in LANGS_NOBIG:
         mynamer  = IntName(lang)
+        nameof   = lambda x: IntName(lang).nameof(str(x))
         maxpower = mynamer._big_expo_max
 
         for _ in range(NB_RAND_TESTS):
@@ -138,7 +158,7 @@ def test_nameof_nobig():
                 AssertionError,
                 match = r".*number too big.*"
             ):
-                mynamer.nameof(rnd_big)
+                nameof(rnd_big)
 
 
 # -------------- #
@@ -147,7 +167,7 @@ def test_nameof_nobig():
 
 def test_nameof_usecases():
     for lang in LANGS_SORTED:
-        nameof = lambda x: IntName(lang).nameof(x, tryconvert = True)
+        nameof = IntName(lang).nameof
 
         with (DATAS_USECASES_DIR / f"{lang}.json").open(
             encoding = 'utf-8',
@@ -156,10 +176,10 @@ def test_nameof_usecases():
             datas = json.load(f)
 
         for onedata in datas:
-            int_val     = onedata[TAG_TEST_INTEGER]
+            nb          = onedata[TAG_TEST_INTEGER]
             name_wanted = onedata[TAG_TEST_NAME]
 
-            assert nameof(int_val) == name_wanted, \
+            assert nameof(nb) == name_wanted, \
                    (
                     "\n"
                     f"LANG   : {lang}"
@@ -176,7 +196,7 @@ def test_nameof_usecases():
 
 def test_nameof_translators_small():
     for lang in LANGS_SORTED:
-        nameof = lambda x: IntName(lang).nameof(x, tryconvert = True)
+        nameof = IntName(lang).nameof
 
         gtrad_json_file = DATAS_TRANSLATORS_DIR / "small" / f"{lang}.json"
 

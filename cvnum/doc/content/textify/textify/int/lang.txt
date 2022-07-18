@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-07-05
+    date = 2022-07-18
 
 
 ===================
@@ -12,7 +12,7 @@ python::
     from cvnum import textify
 
     intname = IntName()
-    print(intname.nameof(123))
+    print(intname.nameof("123"))
 
 
 Si vous souhaitez utiliser le français académique, vous pouvez faire comme ci-dessous où vous noterez l'utilisation de la constante spéciale ``fr_FR``
@@ -25,7 +25,7 @@ python::
     from cvnum import textify
 
     intname = IntName(fr_FR)
-    print(intname.nameof(123))
+    print(intname.nameof("123"))
 
 
 Vous pouvez juste changer dynamiquement la langue comme dans le code suivant.
@@ -35,15 +35,15 @@ python::
 
     # Par défaut, on utilise l'anglais de Grande-Bretagne ``en_GB``.
     intname = IntName()
-    print(intname.lang, ":", intname.nameof(123))
+    print(intname.lang, ":", intname.nameof("123"))
 
     # En anglais américain.
     intname.lang = en_US
-    print(intname.lang, ":", intname.nameof(123))
+    print(intname.lang, ":", intname.nameof("123"))
 
     # En espagnol.
     intname.lang = es_ES
-    print(intname.lang, ":", intname.nameof(123))
+    print(intname.lang, ":", intname.nameof("123"))
 
 
 Une fois lancé dans un terminal, le code produira ce qui suit.

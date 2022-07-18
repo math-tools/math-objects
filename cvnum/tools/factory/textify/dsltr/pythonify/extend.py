@@ -23,7 +23,7 @@ _REMAINING_KINDS_TO_KEEP = _KINDS_TO_KEEP - set([
 ])
 
 
-def sortlangs(alltrans):
+def deps_n_sortlangs(alltrans):
     deps = {}
 
     for lang, specs in alltrans.items():
@@ -78,12 +78,12 @@ def sortlangs(alltrans):
     # exit()
     # ! -- DEBUGGING -- ! #
 
-    return sortedlangs
+    return deps, sortedlangs
 
 
 def manage_extend(alltrans):
 # Chaining extensions
-    sortedlangs      = sortlangs(alltrans)
+    _, sortedlangs   = deps_n_sortlangs(alltrans)
     pyspecs_alltrans = {}
 
     for lang in sortedlangs:

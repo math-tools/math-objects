@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-07-05
+    date = 2022-07-18
 
 
 ===================
@@ -24,4 +24,4 @@ terminal::
     sept cent quatre-vingt-neuf
 
 
-Avec python::``intname.nameof(-123_456_789)``, on obtiendrait "moins ...".
+Avec python::``intname.nameof("- 123_456_789")``, on obtiendrait "moins ...".

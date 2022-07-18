@@ -1,0 +1,65 @@
+﻿this::
+    date = 2022-07-18
+
+
+========================
+Transformer en un entier
+========================
+
+Commençons par le comportement par défaut de la fonction ``intify`` capable de converir une variable ¨python en un entier sous certaines conditions.
+Commençons par le comportement par défaut qui se limite à valider qu'une variable est bien de type ``int``, en renvoyant la valuer de la variable.
+
+python-term::
+    >>> from cvnum.tbox.var2nb import *
+    >>> print(intify(123)))
+    123
+    >>> print(intify(- 456)))
+    - 456
+    >>> print(intify("+ 789"))
+    [...]
+    AssertionError: ``The number str(nb) = '60000'`` is not an integer.
+    Info: no try to convert, and repr(nb) = "'60000'".
+
+
+Le dernier message d'erreur laisse entrevoir la possibilité de faire un peu plus que le banal exemple précédent.
+Effectivement, on peut demander que la variable soit transformée via ``str`` en une chaîne de carctères, pour ensuite valider que cette chaîne représente un entier.
+Ceci se fait comme suit où le `789` renvoyé est de type ``int``.
+
+...python-term::
+    >>> print(intify("+ 789", tryconvert = True))
+    789
+
+
+On peut aussi choisir une valeur minimale autorisée, ¨etou un valeur maximale, ces valeurs devant être de type ``float``, ou de l'un de ses sous-types. Voici un exemple d'utilisation.
+
+...python-term::
+    >>> print(intify(8, min = 0))
+    8
+    >>> print(intify(8, min = 10))
+    [...]
+    AssertionError: ``The number 8`` is too small (mini = 10).
+
+
+note::
+    Par défaut, ``intify`` utilise mini = float('-inf') et maxi = float('inf').
+
+
+Dans les messages d'erreur, il est possible d'utiliser autre chose que "number" grâce au paramètre ``name``. C'est simple comme le montre l'exemple suivant.
+
+...python-term::
+    >>> print(intify(8, min = 10, name = "BIG NUMBER"))
+    [...]
+    AssertionError: ``The BIG NUMBER 8`` is too small (mini = 10).
+
+
+Un dernier paramètre proposé par ``intify`` est ``toremove`` qui eprmet de fournir une liste de textes à effacer de la représentation textuelle de la variable. Ceci sous-entend l'utilisation de ``tryconvert = True`` pour un effet notable. Voici ce que cela donne où l'on notera au passage la prise en compte automatique des ¨_s comme dans les entiers ¨python.
+
+...python-term::
+    >>> bignb = "111_222_333  444_555_666"
+    >>> print(intify(bignb, tryconvert = True, toremove = [' ']))
+    111222333444555666
+    >>> print(intify(bignb, tryconvert = True))
+    [...]
+    ValueError: ``The number str(nb) = '111_222_333 444_555_666'`` is not
+    an integer.
+    Infos: repr(nb) = "'111_222_333 444_555_666'" and toremove = [].

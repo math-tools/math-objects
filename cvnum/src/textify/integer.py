@@ -11,7 +11,7 @@ from re import findall
 
 from .automata import *
 
-from ..tbox.str2nb import intify
+from ..tbox.var2nb import intify
 
 
 # --------------------- #
@@ -55,27 +55,25 @@ class IntName(BaseAutomaton):
 
 ###
 # prototype::
-#     nb         : any object that is printable as an integer
-#                @ str(nb) in str(ZZ)
-#     tryconvert : to allow, or not, the use of the printed version of
-#                  ``number`` such as to try to convert it to an integer
+#     nb : a string that represents a "legal" integer
+#          (see the method ``self.sign_n_abs`` for the meaning of "legal")
 #
-#     :return: the name of ``str(nb)`` in the language ``self.lang``
+#     :return: the name of ``nb`` in the language ``self.lang``
 #
-#     :see: self.name_big ,
+#     :see: self.sign_n_abs ,
+#           self.name_big ,
 #           self.name_small
 ###
-    def nameof(
-        self,
-        nb        : Any,
-        tryconvert: bool = False
-    ) -> str:
+    def nameof(self, nb: str) -> str:
+        assert isinstance(nb, str), \
+               f'illegal type : "{type(nb) = }".'
+
 # For error messages.
         self._initial_nb = nb
 
 # Name of the sign, and the string version of the absolute value of the integer.
-        sign, str_absnb = self.sign_n_abs(nb, tryconvert)
-        nb_digits       = len(str_absnb)
+        sign, absnb = self.sign_n_abs(nb)
+        nb_digits   = len(absnb)
 
 # Do big numbers are allowed?
         assert (
@@ -93,11 +91,11 @@ class IntName(BaseAutomaton):
 # warning::
 #     Zero is a very special case (we will work with ``d_var`` made of
 #     several zero).
-        if str_absnb == '0':
-            name = self.name_small(str_absnb)
+        if absnb == '0':
+            name = self.name_small(absnb)
 
         else:
-            name = self.name_big(str_absnb)
+            name = self.name_big(absnb)
 
 # Suffixes for very big integers.
             # ! -- DEBUGGING -- ! #
@@ -130,30 +128,27 @@ class IntName(BaseAutomaton):
 
 ###
 # prototype::
-#     nb         : any object that is printable as an integer
-#                @ str(nb) in str(ZZ)
-#     tryconvert : to allow, or not, the use of the printed version of
-#                  ``number`` such as to try to convert it to an integer
+#     nb : a string that represents a "legal" integer
 #
 #     :return: the name of the sign or an empty string,
 #              and the string version of the absolute numerical value
 #              of ``str(nb)``
-#            @ let intnb = int(str(nb)) ;
+#            @ let intnb = int(nb) ;
 #              abs(return[1]) = abs(intnb) ;
 #              return[0] = '-' if intnb < 0 ;
 #              return[0] in ['', '+'] if intnb >= 0
+#
+#
+# note::
+#     Some separators between digits are allowed.
 ###
-    def sign_n_abs(
-        self,
-        nb        : Any,
-        tryconvert: bool,
-    ) -> Tuple[str, str]:
-# A plus sign?
-        strnb = str(nb)
+    def sign_n_abs(self, nb: str) -> Tuple[str, str]:
+        nb = nb.strip()
 
-        if strnb[0] == "+":
-            sign = strnb[0]
-            nb   = strnb[1:]
+# A plus sign?
+        if nb[0] in "+-":
+            sign = nb[0]
+            nb   = nb[1:]
 
         else:
             sign = ""
@@ -161,17 +156,12 @@ class IntName(BaseAutomaton):
 # Integer version of nb.
         nb = str(
             intify(
-                number     = nb,
-                tryconvert = tryconvert,
+                nb         = nb,
+                tryconvert = True,
                 toremove   = [' ', self._groups_sep],
                 name       = "absolute value"
             )
         )
-
-# A minus sign?
-        if nb[0] == "-":
-            sign = nb[0]
-            nb   = nb[1:]
 
 # Name of the sign
         if sign:

@@ -9,7 +9,7 @@ from .config import *
 SPACES_FOR_INT = " _"
 CHARS_FOR_INT  = set(digits + SPACES_FOR_INT + "+-*")
 
-def intify(txtexopr):
+def localintify(txtexopr):
     memo_txtexopr = txtexopr
 
     assert set(txtexopr) <= CHARS_FOR_INT, \
@@ -29,7 +29,7 @@ def intify(txtexopr):
     if memo_txtexopr.strip()[0] == '+':
         intval = f"+{intval}"
 
-    return intval
+    return str(intval)
 
 
 def buildjson(kind, onepath):
@@ -56,7 +56,7 @@ def buildjson(kind, onepath):
             if val:
                 jsoncode.append({
                     'where'  : where,
-                    'integer': intify(key),
+                    'integer': localintify(key),
                     'initial': key,
                     'name'   : val,
                 })
@@ -69,7 +69,7 @@ def buildjson(kind, onepath):
     if val:
         jsoncode.append({
             'where'  : where,
-            'integer': intify(key),
+            'integer': localintify(key),
             'initial': key,
             'name'   : val,
         })

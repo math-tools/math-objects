@@ -12,13 +12,12 @@ from math import (
     log
 )
 
-from .int2base import (
+from .int2base import int2bnb
+
+from ...tbox.var2nb import (
     basify,
     intify,
-    int2bnb
 )
-
-
 
 
 # ---------------------------- #
@@ -145,12 +144,11 @@ def bdigits2int(
 
     for n in reversed(bdigits):
         n = intify(
-            number = n,
-            name   = "digit"
+            nb   = n,
+            mini = 0,
+            maxi = base - 1,
+            name = "digit"
         )
-
-        assert n < base, \
-               f"digit << {n} >> is bigger than the base << {base} >>."
 
         intval += n*bpower
         bpower *= base
@@ -201,8 +199,8 @@ def bnumerals2int(
 #
 #     :return: the integer value of ``number``
 #
-#     :see: bnumerals2int ,
-#           bnb2bnumerals
+#     :see: basenumerals ,
+#           bnumerals2int
 #
 #
 # note::

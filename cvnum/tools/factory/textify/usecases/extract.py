@@ -4,8 +4,9 @@ from .config import *
 
 
 def usecases_deps(dirlang):
-    rulestoignore = langdefs(dirlang)
-    dependencies  = list(extend_deps(rulestoignore))
+    rulestoignore   = langdefs(dirlang)
+    dependencies, _ = deps_n_sortlangs(rulestoignore)
+    dependencies    = list(dependencies)
 
     # Just keep the tags useful for testing.
     for specs in rulestoignore.values():

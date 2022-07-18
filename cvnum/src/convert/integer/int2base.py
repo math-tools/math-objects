@@ -12,10 +12,7 @@ from math import (
     log
 )
 
-from .common import (
-    basify,
-    intify
-)
+from ...tbox.var2nb import *
 
 
 # ---------------------- #
@@ -24,16 +21,16 @@ from .common import (
 
 ###
 # prototype::
-#     nb : the integer to convert into digits in base ``base``
+#     nb : a positive integer
 #        @ nb >= 0
 #
-#     :return: the list of textual numerals of ``nb``, the numerals beeing
-#              sorted from the biggest weight to the smallest one
-#            @ v in return ==> v in str(0..10)
+#     :return: the list of textual decimal digits of ``nb`` from the biggest
+#              weight to the smallest one
+#            @ v in return ==> v in str(0..9)
 ###
 def intnumerals(nb: int) -> List[str]:
 # Is ``nb`` a natural ?
-    nb = intify(nb)
+    nb = intify_notneg(nb)
 
 # We can do the conversion.
     return [d for d in str(nb)]
@@ -42,7 +39,7 @@ def intnumerals(nb: int) -> List[str]:
 ###
 # prototype::
 #     nb : the integer to convert into digits in base ``base``
-#        @ nb >= 0
+#        @ nb >= 0 {not tested}
 #
 #     :return: the list of decimal digits of ``nb``, the digits beeing
 #              sorted from the biggest weight to the smallest one
@@ -50,7 +47,7 @@ def intnumerals(nb: int) -> List[str]:
 ###
 def intdigits(nb: int) -> List[int]:
 # Is ``nb`` a natural ?
-    nb = intify(nb)
+    nb = intify_notneg(nb)
 
 # We can do the conversion.
     return [int(d) for d in str(nb)]
@@ -62,15 +59,15 @@ def intdigits(nb: int) -> List[int]:
 
 ###
 # prototype::
-#     nb   : the integer to convert into digits in base ``base``
+#     nb   : the integer to convert into integer digits in base ``base``
 #          @ nb >= 0
 #     base : an integer that represents a base
 #          @ base > 1
 #
-#     :return: the list of digits of ``nb`` converted into the base
+#     :return: the list of integer digits of ``nb`` converted into the base
 #              ``base``, the digits beeing sorted from the biggest weight
 #              to the smallest one
-#            @ v in return ==> v in NN
+#            @ v in return ==> v in 0..(base-1)
 #
 #
 # note::
@@ -81,7 +78,7 @@ def int2bdigits(
     base: int,
 ) -> List[int]:
 # Is ``nb`` a natural ?
-    nb = intify(nb)
+    nb = intify_notneg(nb)
 
 # Is ``base`` a natural greater than one ?
     base = basify(base)
@@ -107,13 +104,17 @@ def int2bdigits(
 #     base : the base used to write a natural integer
 #          @ base > 1
 #
-#     :return: a function that converts a ``base`` digit into a textual numeral.
+#     :return: a function that converts a ``base`` integer digit into
+#              a textual numeral.
 #
 #
 # warning::
 #     This function is an internal one even if we let it public.
 ###
 def numeralize(base: int) -> Callable[[int], str]:
+# Is ``base`` a natural greater than one ?
+    base = basify(base)
+
 # Number of characters needed to code one single digit.
     max_singledigit = 36
 
@@ -195,7 +196,10 @@ def int2bnumerals(
     nb  : int,
     base: int,
 ) -> List[int]:
-    nb   = intify(nb)
+# Is ``nb`` a natural ?
+    nb = intify_notneg(nb)
+
+# Is ``base`` a natural greater than one ?
     base = basify(base)
 
     return numeralize(base)(nb)
@@ -225,7 +229,10 @@ def int2bnb(
     base: int,
     sep : str = "."
 ) -> str:
-    nb   = intify(nb)
+# Is ``nb`` a natural ?
+    nb = intify_notneg(nb)
+
+# Is ``base`` a natural greater than one ?
     base = basify(base)
 
     if base < 37:

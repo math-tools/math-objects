@@ -19,7 +19,7 @@ from .int2base import (
     int2bdigits
 )
 
-from .common import basify
+from ...tbox.var2nb import basify
 
 
 # --------------- #

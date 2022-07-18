@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 ###
-# This module converts positive integers in [1 , 4999] into roman ones
+# This module converts positive integers in `1..4999` into roman ones
 # and vice versa.
 ###
 
@@ -11,7 +11,7 @@ from typing import *
 import re
 
 from ...config.digit import ROMAN_2_NUMERAL
-from ...tbox.str2nb  import intify
+from ...tbox.var2nb  import intify
 
 
 # ---------------------- #
@@ -67,12 +67,12 @@ def isroman(rnb: str) -> bool:
 #     :return: the roman writing of ``nb``.
 ###
 def int2roman(nb: int) -> str:
-# ``nb`` must be a natural integer.
-    nb = intify(nb)
-
-# We must have ``1 <= nb <= 4999``.
-    assert 0 < nb < 5000, \
-           'the natural integer ``nb`` must go from 1 to 4999.'
+# ``nb`` must be a natural integerbelonging to 1..4999.
+    nb = intify(
+        nb   = nb,
+        mini = 1,
+        maxi = 4999,
+    )
 
 # We first build the upper version of the roman nb by adding the biggest
 # roman numerals first (here, we use the fact that ``ROMAN_2_NUMERAL`` is

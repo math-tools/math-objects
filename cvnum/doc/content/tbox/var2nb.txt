@@ -1,0 +1,12 @@
+﻿abrev::
+    content = /var2nb
+
+
+=========================================
+Variables converties en "nombres ¨python"
+=========================================
+
+content::
+    ¨content/intify.txt
+    ¨content/intify_notneg.txt
+    ¨content/basify.txt

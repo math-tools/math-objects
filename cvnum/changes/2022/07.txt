@@ -9,33 +9,26 @@
 --------
 
 [[:api:]]
+Here are the breaking new features.
 
-Conversions of integers: one package ``convert.integer`` has been created to gather all the features already available (conversions of other kinds of ¨nbs will be added later).
+    1) Conversions of integers: one package ``convert.integer`` has been created to gather all the features already available (conversions of other kinds of ¨nbs will be added later).
 
-
------
-:new:
------
-
-????
-
-tryconvert accesible partout (à False par défaut !)
-
-(in backstage, the new function ``tbox.str2nb.intify`` is used)
-
-doc a jour ????
-
-
-doc pour str2nb et aussi parler de common/basify !!!
-
-
-
-
+    1) Naming integers: the method ``IntName.nameof`` only accepts strings.
 
 
 --------
-:update:
+:updates:
 --------
+
+[[:doc:]]
+Here the new things added.
+
+    1) Conversions of integers: the new package ``convert.integer`` has been indicated.
+
+    1) Naming integers: the only possibility to translate from string to string has been added.
+
+    1) Toolbox: a ¨doc has been added to present this package.
+
 
 [[:bugs:]]
 ¨DSL for translations: the work on the new unit tests via *googletrad has revealed two stupid bugs with the ¨lang ``en_US``.
@@ -50,13 +43,17 @@ doc pour str2nb et aussi parler de common/basify !!!
 --------
 
 [[:facto:]]
-Tool box: from now, this package is to share features for ``convert`` and ``textify``. This implies the following changes.
+Toolbox: this package is to share features useful for the packages of  ``cvnum``. This implies the following changes.
 
-    1) A new function ``tbox.str2nb.intify`` allows to do the same jobs as the old ``tbox.str2nb.intnonneg`` and ``tbox.str2nb.intbase``. This new function allows the use of ¨_s betwwen digits.
+    1) The package ``tbox.str2nb`` has been deleted.
 
-    1) The functions ``tbox.str2nb.intnonneg`` and ``tbox.str2nb.intbase`` has been deleted.
+    1) Creation of a new package ``tbox.var2nb`` with the following functions.
 
-    1) A new function ``convert.integer.common.basify`` transforms one variable into a legal integer base.
+        * ``intify`` can transform one variable into a legal integer (for example, this new function allows the use of ¨_s between digits).
+
+        * ``intify_notneg`` can transform one variable into a legal non negtaive integer.
+
+        * ``basify`` can transform one variable into a legal integer that can be used as a base.
 
 
 [[:api:]]
@@ -72,6 +69,11 @@ Some new tests.
     Tests unitiares de conversion et/ou BDT via hypothesis
 
     Testing the conversions in different bases: via du BTD ???
+
+
+
+
+
 
 
 // ---------- //

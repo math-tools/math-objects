@@ -17,7 +17,7 @@ MODULE_DIR = addfindsrc(
 # -- LET'S GO -- #
 # -------------- #
 
-from src.tbox import *
+from src.tbox.var2nb import *
 
 class fakeINT:
     def __init__(self, n):
@@ -26,15 +26,22 @@ class fakeINT:
     def __str__(self):
         return str(self.n)
 
+
+# bignb = "111_222_333 444_555_666";print(intify(bignb, tryconvert = True, toremove = ['']));exit()
+
 for n in [
-    50000,
+    123,
+    -123,
     "60000",
     fakeINT(54321),
 ]:
     print()
     print('--- intnonneg ---')
     print(f"{n} with type = {type(n)}")
-    print(intify(n, tryconvert = True))
+
+    # print(intify(n))
+    print(intify(n, mini = 10))
+    # print(intify(n, tryconvert = True))
 
 
 for n in [

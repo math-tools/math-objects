@@ -29,8 +29,8 @@ class BaseAutomaton:
 #     lang : the language used to name integers
 #          @ lang in ALL_LANGS
 #
-#       :action: this method builds the ¨dict ``self.ACTIONS_IMPLEMENTED``
-#                that associates each ¨DSL tag to an effective method.
+#     :action: this method builds the ¨dict ``self.ACTIONS_IMPLEMENTED``
+#              that associates each ¨DSL tag to an effective method.
 ###
     def __init__(self, lang: str = "en_GB") -> None:
         self.lang = lang

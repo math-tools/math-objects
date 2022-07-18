@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from dsltr    import *
+from dsltr import *
 
 
 TAGS_FOR_IGNORED_TESTS = [
