@@ -49,7 +49,7 @@ from unit.common import build_removable
 # ---------------------- #
 
 @given(st.text())
-def test_nameof_badinput_name(text):
+def test_intify_badinput_name(text):
     with pytest.raises(
         (AssertionError, ValueError),
         match = r".*XXXXXX.*"
@@ -62,7 +62,7 @@ def test_nameof_badinput_name(text):
 # ---------------- #
 
 @given(st.integers())
-def test_nameof_badinput_str_int_NOT_OK(nb):
+def test_intify_badinput_str_int_NOT_OK(nb):
     with pytest.raises(
         (AssertionError, ValueError),
         match = r".*not an integer.*"
@@ -71,7 +71,7 @@ def test_nameof_badinput_str_int_NOT_OK(nb):
 
 
 @given(st.integers())
-def test_nameof_str_int_convert_OK(nb):
+def test_intify_str_int_convert_OK(nb):
     assert nb == intify(str(nb), tryconvert = True)
 
 
@@ -89,8 +89,8 @@ def st_badintminmax(draw, elements = st.integers()):
 
 
 @given(st_badintminmax())
-def test_nameof_too_small(nbminimaxi):
-    nb, mini, maxi = nbminimaxi
+def test_intify_too_small(nbminimaxi):
+    nb, mini, _ = nbminimaxi
 
     with pytest.raises(
         AssertionError,
@@ -100,8 +100,8 @@ def test_nameof_too_small(nbminimaxi):
 
 
 @given(st_badintminmax())
-def test_nameof_too_big(nbminimaxi):
-    nb, mini, maxi = nbminimaxi
+def test_intify_too_big(nbminimaxi):
+    nb, _, maxi = nbminimaxi
 
     with pytest.raises(
         AssertionError,
@@ -115,7 +115,7 @@ def test_nameof_too_big(nbminimaxi):
 # ------------ #
 
 @given(st.integers(min_value = 1))
-def test_nameof_remove_OK(nb):
+def test_intify_remove_OK(nb):
     toremove = [' ', '_']
 
     assert intify(
@@ -126,7 +126,7 @@ def test_nameof_remove_OK(nb):
 
 
 @given(st.integers(min_value = 10))
-def test_nameof_remove_NOT_OK(nb):
+def test_intify_remove_NOT_OK(nb):
     toremove = [' ', '_', '.']
 
     with pytest.raises(
