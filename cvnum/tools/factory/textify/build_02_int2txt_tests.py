@@ -23,7 +23,7 @@ while(SRC_DIR.name != "cvnum"):
     SRC_DIR = SRC_DIR.parent
 
 DIR_LANG         = SRC_DIR / "contribute" / "api" / "textify" / "lang"
-PYTEST_DIR       = SRC_DIR / "tests" / "textify" / "integers"
+PYTEST_DIR       = SRC_DIR / "tests" / "unit" / "textify" / "integers"
 TEST_USECASE_DIR = PYTEST_DIR / "usecases"
 TEST_PYFILE      = PYTEST_DIR / "test_02_int2txt_nameof.py"
 

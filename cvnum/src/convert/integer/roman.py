@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 ###
-# This module converts positive integers in `1..4999` into roman ones
+# This module converts positive integers in `1..4999` into Roman ones,
 # and vice versa.
 ###
 

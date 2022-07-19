@@ -24,6 +24,14 @@ MODULE_DIR = addfindsrc(
 from src.textify import *
 
 
+_ = addfindsrc(
+    file    = __file__,
+    project = 'tests',
+)
+
+from unit.common import build_removable
+
+
 # ----------------------- #
 # -- GENERAL CONSTANTS -- #
 # ----------------------- #
@@ -65,29 +73,6 @@ TAG_TEST_NAME    = 'name'
 # -- SPACES/UNDERSCORES IGNORED BIG -- #
 # ------------------------------------ #
 
-# TODO Create a new strategy!
-def build_removable(nb, toremove, atleastone = True):
-    nb          = str(nb)
-    nb_polluted = ''
-
-    for c in nb:
-        if (
-            nb_polluted
-            and
-            not nb_polluted[-1] in toremove
-            and
-            randint(0, 10) <= 7
-        ):
-            nb_polluted += choice(toremove)
-
-        nb_polluted += c
-
-    if atleastone and nb_polluted == nb:
-        nb_polluted = nb_polluted[:1] + choice(toremove) + nb_polluted[1:]
-
-    return nb_polluted
-
-
 def test_nameof_spaces_underscores_ignored():
     for lang in LANGS_SORTED:
         mynamer = IntName(lang)
@@ -105,7 +90,7 @@ def test_nameof_spaces_underscores_ignored():
 # -- BAD INPUT -- #
 # --------------- #
 
-def test_nameof_badinput_STR():
+def test_nameof_input_string_NOT_OK():
     for lang in LANGS_SORTED:
         nameof = IntName(lang).nameof
 
@@ -117,7 +102,7 @@ def test_nameof_badinput_STR():
                 nameof(bad)
 
 
-def test_nameof_badinput_TYPE():
+def test_nameof_input_type_NOT_OK():
     for lang in LANGS_SORTED:
         nameof = IntName(lang).nameof
 
@@ -133,7 +118,7 @@ def test_nameof_badinput_TYPE():
 # -- BIGGEST -- #
 # ------------- #
 
-def test_nameof_biggest_no_exception():
+def test_nameof_biggest_OK():
     for lang in LANGS_NOBIG:
         mynamer = IntName(lang)
         nameof  = lambda x: IntName(lang).nameof(str(x))
@@ -148,7 +133,7 @@ def test_nameof_biggest_no_exception():
 # -- NO BIG -- #
 # ------------ #
 
-def test_nameof_nobig_exception():
+def test_nameof_nobig_NOT_OK():
     for lang in LANGS_NOBIG:
         mynamer  = IntName(lang)
         nameof   = lambda x: IntName(lang).nameof(str(x))

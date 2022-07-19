@@ -41,8 +41,7 @@ def bdigitize(base: int) -> Dict[str, int]:
 ###
 # prototype::
 #     bnb  : a number writing into the base ``base``
-#     base : an integer that represents a base
-#          @ base > 1
+#     base : :see: ``bdigitize``
 #     sep  : the text used to separate the textual numerals
 #
 #     :return: the list of textual numerals of ``bnb``, the numerals beeing
@@ -93,9 +92,8 @@ def basenumerals(
 ###
 # prototype::
 #     bnb  : a number writing into the base ``base``
-#     base : an integer that represents a base
-#          @ base > 1
-#     sep  : the text used to separate the textual numerals
+#     base : :see: ``bdigitize``
+#     sep  : the text used to separate the integer numerals
 #
 #     :return: the list of decimal digits of ``bnb``, the digits beeing
 #              sorted from the biggest weight to the smallest one
@@ -123,8 +121,7 @@ def basedigits(
 #     bdigits : a list of ``base`` digits from the biggest weight to
 #               the smallest one
 #             @ d in bdigits ==> d in 0..base-1
-#     base    : an integer that represents a base
-#             @ base > 1
+#     base    : :see: ``bdigitize``
 #
 #     :return: the integer value corresponding to the ``base`` digits
 #
@@ -160,8 +157,7 @@ def bdigits2int(
 # prototype::
 #     bnumerals : a list of ``base`` textual numerals sorted from the biggest
 #                 weight to the smallest one
-#     base      : an integer that represents a base
-#               @ base > 1
+#     base      : :see: ``bdigitize``
 #
 #     :return: the integer value from the biggest weight to the smallest one
 #
@@ -192,9 +188,8 @@ def bnumerals2int(
 
 ###
 # prototype::
-#     bnb  : a string version of ``number`` written into the base ``base``
-#     base : an integer that represents a base
-#          @ base > 1
+#     bnb  : a number written into the base ``base``
+#     base : :see: ``bdigitize``
 #     sep  : the text used to separate the textual numerals
 #
 #     :return: the integer value of ``number``

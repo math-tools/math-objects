@@ -1,6 +1,25 @@
 // ---------- //
 
 ==
+19
+==
+
+--------
+:fordev:
+--------
+
+[[:facto:]]
+Unit tests.
+
+    1) Use of homemade ``hypothesis`` strategies when it is needed.
+
+    1) A package ``unit.common`` contains common tools for tests.
+
+
+// ---------- //
+
+
+==
 18
 ==
 
@@ -55,7 +74,7 @@ Here the new things added.
 --------
 
 [[:api:]]
-New tests with some of them that use of the excellent package ``hypothesis``.
+New unit tests with some of them that use of the excellent package ``hypothesis``.
 
     1) Naming integers: two new things.
 
@@ -115,7 +134,7 @@ Three bugs have been fixed.
 [[:api:]]
 Testing the naming of integers.
 
-    1) Some tests added by hands.
+    1) Some unit tests added by hands.
 
     1) Datas for unit tests automatically build from the usecases in the folder of the contributions.
 
@@ -254,7 +273,7 @@ Here are the changes.
 [[:api:]]
 Here are the new features to name integers.
 
-    1) Naming integers: the new ¨python ¨api is now "fully functional" (tests will be added soon, so it should remain some insidious and serious bugs).
+    1) Naming integers: the new ¨python ¨api is now "fully functional" (unit tests will be added soon, so it should remain some insidious and serious bugs).
 
     1) ¨DSL for translations: the analysis of very big numbers follows a simpler logic. This implies the creation of a new optional key cvnum::``dir`` for the block peuf::``general``.
 

@@ -127,7 +127,7 @@ class IntName(BaseAutomaton):
 
 ###
 # prototype::
-#     nb : a string that represents a "legal" integer
+#     nb : a string that represents a "legal" integer (see the note below)
 #
 #     :return: the sign or an empty string,
 #              and the string version of the absolute numerical value

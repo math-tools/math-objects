@@ -6,7 +6,7 @@
 
 from   hypothesis            import given
 import hypothesis.strategies as st
-import pytest
+# import pytest
 
 from cbdevtools     import *
 
@@ -23,19 +23,23 @@ MODULE_DIR = addfindsrc(
 from src.textify import *
 
 
-# ---------------------------- #
-# -- STRING INT - FORBIDDEN -- #
-# ---------------------------- #
+# --------------------- #
+# -- POST CONDITIONS -- #
+# --------------------- #
 
-# Postconditions for the value returned.
+# Postconditions from the technical documentation.
 #
 #    let intnb = int(nb) ;
 #    int(return[1]) = abs(intnb) ;
 #    return[0] = '-' if intnb < 0 ;
 #    return[0] in ['', '+'] if intnb >= 0
+#
+# warning::
+#     The parameter ``nb`` is known to be a legal string representation of
+#     an integer.
 
 @given(st.integers())
-def test_sign_n_abs_postcond_OK(nb):
+def test_sign_n_abs_postcond(nb):
     valreturned = IntName().sign_n_abs(str(nb))
 
     assert (
@@ -47,3 +51,18 @@ def test_sign_n_abs_postcond_OK(nb):
             (valreturned[0] in ['', '+'] and nb >= 0)
         )
     )
+
+
+@given(st.integers(min_value = 0))
+def test_sign_n_abs_postcond_plus_sign(nb):
+    nb          = f"+{nb}"
+    valreturned = IntName().sign_n_abs(nb)
+
+    assert valreturned[0] == '+'
+
+
+@given(st.integers(min_value = 0))
+def test_sign_n_abs_postcond_no_plus_sign(nb):
+    valreturned = IntName().sign_n_abs(str(nb))
+
+    assert valreturned[0] == ''
