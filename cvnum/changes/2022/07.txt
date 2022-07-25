@@ -1,6 +1,86 @@
 // ---------- //
 
 ==
+22 ???
+==
+
+-------
+:break:
+-------
+
+[[:api:]] ??????
+The packages ``tbox`` and ``convert.integer`` have been totally rebuild. Here are the breaking updates made.
+
+    ?????? 1) The method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb`` have been removed, because a class ``var2int.Var2Int`` has been created to obtain several kinds of normalisation of variables.
+
+    int_n_strify renvoie str et int versions
+    int_n_strsignabs
+
+
+    ?????? 1) Conversions of integers: negative integers are allowed. This has implied the following changes.
+
+        * utilisation de classes avec natconv.NatCnv comme base commune
+
+        * on part de NN puis ensuite on enrichit avec ZZ
+
+        * cahce utilisé en interne pour cas avec base peu changés
+
+        * api "symétrique" : ajout de digits2nat et numerals2nat à Int2Base
+
+        * nom mpons abigus et sytsématique
+
+                        + base dix : pas de péréfixe
+
+                        + [b]digitsof et [b]numeralsof
+
+    ?????? 1) Naming integers: the method ``IntName.nameof`` accepts again variables with string representation beeing a "legal" integer.
+
+
+--------
+:update:
+--------
+
+[[:doc:]]
+???? toutes les nouveautés !!!
+
+--------
+:fordev:
+--------
+
+[[:api:]]    ??????
+Unit tests.
+
+    ?????? 1) Conversions of integers: every features are tested except for the Roman writing of integers (new versions of Roman conversions will come soon that will be easy to test).
+
+
+    ?????? 1) Naming integers: new tests added with variables that are not strings.
+
+
+[[:misc:]]  ??????
+https://github.com/gruns/icecream
+
+    ---> faire un mini script BASIQUE qui nettoie code en prod (option dans scr2prod)
+
+            * on vire ligne commençant par ic()
+            * on vire import icecream
+
+            * mais aussi on gère
+              # ! -- DEBUGGING -- ! #
+              suivi de
+              # ! -- DEBUGGING -- ! #
+              en continue
+
+
+
+
+
+
+
+
+
+// ---------- //
+
+==
 19
 ==
 

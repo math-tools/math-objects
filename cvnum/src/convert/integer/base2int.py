@@ -1,216 +1,216 @@
-#!/usr/bin/env python3
+# #!/usr/bin/env python3
 
-###
-# This module converts specific base writings to decimal writings.
-###
-
-
-from typing import *
-
-from math import (
-    ceil,
-    log
-)
-
-from .int2base import int2bnb
-
-from ...tbox.var2nb import (
-    basify,
-    intify,
-)
+# ###
+# # This module converts specific base writings to decimal writings.
+# ###
 
 
-# ---------------------------- #
-# -- SPECIFIC BASE WRITINGS -- #
-# ---------------------------- #
+# from typing import *
 
-###
-# prototype::
-#     base : an integer that represents a base
-#          @ base > 1
-#
-#     :return: a dictionary associating ``base`` numerals to integer values
-###
-def bdigitize(base: int) -> Dict[str, int]:
-    return {
-        int2bnb(i, base): i
-        for i in range(base)
-    }
+# from math import (
+#     ceil,
+#     log
+# )
+
+# from .int2base import int2bnb
+
+# from ...tbox.var2int import (
+#     basify,
+#     intify,
+# )
 
 
-###
-# prototype::
-#     bnb  : a number writing into the base ``base``
-#     base : :see: ``bdigitize``
-#     sep  : the text used to separate the textual numerals
-#
-#     :return: the list of textual numerals of ``bnb``, the numerals beeing
-#              sorted from the biggest weight to the smallest one
-#            @ v in return ==> v in str(0..10)
-###
-def basenumerals(
-    bnb : str,
-    base: int,
-    sep : str = "."
-) -> List[str]:
-    base          = basify(base)
-    base_numerals = list(bdigitize(base))
+# # ---------------------------- #
+# # -- SPECIFIC BASE WRITINGS -- #
+# # ---------------------------- #
 
-# No need to use a separator.
-    if base <= 36:
-        numerals = [x for x in bnb]
-
-# An non empty seperator used.
-    elif sep:
-        numerals = bnb.split(sep)
-
-# An empty seperator has been used.
-    else:
-        numerals = []
-        nbchars  = ceil(log(base) / log(36))
-        sizenb   = len(bnb)
-
-        for i in range(sizenb - nbchars, -1, -nbchars):
-            numerals.append(bnb[i: i + nbchars])
-
-        nbchars_isolated = sizenb % nbchars
-
-        if nbchars_isolated != 0:
-            numerals.append(bnb[:nbchars_isolated])
-
-        numerals.reverse()
-
-# Legal numerals?
-    for n in numerals:
-        assert n in base_numerals, \
-               f"illegal numeral << {n} >> found"
-
-# The job is finished.
-    return numerals
+# ###
+# # prototype::
+# #     base : an integer that represents a base
+# #          @ base > 1
+# #
+# #     :return: a dictionary associating ``base`` numerals to integer values
+# ###
+# def bdigitize(base: int) -> Dict[str, int]:
+#     return {
+#         int2bnb(i, base): i
+#         for i in range(base)
+#     }
 
 
-###
-# prototype::
-#     bnb  : a number writing into the base ``base``
-#     base : :see: ``bdigitize``
-#     sep  : the text used to separate the integer numerals
-#
-#     :return: the list of decimal digits of ``bnb``, the digits beeing
-#              sorted from the biggest weight to the smallest one
-#            @ v in return ==> v in 0..base-1
-###
-def basedigits(
-    bnb : str,
-    base: int,
-    sep : str = "."
-) -> List[int]:
-    numerals2digits = bdigitize(base)
+# ###
+# # prototype::
+# #     bnb  : a number writing into the base ``base``
+# #     base : :see: ``bdigitize``
+# #     sep  : the text used to separate the textual numerals
+# #
+# #     :return: the list of textual numerals of ``bnb``, the numerals beeing
+# #              sorted from the biggest weight to the smallest one
+# #            @ v in return ==> v in str(0..10)
+# ###
+# def basenumerals(
+#     bnb : str,
+#     base: int,
+#     sep : str = "."
+# ) -> List[str]:
+#     base          = basify(base)
+#     base_numerals = list(bdigitize(base))
 
-    return [
-        numerals2digits[n]
-        for n in basenumerals(bnb, base, sep)
-    ]
+# # No need to use a separator.
+#     if base <= 36:
+#         numerals = [x for x in bnb]
 
+# # An non empty seperator used.
+#     elif sep:
+#         numerals = bnb.split(sep)
 
-# -------------------------------- #
-# -- SPECIFIC BASE ~~~> DECIMAL -- #
-# -------------------------------- #
+# # An empty seperator has been used.
+#     else:
+#         numerals = []
+#         nbchars  = ceil(log(base) / log(36))
+#         sizenb   = len(bnb)
 
-###
-# prototype::
-#     bdigits : a list of ``base`` digits from the biggest weight to
-#               the smallest one
-#             @ d in bdigits ==> d in 0..base-1
-#     base    : :see: ``bdigitize``
-#
-#     :return: the integer value corresponding to the ``base`` digits
-#
-#     :see: bdigitize
-#
-#
-# note::
-#     The name ``bdigits2int`` comes from "base digits to integer".
-###
-def bdigits2int(
-    bdigits: List[int],
-    base   : int,
-) -> int:
-    base   = basify(base)
-    intval = 0
-    bpower = 1
+#         for i in range(sizenb - nbchars, -1, -nbchars):
+#             numerals.append(bnb[i: i + nbchars])
 
-    for n in reversed(bdigits):
-        n = intify(
-            nb   = n,
-            mini = 0,
-            maxi = base - 1,
-            name = "digit"
-        )
+#         nbchars_isolated = sizenb % nbchars
 
-        intval += n*bpower
-        bpower *= base
+#         if nbchars_isolated != 0:
+#             numerals.append(bnb[:nbchars_isolated])
 
-    return intval
+#         numerals.reverse()
+
+# # Legal numerals?
+#     for n in numerals:
+#         assert n in base_numerals, \
+#                f"illegal numeral << {n} >> found"
+
+# # The job is finished.
+#     return numerals
 
 
-###
-# prototype::
-#     bnumerals : a list of ``base`` textual numerals sorted from the biggest
-#                 weight to the smallest one
-#     base      : :see: ``bdigitize``
-#
-#     :return: the integer value from the biggest weight to the smallest one
-#
-#     :see: bdigitize
-#
-#
-# note::
-#     The name ``bnumerals2int`` comes from "base numerals to integer".
-###
-def bnumerals2int(
-    bnumerals: List[str],
-    base     : int,
-) -> int:
-    base_digits = bdigitize(base)
+# ###
+# # prototype::
+# #     bnb  : a number writing into the base ``base``
+# #     base : :see: ``bdigitize``
+# #     sep  : the text used to separate the integer numerals
+# #
+# #     :return: the list of decimal digits of ``bnb``, the digits beeing
+# #              sorted from the biggest weight to the smallest one
+# #            @ v in return ==> v in 0..base-1
+# ###
+# def basedigits(
+#     bnb : str,
+#     base: int,
+#     sep : str = "."
+# ) -> List[int]:
+#     numerals2digits = bdigitize(base)
 
-    intval = 0
-    bpower = 1
-
-    for n in reversed(bnumerals):
-        assert n in base_digits, \
-               'unknown numeral << {0} >>.'.format(n)
-
-        intval += base_digits[n]*bpower
-        bpower *= base
-
-    return intval
+#     return [
+#         numerals2digits[n]
+#         for n in basenumerals(bnb, base, sep)
+#     ]
 
 
-###
-# prototype::
-#     bnb  : a number written into the base ``base``
-#     base : :see: ``bdigitize``
-#     sep  : the text used to separate the textual numerals
-#
-#     :return: the integer value of ``number``
-#
-#     :see: basenumerals ,
-#           bnumerals2int
-#
-#
-# note::
-#     The name ``bnb2int`` comes from "base number to integer".
-###
-def bnb2int(
-    bnb : str,
-    base: int,
-    sep : str = "."
-) -> int:
-    return bnumerals2int(
-        bnumerals = basenumerals(
-            bnb  = bnb,
-            base = base,
-            sep  = sep
-        ),
-        base = base
-    )
+# # -------------------------------- #
+# # -- SPECIFIC BASE ~~~> DECIMAL -- #
+# # -------------------------------- #
+
+# ###
+# # prototype::
+# #     bdigits : a list of ``base`` digits from the biggest weight to
+# #               the smallest one
+# #             @ d in bdigits ==> d in 0..base-1
+# #     base    : :see: ``bdigitize``
+# #
+# #     :return: the integer value corresponding to the ``base`` digits
+# #
+# #     :see: bdigitize
+# #
+# #
+# # note::
+# #     The name ``bdigits2int`` comes from "base digits to integer".
+# ###
+# def bdigits2int(
+#     bdigits: List[int],
+#     base   : int,
+# ) -> int:
+#     base   = basify(base)
+#     intval = 0
+#     bpower = 1
+
+#     for n in reversed(bdigits):
+#         n = intify(
+#             nb      = n,
+#             mini    = 0,
+#             maxi    = base - 1,
+#             errname = "digit"
+#         )
+
+#         intval += n*bpower
+#         bpower *= base
+
+#     return intval
+
+
+# ###
+# # prototype::
+# #     bnumerals : a list of ``base`` textual numerals sorted from the biggest
+# #                 weight to the smallest one
+# #     base      : :see: ``bdigitize``
+# #
+# #     :return: the integer value from the biggest weight to the smallest one
+# #
+# #     :see: bdigitize
+# #
+# #
+# # note::
+# #     The name ``bnumerals2int`` comes from "base numerals to integer".
+# ###
+# def bnumerals2int(
+#     bnumerals: List[str],
+#     base     : int,
+# ) -> int:
+#     base_digits = bdigitize(base)
+
+#     intval = 0
+#     bpower = 1
+
+#     for n in reversed(bnumerals):
+#         assert n in base_digits, \
+#                'unknown numeral << {0} >>.'.format(n)
+
+#         intval += base_digits[n]*bpower
+#         bpower *= base
+
+#     return intval
+
+
+# ###
+# # prototype::
+# #     bnb  : a number written into the base ``base``
+# #     base : :see: ``bdigitize``
+# #     sep  : the text used to separate the textual numerals
+# #
+# #     :return: the integer value of ``number``
+# #
+# #     :see: basenumerals ,
+# #           bnumerals2int
+# #
+# #
+# # note::
+# #     The name ``bnb2int`` comes from "base number to integer".
+# ###
+# def bnb2int(
+#     bnb : str,
+#     base: int,
+#     sep : str = "."
+# ) -> int:
+#     return bnumerals2int(
+#         bnumerals = basenumerals(
+#             bnb  = bnb,
+#             base = base,
+#             sep  = sep
+#         ),
+#         base = base
+#     )

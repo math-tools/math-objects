@@ -11,8 +11,6 @@ from re import findall
 
 from .automata import *
 
-from ..tbox.var2nb import intify
-
 
 # --------------------- #
 # -- NAMING INTEGERS -- #
@@ -54,27 +52,32 @@ class IntName(BaseAutomaton):
 
 ###
 # prototype::
-#     nb : a string that represents a "legal" integer
-#          (see the method ``self.sign_n_abs`` for the meaning of "legal")
+#     nb : any object that is printable as a "legal" integer (spaces and separators
+#          for digits can be used)
 #
 #     :return: the name of ``nb`` in the language ``self.lang``
 #
-#     :see: self.sign_n_abs ,
-#           self.name_big ,
+#     :see: self.name_big ,
 #           self.name_small
 ###
-    def nameof(self, nb: str) -> str:
-        assert isinstance(nb, str), \
-               f'illegal type : "{type(nb) = }".'
-
+    def nameof(self, nb: Any) -> str:
 # For error messages.
         self._initial_nb = nb
 
 # Name of the sign, and the string version of the absolute value of the integer.
-        sign, absnb = self.sign_n_abs(nb)
-        nb_digits   = len(absnb)
+        _, sign, absnb = self.int_n_strify(varnb = nb)
+
+# Can we use a sign?
+        if sign:
+            assert not self._sign_name[sign] is None, \
+                (
+                    f"the sign ``{sign}`` can't be used "
+                    f"with the language {self.lang}"
+                )
 
 # Do big numbers are allowed?
+        nb_digits = len(absnb)
+
         assert (
                 self._very_big_allowed
                 or
@@ -113,7 +116,7 @@ class IntName(BaseAutomaton):
 
             name = name.strip()
 
-# The "complete" name.
+# The "complete" name with a sign.
         if sign:
             name = self._sign_name[sign].replace(ELLIPSIS, name)
 
@@ -123,55 +126,6 @@ class IntName(BaseAutomaton):
 
 # Nothing left to do.
         return name
-
-
-###
-# prototype::
-#     nb : a string that represents a "legal" integer (see the note below)
-#
-#     :return: the sign or an empty string,
-#              and the string version of the absolute numerical value
-#              of ``str(nb)``
-#            @ let intnb = int(nb) ;
-#              int(return[1]) = abs(intnb) ;
-#              return[0] = '-' if intnb < 0 ;
-#              return[0] in ['', '+'] if intnb >= 0
-#
-#
-# note::
-#     Some separators between digits are allowed.
-###
-    def sign_n_abs(self, nb: str) -> Tuple[str, str]:
-        nb = nb.strip()
-
-# A plus sign?
-        if nb[0] in "+-":
-            sign = nb[0]
-            nb   = nb[1:]
-
-        else:
-            sign = ""
-
-# Integer version of nb.
-        nb = str(
-            intify(
-                nb         = nb,
-                tryconvert = True,
-                toremove   = [' ', self._groups_sep],
-                name       = "absolute value"
-            )
-        )
-
-# Name of the sign
-        if sign:
-            assert not self._sign_name[sign] is None, \
-                   (
-                    f"the sign ``{sign}`` can't be used "
-                    f"with the language {self.lang}"
-                   )
-
-# Nothing more to do.
-        return sign, nb
 
 
 ###

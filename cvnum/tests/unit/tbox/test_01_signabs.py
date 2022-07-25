@@ -20,7 +20,7 @@ MODULE_DIR = addfindsrc(
     project = 'cvnum',
 )
 
-from src.textify import *
+from src.tbox.signabs import *
 
 
 # --------------------- #
@@ -39,8 +39,8 @@ from src.textify import *
 #     an integer.
 
 @given(st.integers())
-def test_sign_n_abs_postcond(nb):
-    valreturned = IntName().sign_n_abs(str(nb))
+def test_signabs_postcond(nb):
+    valreturned = signabs(str(nb))
 
     assert (
         int(valreturned[1]) == abs(nb)
@@ -54,15 +54,15 @@ def test_sign_n_abs_postcond(nb):
 
 
 @given(st.integers(min_value = 0))
-def test_sign_n_abs_postcond_plus_sign(nb):
+def test_signabs_postcond_plus_sign(nb):
     nb          = f"+{nb}"
-    valreturned = IntName().sign_n_abs(nb)
+    valreturned = signabs(nb)
 
     assert valreturned[0] == '+'
 
 
 @given(st.integers(min_value = 0))
-def test_sign_n_abs_postcond_no_plus_sign(nb):
-    valreturned = IntName().sign_n_abs(str(nb))
+def test_signabs_postcond_no_plus_sign(nb):
+    valreturned = signabs(str(nb))
 
     assert valreturned[0] == ''

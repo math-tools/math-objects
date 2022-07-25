@@ -1,16 +1,5 @@
 #!/usr/bin/env python3
 
-# from cbdevtools import *
-
-# print(addfindsrc(
-#     file    = __file__,
-#     project = 'xx',
-# ))
-
-# from common import *
-# exit()
-
-
 # --------------------- #
 # -- SEVERAL IMPORTS -- #
 # --------------------- #
@@ -28,20 +17,17 @@ from cbdevtools import *
 # -- MODULE TESTED IMPORTED FROM SOURCES! -- #
 # ------------------------------------------ #
 
-_ = addfindsrc(
-    file    = __file__,
-    project = 'cvnum',
-)
+for upfolder in [
+    'cvnum',
+    'tests',
+]:
+    _ = addfindsrc(
+        file    = __file__,
+        project = upfolder,
+    )
 
 from src.tbox.var2nb import intify
-
-
-_ = addfindsrc(
-    file    = __file__,
-    project = 'tests',
-)
-
-from unit.common import build_removable
+from unit.common     import build_removable
 
 
 # ---------------------- #
@@ -54,7 +40,7 @@ def test_intify_badinput_name(text):
         (AssertionError, ValueError),
         match = r".*XXXXXX.*"
     ):
-        intify(text, name = "XXXXXX")
+        intify(text, errname = "XXXXXX")
 
 
 # ---------------- #

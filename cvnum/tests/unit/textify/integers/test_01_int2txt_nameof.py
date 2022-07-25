@@ -16,19 +16,16 @@ from mistool.os_use import PPath
 # -- MODULE TESTED IMPORTED FROM SOURCES! -- #
 # ------------------------------------------ #
 
-MODULE_DIR = addfindsrc(
-    file    = __file__,
-    project = 'cvnum',
-)
+for upfolder in [
+    'cvnum',
+    'tests',
+]:
+    _ = addfindsrc(
+        file    = __file__,
+        project = upfolder,
+    )
 
 from src.textify import *
-
-
-_ = addfindsrc(
-    file    = __file__,
-    project = 'tests',
-)
-
 from unit.common import build_removable
 
 
@@ -118,7 +115,7 @@ def test_nameof_input_type_NOT_OK():
 # -- BIGGEST -- #
 # ------------- #
 
-def test_nameof_biggest_OK():
+def test_nameof_biggest():
     for lang in LANGS_NOBIG:
         mynamer = IntName(lang)
         nameof  = lambda x: IntName(lang).nameof(str(x))

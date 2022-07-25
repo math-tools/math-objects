@@ -12,179 +12,178 @@ from math import (
     log
 )
 
-from ...tbox.var2nb import *
-
-
-# ---------------------- #
-# -- DECIMAL WRITINGS -- #
-# ---------------------- #
-
-###
-# prototype::
-#     nb : a positive integer
-#        @ nb >= 0
-#
-#     :return: the list of textual decimal digits of ``nb`` from the biggest
-#              weight to the smallest one
-#            @ v in return ==> v in str(0..9)
-###
-def intnumerals(nb: int) -> List[str]:
-# Is ``nb`` a natural ?
-    nb = intify_notneg(nb)
-
-# We can do the conversion.
-    return [d for d in str(nb)]
-
-
-###
-# prototype::
-#     nb : the integer to convert into digits in base ``base``
-#        @ nb >= 0 {not tested}
-#
-#     :return: the list of decimal digits of ``nb``, the digits beeing
-#              sorted from the biggest weight to the smallest one
-#            @ v in return ==> v in 0..10
-###
-def intdigits(nb: int) -> List[int]:
-# Is ``nb`` a natural ?
-    nb = intify_notneg(nb)
-
-# We can do the conversion.
-    return [int(d) for d in str(nb)]
+from .intconv import IntConv
 
 
 # -------------------------------- #
 # -- DECIMAL ~~~> SPECIFIC BASE -- #
 # -------------------------------- #
 
+class Int2Base(IntConv):
 ###
 # prototype::
-#     nb   : the integer to convert into integer digits in base ``base``
-#          @ nb >= 0
-#     base : an integer that represents a base
-#          @ base > 1
+#     :see: ``common.BaseConverter.__init__``
+###
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+###
+# prototype::
+#     varnb : :see: tbox.var2int.Var2Int.int_n_strify
 #
-#     :return: the list of integer digits of ``nb`` converted into the base
-#              ``base``, the digits beeing sorted from the biggest weight
-#              to the smallest one
-#            @ v in return ==> v in 0..(base-1)
+#     :return: the sign, and the list of textual decimal digits of ``nb``
+#              from the biggest weight to the smallest one
+#            @ v in return[1] ==> v in str(0..9)
+###
+    def intnumerals(self, varnb: Any) -> Tuple[str, List[str]]:
+# Is ``nb`` a natural ?
+        _, sign, strnb = self.legalint.int_n_strsignabs(varnb)
+
+# We can do the conversion.
+        return sign, [d for d in strnb]
+
+
+###
+# prototype::
+#     varnb : :see: tbox.var2int.Var2Int.int_n_strify
+#
+#     :return: the sign, and the list of decimal digits of ``nb``, the digits
+#              beeing sorted from the biggest weight to the smallest one
+#            @ v in return[1] ==> v in 0..10
+###
+    def intdigits(self, varnb: Any) -> List[int]:
+# Is ``nb`` a natural ?
+        _, sign, strnb = self.legalint.int_n_strsignabs(varnb)
+
+# We can do the conversion.
+        return sign, [int(d) for d in strnb]
+
+
+###
+# prototype::
+#     varnb   : :see: tbox.var2int.Var2Int.int_n_strify
+#     varbase : :see: tbox.var2int.Var2Int.int_n_strify
+#             @ int(str(varbase)) > 1
+#
+#     :return: the sign, and the list of integer digits of ``varnb`` converted
+#              into the base ``varbase``, the digits beeing sorted from
+#              the biggest weight to the smallest one
+#            @ v in return[1] ==> v in 0 .. (base-1)
 #
 #
 # note::
 #     The name ``int2bdigits`` comes from "integer to base digits".
 ###
-def int2bdigits(
-    nb  : int,
-    base: int,
-) -> List[int]:
+    def int2bdigits(
+        self,
+        varnb  : Any,
+        varbase: Any,
+    ) -> List[int]:
 # Is ``nb`` a natural ?
-    nb = intify_notneg(nb)
+        intnb, sign, _ = self.legalint.int_n_strsignabs(varnb)
 
 # Is ``base`` a natural greater than one ?
-    base = basify(base)
+        intbase, _ = self.legalint.int_n_strify(varbase)
 
 # Let's go.
-    bdigits = []
+        bdigits = []
 
-    if nb == 0:
-        bdigits = [0]
+        if intnb == 0:
+            bdigits = [0]
 
-    else:
-        while(nb):
-            bdigits.append(nb % base)
-            nb = nb // base
+        else:
+            while(intnb):
+                bdigits.append(intnb % intbase)
+                intnb = intnb // intbase
 
-        bdigits.reverse()
+            bdigits.reverse()
 
-    return bdigits
+        return sign, bdigits
 
 
 ###
 # prototype::
 #     base : the base used to write a natural integer
-#          @ base > 1
+#          @ base in 2 .. +inf  {not checked}
 #
 #     :return: a function that converts a ``base`` integer digit into
 #              a textual numeral.
 #
 #
 # warning::
-#     This function is an internal one even if we let it public.
+#     This method is an internal one even if we let it public.
 ###
-def numeralize(base: int) -> Callable[[int], str]:
-# Is ``base`` a natural greater than one ?
-    base = basify(base)
+    def numeralize(self, base: int) -> Callable[[int], str]:
+    # Number of characters needed to code one single digit.
+        max_singledigit = 36
 
-# Number of characters needed to code one single digit.
-    max_singledigit = 36
+        if base > max_singledigit:
+            nbchars = ceil(log(base) / log(max_singledigit))
 
-    if base > max_singledigit:
-        nbchars = ceil(log(base) / log(max_singledigit))
-
-    else:
-        nbchars = 1
-
-# Internal functions
-    def alphanum_single(
-        x      : int,
-        padding: bool = True
-    ) -> str:
-# We need more than one character.
-        if x >= max_singledigit:
-            result = "".join(
-                alphanum_single(
-                    x       = d,
-                    padding = False
-                )
-                for d in int2bdigits(
-                    nb   = x,
-                    base = max_singledigit,
-                )
-            )
-
-# One single decimal numeral.
-        elif x < 10:
-            result = str(x)
-
-# One single upper case letter.
         else:
-# 65 - 10 = 55
-            result = chr(55 + x)
+            nbchars = 1
 
-# Padding or not padding? That is the question...
-        if padding:
-            result = result.rjust(nbchars, '0')
+    # Internal functions
+        def alphanum_single(
+            x      : int,
+            padding: bool = True
+        ) -> str:
+    # We need more than one character.
+            if x >= max_singledigit:
+                result = "".join(
+                    alphanum_single(
+                        x       = d,
+                        padding = False
+                    )
+                    for d in self.int2bdigits(
+                        varnb   = x,
+                        varbase = max_singledigit,
+                    )[1]
+                )
 
-        return result
+    # One single decimal numeral.
+            elif x < 10:
+                result = str(x)
+
+    # One single upper case letter.
+            else:
+    # 65 - 10 = 55
+                result = chr(55 + x)
+
+    # Padding or not padding? That is the question...
+            if padding:
+                result = result.rjust(nbchars, '0')
+
+            return result
 
 
-    def alphanum(nb: int) -> str:
-        coding = list(
-            map(
-                alphanum_single,
-                int2bdigits(
-                    nb   = nb,
-                    base = base,
+        def alphanum(nb: int) -> str:
+            coding = list(
+                map(
+                    alphanum_single,
+                    self.int2bdigits(
+                        varnb   = nb,
+                        varbase = base,
+                    )[1]
                 )
             )
-        )
 
-        return coding
+            return coding
 
-# We return the coding function.
-    return alphanum
+    # We return the coding function.
+        return alphanum
 
 
 ###
 # prototype::
-#     nb   : the integer to convert into digits in base ``base``
-#          @ nb >= 0
-#     base : an integer that represents a base
-#          @ base > 1
+#     varnb   : :see: tbox.var2int.Var2Int.int_n_strify
+#     varbase : :see: tbox.var2int.Var2Int.int_n_strify
+#             @ int(str(varbase)) > 1
 #
-#     :return: the list of textual numerals of ``nb`` converted into
-#              the base ``base``, the numerals beeing sorted from the biggest
-#              weight to the smallest one
+#     :return: the sign, and the list of textual numerals of ``nb`` converted
+#              into the base ``base``, the numerals beeing sorted from
+#              the biggest weight to the smallest one
 #
 #     :see: numeralize
 #
@@ -192,27 +191,28 @@ def numeralize(base: int) -> Callable[[int], str]:
 # note::
 #     The name ``int2bdigits`` comes from "integer to base numerals".
 ###
-def int2bnumerals(
-    nb  : int,
-    base: int,
-) -> List[int]:
+    def int2bnums(
+        self,
+        varnb  : Any,
+        varbase: Any,
+    ) -> List[int]:
 # Is ``nb`` a natural ?
-    nb = intify_notneg(nb)
+        intnb, sign, strabsnb = self.legalint.int_n_strsignabs(varnb)
 
 # Is ``base`` a natural greater than one ?
-    base = basify(base)
+        intbase, _ = self.legalint.int_n_strify(varbase)
 
-    return numeralize(base)(nb)
+        return sign, self.numeralize(intbase)(int(strabsnb))
 
 
 ###
 # prototype::
-#     nb   : the integer to convert into digits in base ``base``
-#          @ nb >= 0
-#     base : an integer that represents a base
-#          @ base > 1
-#     sep  : the text that will be used if needed to separate numerals
-#            using at least two digits (that is the case when base > 36)
+#     varnb   : :see: tbox.var2int.Var2Int.int_n_strify
+#     varbase : :see: tbox.var2int.Var2Int.int_n_strify
+#             @ int(str(varbase)) > 1
+#     sep     : the text that will be used if needed to separate numerals
+#               using at least two digits (that is the case when the base
+#               is bigger than 36)
 #
 #     :return: an easy-to-read string version of ``nb`` converted into
 #              the base ``base``
@@ -224,23 +224,24 @@ def int2bnumerals(
 # note::
 #     The name ``int2bnb`` comes from "integer to base number".
 ###
-def int2bnb(
-    nb  : int,
-    base: int,
-    sep : str = "."
-) -> str:
+    def int2bnb(
+        self,
+        varnb  : int,
+        varbase: int,
+        sep : str = "."
+    ) -> str:
 # Is ``nb`` a natural ?
-    nb = intify_notneg(nb)
+        intnb, sign, strabsnb = self.legalint.int_n_strsignabs(varnb)
 
 # Is ``base`` a natural greater than one ?
-    base = basify(base)
+        intbase, _ = self.legalint.int_n_strify(varbase)
 
-    if base < 37:
-        sep = ""
+        if intbase < 37:
+            sep = ""
 
-    return sep.join(
-        int2bnumerals(
-            nb   = nb,
-            base = base,
+        sign, numerals = self.int2bnumerals(
+            varnb   = strabsnb,
+            varbase = varbase,
         )
-    )
+
+        return sign + sep.join(numerals)

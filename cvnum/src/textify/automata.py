@@ -10,6 +10,8 @@ from typing import *
 
 from ..config.textify import *
 
+from ..convert.integer.var2int import Var2Int
+
 
 # -------------------------- #
 # -- BASE AUTOMATON CLASS -- #
@@ -66,8 +68,11 @@ class BaseAutomaton:
 # prototype::
 #     :action: update of the values of private attributes used to name
 #              integers.
+#
+#     :see: self.var2int.Var2Int
 ###
     def _update_internals(self) -> None:
+# Rules
         rulestouse = INT_2_NAME[self.lang]
 
 # Patch
@@ -115,6 +120,12 @@ class BaseAutomaton:
             self._very_big_matching,   \
             self._very_big_suffix    = \
             rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
+
+# Sign and absolute value
+        self.int_n_strify = Var2Int(
+            tryconvert = True,
+            toremove   = [' ', self._groups_sep]
+        ).int_n_strify
 
 
 ###
