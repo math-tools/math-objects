@@ -26,7 +26,7 @@ for upfolder in [
         project = upfolder,
     )
 
-from src.convert.integer import int2base
+from cvnum.src.convert.integer import int2base
 # from unit.common     import build_removable
 
 

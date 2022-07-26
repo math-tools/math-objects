@@ -14,12 +14,21 @@ MODULE_DIR = addfindsrc(
 
 
 # -------------- #
+# -- TO DEBUG -- #
+# -------------- #
+
+from src.convert.natural import *
+
+base2base = Base2Base()
+
+
+# -------------- #
 # -- LET'S GO -- #
 # -------------- #
 
-from src.convert.integer import *
+exit()
 
-base2base = Base2Base()
+
 
 for (x, f, b_1, b_2) in [
 # SINGLE FUNC.

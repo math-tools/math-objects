@@ -61,20 +61,20 @@ class Nat2Base(NatConv):
 
 
 
-    ###
-    # prototype:: cohérence de l'API!
-    #     bdigits : a list of ``base`` digits from the biggest weight to
-    #               the smallest one
-    #             @ d in bdigits ==> d in 0..9
-    #
-    #     :return: the integer value corresponding to the ``base`` digits
-    #
-    #     :see: bdigitize
-    #
-    #
-    # note::
-    #     The name ``bdigits2nat`` comes from "base digits to integer".
-    ###
+###
+# prototype:: cohérence de l'API!
+#     bdigits : a list of ``base`` digits from the biggest weight to
+#               the smallest one
+#             @ d in bdigits ==> d in 0..9
+#
+#     :return: the integer value corresponding to the ``base`` digits
+#
+#     :see: bdigitize
+#
+#
+# note::
+#     The name ``bdigits2nat`` comes from "base digits to integer".
+###
     def digits2nat(
         self,
         digits: List[int],
@@ -92,19 +92,19 @@ class Nat2Base(NatConv):
         return intval
 
 
-    ###
-    # prototype::  cohérence de l'API!
-    #     numerals : a list of ``base`` textual numerals sorted from the biggest
-    #                 weight to the smallest one
-    #
-    #     :return: the integer value from the biggest weight to the smallest one
-    #
-    #     :see: bdigitize
-    #
-    #
-    # note::
-    #     The name ``numerals2nat`` comes from "base numerals to integer".
-    ###
+###
+# prototype::  cohérence de l'API!
+#     numerals : a list of ``base`` textual numerals sorted from the biggest
+#                 weight to the smallest one
+#
+#     :return: the integer value from the biggest weight to the smallest one
+#
+#     :see: bdigitize
+#
+#
+# note::
+#     The name ``numerals2nat`` comes from "base numerals to integer".
+###
     def numerals2nat(
         self,
         numerals: List[str],
@@ -135,12 +135,12 @@ class Nat2Base(NatConv):
         else:
             nbchars = 1
 
-    # Internal functions
+# Internal functions
         def alphanum_single(
             x      : int,
             padding: bool = True
         ) -> str:
-    # We need more than one character.
+# We need more than one character.
             if x >= self.max_singledigit:
                 result = "".join(
                     alphanum_single(
@@ -153,16 +153,16 @@ class Nat2Base(NatConv):
                     )
                 )
 
-    # One single decimal numeral.
+# One single decimal numeral.
             elif x < 10:
                 result = str(x)
 
-    # One single upper case letter.
+# One single upper case letter.
             else:
-    # 65 - 10 = 55
+# 65 - 10 = 55
                 result = chr(55 + x)
 
-    # Padding or not padding? That is the question...
+# Padding or not padding? That is the question...
             if padding:
                 result = result.rjust(nbchars, '0')
 
@@ -182,7 +182,7 @@ class Nat2Base(NatConv):
 
             return coding
 
-    # We return the coding function.
+# We return the coding function.
         return alphanum
 
 
@@ -292,7 +292,7 @@ class Nat2Base(NatConv):
         self,
         nb  : int,
         base: int,
-        sep : str = "."
+        sep : str = ''
     ) -> str:
 # Safe mode used?
         self.checknatural(nb)
@@ -302,10 +302,7 @@ class Nat2Base(NatConv):
             errname = 'base'
         )
 
-# Do we need a separator?
-        if base < 37:
-            sep = ""
-
+# ???
         numerals = self.nat2bnumerals(
             nb   = nb,
             base = base,

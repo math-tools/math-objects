@@ -58,7 +58,7 @@ class NatConv:
         nb     : Any,
         mini   : float = 0,
         maxi   : float = float('inf'),
-        errname: str = '',
+        errname: str   = '',
     ) -> None:
         if not errname:
             errname = self.errname

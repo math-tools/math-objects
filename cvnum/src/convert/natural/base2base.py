@@ -1,25 +1,97 @@
-# #!/usr/bin/env python3
+#!/usr/bin/env python3
 
-# ###
-# # This module proposes one class to convert integers between different bases.
-# ###
+###
+# This module proposes one class to convert integers between two bases.
+###
 
 
-# from typing import *
+from typing import *
 
-# from .base2int import (
-#     bnb2int,
-#     bnumerals2int,
-#     bdigits2int
-# )
+from .natconv  import NatConv
+from .nat2base import Nat2Base
+from .base2nat import Base2Nat
 
-# from .int2base import (
-#     int2bnb,
-#     int2bnumerals,
-#     int2bdigits
-# )
 
-# from ...tbox.var2int import basify
+# ------------------------------ #
+# -- NATURAL: BASE <~~~> BASE -- #
+# ------------------------------ #
+
+# -- FORMATS ALLOWED "AUTO" - START -- #
+
+# Lines automatically build by the following file.
+#
+#     + ``tools/factory/convert/build_01_format_b2b_natural.py``
+
+# To avoid mistypings.
+
+FORMAT_BDIGITS_2_NAT   = 'bdigits2nat'
+FORMAT_BDIGITS_OF      = 'bdigitsof'
+FORMAT_BNB_2_NAT       = 'bnb2nat'
+FORMAT_BNUMERALS_2_NAT = 'bnumerals2nat'
+FORMAT_BNUMERALS_OF    = 'bnumeralsof'
+FORMAT_DIGITS_2_NAT    = 'digits2nat'
+FORMAT_DIGITS_OF       = 'digitsof'
+FORMAT_NAT_2_BDIGITS   = 'nat2bdigits'
+FORMAT_NAT_2_BNB       = 'nat2bnb'
+FORMAT_NAT_2_BNUMERALS = 'nat2bnumerals'
+FORMAT_NUMERALS_2_NAT  = 'numerals2nat'
+FORMAT_NUMERALS_OF     = 'numeralsof'
+
+# To test "hard" typing strings.
+
+ALL_NAT_FORMATS = {
+    FORMAT_DIGITS_2_NAT,
+    FORMAT_DIGITS_OF,
+    FORMAT_NAT_2_BDIGITS,
+    FORMAT_NAT_2_BNB,
+    FORMAT_NAT_2_BNUMERALS,
+    FORMAT_NUMERALS_2_NAT,
+    FORMAT_NUMERALS_OF,
+}
+
+ALL_BASE_FORMATS = {
+    FORMAT_BDIGITS_2_NAT,
+    FORMAT_BDIGITS_OF,
+    FORMAT_BNB_2_NAT,
+    FORMAT_BNUMERALS_2_NAT,
+    FORMAT_BNUMERALS_OF,
+}
+
+# -- FORMATS ALLOWED "AUTO" - END -- #
+
+
+###
+# This class simplifies conversions of integers between two bases.
+#
+#
+# warning::
+#     If you only work with conversion from naturals to a base, just work directly
+#     with the class ``nat2Base.Nat2Base``.
+#     If you only work with conversion from one base to naturals, just work directly
+#     with the class ``base2nat.Base2Nat``.
+###
+class Base2Base(NatConv):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.nat2base = Nat2Base(
+            safemode = self.safemode,
+            errname  = self.errname
+        )
+
+        self.base2nat = Base2Nat(
+            safemode = self.safemode,
+            errname  = self.errname
+        )
+
+
+
+
+
+
+
+
+
 
 
 # # --------------- #
@@ -40,144 +112,22 @@
 
 
 # # --------------------- #
-# # -- BASE <~~~> BASE -- #
+# # --  -- #
 # # --------------------- #
 
-# ###
-# # This class simplifies conversions of integers between two bases.
-# #
-# #
-# # warning::
-# #     If you must do the same kind of conversion a lot, you should work
-# #     directly with the functions of the modules ``dec2base`` and ``base2dec``.
-# ###
-# class Base2Base:
+
+# class Base2Base(NatConv):
 # # The list of functions that can be use directly.
 #     CONVERT_FUNCS = {
 # # --     name_of_func  : (func         , needs_seps)      -- #
-#         'bnb2int'      : (bnb2int      , True),
-#         'bnumerals2int': (bnumerals2int, False),
-#         'bdigits2int'  : (bdigits2int  , False),
-#         'int2bnb'      : (int2bnb      , True),
-#         'int2bnumerals': (int2bnumerals, False),
-#         'int2bdigits'  : (int2bdigits  , False),
+#         'bnb2nat'      : (bnb2nat      , True),
+#         'bnumerals2nat': (bnumerals2nat, False),
+#         'bdigits2nat'  : (bdigits2nat  , False),
+#         'nat2bnb'      : (nat2bnb      , True),
+#         'nat2bnumerals': (nat2bnumerals, False),
+#         'nat2bdigits'  : (nat2bdigits  , False),
 #     }
 
-
-# ###
-# # prototype::
-# #     bases : a couple of two integers
-# #           @ b in bases ==> b > 1
-# #     seps  : a couple of texts used to separate numerals
-# ###
-#     def __init__(
-#         self,
-#         bases: Tuple[int, int] = (10, 16),
-#         seps : Tuple[str, str] = (".", ".")
-#     ) -> None:
-#         self.bases = bases
-#         self.seps  = seps
-
-
-# ###
-# # We have to verify the bases when they are setted.
-# ###
-#     @property
-#     def bases(self) -> Tuple[int, int]:
-#         return self._bases
-
-#     @bases.setter
-#     def bases(self, bases: Tuple[int, int]) -> None:
-#         self._bases = (
-#             basify(bases[0]),
-#             basify(bases[1]),
-#         )
-
-
-# ###
-# # prototype::
-# #     b     : either an integer, or a couple of two integers
-# #           @ type(bases) = tuple ==> b in bases ==> b > 1
-# #           @ type(bases) = int   ==> bases > 1
-# #     which : an integer code to indicate what have to be updated.
-# #             ``1`` is to just update the first base.
-# #             ``2`` is to just update the second base.
-# #             ``-1`` is to update the both bases.
-# #           @ which in {-1 , 1, 2}
-# #
-# #     :action: update of the value of ``self.bases``
-# #
-# #     :see: self.__change_tuple_attr
-# ###
-#     def changebases(
-#         self,
-#         b    : Union[int, Tuple[int, int]],
-#         which: int  = -1
-#     ) -> None:
-#         self.__change_tuple_attr(
-#             name  = "bases",
-#             val   = b,
-#             which = which
-#         )
-
-
-# ###
-# # prototype::
-# #     s     : a couple of texts used to separate numerals
-# #     which : an integer code to indicate what have to be updated.
-# #             ``1`` is to just update the first separator.
-# #             ``2`` is to just update the second separator.
-# #             ``-1`` is to update the both separators.
-# #           @ which in {-1 , 1, 2}
-# #
-# #     :action: update of the value of ``self.seps``
-# #
-# #     :see: self.__change_tuple_attr
-# ###
-#     def changeseps(
-#         self,
-#         s    : Union[str, Tuple[str, str]],
-#         which: int  = -1
-#     ) -> None:
-#         self.__change_tuple_attr(
-#             name  = "seps",
-#             val   = s,
-#             which = which
-#         )
-
-
-# ###
-# # prototype::
-# #     name  : the name of the attribut to update to a couple of two primitive
-# #             ¨python values
-# #     val   : one primitive ¨python value, or a couple a couple of
-# #             two primitive ¨python values
-# #     which : an integer code to indicate what have to be updated.
-# #             ``1`` is to just update the first separator.
-# #             ``2`` is to just update the second separator.
-# #             ``-1`` is to update the both separators.
-# #           @ which in {-1 , 1, 2}
-# #
-# #     :action: the attribut named ``name`` with a tuple value is updated
-# #              regarding the values of the arguments above.
-# ###
-#     def __change_tuple_attr(
-#         self,
-#         name : str,
-#         val  : Any,
-#         which: int
-#     ) -> None:
-#         if which == 1:
-#             setattr(self, name, (val, getattr(self, name)[1]))
-
-#         elif which == 2:
-#             setattr(self, name, (getattr(self, name)[0], val))
-
-#         elif which == -1:
-#             setattr(self, name, val)
-
-#         else:
-#             raise ValueError(f"illegal use of << which = {which} >>")
 
 
 # ###
@@ -261,18 +211,18 @@
 #             )
 
 # # We need to compose two functions.
-#         funcname_int2xxx = f'b{fromkind}2int'
-#         funcname_xxx2int = f'int2b{format}'
+#         funcname_nat2xxx = f'b{fromkind}2nat'
+#         funcname_xxx2nat = f'nat2b{format}'
 
 #         val = self.__applyfunc(
-#             funcname_int2xxx,
+#             funcname_nat2xxx,
 #             x,
 #             self.bases[0],
 #             self.seps[0]
 #         )
 
 #         return self.__applyfunc(
-#             funcname_xxx2int,
+#             funcname_xxx2nat,
 #             val,
 #             self.bases[1],
 #             self.seps[1]

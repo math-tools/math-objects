@@ -1,7 +1,7 @@
 // ---------- //
 
 ==
-22 ???
+?????
 ==
 
 -------
@@ -9,7 +9,9 @@
 -------
 
 [[:api:]] ??????
-The packages ``tbox`` and ``convert.integer`` have been totally rebuild. Here are the breaking updates made.
+Here are the breaking updates made.
+
+    1) The package ``tbox`` has been removed (it could come back later if it will become necessary).
 
     ?????? 1) The method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb`` have been removed, because a class ``var2int.Var2Int`` has been created to obtain several kinds of normalisation of variables.
 
@@ -21,17 +23,23 @@ The packages ``tbox`` and ``convert.integer`` have been totally rebuild. Here ar
 
         * utilisation de classes avec natconv.NatCnv comme base commune
 
-        * on part de NN puis ensuite on enrichit avec ZZ
+        ????????????   * on part de NN puis ensuite on enrichit avec ZZ
 
-        * cahce utilisé en interne pour cas avec base peu changés
+        ???????????   * cahce utilisé en interne pour cas avec base peu changés
+
+        * sep = '' par défaut !
 
         * api "symétrique" : ajout de digits2nat et numerals2nat à Int2Base
+                                      bnb2digits et bnb2numerals à Base2int
 
         * nom mpons abigus et sytsématique
 
                         + base dix : pas de péréfixe
 
                         + [b]digitsof et [b]numeralsof
+
+        * base2base.Base2Base : tout a étét revu (casse totale de l'api!)
+        passer via __getattr__ : les str utilisé en parfaite cocnoc-rdance avec les noms des méthodes !!!
 
     ?????? 1) Naming integers: the method ``IntName.nameof`` accepts again variables with string representation beeing a "legal" integer.
 
@@ -47,6 +55,9 @@ The packages ``tbox`` and ``convert.integer`` have been totally rebuild. Here ar
 :fordev:
 --------
 
+doc des prototypes ????
+
+
 [[:api:]]    ??????
 Unit tests.
 
@@ -61,7 +72,7 @@ https://github.com/gruns/icecream
 
     ---> faire un mini script BASIQUE qui nettoie code en prod (option dans scr2prod)
 
-            * on vire ligne commençant par ic()
+            * on vire ligne commençant par ic() éventuelelement après avoir virer commentaire #
             * on vire import icecream
 
             * mais aussi on gère
