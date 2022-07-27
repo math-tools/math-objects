@@ -20,41 +20,26 @@ from .base2nat import Base2Nat
 
 # Lines automatically build by the following file.
 #
-#     + ``tools/factory/convert/build_01_format_b2b_natural.py``
+#     + ``tools/factory/convert/natural/build_01_format_b2b.py``
 
-# To avoid mistypings.
+# To avoid mistypings of formats.
 
-FORMAT_BDIGITS_2_NAT   = 'bdigits2nat'
-FORMAT_BDIGITS_OF      = 'bdigitsof'
-FORMAT_BNB_2_NAT       = 'bnb2nat'
-FORMAT_BNUMERALS_2_NAT = 'bnumerals2nat'
-FORMAT_BNUMERALS_OF    = 'bnumeralsof'
-FORMAT_DIGITS_2_NAT    = 'digits2nat'
-FORMAT_DIGITS_OF       = 'digitsof'
-FORMAT_NAT_2_BDIGITS   = 'nat2bdigits'
-FORMAT_NAT_2_BNB       = 'nat2bnb'
-FORMAT_NAT_2_BNUMERALS = 'nat2bnumerals'
-FORMAT_NUMERALS_2_NAT  = 'numerals2nat'
-FORMAT_NUMERALS_OF     = 'numeralsof'
+FORMAT_BDIGITS_OF   = 'bdigitsof'
+FORMAT_NAT          = 'nat'
+FORMAT_BNUMERALS_OF = 'bnumeralsof'
+FORMAT_BDIGITS      = 'bdigits'
+FORMAT_BNB          = 'bnb'
+FORMAT_BNUMERALS    = 'bnumerals'
 
-# To test "hard" typing strings.
+# To test "hard" typing strings of formats.
 
-ALL_NAT_FORMATS = {
-    FORMAT_DIGITS_2_NAT,
-    FORMAT_DIGITS_OF,
-    FORMAT_NAT_2_BDIGITS,
-    FORMAT_NAT_2_BNB,
-    FORMAT_NAT_2_BNUMERALS,
-    FORMAT_NUMERALS_2_NAT,
-    FORMAT_NUMERALS_OF,
-}
-
-ALL_BASE_FORMATS = {
-    FORMAT_BDIGITS_2_NAT,
+ALL_FORMATS = {
     FORMAT_BDIGITS_OF,
-    FORMAT_BNB_2_NAT,
-    FORMAT_BNUMERALS_2_NAT,
+    FORMAT_NAT,
     FORMAT_BNUMERALS_OF,
+    FORMAT_BDIGITS,
+    FORMAT_BNB,
+    FORMAT_BNUMERALS,
 }
 
 # -- FORMATS ALLOWED "AUTO" - END -- #

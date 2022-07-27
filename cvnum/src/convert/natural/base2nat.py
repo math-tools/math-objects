@@ -27,10 +27,10 @@ class Base2Nat(NatConv):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.numeralize = Nat2Base(
+        self.nat2base = Nat2Base(
             safemode = self.safemode,
             errname  = self.errname
-        ).numeralize
+        )
 
 
 ###
@@ -46,7 +46,7 @@ class Base2Nat(NatConv):
             errname = 'base'
         )
 
-        numeralize = self.numeralize(base)
+        numeralize = self.nat2base.numeralize(base)
 
         return {
             numeralize(i)[0]: i
@@ -250,4 +250,62 @@ class Base2Nat(NatConv):
                 sep  = sep
             ),
             base = base
+        )
+
+
+###
+# prototype:: cohérence de l'API!
+#     bdigits : a list of ``base`` digits from the biggest weight to
+#               the smallest one
+#             @ d in bdigits ==> d in 0..9
+#
+#     :return: the integer value corresponding to the ``base`` digits
+#
+#     :see: bdigitize
+#
+#
+# note::
+#     The name ``bdigits2nat`` comes from "base digits to integer".
+###
+    def bnb2digits(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = ''
+    ) -> List[int]:
+        return self.nat2base.digitsof(
+            self.bnb2nat(
+                bnb  = bnb,
+                base = base,
+                sep  = sep
+            )
+        )
+
+
+###
+# prototype:: cohérence de l'API!
+#     bdigits : a list of ``base`` digits from the biggest weight to
+#               the smallest one
+#             @ d in bdigits ==> d in 0..9
+#
+#     :return: the integer value corresponding to the ``base`` digits
+#
+#     :see: bdigitize
+#
+#
+# note::
+#     The name ``bdigits2nat`` comes from "base digits to integer".
+###
+    def bnb2numerals(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = ''
+    ) -> List[int]:
+        return self.nat2base.numeralsof(
+            self.bnb2nat(
+                bnb  = bnb,
+                base = base,
+                sep  = sep
+            )
         )

@@ -23,6 +23,8 @@ SRC_DIR = THIS_DIR
 while(SRC_DIR.name != "cvnum"):
     SRC_DIR = SRC_DIR.parent
 
+THIS_FILE_REL_SRC_PATH = PPath(__file__) - SRC_DIR
+
 DIR_LANG       = SRC_DIR / "contribute" / "api" / "textify" / "lang"
 SRC_DIR_CONFIG = SRC_DIR / "src" / "config"
 
@@ -36,7 +38,8 @@ LANGS_DEFS = langdefs(DIR_LANG)
 print(f"   * Working on the final source codes.")
 
 pythonify(
-    DEBUG_CODING,
-    LANGS_DEFS,
-    SRC_DIR_CONFIG / "textify" / "langint.py"
+    debug_coding      = DEBUG_CODING,
+    alltrans          = LANGS_DEFS,
+    srcdir_file       = SRC_DIR_CONFIG / "textify" / "langint.py",
+    buildfile_relpath = THIS_FILE_REL_SRC_PATH
 )

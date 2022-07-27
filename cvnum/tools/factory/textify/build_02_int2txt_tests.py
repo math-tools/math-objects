@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import black
+
 from mistool.os_use     import PPath
 from mistool.string_use import between
 
@@ -22,10 +24,12 @@ SRC_DIR = THIS_DIR
 while(SRC_DIR.name != "cvnum"):
     SRC_DIR = SRC_DIR.parent
 
+THIS_FILE_REL_SRC_PATH = PPath(__file__) - SRC_DIR
+
 DIR_LANG         = SRC_DIR / "contribute" / "api" / "textify" / "lang"
 PYTEST_DIR       = SRC_DIR / "tests" / "unit" / "textify" / "integers"
 TEST_USECASE_DIR = PYTEST_DIR / "usecases"
-TEST_PYFILE      = PYTEST_DIR / "test_02_int2txt_nameof.py"
+TEST_PYFILE      = PYTEST_DIR / "test_01_int2txt_nameof.py"
 
 
 # ------------------ #
@@ -144,11 +148,25 @@ before, _, after = between(
     ],
 )
 
-pycode = f"""{before}
-
+all_Langs_meta = f"""
 LANGS_SORTED = {langs_sorted}
 
 LANGS_NOBIG = {langs_nobig}
+"""
+
+all_Langs_meta = black.format_file_contents(
+    all_Langs_meta,
+    fast = False,
+    mode = black.FileMode()
+).strip()
+
+pycode = f"""{before}
+
+# Lines automatically build by the following file.
+#
+#     + ``{THIS_FILE_REL_SRC_PATH}``
+
+{all_Langs_meta}
 
 {after}"""
 

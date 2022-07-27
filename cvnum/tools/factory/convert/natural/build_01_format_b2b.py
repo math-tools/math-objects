@@ -23,6 +23,8 @@ SRC_DIR = THIS_DIR
 while(SRC_DIR.name != "cvnum"):
     SRC_DIR = SRC_DIR.parent
 
+THIS_FILE_REL_SRC_PATH = PPath(__file__) - SRC_DIR
+
 SRC_DIR    = SRC_DIR / "src"
 CV_DIR_NAT = SRC_DIR / "convert" / "natural"
 B2B_PYFILE = CV_DIR_NAT / "base2base.py"
@@ -51,7 +53,7 @@ def symcenter2(text):
 
 
 def formattag(text, length = 0):
-    text = text.replace('2', '_2_')
+    # text = text.replace('2', '_2_')
     text = text.replace('of', '_of')
     text = text.upper()
 
@@ -71,7 +73,7 @@ def alignspaces(text, maxlength):
 
 print(f"   * Building the formats for ``natural.base2base.Base2Base.py``.")
 
-print(f"   * Looking for the methods available.")
+print(f"   * Looking for the methods available in ``Nat2Base`` and ``Base2Nat``.")
 
 methods_natconv = dir(NatConv)
 
@@ -82,8 +84,6 @@ methods_nat2base = set(
         not name in methods_natconv
         and
         name != 'numeralize'
-        # and
-        # not name.startswith('_')
     )
 )
 
@@ -94,9 +94,11 @@ methods_base2nat = set(
     if(
         not name in methods_natconv
         and
-        name != 'basedigitize'
-        # and
-        # not name.startswith('_')
+        name not in [
+            'basedigitize',
+            'bnb2numerals',
+            'bnb2digits',
+        ]
     )
 )
 
@@ -151,14 +153,34 @@ if missing_nat2base or missing_base2nat:
     )
 
 
-methods_nat2base = sorted(list(methods_nat2base))
-methods_base2nat = sorted(list(methods_base2nat))
-all_methods      = sorted(methods_nat2base + methods_base2nat)
+# ----------------------- #
+# -- METHODS AVAILABLE -- #
+# ----------------------- #
+
+print(f"   * Building constants for the formats of ``Base2Base``.")
+
+formats_base2base = set()
+
+for name in methods_nat2base:
+    for part in name.split('2'):
+        if part[0] == 'b':
+            part = part[1:]
+
+        formats_base2base.add(f'b{part}')
+
+formats_base2base.remove('bnat')
+formats_base2base.add('nat')
+
+# ! -- DEBUGGING -- ! #
+# print(f"{methods_base2nat  = }")
+# print(f"{formats_base2base = }")
+# exit()
+# ! -- DEBUGGING -- ! #
+
 
 # ------------------------------- #
 # -- UPDATE OF THE SOURCE FILE -- #
 # ------------------------------- #
-
 
 print("   * Updating the source code of the Python testing file.")
 
@@ -180,8 +202,9 @@ before, _, after = between(
 
 TAGS_VARS = {
     formattag(n): n
-    for n in all_methods
+    for n in formats_base2base
 }
+
 
 maxlength = max(len(x) for x in TAGS_VARS)
 
@@ -191,24 +214,17 @@ formats_vars = '\n'.join([
 ])
 
 
-methods_nat2base = ", ".join([
+formats_base2base = ", ".join([
     formattag(n)
-    for n in methods_nat2base
+    for n in formats_base2base
 ])
 
-methods_base2nat = ", ".join([
-    formattag(n)
-    for n in methods_base2nat
-])
-
-all_like_code = f"""
-ALL_NAT_FORMATS = {{{methods_nat2base}}}
-
-ALL_BASE_FORMATS = {{{methods_base2nat}}}
+all_formats_code = f"""
+ALL_FORMATS = {{{formats_base2base}}}
 """.strip()
 
-all_like_code = black.format_file_contents(
-    all_like_code,
+all_formats_code = black.format_file_contents(
+    all_formats_code,
     fast = False,
     mode = black.FileMode()
 ).strip()
@@ -217,15 +233,15 @@ pycode = f"""{before}
 
 # Lines automatically build by the following file.
 #
-#     + ``tools/factory/convert/build_01_format_b2b_natural.py``
+#     + ``{THIS_FILE_REL_SRC_PATH}``
 
-# To avoid mistypings.
+# To avoid mistypings of formats.
 
 {formats_vars}
 
-# To test "hard" typing strings.
+# To test "hard" typing strings of formats.
 
-{all_like_code}
+{all_formats_code}
 
 {after}"""
 

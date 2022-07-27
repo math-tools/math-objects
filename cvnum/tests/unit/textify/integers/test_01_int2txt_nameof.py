@@ -49,9 +49,25 @@ BAD_STR_INPUTS = [
 
 # -- CONSTANTS "AUTO" - START -- #
 
-LANGS_SORTED = ['fr_FR', 'it_IT', 'de_DE', 'en_GB', 'es_ES', 'en_US', 'fr_BE', 'fr_FR_chuquet_1', 'fr_FR_chuquet_2', 'fr_FR_rowlett', 'fr_FR_tiret']
+# Lines automatically build by the following file.
+#
+#     + ``tools/factory/textify/build_02_int2txt_tests.py``
 
-LANGS_NOBIG = ['fr_FR_chuquet_1', 'fr_FR_chuquet_2', 'fr_FR_rowlett']
+LANGS_SORTED = [
+    "fr_FR",
+    "it_IT",
+    "de_DE",
+    "en_GB",
+    "es_ES",
+    "en_US",
+    "fr_BE",
+    "fr_FR_chuquet_1",
+    "fr_FR_chuquet_2",
+    "fr_FR_rowlett",
+    "fr_FR_tiret",
+]
+
+LANGS_NOBIG = ["fr_FR_chuquet_1", "fr_FR_chuquet_2", "fr_FR_rowlett"]
 
 # -- CONSTANTS "AUTO" - END -- #
 

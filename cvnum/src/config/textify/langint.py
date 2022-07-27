@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
-# -------------------------------------------------------------------------- #
-# --  This code was automatically build by the following file.            -- #
-# --                                                                      -- #
-# --      + ``tools/factory/textify/build_01_int2txt_automaton_rules.py`` -- #
-# -------------------------------------------------------------------------- #
+# This code was automatically build by the following file.
+#
+#     + ``tools/factory/textify/build_01_int2txt_automaton_rules.py``
 
 from collections import OrderedDict
 from re          import compile as __re_compile

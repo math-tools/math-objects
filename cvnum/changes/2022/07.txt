@@ -11,7 +11,7 @@
 [[:api:]] ??????
 Here are the breaking updates made.
 
-    1) The package ``tbox`` has been removed (it could come back later if it will become necessary).
+    1) The package ``tbox`` has been removed.
 
     ?????? 1) The method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb`` have been removed, because a class ``var2int.Var2Int`` has been created to obtain several kinds of normalisation of variables.
 
@@ -25,12 +25,11 @@ Here are the breaking updates made.
 
         ????????????   * on part de NN puis ensuite on enrichit avec ZZ
 
-        ???????????   * cahce utilisé en interne pour cas avec base peu changés
-
         * sep = '' par défaut !
 
-        * api "symétrique" : ajout de digits2nat et numerals2nat à Int2Base
-                                      bnb2digits et bnb2numerals à Base2int
+        * api "symétrique" : tester via path::``tools/factory/convert/natural/build_01_format_b2b.py``
+            ajout de digits2nat et numerals2nat à Nat2Base
+                     bnb2digits et bnb2numerals à Base2Nat
 
         * nom mpons abigus et sytsématique
 
@@ -40,6 +39,7 @@ Here are the breaking updates made.
 
         * base2base.Base2Base : tout a étét revu (casse totale de l'api!)
         passer via __getattr__ : les str utilisé en parfaite cocnoc-rdance avec les noms des méthodes !!!
+        b2b malin si l'une des bases est 10
 
     ?????? 1) Naming integers: the method ``IntName.nameof`` accepts again variables with string representation beeing a "legal" integer.
 
@@ -58,8 +58,11 @@ Here are the breaking updates made.
 doc des prototypes ????
 
 
+
 [[:api:]]    ??????
 Unit tests.
+
+    1) The package ``unit.common`` has been renamed ``unit.core``.
 
     ?????? 1) Conversions of integers: every features are tested except for the Roman writing of integers (new versions of Roman conversions will come soon that will be easy to test).
 
@@ -67,19 +70,7 @@ Unit tests.
     ?????? 1) Naming integers: new tests added with variables that are not strings.
 
 
-[[:misc:]]  ??????
-https://github.com/gruns/icecream
 
-    ---> faire un mini script BASIQUE qui nettoie code en prod (option dans scr2prod)
-
-            * on vire ligne commençant par ic() éventuelelement après avoir virer commentaire #
-            * on vire import icecream
-
-            * mais aussi on gère
-              # ! -- DEBUGGING -- ! #
-              suivi de
-              # ! -- DEBUGGING -- ! #
-              en continue
 
 
 

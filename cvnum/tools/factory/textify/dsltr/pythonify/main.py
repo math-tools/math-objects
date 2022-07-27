@@ -22,7 +22,8 @@ from pprint import pformat
 def pythonify(
     debug_coding,
     alltrans,
-    srcdir_file
+    srcdir_file,
+    buildfile_relpath
 ):
     # ! -- DEBUGGING -- ! #
     # pprint(alltrans['debug_DEBUG']);exit()
@@ -60,11 +61,9 @@ def pythonify(
             f"""
 #!/usr/bin/env python3
 
-# -------------------------------------------------------------------------- #
-# --  This code was automatically build by the following file.            -- #
-# --                                                                      -- #
-# --      + ``tools/factory/textify/build_01_int2txt_automaton_rules.py`` -- #
-# -------------------------------------------------------------------------- #
+# This code was automatically build by the following file.
+#
+#     + ``{buildfile_relpath}``
 
 from collections import OrderedDict
 from re          import compile as __re_compile
