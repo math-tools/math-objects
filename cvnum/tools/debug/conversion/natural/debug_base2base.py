@@ -26,6 +26,14 @@ base2base = Base2Base()
 # -- LET'S GO -- #
 # -------------- #
 
+output = base2base.convert(
+    input   = ['1', '0', 'B', 'A'],
+    bases   = (16, 10),
+    formats = (FORMAT_BNUMERALS, FORMAT_NAT),
+    # seps =
+)
+
+print(f"{output = }")
 exit()
 
 

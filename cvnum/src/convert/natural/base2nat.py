@@ -24,6 +24,10 @@ from .nat2base import Nat2Base
 # ???
 ###
 class Base2Nat(NatConv):
+###
+# prototype::
+#     :see: NatConv.__init__
+###
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

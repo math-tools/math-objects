@@ -44,7 +44,7 @@ class NatConv:
         self._safemode = safemode
 
         if safemode:
-            self.checknatural = self.__checknatural
+            self.checknatural = self._checknatural
 
         else:
             self.checknatural = lambda nb, mini=0, maxi=0, errname='': None
@@ -53,7 +53,7 @@ class NatConv:
 ###
 # prototype::
 ###
-    def __checknatural(
+    def _checknatural(
         self,
         nb     : Any,
         mini   : float = 0,

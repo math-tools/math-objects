@@ -102,6 +102,12 @@ methods_base2nat = set(
     )
 )
 
+# ! -- DEBUGGING -- ! #
+print(f"{methods_nat2base = }")
+print(f"{methods_base2nat = }")
+exit()
+# ! -- DEBUGGING -- ! #
+
 
 missing_nat2base = set()
 missing_base2nat = set()
