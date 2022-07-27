@@ -27,6 +27,13 @@ myn2b = Nat2Base()
 # -------------- #
 
 print('---')
+print(f"{myn2b.digits2bnb([1, 5, 3], 16) = }")
+assert(153 == int(myn2b.digits2bnb([1, 5, 3], 16), 16))
+
+exit()
+
+
+print('---')
 mydigits   = [3, 0, 5, 9, 4]
 mynumerals = [str(d) for d in mydigits]
 

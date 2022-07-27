@@ -11,35 +11,17 @@
 [[:api:]] ??????
 Here are the breaking updates made.
 
-    1) The package ``tbox`` has been removed.
 
-    ?????? 1) The method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb`` have been removed, because a class ``var2int.Var2Int`` has been created to obtain several kinds of normalisation of variables.
+    ?????? 1) Conversions of integers: negative integers are allowed. This has implied a total refactoring of the ¨api: this implies to read the brand new ¨ doc.
+
+        ??????  * A package ``convert.natural`` contans sevral classes to manipulate easily, and efficiently, naturals in different bases.
+
+        ?????? *  A package ``convert.integer`` extends the features of ``convert.natural`` to the integers.
+
+    ?????  1) The package ``tbox`` has been removed, such as the method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb``. A class ``convert.integer.var2int.Var2Int`` has been created to obtain several kinds of normalisations of variables that are expected to be integers.
 
     int_n_strify renvoie str et int versions
     int_n_strsignabs
-
-
-    ?????? 1) Conversions of integers: negative integers are allowed. This has implied the following changes.
-
-        * utilisation de classes avec natconv.NatCnv comme base commune
-
-        ????????????   * on part de NN puis ensuite on enrichit avec ZZ
-
-        * sep = '' par défaut !
-
-        * api "symétrique" : tester via path::``tools/factory/convert/natural/build_01_format_b2b.py``
-            ajout de digits2nat et numerals2nat à Nat2Base
-                     bnb2digits et bnb2numerals à Base2Nat
-
-        * nom mpons abigus et sytsématique
-
-                        + base dix : pas de péréfixe
-
-                        + [b]digitsof et [b]numeralsof
-
-        * base2base.Base2Base : tout a étét revu (casse totale de l'api!)
-        passer via __getattr__ : les str utilisé en parfaite cocnoc-rdance avec les noms des méthodes !!!
-        b2b malin si l'une des bases est 10
 
     ?????? 1) Naming integers: the method ``IntName.nameof`` accepts again variables with string representation beeing a "legal" integer.
 
@@ -51,12 +33,19 @@ Here are the breaking updates made.
 [[:doc:]]
 ???? toutes les nouveautés !!!
 
+
 --------
 :fordev:
 --------
 
+[[:doc:]]
 doc des prototypes ????
 
+
+[[:api:]]
+build auto methodes extra pour Nat2Base
+
+????? Base2Nat et Nat2Base
 
 
 [[:api:]]    ??????
@@ -64,8 +53,7 @@ Unit tests.
 
     1) The package ``unit.common`` has been renamed ``unit.core``.
 
-    ?????? 1) Conversions of integers: every features are tested except for the Roman writing of integers (new versions of Roman conversions will come soon that will be easy to test).
-
+    ?????? 1) Conversions of naturals and integers: every features are tested except for the Roman writing of naturals (new versions of Roman conversions will come soon that will be easy to test).
 
     ?????? 1) Naming integers: new tests added with variables that are not strings.
 
