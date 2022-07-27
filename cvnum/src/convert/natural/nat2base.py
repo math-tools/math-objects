@@ -84,7 +84,7 @@ class Nat2Base(NatConv):
 
         for n in reversed(digits):
             assert n in DIGITS, \
-                   'unknown digit << {0} >>.'.format(n)
+                   'unknown digit ``{0}``.'.format(n)
 
             intval += n*power
             power  *= 10
@@ -111,7 +111,7 @@ class Nat2Base(NatConv):
     ) -> int:
         for n in reversed(numerals):
             assert n in STR_DIGITS, \
-                   'unknown numeral << {0} >>.'.format(n)
+                   'unknown numeral ``{0}``.'.format(n)
 
         return int(''.join(numerals))
 

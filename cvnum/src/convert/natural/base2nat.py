@@ -106,7 +106,7 @@ class Base2Nat(NatConv):
 # Legal numerals?
         for n in numerals:
             assert n in base_numerals, \
-                   f"illegal numeral << {n} >> found"
+                   f"illegal numeral ``{n}`` found"
 
 # The job is finished.
         return numerals
@@ -214,7 +214,7 @@ class Base2Nat(NatConv):
 
         for n in reversed(bnumerals):
             assert n in base_digits, \
-                   'unknown numeral << {0} >>.'.format(n)
+                   'unknown numeral ``{0}``.'.format(n)
 
             intval += base_digits[n]*bpower
             bpower *= base

@@ -162,6 +162,9 @@ print(f"   * Building constants for the formats of ``Base2Base``.")
 formats_base2base = set()
 
 for name in methods_nat2base:
+    if name.endswith('of'):
+        continue
+
     for part in name.split('2'):
         if part[0] == 'b':
             part = part[1:]
