@@ -1,11 +1,11 @@
 # #!/usr/bin/env python3
 
-# ###
-# # This module proposes one class to convert integers between two bases.
-# ###
+###
+# This module proposes one class to convert integers between two bases.
+###
 
 
-# from typing import *
+from typing import *
 
 # from .natconv  import NatConv
 # from .nat2base import Nat2Base
