@@ -64,7 +64,7 @@ class Nat2Base(NatConv):
 #            @ v in return ==> v in str(0..9)
 ###
     def numeralsof(self, nb: int) -> List[str]:
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(nb)
 
 # Let's work.
@@ -80,7 +80,7 @@ class Nat2Base(NatConv):
 #            @ v in return ==> v in 0..9
 ###
     def digitsof(self, nb: int) -> List[int]:
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(nb)
 
 # We can do the conversion.
@@ -107,14 +107,14 @@ class Nat2Base(NatConv):
         nb  : int,
         base: int,
     ) -> List[int]:
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(nb)
 
 # Special case of ``base = 10``.
         if base == 10:
             return self.digitsof(nb)
 
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(
             nb      = base,
             mini    = 2,
@@ -231,14 +231,14 @@ class Nat2Base(NatConv):
         nb  : int,
         base: int,
     ) -> List[str]:
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(nb)
 
 # Special case of ``base = 10``.
         if base == 10:
             return self.numeralsof(nb)
 
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(
             nb      = base,
             mini    = 2,
@@ -271,7 +271,7 @@ class Nat2Base(NatConv):
         base: int,
         sep : str = ''
     ) -> str:
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(nb)
         self.checknatural(
             nb      = base,
@@ -341,134 +341,4 @@ class Nat2Base(NatConv):
 
 
 # -- EXTRA METHODS "AUTO" - START -- #
-
-# Lines automatically build by the following file.
-#
-#     + ``tools/factory/convert/natural/build_02_xtra_methods.py``
-
-###
-# prototype::
-#     digits : :see: self.digits2nat
-#     base   : :see: self.nat2bdigits
-#
-#     :return: :see: self.nat2bdigits
-###
-    def digits2bdigits(
-        self,
-        digits: List[int],
-        base  : int,
-    ) -> List[int]:
-        return self.nat2bdigits(
-            nb = self.digits2nat(
-                digits = digits,
-            ),
-            base = base,
-        )
-
-
-###
-# prototype::
-#     digits : :see: self.digits2nat
-#     base   : :see: self.nat2bnb
-#     sep    : :see: self.nat2bnb
-#
-#     :return: :see: self.nat2bnb
-###
-    def digits2bnb(
-        self,
-        digits: List[int],
-        base  : int,
-        sep   : str = '',
-    ) -> str:
-        return self.nat2bnb(
-            nb = self.digits2nat(
-                digits = digits,
-            ),
-            base = base,
-            sep  = sep,
-        )
-
-
-###
-# prototype::
-#     digits : :see: self.digits2nat
-#     base   : :see: self.nat2bnumerals
-#
-#     :return: :see: self.nat2bnumerals
-###
-    def digits2bnumerals(
-        self,
-        digits: List[int],
-        base  : int,
-    ) -> List[str]:
-        return self.nat2bnumerals(
-            nb = self.digits2nat(
-                digits = digits,
-            ),
-            base = base,
-        )
-
-
-###
-# prototype::
-#     numerals : :see: self.numerals2nat
-#     base     : :see: self.nat2bdigits
-#
-#     :return: :see: self.nat2bdigits
-###
-    def numerals2bdigits(
-        self,
-        numerals: List[str],
-        base    : int,
-    ) -> List[int]:
-        return self.nat2bdigits(
-            nb = self.numerals2nat(
-                numerals = numerals,
-            ),
-            base = base,
-        )
-
-
-###
-# prototype::
-#     numerals : :see: self.numerals2nat
-#     base     : :see: self.nat2bnb
-#     sep      : :see: self.nat2bnb
-#
-#     :return: :see: self.nat2bnb
-###
-    def numerals2bnb(
-        self,
-        numerals: List[str],
-        base    : int,
-        sep     : str = '',
-    ) -> str:
-        return self.nat2bnb(
-            nb = self.numerals2nat(
-                numerals = numerals,
-            ),
-            base = base,
-            sep  = sep,
-        )
-
-
-###
-# prototype::
-#     numerals : :see: self.numerals2nat
-#     base     : :see: self.nat2bnumerals
-#
-#     :return: :see: self.nat2bnumerals
-###
-    def numerals2bnumerals(
-        self,
-        numerals: List[str],
-        base    : int,
-    ) -> List[str]:
-        return self.nat2bnumerals(
-            nb = self.numerals2nat(
-                numerals = numerals,
-            ),
-            base = base,
-        )
-
 # -- EXTRA METHODS "AUTO" - END -- #

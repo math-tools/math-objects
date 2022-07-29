@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 ###
-# This module converts specific base writings to decimal writings.
+# This module converts naturals given in different kinds of "base" writings
+# into different kinds of decimal writings.
 ###
 
 
@@ -21,7 +22,27 @@ from .nat2base import Nat2Base
 # ----------------------------------------- #
 
 ###
-# ???
+# This class can transform a "base" writting natural like ``"7B"`` to a decimal
+# one like ``123`` (``"7B"`` is the hexadecimal writing of ``123``).
+#
+# The base must be ``int`` Python greater than ``1``, and , the input
+# for conversion can be of the following kinds.
+#
+#     1) A ``str`` Python like ``"7B"``.
+#
+#     1) A list of digits like ``[7, 11]``.
+#
+#     1) A list of numerals like ``["7", "11"]``.
+#
+#
+# The output for conversion can be of the following kinds.
+#
+#     1) An ``int`` Python like ``123`` (``str`` version are not supported
+#        by this module, and they won't be).
+#
+#     1) A list of digits like ``[1, 2, 3]``.
+#
+#     1) A list of numerals like ``["1", "2", "3"]``.
 ###
 class Base2Nat(NatConv):
 ###
@@ -32,24 +53,66 @@ class Base2Nat(NatConv):
         super().__init__(*args, **kwargs)
 
         self.nat2base = Nat2Base(
-            safemode = self.safemode,
-            errname  = self.errname
+            errname = self.errname
         )
+
+
+###
+# prototype::
+#     bnumerals     : a list of ``base`` textual numerals sorted from the biggest
+#                     weight to the smallest one
+#     base_numerals : the list of legal ``base`` textual numerals
+#
+#     :postcond: v in bnumerals ==> v in base_numerals
+###
+    def checkbnumerals(
+        self,
+        bnumerals    : List[str],
+        base_numerals: List[str],
+    ) -> None:
+        for n in bnumerals:
+            assert n in base_numerals, \
+                   f"illegal numeral ``{n}`` found"
+
+
+### TODO
+# prototype::
+#     bdigits : a list of ``base`` digits from the biggest weight to
+#               the smallest one
+#     base    : :see: nat2base.Nat2Base.nat2bnb
+#
+#     :postcond: d in bdigits ==> d in 0..base-1
+###
+    def checkbdigits(
+        self,
+        bdigits: List[int],
+        base   : int,
+    ):
+        for d in bdigits:
+            self.checknatural(
+                nb      = d,
+                mini    = 0,
+                maxi    = base - 1,
+                errname = "digit"
+            )
 
 
 ###
 # prototype::
 #     base : :see: nat2base.Nat2Base.nat2bnb
 #
-#     :return: a dictionary associating ``base`` numerals to integer values
+#     :return: a dictionary associating a ``base`` numerals to
+#              its ``base``-digit integer value
 ###
-    def basedigitize(self, base: int) -> Dict[str, int]:# Safe mode used?
+    def basedigitize(self, base: int) -> Dict[str, int]:
+# Don't trust the user!
         self.checknatural(
             nb      = base,
             mini    = 2,
             errname = 'base'
         )
 
+# Let's work.
         numeralize = self.nat2base.numeralize(base)
 
         return {
@@ -60,13 +123,13 @@ class Base2Nat(NatConv):
 
 ###
 # prototype::
-#     bnb  : a string represetation of a number in base ``base``
-#     base : :see: nat2base.Nat2Base.nat2bnb
+#     bnb  : a string representation of a number in base ``base``
+#     base : :see: self.checkbdigits
 #     sep  : :see: nat2base.Nat2Base.nat2bnb
 #
 #     :return: the list of textual numerals of ``bnb``, the numerals beeing
 #              sorted from the biggest weight to the smallest one
-#            @ v in return ==> v in str(0..10)
+#            @ v in return ==> v in str(0 .. (base-1))
 ###
     def bnumeralsof(
         self,
@@ -74,53 +137,53 @@ class Base2Nat(NatConv):
         base: int,
         sep : str = ''
     ) -> List[str]:
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(
             nb      = base,
             mini    = 2,
             errname = 'base'
         )
 
-        base_numerals = list(self.basedigitize(base))
+        base_numerals = self.basedigitize(base).values()
 
 # An non empty seperator used.
         if sep:
-            numerals = bnb.split(sep)
-
-# ???
-        elif base < 37:
-            numerals = [x for x in bnb]
+            bnumerals = bnb.split(sep)
 
 # An empty seperator has been used.
+#
+# Nothing to do with small bases.
+        elif base < 37:
+            bnumerals = [x for x in bnb]
+
+# Let's slice the input.
         else:
-            numerals = []
+            bnumerals = []
             nbchars  = ceil(log(base) / log(36))
             sizenb   = len(bnb)
 
             for i in range(sizenb - nbchars, -1, -nbchars):
-                numerals.append(bnb[i: i + nbchars])
+                bnumerals.append(bnb[i: i + nbchars])
 
             nbchars_isolated = sizenb % nbchars
 
             if nbchars_isolated != 0:
-                numerals.append(bnb[:nbchars_isolated])
+                bnumerals.append(bnb[:nbchars_isolated])
 
-            numerals.reverse()
+            bnumerals.reverse()
 
 # Legal numerals?
-        for n in numerals:
-            assert n in base_numerals, \
-                   f"illegal numeral ``{n}`` found"
+        self.checkbnumerals(bnumerals, base_numerals)
 
 # The job is finished.
-        return numerals
+        return bnumerals
 
 
 ###
 # prototype::
-#     bnb  : a number writing into the base ``base``
-#     base : :see: ``bdigitize``
-#     sep  : the text used to separate the integer numerals
+#     bnb  : :see: self.bnumeralsof
+#     base : :see: self.bnumeralsof
+#     sep  : :see: self.bnumeralsof
 #
 #     :return: the list of decimal digits of ``bnb``, the digits beeing
 #              sorted from the biggest weight to the smallest one
@@ -142,10 +205,8 @@ class Base2Nat(NatConv):
 
 ###
 # prototype::
-#     bdigits : a list of ``base`` digits from the biggest weight to
-#               the smallest one
-#             @ d in bdigits ==> d in 0..base-1
-#     base    : :see: ``bdigitize``
+#     bdigits : :see: self.checkbdigits
+#     base    : :see: self.checkbdigits
 #
 #     :return: the integer value corresponding to the ``base`` digits
 #
@@ -160,25 +221,22 @@ class Base2Nat(NatConv):
         bdigits: List[int],
         base   : int,
     ) -> int:
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(
             nb      = base,
             mini    = 2,
             errname = 'base'
         )
 
+        self.checkbdigits(
+            bdigits = bdigits,
+            base    = base,
+        )
+
         intval = 0
         bpower = 1
 
         for n in reversed(bdigits):
-# Safe mode used?
-            self.checknatural(
-                nb      = n,
-                mini    = 0,
-                maxi    = base - 1,
-                errname = "digit"
-            )
-
             intval += n*bpower
             bpower *= base
 
@@ -187,9 +245,8 @@ class Base2Nat(NatConv):
 
 ###
 # prototype::
-#     bnumerals : a list of ``base`` textual numerals sorted from the biggest
-#                 weight to the smallest one
-#     base      : :see: ``bdigitize``
+#     bnumerals : :see: self.checkbnumerals
+#     base      : :see: self.bnumeralsof
 #
 #     :return: the integer value from the biggest weight to the smallest one
 #
@@ -204,7 +261,7 @@ class Base2Nat(NatConv):
         bnumerals: List[str],
         base     : int,
     ) -> int:
-# Safe mode used?
+# Don't trust the user!
         self.checknatural(
             nb      = base,
             mini    = 2,
@@ -213,13 +270,15 @@ class Base2Nat(NatConv):
 
         base_digits = self.basedigitize(base)
 
+        self.checkbnumerals(
+            bnumerals     = bnumerals,
+            base_numerals = base_digits,
+        )
+
         intval = 0
         bpower = 1
 
         for n in reversed(bnumerals):
-            assert n in base_digits, \
-                   'unknown numeral ``{0}``.'.format(n)
-
             intval += base_digits[n]*bpower
             bpower *= base
 
@@ -228,88 +287,65 @@ class Base2Nat(NatConv):
 
 ###
 # prototype::
-#     bnb  : a number written into the base ``base``
-#     base : :see: ``bdigitize``
-#     sep  : the text used to separate the textual numerals
+#     bdigits : a list of integer ``base`` digits
+#     base    : :see: self.bnumeralsof
+#     sep     : :see: self.bnumeralsof
 #
-#     :return: the integer value of ``number``
-#
-#     :see: basenumerals ,
-#           bnumerals2nat
-#
-#
-# note::
-#     The name ``bnb2int`` comes from "base number to integer".
+#     :return: the string ``base`` writing of ``bdigits``
 ###
-    def bnb2nat(
+    def bdigits2bnb(
         self,
-        bnb : str,
-        base: int,
-        sep : str = ''
-    ) -> int:
-        return self.bnumerals2nat(
-            bnumerals = self.bnumeralsof(
-                bnb  = bnb,
-                base = base,
-                sep  = sep
-            ),
-            base = base
+        bdigits: List[str],
+        base   : int,
+        sep    : str = ''
+    ):
+# Don't trust the user!
+        self.checknatural(
+            nb      = base,
+            mini    = 2,
+            errname = 'base'
         )
 
-
-###
-# prototype:: cohérence de l'API!
-#     bdigits : a list of ``base`` digits from the biggest weight to
-#               the smallest one
-#             @ d in bdigits ==> d in 0..9
-#
-#     :return: the integer value corresponding to the ``base`` digits
-#
-#     :see: bdigitize
-#
-#
-# note::
-#     The name ``bdigits2nat`` comes from "base digits to integer".
-###
-    def bnb2digits(
-        self,
-        bnb : str,
-        base: int,
-        sep : str = ''
-    ) -> List[int]:
-        return self.nat2base.digitsof(
-            self.bnb2nat(
-                bnb  = bnb,
-                base = base,
-                sep  = sep
-            )
+        self.checkbdigits(
+            bdigits = bdigits,
+            base    = base,
         )
 
+        numeralize = self.nat2base.numeralize(base)
+
+        return sep.join(numeralize(i)[0] for i in bdigits)
+
 
 ###
-# prototype:: cohérence de l'API!
-#     bdigits : a list of ``base`` digits from the biggest weight to
-#               the smallest one
-#             @ d in bdigits ==> d in 0..9
+# prototype::
+#     bnumerals : :see: self.checkbnumerals``
+#     base      : :see: self.bnumeralsof
+#     sep       : :see: self.bnumeralsof
 #
-#     :return: the integer value corresponding to the ``base`` digits
-#
-#     :see: bdigitize
-#
-#
-# note::
-#     The name ``bdigits2nat`` comes from "base digits to integer".
+#     :return: the string ``base`` writing of ``bnumerals``
 ###
-    def bnb2numerals(
+    def bnumerals2bnb(
         self,
-        bnb : str,
-        base: int,
-        sep : str = ''
-    ) -> List[int]:
-        return self.nat2base.numeralsof(
-            self.bnb2nat(
-                bnb  = bnb,
-                base = base,
-                sep  = sep
-            )
+        bnumerals: List[str],
+        base     : int,
+        sep      : str = ''
+    ) -> str:
+# Don't trust the user!
+        self.checknatural(
+            nb      = base,
+            mini    = 2,
+            errname = 'base'
         )
+
+        base_digits = self.basedigitize(base)
+
+        self.checkbnumerals(
+            bnumerals     = bnumerals,
+            base_numerals = base_digits,
+        )
+
+        return sep.join(bnumerals)
+
+
+# -- EXTRA METHODS "AUTO" - START -- #
+# -- EXTRA METHODS "AUTO" - END -- #

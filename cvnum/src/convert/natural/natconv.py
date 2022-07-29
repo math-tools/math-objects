@@ -23,37 +23,18 @@ class NatConv:
 ###
     def __init__(
         self,
-        safemode: bool = True,
         errname : str  = "number",
     ):
-        self.safemode = safemode
-        self.errname  = errname
+        self.errname = errname
 
         self.max_singledigit = 36
 
 
 ###
-# ???
-###
-    @property
-    def safemode(self) -> str:
-        return self._safemode
-
-    @safemode.setter
-    def safemode(self, safemode: bool) -> None:
-        self._safemode = safemode
-
-        if safemode:
-            self.checknatural = self._checknatural
-
-        else:
-            self.checknatural = lambda nb, mini=0, maxi=0, errname='': None
-
-
-###
 # prototype::
+#     ???
 ###
-    def _checknatural(
+    def checknatural(
         self,
         nb     : Any,
         mini   : float = 0,

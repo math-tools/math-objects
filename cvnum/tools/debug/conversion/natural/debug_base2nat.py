@@ -27,6 +27,12 @@ myn2b = Nat2Base()
 # -- LET'S GO -- #
 # -------------- #
 
+print(f"{myb2n.bnumerals2bnb(['A', '5'], 16) = }")
+print(f"{myb2n.bdigits2bnb([10, 5], 16) = }")
+
+exit()
+
+
 for b in [
     2,
     # 8,

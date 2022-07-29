@@ -7,6 +7,13 @@ from cbdevtools         import *
 from mistool.os_use     import PPath
 from mistool.string_use import between
 
+from core.xtra_methods import (
+    cls_xtramethods,
+    TAG_XXX_2_NAT,
+    TAG_NAT_2_YYY
+)
+
+
 # ! -- DEBUGGING -- ! #
 # Clear the terminal.
 print("\033c", end="")
@@ -28,38 +35,50 @@ THIS_FILE_REL_SRC_PATH = PPath(__file__) - SRC_DIR
 
 SRC_DIR    = SRC_DIR / "src"
 CV_DIR_NAT = SRC_DIR / "convert" / "natural"
-N2B_PYFILE = CV_DIR_NAT / "nat2base.py"
+
+PYFILES = {
+    name: CV_DIR_NAT / f"{name}.py"
+    for name in [
+        # "nat2base",
+# tags_from = {'digits': 'digits2nat', 'numerals': 'numerals2nat'}
+# tags_to   = {'bdigits': 'nat2bdigits', 'bnb': 'nat2bnb', 'bnumerals': 'nat2bnumerals'}
+        "base2nat",
+# tags_from = {'bdigits': 'bdigits2bnb', 'bnumerals': 'bnumerals2bnb'}
+# tags_to   = {'digits': 'bnb2digits', 'nat': 'bnb2nat', 'numerals': 'bnb2numerals'}
+    ]
+}
 
 
 # -------------------------------------------- #
 # -- REMOVE THE XTRA METHODS IN THE SOURCES -- #
 # -------------------------------------------- #
 
-print(f"   * Removing the codes of the extra methods. TODO!")
+for modulename, pyfile in PYFILES.items():
+    print(f"   * Module ``{modulename}`` - Removing the codes of the extra methods.")
 
-with N2B_PYFILE.open(
-    encoding = "utf-8",
-    mode     = "r",
-) as f:
-    pycode = f.read()
+    with pyfile.open(
+        encoding = "utf-8",
+        mode     = "r",
+    ) as f:
+        pycode = f.read()
 
-before, _, after = between(
-    text     = pycode,
-    keepseps = True,
-    seps     = [
-        '# -- EXTRA METHODS "AUTO" - START -- #',
-        '# -- EXTRA METHODS "AUTO" - END -- #'
-    ],
-)
+    before, _, after = between(
+        text     = pycode,
+        keepseps = True,
+        seps     = [
+            '# -- EXTRA METHODS "AUTO" - START -- #',
+            '# -- EXTRA METHODS "AUTO" - END -- #'
+        ],
+    )
 
-pycode = f"""{before}
+    pycode = f"""{before}
 {after}"""
 
-with N2B_PYFILE.open(
-    encoding = "utf-8",
-    mode     = "w",
-) as f:
-    f.write(pycode)
+    with pyfile.open(
+        encoding = "utf-8",
+        mode     = "w",
+    ) as f:
+        f.write(pycode)
 
 
 # ------------------------------------ #
@@ -73,109 +92,19 @@ MODULE_DIR = addfindsrc(
 
 from src.convert.natural import Nat2Base, Base2Nat, Base2Base
 
-
-# ----------- #
-# -- TOOLS -- #
-# ----------- #
-
-def seeat(method):
-    return f":see: self.{method}"
-
-def prototype_param(param, method):
-    return f"{param} : :see: self.{method}"
-
-def cleantype(onetype):
-    for toremove in [
-        "typing.",
-        "<class '",
-        "'>"
-    ]:
-        onetype = onetype.replace(toremove, "")
-
-    return onetype
+CLASSES = {
+    c.__name__.lower(): c
+    for c in [
+        Nat2Base,
+        Base2Nat,
+        Base2Base,
+    ]
+}
 
 
-# ----------------------- #
-# -- METHODS AVAILABLE -- #
-# ----------------------- #
-
-print(f"   * Looking for the extra methods.")
-
-# Some useful tags.
-TAG_BASE = 'base'
-TAG_BNB  = 'bnb'
-TAG_2    = '2'
-
-cls  = Nat2Base
-inst = cls()
-
-# "INPUT" tag & "OUPUT" tag
-tag_input, _, _ = cls.__name__.lower().partition(TAG_2)
-
-if tag_input == TAG_BASE:
-    tag_input = TAG_BNB
-
-# "FROM" tags & "TO" tags
-tags_from = {}
-tags_to   = {}
-
-for name in dir(cls):
-    if name[0] == "_":
-        continue
-
-    if TAG_2 in name:
-        before, _, after = name.partition(TAG_2)
-
-        if after == tag_input:
-            tags_from[before] = name
-
-        elif before == tag_input:
-            tags_to[after] = name
-
-# ! -- DEBUGGING -- ! #
-# print(f"{tags_from = }")
-# print(f"{tags_to   = }")
-# exit()
-# ! -- DEBUGGING -- ! #
-
-
-# Extra methods added automatically.
-xtra_methods = {}
-
-for fromtag, frommethod in tags_from.items():
-    for totag, tomethod in tags_to.items():
-        xtra_methods[f"{fromtag}2{totag}"] = (
-            (
-                frommethod,
-                signature(
-                    inst.__getattribute__(frommethod)
-                )
-            ),
-            (
-                tomethod,
-                signature(
-                    inst.__getattribute__(tomethod)
-                )
-            ),
-        )
-
-# ! -- DEBUGGING -- ! #
-# from pprint import pprint;pprint(xtra_methods)
-# print(xtra_methods['digits2bnb'])
-# print(xtra_methods['digits2bnb'][0][1].parameters)
-# print(xtra_methods['digits2bnb'][1][1].parameters)
-# exit()
-# ! -- DEBUGGING -- ! #
-
-
-# ----------------------- #
-# -- METHODS AVAILABLE -- #
-# ----------------------- #
-
-print(f"   * Building the codes of the extra methods.")
-
-TAG_NB  = 'nb'
-TAG_NAT = 'nat'
+# --------------- #
+# -- TEMPLATES -- #
+# --------------- #
 
 TABU_PROTO  = '\n# ' + ' '*4
 TABU_METH_2 = '\n' + ' '*8
@@ -204,159 +133,95 @@ TEMP_METH_CODE = " "*4 + """
         )
 """.strip()
 
-xtra_code = []
 
-for xtramethod, metainfos in xtra_methods.items():
-# ! -- DEBUGGING -- ! #
-    # print('---')
-    # print(xtramethod)
-    # print()
-# ! -- DEBUGGING -- ! #
+# ----------------------- #
+# -- METHODS AVAILABLE -- #
+# ----------------------- #
 
-    see_return  = ''
-    return_type = ''
+for modulename, pyfile in PYFILES.items():
+    print(f"   * Module ``{modulename}`` - Looking for the extra methods.")
 
-    TAG_XXX_2_NAT, TAG_NAT_2_YYY = int_2_tag = ["XXX_2_nat", "nat_2_YYY"]
-
-    methods_called         = {}
-    max_len_params         = {}
-    infos_params_XXX_2_YYY = defaultdict(list)
-
-    for i, (intermeth, sign) in enumerate(metainfos):
-        tag = int_2_tag[i]
-
-        methods_called[tag] = intermeth
-
-        if not intermeth.endswith(TAG_NAT):
-            see_return  = seeat(intermeth)
-            return_type = cleantype(str(sign.return_annotation))
-
-        max_len_params[tag] = 0
-
-        for p, t in sign.parameters.items():
-            if p == TAG_NB:
-                continue
-
-            default = sign.parameters[p].default
-
-            if default == _empty:
-                default = None
-
-            max_len_params[tag] = max(
-                len(p),
-                max_len_params[tag]
-            )
-
-            infos_params_XXX_2_YYY[tag].append({
-                'p'      : p,
-                'ptype'  : cleantype(str(t.annotation)),
-                'see'    : intermeth,
-                'default': default,
-            })
-
-# ! -- DEBUGGING -- ! #
-    # print(f"{see_return  = }")
-    # print(f"{return_type = }")
-    # print()
-    # print(f"{methods_called         = }")
-    # print(f"{infos_params_XXX_2_YYY = }")
-    # exit()
-# ! -- DEBUGGING -- ! #
-
-    see_params       = []
-    params_xtra      = []
-    params_XXX_2_YYY = defaultdict(list)
-
-    maxlen_all = max(m for m in max_len_params.values())
-
-    for tag, aboutparams in infos_params_XXX_2_YYY.items():
-        maxlen = max_len_params[tag]
-
-        for infos in aboutparams:
-            p       = infos['p']
-            ptype   = infos['ptype']
-            see     = infos['see']
-            default = infos['default']
-
-            len_p = len(p)
-            p_all = p + ' '*(maxlen_all - len_p)
-
-            see_params.append(
-                prototype_param(p_all, see)
-            )
-
-            if default is None:
-                default = ''
-
-            else:
-                default = f" = {repr(default)}"
-
-            params_xtra.append(f"{p_all}: {ptype}{default},")
-
-            p += ' '*(maxlen - len_p)
-
-            params_XXX_2_YYY[tag].append(f"{p} = {p.strip()},")
-
-# ! -- DEBUGGING -- ! #
-    # print(f"{see_params  = }")
-    # print(f"{params_xtra = }")
-    # print()
-    # print(f"{methods_called   = }")
-    # print(f"{params_XXX_2_YYY = }")
-    # exit()
-# ! -- DEBUGGING -- ! #
-
-    see_params       = TABU_PROTO.join(see_params)
-    params_xtra      = TABU_METH_2.join(params_xtra)
-    params_XXX_2_nat = TABU_METH_4.join(params_XXX_2_YYY[TAG_XXX_2_NAT])
-    params_nat_2_YYY = TABU_METH_3.join(params_XXX_2_YYY[TAG_NAT_2_YYY])
-
-    code_prototype = TEMP_PROTOTYPE.format(
-        see_params = see_params,
-        see_return = see_return,
+    xtrainfos = cls_xtramethods(
+        cls = CLASSES[modulename],
     )
 
-    code_meth = TEMP_METH_CODE.format(
-        xtramethod       = xtramethod,
-        params_xtra      = params_xtra,
-        XXX_2_nat        = methods_called[TAG_XXX_2_NAT],
-        nat_2_YYY        = methods_called[TAG_NAT_2_YYY],
-        return_type      = return_type,
-        params_XXX_2_nat = params_XXX_2_nat,
-        params_nat_2_YYY = params_nat_2_YYY,
-    )
-
-    xtra_code.append(f"{code_prototype}\n{code_meth}")
-
 # ! -- DEBUGGING -- ! #
-    # print('---')
-    # print()
-    # print("TEMP_PROTOTYPE:")
-    # print(code_prototype)
-    # print()
-    # print(code_meth)
-    # print()
+    # for xtramethod, infos in xtrainfos.items():
+    #     print('---')
+    #     print(xtramethod)
+    #     # print(infos)
+    #     print()
+    # continue
     # exit()
 # ! -- DEBUGGING -- ! #
 
-xtra_code = ("\n"*3).join(xtra_code)
 
-with N2B_PYFILE.open(
-    encoding = "utf-8",
-    mode     = "r",
-) as f:
-    pycode = f.read()
+# ------------------------ #
+# -- PYTHON CODE UPDATE -- #
+# ------------------------ #
 
-before, _, after = between(
-    text     = pycode,
-    keepseps = True,
-    seps     = [
-        '# -- EXTRA METHODS "AUTO" - START -- #',
-        '# -- EXTRA METHODS "AUTO" - END -- #'
-    ],
-)
+    print(f"   * Module ``{modulename}`` - Updating the Python code.")
 
-pycode = f"""{before}
+    xtra_code = []
+
+    for xtramethod, infos in xtrainfos.items():
+        see_params  = TABU_PROTO.join(infos["see_params"])
+        params_xtra = TABU_METH_2.join(infos["params_xtra"])
+
+        params_XXX_2_nat = TABU_METH_4.join(
+            infos["params_XXX_2_YYY"][TAG_XXX_2_NAT]
+        )
+
+        params_nat_2_YYY = TABU_METH_3.join(
+            infos["params_XXX_2_YYY"][TAG_NAT_2_YYY]
+        )
+
+        code_prototype = TEMP_PROTOTYPE.format(
+            see_params = see_params,
+            see_return = infos["see_return"],
+        )
+
+        code_meth = TEMP_METH_CODE.format(
+            xtramethod       = xtramethod,
+            params_xtra      = params_xtra,
+            XXX_2_nat        = infos["methods_called"][TAG_XXX_2_NAT],
+            nat_2_YYY        = infos["methods_called"][TAG_NAT_2_YYY],
+            return_type      = infos["return_type"],
+            params_XXX_2_nat = params_XXX_2_nat,
+            params_nat_2_YYY = params_nat_2_YYY,
+        )
+
+        xtra_code.append(f"{code_prototype}\n{code_meth}")
+
+# ! -- DEBUGGING -- ! #
+        # print('---')
+        # print()
+        # print("TEMP_PROTOTYPE:")
+        # print(code_prototype)
+        # print()
+        # print(code_meth)
+        # print()
+        # exit()
+# ! -- DEBUGGING -- ! #
+
+    xtra_code = ("\n"*3).join(xtra_code)
+
+    with pyfile.open(
+        encoding = "utf-8",
+        mode     = "r",
+    ) as f:
+        pycode = f.read()
+
+    before, _, after = between(
+        text     = pycode,
+        keepseps = True,
+        seps     = [
+            '# -- EXTRA METHODS "AUTO" - START -- #',
+            '# -- EXTRA METHODS "AUTO" - END -- #'
+        ],
+    )
+
+    pycode = f"""{before}
 
 # Lines automatically build by the following file.
 #
@@ -367,12 +232,12 @@ pycode = f"""{before}
 {after}"""
 
 # ! -- DEBUGGING -- ! #
-# print(pycode)
-# exit()
+    # print(pycode)
+    # exit()
 # ! -- DEBUGGING -- ! #
 
-with N2B_PYFILE.open(
-    encoding = "utf-8",
-    mode     = "w",
-) as f:
-    f.write(pycode)
+    with pyfile.open(
+        encoding = "utf-8",
+        mode     = "w",
+    ) as f:
+        f.write(pycode)

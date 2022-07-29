@@ -61,45 +61,19 @@ class Base2Base(NatConv):
         super().__init__(*args, **kwargs)
 
         self.nat2base = Nat2Base(
-            safemode = self.safemode,
             errname  = self.errname
         )
 
         self.base2nat = Base2Nat(
-            safemode = self.safemode,
-            errname  = self.errname
+            errname = self.errname
         )
-
-###
-# ???
-#
-# note::
-#     We redefine the setter and getter of the attribut ``self.safemode``
-#     such as to add another checker for the arguments of the method
-#     ``self.convert``.
-###
-    @property
-    def safemode(self) -> str:
-        return self._safemode
-
-    @safemode.setter
-    def safemode(self, safemode: bool) -> None:
-        self._safemode = safemode
-
-        if safemode:
-            self.checknatural = self._checknatural
-            self.checkcvargs  = self._checkcvargs
-
-        else:
-            self.checknatural = lambda nb, mini=0, maxi=0, errname='': None
-            self.checkcvargs  = lambda input, bases, formats, seps: None
 
 
 ###
 # prototype::
 #     :action: ???
 ###
-    def _checkcvargs(self) -> None:
+    def checkcvargs(self) -> None:
 # Good sizes?
         for k, v in [
             ("formats", self.formats),
