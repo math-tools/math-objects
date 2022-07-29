@@ -11,13 +11,13 @@
 [[:api:]]
 Here are the breaking updates made.
 
-    1) Conversions of integers: the code has been totally rebuild to use ¨poo. integers are allowed (the human and the ¨tech ¨docs will be updated later).
+    1) Conversions of integers: the code has been totally rebuild to use ¨poo (the human and the ¨tech ¨docs will be updated later).
 
         * A package ``convert.natural`` contains classes to manipulate easily naturals in different bases. The conversion from any base to any other base will be implemented later.
 
-        * A package ``convert.integer`` will extend the features of ``convert.natural`` to the varuables with string representation that is an integer. To not break everything, this package only contains the module ``var2int`` for the moment.
+        * A package ``convert.integer`` will extend the features of ``convert.natural`` to variables with string representation that is an integer. To not break everything, this package only contains the module ``var2int`` for the moment.
 
-    1) The package ``tbox`` has been removed, and so are the method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb``.
+    1) The package ``tbox`` has been removed, and so have the method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb``.
     A module ``convert.integer.var2int`` with a class ``Var2Int`` has been created to obtain several kinds of normalisations of variables that are expected to be printed as integers (no human and ¨tech ¨docs uptodate for the moment).
 
     1) Naming integers: the method ``IntName.nameof`` accepts again variables with string representation beeing a "legal" integer.
@@ -28,7 +28,7 @@ Here are the breaking updates made.
 --------
 
 [[:api:]]
-Some builders and one checker ere used such as to obtain easily symetric ¨api for the classes ``Base2Nat`` and ``Nat2Base``.
+Some builders and one checker are used such as to obtain easily symetric ¨apis for the classes ``Base2Nat`` and ``Nat2Base``.
 
 
 [[:tests:]]
@@ -36,9 +36,9 @@ Unit tests.
 
     1) The package ``unit.common`` has been renamed ``unit.core``.
 
-    1) Conversions of naturals and integers: few features are tested (other tests will come later).
+    1) Conversions of naturals: few features are tested (other tests will come later).
 
-    1) Use of covering of tests to know what is missing. A lot of tests remained to be done... When? That is th big question. ;-) A sumarry of the results tells me to do it soon!
+    1) Covering analysis of tests to know what is missing. A lot of tests remained to be done... When? That is the big question. ;-) A sumary of the results tells me to do it soon!
 
         * Covering `93 %` of path::``src/convert/integer/var2int.py``
         * Covering `27 %` of path::``src/convert/natural/base2nat.py``
