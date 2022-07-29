@@ -29,6 +29,9 @@ myn2b = Nat2Base()
 print('---')
 print(f"{myn2b.digits2bnb([1, 5, 3], 16) = }")
 assert(153 == int(myn2b.digits2bnb([1, 5, 3], 16), 16))
+print(f"{myn2b.digits2bnumerals([1, 5, 3], 16) = }")
+print(f"{myn2b.digits2bnumerals([1, 5, 3], 20) = }")
+print(f"{myn2b.digits2bnb([1, 5, 3], 37) = }")
 
 exit()
 

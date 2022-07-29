@@ -349,14 +349,14 @@ class Nat2Base(NatConv):
 ###
 # prototype::
 #     digits : :see: self.digits2nat
-#     base : :see: self.nat2bdigits
+#     base   : :see: self.nat2bdigits
 #
 #     :return: :see: self.nat2bdigits
 ###
     def digits2bdigits(
         self,
         digits: List[int],
-        base: int,
+        base  : int,
     ) -> List[int]:
         return self.nat2bdigits(
             nb = self.digits2nat(
@@ -369,37 +369,37 @@ class Nat2Base(NatConv):
 ###
 # prototype::
 #     digits : :see: self.digits2nat
-#     base : :see: self.nat2bnb
-#     sep : :see: self.nat2bnb
+#     base   : :see: self.nat2bnb
+#     sep    : :see: self.nat2bnb
 #
 #     :return: :see: self.nat2bnb
 ###
     def digits2bnb(
         self,
         digits: List[int],
-        base: int,
-        sep: str = '',
+        base  : int,
+        sep   : str = '',
     ) -> str:
         return self.nat2bnb(
             nb = self.digits2nat(
                 digits = digits,
             ),
             base = base,
-            sep = sep,
+            sep  = sep,
         )
 
 
 ###
 # prototype::
 #     digits : :see: self.digits2nat
-#     base : :see: self.nat2bnumerals
+#     base   : :see: self.nat2bnumerals
 #
 #     :return: :see: self.nat2bnumerals
 ###
     def digits2bnumerals(
         self,
         digits: List[int],
-        base: int,
+        base  : int,
     ) -> List[str]:
         return self.nat2bnumerals(
             nb = self.digits2nat(
@@ -412,14 +412,14 @@ class Nat2Base(NatConv):
 ###
 # prototype::
 #     numerals : :see: self.numerals2nat
-#     base : :see: self.nat2bdigits
+#     base     : :see: self.nat2bdigits
 #
 #     :return: :see: self.nat2bdigits
 ###
     def numerals2bdigits(
         self,
         numerals: List[str],
-        base: int,
+        base    : int,
     ) -> List[int]:
         return self.nat2bdigits(
             nb = self.numerals2nat(
@@ -432,37 +432,37 @@ class Nat2Base(NatConv):
 ###
 # prototype::
 #     numerals : :see: self.numerals2nat
-#     base : :see: self.nat2bnb
-#     sep : :see: self.nat2bnb
+#     base     : :see: self.nat2bnb
+#     sep      : :see: self.nat2bnb
 #
 #     :return: :see: self.nat2bnb
 ###
     def numerals2bnb(
         self,
         numerals: List[str],
-        base: int,
-        sep: str = '',
+        base    : int,
+        sep     : str = '',
     ) -> str:
         return self.nat2bnb(
             nb = self.numerals2nat(
                 numerals = numerals,
             ),
             base = base,
-            sep = sep,
+            sep  = sep,
         )
 
 
 ###
 # prototype::
 #     numerals : :see: self.numerals2nat
-#     base : :see: self.nat2bnumerals
+#     base     : :see: self.nat2bnumerals
 #
 #     :return: :see: self.nat2bnumerals
 ###
     def numerals2bnumerals(
         self,
         numerals: List[str],
-        base: int,
+        base    : int,
     ) -> List[str]:
         return self.nat2bnumerals(
             nb = self.numerals2nat(
