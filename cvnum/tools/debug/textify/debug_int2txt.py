@@ -41,7 +41,7 @@ lang = "en_US"    # TESTS OK
 
 FIXED_INTS = [
     "100", # Pour extend
-    # "63_005",
+    "-63_005",
     # 0,
     # 1,
     # 11,

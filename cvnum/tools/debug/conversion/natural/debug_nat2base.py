@@ -27,11 +27,16 @@ myn2b = Nat2Base()
 # -------------- #
 
 print('---')
-print(f"{myn2b.digits2bnb([1, 5, 3], 16) = }")
-assert(153 == int(myn2b.digits2bnb([1, 5, 3], 16), 16))
+print(f"{myn2b.digits2bnb([1, 5, 3], 16)       = }")
+assert 153 == 9*16 + 9
+
 print(f"{myn2b.digits2bnumerals([1, 5, 3], 16) = }")
+
 print(f"{myn2b.digits2bnumerals([1, 5, 3], 20) = }")
-print(f"{myn2b.digits2bnb([1, 5, 3], 37) = }")
+assert 153 == 7*20 + 13
+
+print(f"{myn2b.digits2bnb([1, 5, 3], 37)       = }")
+assert 153 == 4*37 + 5
 
 exit()
 
@@ -41,8 +46,8 @@ mydigits   = [3, 0, 5, 9, 4]
 mynumerals = [str(d) for d in mydigits]
 
 print(f'                      {mydigits = }')
-print(f'    {myn2b.digits2nat(mydigits) = }')
-print(f'{myn2b.numerals2nat(mynumerals) = }')
+print(f'    {myn2b.fromdigits(mydigits) = }')
+print(f'{myn2b.fromnumerals(mynumerals) = }')
 
 # exit()
 

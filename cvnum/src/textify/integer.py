@@ -65,7 +65,7 @@ class IntName(BaseAutomaton):
         self._initial_nb = nb
 
 # Name of the sign, and the string version of the absolute value of the integer.
-        _, sign, absnb = self.int_n_strify(varnb = nb)
+        _, sign, absnb = self.int_n_strsignabs(varnb = nb)
 
 # Can we use a sign?
         if sign:

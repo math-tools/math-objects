@@ -26,7 +26,7 @@ for upfolder in [
         project = upfolder,
     )
 
-from src.convert.natural.nat2base import Nat2Base
+from src.convert.natural import nat2base
 # from unit.core       import build_removable
 
 
@@ -35,17 +35,17 @@ from src.convert.natural.nat2base import Nat2Base
 # ---------------------- #
 
 @given(st.integers(max_value = -1))
-def test_nat2base_numerals_negative_NOT_OK(bad):
+def test_int2base_numerals_negative_NOT_OK(bad):
     with pytest.raises(
         (AssertionError, ValueError),
         match = r".*too small.*"
     ):
-        Nat2Base().numeralsof(bad)
+        nat2base.intnumerals(bad)
 
 
 @given(st.integers(min_value = 0))
-def test_nat2base_numerals(nb):
-    nb_numerals = Nat2Base().numeralsof(nb)
+def test_int2base_numerals(nb):
+    nb_numerals = nat2base.intnumerals(nb)
 
     assert str(nb) == ''.join(nb_numerals)
 
@@ -55,17 +55,17 @@ def test_nat2base_numerals(nb):
 # -------------------- #
 
 @given(st.integers(max_value = -1))
-def test_nat2base_digits_negative_NOT_OK(bad):
+def test_int2base_digits_negative_NOT_OK(bad):
     with pytest.raises(
         (AssertionError, ValueError),
         match = r".*too small.*"
     ):
-        Nat2Base().digitsof(bad)
+        nat2base.intdigits(bad)
 
 
 @given(st.integers(min_value = 0))
-def test_nat2base_digits(nb):
-    nb_digits = Nat2Base().digitsof(nb)
+def test_int2base_digits(nb):
+    nb_digits = nat2base.intdigits(nb)
 
     assert nb == reduce(
         lambda x, y: 10*x + y,
@@ -77,13 +77,15 @@ def test_nat2base_digits(nb):
 # -- DECIMAL --> BASE -- #
 # ---------------------- #
 
+
+
 @given(st.integers(max_value = 1))
-def test_nat2base_digits_negative_NOT_OK(bad_base):
+def test_int2base_digits_negative_NOT_OK(bad_base):
     with pytest.raises(
         (AssertionError, ValueError),
         match = r".*base.*too small.*"
     ):
-        Nat2Base().nat2bdigits(
+        nat2base.int2bdigits(
             nb   = 20220722, # This looks like a date...
             base = bad_base,
         )

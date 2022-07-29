@@ -26,7 +26,7 @@ for upfolder in [
     )
 
 from src.textify import *
-from unit.common import build_removable
+from unit.core   import build_removable
 
 
 # ----------------------- #
@@ -37,7 +37,7 @@ NB_RAND_TESTS = 50
 
 
 BAD_TYPE_INPUTS = [
-    123,
+    PPath("3") / "2" / "1",
 ]
 
 BAD_STR_INPUTS = [
@@ -94,9 +94,19 @@ def test_nameof_spaces_underscores_ignored():
 
         for _ in range(NB_RAND_TESTS):
             randnb          = str(randint(0, maxpos))
-            randnb_polluted = build_removable(randnb, [' ', '_'])
+            randnb_polluted = build_removable(
+                nb         = randnb,
+                toremove   = [' ', '_'],
+                atleastone = "_",
+            )
 
-            assert nameof(randnb) == nameof(randnb_polluted)
+            assert nameof(randnb) == nameof(randnb_polluted), \
+                   (
+                    "\n"
+                    f"{randnb          = }"
+                    "\n"
+                    f"{randnb_polluted = }"
+                   )
 
 
 # --------------- #
@@ -122,7 +132,7 @@ def test_nameof_input_type_NOT_OK():
         for bad in BAD_TYPE_INPUTS:
             with pytest.raises(
                 (AssertionError, ValueError),
-                match = r".*illegal type.*"
+                match = r".*not an integer.*"
             ):
                 nameof(bad)
 

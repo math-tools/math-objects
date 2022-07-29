@@ -27,8 +27,25 @@ myn2b = Nat2Base()
 # -- LET'S GO -- #
 # -------------- #
 
-print(f"{myb2n.bnumerals2bnb(['A', '5'], 16) = }")
-print(f"{myb2n.bdigits2bnb([10, 5], 16) = }")
+print(f"{myb2n.frombnumerals(['A', '5'], 16) = }")
+print(f"{myb2n.frombdigits([10, 5], 16)      = }")
+
+print(f"{myb2n.bnb2nat('A5', 16)             = }")
+print(f"{myb2n.bdigits2digits([10, 5], 16)   = }")
+
+# exit()
+
+
+print('---')
+mydigits   = [3, 0, 10, 15, 4]
+mynumerals = ['3', '0', 'A', 'F', '4']
+b          = 16
+nbbyhand   = (((3 *16 +0)*16 + 10)*16 + 15)*16 + 4
+
+print(f'                       {b, mydigits = }')
+print(f'    {myb2n.bdigits2nat(mydigits, b) = }')
+print(f'{myb2n.bnumerals2nat(mynumerals, b) = }')
+print(f'                          {nbbyhand = }')
 
 exit()
 
@@ -59,16 +76,7 @@ print(f'{myb2n.bnumeralsof(bnb, b) = }')
 # exit()
 
 
-print('---')
-mydigits   = [3, 0, 10, 15, 4]
-mynumerals = ['3', '0', 'A', 'F', '4']
-b          = 16
-nbbyhand   = (((3 *16 +0)*16 + 10)*16 + 15)*16 + 4
 
-print(f'                       {b, mydigits = }')
-print(f'    {myb2n.bdigits2nat(mydigits, b) = }')
-print(f'{myb2n.bnumerals2nat(mynumerals, b) = }')
-print(f'                          {nbbyhand = }')
 
 # print('---')
 # b = 40

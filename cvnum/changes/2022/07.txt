@@ -1,73 +1,49 @@
 // ---------- //
-check les :see: !!!
-
 
 ==
-?????
+29
 ==
 
 -------
 :break:
 -------
 
-[[:api:]] ??????
+[[:api:]]
 Here are the breaking updates made.
 
+    1) Conversions of integers: the code has been totally rebuild to use ¨poo. integers are allowed (the human and the ¨tech ¨docs will be updated later).
 
-    ?????? 1) Conversions of integers: negative integers are allowed. This has implied a total refactoring of the ¨api: this implies to read the brand new ¨ doc.
+        * A package ``convert.natural`` contains classes to manipulate easily naturals in different bases. The conversion from any base to any other base will be implemented later.
 
-        ??????  * A package ``convert.natural`` contans sevral classes to manipulate easily, and efficiently, naturals in different bases.
+        * A package ``convert.integer`` will extend the features of ``convert.natural`` to the varuables with string representation that is an integer. To not break everything, this package only contains the module ``var2int`` for the moment.
 
-        ?????? *  A package ``convert.integer`` extends the features of ``convert.natural`` to the integers.
+    1) The package ``tbox`` has been removed, and so are the method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb``.
+    A module ``convert.integer.var2int`` with a class ``Var2Int`` has been created to obtain several kinds of normalisations of variables that are expected to be printed as integers (no human and ¨tech ¨docs uptodate for the moment).
 
-    ?????  1) The package ``tbox`` has been removed, such as the method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb``. A class ``convert.integer.var2int.Var2Int`` has been created to obtain several kinds of normalisations of variables that are expected to be integers.
-
-    int_n_strify renvoie str et int versions
-    int_n_strsignabs
-
-    ?????? 1) Naming integers: the method ``IntName.nameof`` accepts again variables with string representation beeing a "legal" integer.
-
-
---------
-:update:
---------
-
-[[:doc:]]
-???? toutes les nouveautés !!!
+    1) Naming integers: the method ``IntName.nameof`` accepts again variables with string representation beeing a "legal" integer.
 
 
 --------
 :fordev:
 --------
 
-[[:doc:]]
-doc des prototypes ????
-
-
 [[:api:]]
-build auto methodes extra pour Nat2Base
-
-????? Base2Nat et Nat2Base
+Some builders and one checker ere used such as to obtain easily symetric ¨api for the classes ``Base2Nat`` and ``Nat2Base``.
 
 
-[[:api:]]    ??????
+[[:tests:]]
 Unit tests.
 
     1) The package ``unit.common`` has been renamed ``unit.core``.
 
-    ?????? 1) Conversions of naturals and integers: every features are tested except for the Roman writing of naturals (new versions of Roman conversions will come soon that will be easy to test).
+    1) Conversions of naturals and integers: few features are tested (other tests will come later).
 
-    ?????? 1) Naming integers: new tests added with variables that are not strings.
+    1) Use of covering of tests to know what is missing. A lot of tests remained to be done... When? That is th big question. ;-) A sumarry of the results tells me to do it soon!
 
-
-
-
-
-
-
-
-
-
+        * Covering `93 %` of path::``src/convert/integer/var2int.py``
+        * Covering `27 %` of path::``src/convert/natural/base2nat.py``
+        * Covering `35 %` of path::``src/convert/natural/nat2base.py``
+        * Covering `84 %` of path::``src/textify/automata.py``
 
 
 // ---------- //
@@ -80,7 +56,7 @@ Unit tests.
 :fordev:
 --------
 
-[[:facto:]]
+[[:tests:]]
 Unit tests.
 
     1) Use of homemade ``hypothesis`` strategies when it is needed.
@@ -145,7 +121,7 @@ Here the new things added.
 :fordev:
 --------
 
-[[:api:]]
+[[:tests:]]
 New unit tests with some of them that use of the excellent package ``hypothesis``.
 
     1) Naming integers: two new things.
@@ -203,7 +179,7 @@ Three bugs have been fixed.
 :fordev:
 --------
 
-[[:api:]]
+[[:tests:]]
 Testing the naming of integers.
 
     1) Some unit tests added by hands.
@@ -338,11 +314,11 @@ Here are the changes.
 07
 ==
 
-------
-:news:
-------
+--------
+:fordev:
+--------
 
-[[:api:]]
+[[:tests:]]
 Here are the new features to name integers.
 
     1) Naming integers: the new ¨python ¨api is now "fully functional" (unit tests will be added soon, so it should remain some insidious and serious bugs).

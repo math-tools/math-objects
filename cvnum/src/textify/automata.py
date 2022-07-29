@@ -122,10 +122,10 @@ class BaseAutomaton:
             rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_BIG]
 
 # Sign and absolute value
-        self.int_n_strify = Var2Int(
+        self.int_n_strsignabs = Var2Int(
             tryconvert = True,
             toremove   = [' ', self._groups_sep]
-        ).int_n_strify
+        ).int_n_strsignabs
 
 
 ###

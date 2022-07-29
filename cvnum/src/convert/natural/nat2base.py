@@ -89,6 +89,50 @@ class Nat2Base(NatConv):
 
 ###
 # prototype::
+#     digits : a list of digits sorted from the biggest weight to
+#              the smallest one
+#             @ d in digits ==> d in 0..9
+#
+#     :return: the natural value corresponding to the digits
+###
+    def fromdigits(
+        self,
+        digits: List[int],
+    ) -> int:
+        intval = 0
+        power  = 1
+
+        for n in reversed(digits):
+            assert n in INT_DIGITS, \
+                   'unknown digit ``{0}``.'.format(n)
+
+            intval += n*power
+            power  *= 10
+
+        return intval
+
+
+###
+# prototype::
+#     numerals : a list of textual numerals sorted from the biggest weight to
+#                the smallest one
+#             @ d in numerals ==> d in str(0..9)
+#
+#     :return: the natural value corresponding to thenumerals
+###
+    def fromnumerals(
+        self,
+        numerals: List[str],
+    ) -> int:
+        for n in reversed(numerals):
+            assert n in STR_DIGITS, \
+                   'unknown numeral ``{0}``.'.format(n)
+
+        return int(''.join(numerals))
+
+
+###
+# prototype::
 #     nb   : :see: self.numeralsof
 #     base : the base used to write a natural natural
 #          @ base in 2 .. +inf
@@ -287,58 +331,135 @@ class Nat2Base(NatConv):
 
         return sep.join(numerals)
 
+# -- EXTRA METHODS "AUTO" - START -- #
+
+# Lines automatically build by the following file.
+#
+#     + ``tools/factory/convert/natural/build_02_xtra_methods.py``
 
 ###
 # prototype::
-#     digits : a list of digits sorted from the biggest weight to
-#              the smallest one
-#             @ d in digits ==> d in 0..9
+#     digits : :see: self.fromdigits
+#     base   : :see: self.nat2bdigits
 #
-#     :return: the natural value corresponding to the digits
-#
-#
-# note::
-#     The name ``digits2nat`` comes from "digits to natural".
+#     :return: :see: self.nat2bdigits
 ###
-    def digits2nat(
+    def digits2bdigits(
         self,
         digits: List[int],
-    ) -> int:
-        intval = 0
-        power  = 1
-
-        for n in reversed(digits):
-            assert n in INT_DIGITS, \
-                   'unknown digit ``{0}``.'.format(n)
-
-            intval += n*power
-            power  *= 10
-
-        return intval
+        base  : int,
+    ) -> List[int]:
+        return self.nat2bdigits(
+            nb = self.fromdigits(
+                digits = digits,
+            ),
+            base = base,
+        )
 
 
 ###
 # prototype::
-#     numerals : a list of textual numerals sorted from the biggest weight to
-#                the smallest one
-#             @ d in numerals ==> d in str(0..9)
+#     digits : :see: self.fromdigits
+#     base   : :see: self.nat2bnb
+#     sep    : :see: self.nat2bnb
 #
-#     :return: the natural value corresponding to thenumerals
-#
-#
-# note::
-#     The name ``numerals2nat`` comes from "numerals to natural".
+#     :return: :see: self.nat2bnb
 ###
-    def numerals2nat(
+    def digits2bnb(
+        self,
+        digits: List[int],
+        base  : int,
+        sep   : str = '',
+    ) -> str:
+        return self.nat2bnb(
+            nb = self.fromdigits(
+                digits = digits,
+            ),
+            base = base,
+            sep  = sep,
+        )
+
+
+###
+# prototype::
+#     digits : :see: self.fromdigits
+#     base   : :see: self.nat2bnumerals
+#
+#     :return: :see: self.nat2bnumerals
+###
+    def digits2bnumerals(
+        self,
+        digits: List[int],
+        base  : int,
+    ) -> List[str]:
+        return self.nat2bnumerals(
+            nb = self.fromdigits(
+                digits = digits,
+            ),
+            base = base,
+        )
+
+
+###
+# prototype::
+#     numerals : :see: self.fromnumerals
+#     base     : :see: self.nat2bdigits
+#
+#     :return: :see: self.nat2bdigits
+###
+    def numerals2bdigits(
         self,
         numerals: List[str],
-    ) -> int:
-        for n in reversed(numerals):
-            assert n in STR_DIGITS, \
-                   'unknown numeral ``{0}``.'.format(n)
+        base    : int,
+    ) -> List[int]:
+        return self.nat2bdigits(
+            nb = self.fromnumerals(
+                numerals = numerals,
+            ),
+            base = base,
+        )
 
-        return int(''.join(numerals))
+
+###
+# prototype::
+#     numerals : :see: self.fromnumerals
+#     base     : :see: self.nat2bnb
+#     sep      : :see: self.nat2bnb
+#
+#     :return: :see: self.nat2bnb
+###
+    def numerals2bnb(
+        self,
+        numerals: List[str],
+        base    : int,
+        sep     : str = '',
+    ) -> str:
+        return self.nat2bnb(
+            nb = self.fromnumerals(
+                numerals = numerals,
+            ),
+            base = base,
+            sep  = sep,
+        )
 
 
-# -- EXTRA METHODS "AUTO" - START -- #
+###
+# prototype::
+#     numerals : :see: self.fromnumerals
+#     base     : :see: self.nat2bnumerals
+#
+#     :return: :see: self.nat2bnumerals
+###
+    def numerals2bnumerals(
+        self,
+        numerals: List[str],
+        base    : int,
+    ) -> List[str]:
+        return self.nat2bnumerals(
+            nb = self.fromnumerals(
+                numerals = numerals,
+            ),
+            base = base,
+        )
+
 # -- EXTRA METHODS "AUTO" - END -- #

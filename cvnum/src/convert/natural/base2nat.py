@@ -75,7 +75,7 @@ class Base2Nat(NatConv):
                    f"illegal numeral ``{n}`` found"
 
 
-### TODO
+###
 # prototype::
 #     bdigits : a list of ``base`` digits from the biggest weight to
 #               the smallest one
@@ -144,8 +144,6 @@ class Base2Nat(NatConv):
             errname = 'base'
         )
 
-        base_numerals = self.basedigitize(base).values()
-
 # An non empty seperator used.
         if sep:
             bnumerals = bnb.split(sep)
@@ -173,7 +171,9 @@ class Base2Nat(NatConv):
             bnumerals.reverse()
 
 # Legal numerals?
-        self.checkbnumerals(bnumerals, base_numerals)
+        base_digits = self.basedigitize(base)
+
+        self.checkbnumerals(bnumerals, base_digits)
 
 # The job is finished.
         return bnumerals
@@ -201,6 +201,68 @@ class Base2Nat(NatConv):
             numerals2digits[n]
             for n in self.bnumeralsof(bnb, base, sep)
         ]
+
+
+###
+# prototype::
+#     bdigits : a list of integer ``base`` digits
+#     base    : :see: self.bnumeralsof
+#     sep     : :see: self.bnumeralsof
+#
+#     :return: the string ``base`` writing of ``bdigits``
+###
+    def frombdigits(
+        self,
+        bdigits: List[str],
+        base   : int,
+        sep    : str = ''
+    ) -> str:
+# Don't trust the user!
+        self.checknatural(
+            nb      = base,
+            mini    = 2,
+            errname = 'base'
+        )
+
+        self.checkbdigits(
+            bdigits = bdigits,
+            base    = base,
+        )
+
+        numeralize = self.nat2base.numeralize(base)
+
+        return sep.join(numeralize(i)[0] for i in bdigits)
+
+
+###
+# prototype::
+#     bnumerals : :see: self.checkbnumerals``
+#     base      : :see: self.bnumeralsof
+#     sep       : :see: self.bnumeralsof
+#
+#     :return: the string ``base`` writing of ``bnumerals``
+###
+    def frombnumerals(
+        self,
+        bnumerals: List[str],
+        base     : int,
+        sep      : str = ''
+    ) -> str:
+# Don't trust the user!
+        self.checknatural(
+            nb      = base,
+            mini    = 2,
+            errname = 'base'
+        )
+
+        base_digits = self.basedigitize(base)
+
+        self.checkbnumerals(
+            bnumerals     = bnumerals,
+            base_numerals = base_digits,
+        )
+
+        return sep.join(bnumerals)
 
 
 ###
@@ -285,67 +347,163 @@ class Base2Nat(NatConv):
         return intval
 
 
+# -- EXTRA METHODS "AUTO" - START -- #
+
+# Lines automatically build by the following file.
+#
+#     + ``tools/factory/convert/natural/build_02_xtra_methods.py``
+
 ###
 # prototype::
-#     bdigits : a list of integer ``base`` digits
-#     base    : :see: self.bnumeralsof
-#     sep     : :see: self.bnumeralsof
+#     bnb  : :see: self.bnumeralsof
+#     base : :see: self.bnumeralsof
+#     sep  : :see: self.bnumeralsof
 #
-#     :return: the string ``base`` writing of ``bdigits``
+#     :return: :see: self.bnumeralsof
 ###
-    def bdigits2bnb(
+    def bnb2nat(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[str]:
+        return self.bnumerals2nat(
+            bnumerals = self.bnumeralsof(
+                bnb  = bnb,
+                base = base,
+                sep  = sep,
+            ),
+            base = base,
+        )
+
+
+###
+# prototype::
+#     bnb  : :see: self.bnb2nat
+#     base : :see: self.bnb2nat
+#     sep  : :see: self.bnb2nat
+#
+#     :return: :see: self.self.nat2base.digitsof
+###
+    def bnb2digits(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[int]:
+        return self.nat2base.digitsof(
+            nb = self.bnb2nat(
+                bnb  = bnb,
+                base = base,
+                sep  = sep,
+            ),
+        )
+
+
+###
+# prototype::
+#     bnb  : :see: self.bnb2nat
+#     base : :see: self.bnb2nat
+#     sep  : :see: self.bnb2nat
+#
+#     :return: :see: self.self.nat2base.numeralsof
+###
+    def bnb2numerals(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[str]:
+        return self.nat2base.numeralsof(
+            nb = self.bnb2nat(
+                bnb  = bnb,
+                base = base,
+                sep  = sep,
+            ),
+        )
+
+
+###
+# prototype::
+#     bdigits : :see: self.frombdigits
+#     base    : :see: self.frombdigits
+#
+#     :return: :see: self.bnb2digits
+###
+    def bdigits2digits(
         self,
         bdigits: List[str],
         base   : int,
-        sep    : str = ''
-    ):
-# Don't trust the user!
-        self.checknatural(
-            nb      = base,
-            mini    = 2,
-            errname = 'base'
+    ) -> List[int]:
+        return self.bnb2digits(
+            bnb = self.frombdigits(
+                bdigits = bdigits,
+                base    = base,
+            ),
+            base = base,
         )
-
-        self.checkbdigits(
-            bdigits = bdigits,
-            base    = base,
-        )
-
-        numeralize = self.nat2base.numeralize(base)
-
-        return sep.join(numeralize(i)[0] for i in bdigits)
 
 
 ###
 # prototype::
-#     bnumerals : :see: self.checkbnumerals``
-#     base      : :see: self.bnumeralsof
-#     sep       : :see: self.bnumeralsof
+#     bdigits : :see: self.frombdigits
+#     base    : :see: self.frombdigits
 #
-#     :return: the string ``base`` writing of ``bnumerals``
+#     :return: :see: self.bnb2numerals
 ###
-    def bnumerals2bnb(
+    def bdigits2numerals(
+        self,
+        bdigits: List[str],
+        base   : int,
+    ) -> List[str]:
+        return self.bnb2numerals(
+            bnb = self.frombdigits(
+                bdigits = bdigits,
+                base    = base,
+            ),
+            base = base,
+        )
+
+
+###
+# prototype::
+#     bnumerals : :see: self.frombnumerals
+#     base      : :see: self.frombnumerals
+#
+#     :return: :see: self.bnb2digits
+###
+    def bnumerals2digits(
         self,
         bnumerals: List[str],
         base     : int,
-        sep      : str = ''
-    ) -> str:
-# Don't trust the user!
-        self.checknatural(
-            nb      = base,
-            mini    = 2,
-            errname = 'base'
+    ) -> List[int]:
+        return self.bnb2digits(
+            bnb = self.frombnumerals(
+                bnumerals = bnumerals,
+                base      = base,
+            ),
+            base = base,
         )
 
-        base_digits = self.basedigitize(base)
 
-        self.checkbnumerals(
-            bnumerals     = bnumerals,
-            base_numerals = base_digits,
+###
+# prototype::
+#     bnumerals : :see: self.frombnumerals
+#     base      : :see: self.frombnumerals
+#
+#     :return: :see: self.bnb2numerals
+###
+    def bnumerals2numerals(
+        self,
+        bnumerals: List[str],
+        base     : int,
+    ) -> List[str]:
+        return self.bnb2numerals(
+            bnb = self.frombnumerals(
+                bnumerals = bnumerals,
+                base      = base,
+            ),
+            base = base,
         )
 
-        return sep.join(bnumerals)
-
-
-# -- EXTRA METHODS "AUTO" - START -- #
 # -- EXTRA METHODS "AUTO" - END -- #

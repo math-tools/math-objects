@@ -8,6 +8,6 @@ Changement de bases pour un naturel
 ===================================
 
 content::
-    ¨content_int/int2base.txt
-    ¨content_int/base2int.txt
-    ¨content_int/base2base.txt
+    ¨content_int/int2base.txt       ????
+    ¨content_int/base2int.txt       ????
+    ¨content_int/base2base.txt      ????

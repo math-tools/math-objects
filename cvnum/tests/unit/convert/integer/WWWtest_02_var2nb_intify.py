@@ -26,8 +26,8 @@ for upfolder in [
         project = upfolder,
     )
 
-from src.tbox.var2nb import intify
-from unit.common     import build_removable
+from src.convert.interger.var2int import intify
+from unit.core       import build_removable
 
 
 # ---------------------- #

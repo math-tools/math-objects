@@ -30,9 +30,17 @@ def cleantype(onetype):
 # ------------------- #
 
 # Some useful tags.
-TAG_XXX_2_NAT, TAG_NAT_2_YYY = int_2_tag = ["XXX_2_nat", "nat_2_YYY"]
+TAG_XXX_2_INTER, TAG_INTER_2_YYY = int_2_tag = ["XXX_2_inter", "inter_2_YYY"]
 
-TAG_2    = '2'
+TAG_2      = '2'
+TAG_FROM   = 'from'
+lentagfrom = len(TAG_FROM)
+
+TAG_BNUMERALS       = 'bnumerals'
+TAG_BNUMERALS_2_NAT = 'bnumerals2nat'
+TAG_BNB_2_NAT       = 'bnb2nat'
+
+TAG_SEP = 'sep'
 
 TAG_BASE = 'base'
 TAG_BNB  = 'bnb'
@@ -41,8 +49,12 @@ TAG_NB  = 'nb'
 TAG_NAT = 'nat'
 
 
-def cls_xtramethods(cls):
-    inst = cls()
+def cls_xtramethods(
+    cls,
+    xtra_methods_hard_specs,
+):
+    dircls = dir(cls)
+    inst   = cls()
 
 # "INPUT" tag & "OUPUT" tag
     tag_input, _, _ = cls.__name__.lower().partition(TAG_2)
@@ -55,65 +67,111 @@ def cls_xtramethods(cls):
     tags_to   = {}
 
 # ! -- DEBUGGING -- ! #
-    # dircls = {
+    # _dircls = {
     #     n
-    #     for n in dir(cls)
-    #     if n[0] != '_' and TAG_2 in n
+    #     for n in dircls
+    #     if n[0] != '_'
     # }
-    # print(f"{dircls = }")
+    # print(f"{_dircls = }")
 # ! -- DEBUGGING -- ! #
 
-    for name in dir(cls):
+    for name in dircls:
         if name[0] == "_":
             continue
 
         if TAG_2 in name:
-            before, _, after = name.partition(TAG_2)
+            _, _, after = name.partition(TAG_2)
 
-            if after == tag_input:
-                tags_from[before] = name
+            tags_to[after] = name
 
-            elif before == tag_input:
-                tags_to[after] = name
+        elif name.startswith(TAG_FROM):
+            tags_from[name[lentagfrom:]] = name
 
 # ! -- DEBUGGING -- ! #
-    print(f"{tags_from = }")
-    print(f"{tags_to   = }")
-    exit()
+    # print(f"{tags_from = }")
+    # print(f"{tags_to   = }")
+    # exit()
 # ! -- DEBUGGING -- ! #
 
+
+    # Extra methods specified directly.
+    xtra_methods = xtra_methods_hard_specs
 
     # Extra methods added automatically.
-    xtra_methods = {}
-
     for fromtag, frommethod in tags_from.items():
         for totag, tomethod in tags_to.items():
-            xtra_methods[f"{fromtag}2{totag}"] = (
-                (
+            xtra_name = f"{fromtag}2{totag}"
+
+            if not xtra_name in xtra_methods:
+                xtra_methods[xtra_name] = [
                     frommethod,
-                    signature(
-                        inst.__getattribute__(frommethod)
-                    )
-                ),
-                (
-                    tomethod,
-                    signature(
-                        inst.__getattribute__(tomethod)
-                    )
-                ),
-            )
+                    tomethod
+                ]
 
 # ! -- DEBUGGING -- ! #
-    # from pprint import pprint;pprint(xtra_methods)
-    # print(xtra_methods['digits2bnb'])
-    # print(xtra_methods['digits2bnb'][0][1].parameters)
-    # print(xtra_methods['digits2bnb'][1][1].parameters)
+    # for n in xtra_methods:
+    #     print()
+    #     print(f"--- {n} ---")
+    #     print(xtra_methods[n])
+    # exit()
+# ! -- DEBUGGING -- ! #
+
+    # Signatures for "known" methods.
+    for xtraname, methodsused in xtra_methods.items():
+        for i, meth in enumerate(methodsused):
+            if meth in dircls:
+                sign = signature(inst.__getattribute__(meth))
+
+            elif meth.startswith('self.nat2base'):
+                submeth = meth.split('.')[-1]
+                sign    = signature(
+                    inst
+                        .__getattribute__('nat2base')
+                        .__getattribute__(submeth)
+                    )
+
+            else:
+                sign = None
+
+            methodsused[i] = (meth, sign)
+
+        xtra_methods[xtraname] = methodsused
+
+    # Signatures for "unknown" methods.
+    dynasign = {}
+
+    for xtraname, methodsused in xtra_methods.items():
+        for i, (meth, sign) in enumerate(methodsused):
+            if sign is None:
+                if meth in dynasign:
+                    sign = dynasign[meth]
+
+                else:
+                    _, sign   = xtra_methods[meth][0]
+                    _, retval = xtra_methods[meth][1]
+
+                    sign = sign.replace(
+                        return_annotation = retval.return_annotation
+                    )
+
+                    dynasign[meth] = sign
+
+                methodsused[i] = (meth, sign)
+
+# ! -- DEBUGGING -- ! #
+    # for n in xtra_methods:
+    #     print()
+    #     print(f"--- {n} ---")
+    #     print(xtra_methods[n])
     # exit()
 # ! -- DEBUGGING -- ! #
 
     xtrainfos = {}
 
     for xtramethod, metainfos in xtra_methods.items():
+        if xtramethod in dircls:
+            continue
+
         see_return  = ''
         return_type = ''
 
@@ -121,7 +179,15 @@ def cls_xtramethods(cls):
         max_len_params         = {}
         infos_params_XXX_2_YYY = defaultdict(list)
 
+        prefix_xtra = xtramethod.split(TAG_2)[0]
+
+        fromb_used   = False
+        params_found = []
+
         for i, (intermeth, sign) in enumerate(metainfos):
+            if intermeth.startswith("fromb"):
+                fromb_used = True
+
             tag = int_2_tag[i]
 
             methods_called[tag] = intermeth
@@ -133,8 +199,22 @@ def cls_xtramethods(cls):
             max_len_params[tag] = 0
 
             for p, t in sign.parameters.items():
-                if p == TAG_NB:
+                if (
+                        p in params_found
+                ) or (
+                        p != prefix_xtra
+                    and p in [TAG_NB, TAG_BNB]
+                ) or (
+                        p == TAG_BNUMERALS
+                    and i == 1
+                    and intermeth == TAG_BNUMERALS_2_NAT
+                ) or (
+                        p == TAG_SEP
+                    and fromb_used
+                ):
                     continue
+
+                params_found.append(p)
 
                 default = sign.parameters[p].default
 
@@ -180,9 +260,8 @@ def cls_xtramethods(cls):
                 len_p = len(p)
                 p_all = p + ' '*(maxlen_all - len_p)
 
-                see_params.append(
-                    prototype_param(p_all, see)
-                )
+                proto_p = prototype_param(p_all, see)
+                see_params.append(proto_p)
 
                 if default is None:
                     default = ''

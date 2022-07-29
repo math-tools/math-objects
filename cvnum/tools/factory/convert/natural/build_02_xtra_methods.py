@@ -1,18 +1,14 @@
 #!/usr/bin/env python3
 
-from collections import defaultdict
-from inspect     import signature, _empty
-
 from cbdevtools         import *
 from mistool.os_use     import PPath
 from mistool.string_use import between
 
 from core.xtra_methods import (
     cls_xtramethods,
-    TAG_XXX_2_NAT,
-    TAG_NAT_2_YYY
+    TAG_XXX_2_INTER,
+    TAG_INTER_2_YYY
 )
-
 
 # ! -- DEBUGGING -- ! #
 # Clear the terminal.
@@ -39,13 +35,24 @@ CV_DIR_NAT = SRC_DIR / "convert" / "natural"
 PYFILES = {
     name: CV_DIR_NAT / f"{name}.py"
     for name in [
-        # "nat2base",
-# tags_from = {'digits': 'digits2nat', 'numerals': 'numerals2nat'}
-# tags_to   = {'bdigits': 'nat2bdigits', 'bnb': 'nat2bnb', 'bnumerals': 'nat2bnumerals'}
+        "nat2base",
         "base2nat",
-# tags_from = {'bdigits': 'bdigits2bnb', 'bnumerals': 'bnumerals2bnb'}
-# tags_to   = {'digits': 'bnb2digits', 'nat': 'bnb2nat', 'numerals': 'bnb2numerals'}
     ]
+}
+
+XTRA_METHODS_HARD_SPECS = {n: {} for n in PYFILES}
+
+XTRA_METHODS_HARD_SPECS["base2nat"] = {
+    "bnb2nat"           : ["bnumeralsof"  , "bnumerals2nat"           ],
+    "bnb2digits"        : ["bnb2nat"      , "self.nat2base.digitsof"  ],
+    "bnb2numerals"      : ["bnb2nat"      , "self.nat2base.numeralsof"],
+    "bdigits2nat"       : ["frombdigits"  , "bnb2nat"                 ],
+    "bnumerals2nat"     : ["frombnumerals", "bnb2nat"                 ],
+# Missing methods found with ``check_xtra_methods.py``.
+    "bdigits2digits"    : ["frombdigits"  , "bnb2digits"              ],
+    "bdigits2numerals"  : ["frombdigits"  , "bnb2numerals"            ],
+    "bnumerals2digits"  : ["frombnumerals", "bnb2digits"              ],
+    "bnumerals2numerals": ["frombnumerals", "bnb2numerals"            ],
 }
 
 
@@ -53,8 +60,10 @@ PYFILES = {
 # -- REMOVE THE XTRA METHODS IN THE SOURCES -- #
 # -------------------------------------------- #
 
+print(f"   * Removing the codes of the extra methods.")
+
 for modulename, pyfile in PYFILES.items():
-    print(f"   * Module ``{modulename}`` - Removing the codes of the extra methods.")
+    print(f"       + Module ``{modulename}``")
 
     with pyfile.open(
         encoding = "utf-8",
@@ -90,14 +99,13 @@ MODULE_DIR = addfindsrc(
     project = 'cvnum',
 )
 
-from src.convert.natural import Nat2Base, Base2Nat, Base2Base
+from src.convert.natural import Nat2Base, Base2Nat
 
 CLASSES = {
     c.__name__.lower(): c
     for c in [
         Nat2Base,
         Base2Nat,
-        Base2Base,
     ]
 }
 
@@ -105,6 +113,9 @@ CLASSES = {
 # --------------- #
 # -- TEMPLATES -- #
 # --------------- #
+
+TAG_SELF     = "self."
+LEN_TAG_SELF = len(TAG_SELF)
 
 TABU_PROTO  = '\n# ' + ' '*4
 TABU_METH_2 = '\n' + ' '*8
@@ -120,7 +131,8 @@ TEMP_PROTOTYPE = """
 ###
 """.strip()
 
-TEMP_METH_CODE = " "*4 + """
+TEMP_METH_CODE = {
+    'nat2base': " "*4 + """
     def {xtramethod}(
         self,
         {params_xtra}
@@ -131,7 +143,21 @@ TEMP_METH_CODE = " "*4 + """
             ),
             {params_nat_2_YYY}
         )
+""".strip(),
+# We keep the unused ``{params_nat_2_YYY}`` to symplifu-y the code.
+    'base2nat': " "*4 + """
+    def {xtramethod}(
+        self,
+        {params_xtra}
+    ) -> {return_type}:
+        return self.{nat_2_YYY}(
+            bnb = self.{XXX_2_nat}(
+                {params_XXX_2_nat}
+            ),
+            base = base,{params_nat_2_YYY}
+        )
 """.strip()
+}
 
 
 # ----------------------- #
@@ -139,17 +165,29 @@ TEMP_METH_CODE = " "*4 + """
 # ----------------------- #
 
 for modulename, pyfile in PYFILES.items():
-    print(f"   * Module ``{modulename}`` - Looking for the extra methods.")
+    print(f"   * Module ``{modulename}``")
+    print( "       + Building the extra methods.")
 
     xtrainfos = cls_xtramethods(
-        cls = CLASSES[modulename],
+        cls                    = CLASSES[modulename],
+        xtra_methods_hard_specs = XTRA_METHODS_HARD_SPECS[modulename],
     )
 
 # ! -- DEBUGGING -- ! #
     # for xtramethod, infos in xtrainfos.items():
     #     print('---')
+    #     # if xtramethod == "bdigits2nat":
+    #     #     print(xtramethod)
+    #     #     print(infos)
+    #     #     print(f"{infos['params_xtra'] = }")
+    #     #     print(f"{infos['return_type'] = }")
+    #     #     continue
     #     print(xtramethod)
-    #     # print(infos)
+    #     # from pprint import pprint;pprint(infos)
+    #     # print(list(infos.keys()))
+    #     print(f"{infos['params_xtra'] = }")
+    #     print(f"{infos['return_type'] = }")
+    #     input("?")
     #     print()
     # continue
     # exit()
@@ -160,7 +198,7 @@ for modulename, pyfile in PYFILES.items():
 # -- PYTHON CODE UPDATE -- #
 # ------------------------ #
 
-    print(f"   * Module ``{modulename}`` - Updating the Python code.")
+    print("       + Updating the Python code.")
 
     xtra_code = []
 
@@ -169,11 +207,11 @@ for modulename, pyfile in PYFILES.items():
         params_xtra = TABU_METH_2.join(infos["params_xtra"])
 
         params_XXX_2_nat = TABU_METH_4.join(
-            infos["params_XXX_2_YYY"][TAG_XXX_2_NAT]
+            infos["params_XXX_2_YYY"][TAG_XXX_2_INTER]
         )
 
         params_nat_2_YYY = TABU_METH_3.join(
-            infos["params_XXX_2_YYY"][TAG_NAT_2_YYY]
+            infos["params_XXX_2_YYY"][TAG_INTER_2_YYY]
         )
 
         code_prototype = TEMP_PROTOTYPE.format(
@@ -181,15 +219,49 @@ for modulename, pyfile in PYFILES.items():
             see_return = infos["see_return"],
         )
 
-        code_meth = TEMP_METH_CODE.format(
+        temp_name = modulename
+
+        if (
+            modulename == 'base2nat'
+            and
+            infos["methods_called"][TAG_INTER_2_YYY].startswith(TAG_SELF)
+        ):
+            tagselfused = True
+
+            infos["methods_called"][TAG_INTER_2_YYY] = \
+            infos["methods_called"][TAG_INTER_2_YYY][LEN_TAG_SELF:]
+
+            temp_name = 'nat2base'
+
+        else:
+            tagselfused = False
+
+        code_meth = TEMP_METH_CODE[temp_name].format(
             xtramethod       = xtramethod,
             params_xtra      = params_xtra,
-            XXX_2_nat        = infos["methods_called"][TAG_XXX_2_NAT],
-            nat_2_YYY        = infos["methods_called"][TAG_NAT_2_YYY],
+            XXX_2_nat        = infos["methods_called"][TAG_XXX_2_INTER],
+            nat_2_YYY        = infos["methods_called"][TAG_INTER_2_YYY],
             return_type      = infos["return_type"],
             params_XXX_2_nat = params_XXX_2_nat,
             params_nat_2_YYY = params_nat_2_YYY,
         )
+
+        if tagselfused:
+            code_meth = '\n'.join(
+                l
+                for l in code_meth.split('\n')
+                if l.strip()
+            )
+
+# Ugly hack.
+        if temp_name == 'base2nat':
+            for old, new in [
+                (
+                    "bnb = self.bnumeralsof",
+                    "bnumerals = self.bnumeralsof"
+                )
+            ]:
+                code_meth = code_meth.replace(old, new)
 
         xtra_code.append(f"{code_prototype}\n{code_meth}")
 

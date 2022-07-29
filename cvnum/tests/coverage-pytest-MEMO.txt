@@ -1,0 +1,13 @@
+refs::
+    https://mamonu.github.io/testing_coverage/
+    https://stackoverflow.com/a/60209909/4589608
+
+packae-used::
+    pip install pytest pytest-cov
+
+how-to::
+    cd cvnum/tests
+    coverage run -m pytest cvnum/tests
+    coverage report
+    or
+    coverage html

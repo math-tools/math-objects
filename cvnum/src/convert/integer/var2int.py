@@ -129,4 +129,4 @@ class Var2Int:
             sign = ""
 
 # Thanks for using this method safely.
-        return intnb, sign, strnb
+        return intnb, sign, str(int(strnb))

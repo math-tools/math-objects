@@ -1,40 +1,40 @@
-#!/usr/bin/env python3
+# #!/usr/bin/env python3
 
-from cbdevtools import *
-
-
-# ------------------------------------ #
-# -- MODULES IMPORTED FROM SOURCES! -- #
-# ------------------------------------ #
-
-MODULE_DIR = addfindsrc(
-    file    = __file__,
-    project = 'cvnum',
-)
+# from cbdevtools import *
 
 
-# -------------- #
-# -- LET'S GO -- #
-# -------------- #
+# # ------------------------------------ #
+# # -- MODULES IMPORTED FROM SOURCES! -- #
+# # ------------------------------------ #
 
-from src.convert.natural import *
+# MODULE_DIR = addfindsrc(
+#     file    = __file__,
+#     project = 'cvnum',
+# )
 
-for i in [1, 4, 49, 51, 4428, 4500, 4999]:
-    print('---')
-    print(f"{i}  =  {int2roman(i)}")
-    print(f"{i} =?= {roman2int(int2roman(i))}")
 
-romlongest = ""
+# # -------------- #
+# # -- LET'S GO -- #
+# # -------------- #
 
-for i in range(1, 5000):
-    rom = int2roman(i)
+# from src.convert.natural import *
 
-    if len(romlongest) < len(rom):
-        romlongest = rom
+# for i in [1, 4, 49, 51, 4428, 4500, 4999]:
+#     print('---')
+#     print(f"{i}  =  {int2roman(i)}")
+#     print(f"{i} =?= {roman2int(int2roman(i))}")
 
-print('---')
-print(f"Longest roman : {romlongest} = {roman2int(romlongest)}")
+# romlongest = ""
 
-print('---')
-print(isroman("XXIII"))
-print(isroman("XXXXXIII"))
+# for i in range(1, 5000):
+#     rom = int2roman(i)
+
+#     if len(romlongest) < len(rom):
+#         romlongest = rom
+
+# print('---')
+# print(f"Longest roman : {romlongest} = {roman2int(romlongest)}")
+
+# print('---')
+# print(isroman("XXIII"))
+# print(isroman("XXXXXIII"))
