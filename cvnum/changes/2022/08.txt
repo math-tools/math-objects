@@ -1,0 +1,12 @@
+// ---------- //
+
+==
+01
+==
+
+--------
+:fordev:
+--------
+
+[[:tests:]]
+Unit tests: the checker of the symetry of the ¨apis of the classes ``Base2Nat`` and ``Nat2Base`` has been transformed into a more strict test.
