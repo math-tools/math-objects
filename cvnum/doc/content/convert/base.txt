@@ -1,11 +1,26 @@
 ﻿abrev::
     content     = /base
+    content_nat = ¨content/nat
     content_int = ¨content/int
 
 
-===================================
-Changement de bases pour un naturel
-===================================
+======================
+Changement de bases...
+======================
+
+-----------------
+Avec des naturels
+-----------------
+
+content::
+    ¨content_nat/nat2base.txt       ????
+    ¨content_nat/base2nat.txt       ????
+    ¨content_nat/base2base.txt      ????
+
+
+-------------------------
+Avec des entiers relatifs
+-------------------------
 
 content::
     ¨content_int/int2base.txt       ????

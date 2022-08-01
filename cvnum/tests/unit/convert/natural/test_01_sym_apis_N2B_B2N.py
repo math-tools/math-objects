@@ -123,27 +123,22 @@ def test_nat2base_sym_apis_N2B_B2N():
         if symname is None and '2b' in name:
             parts = name.split('2b')
 
-            assert len(parts) == 2
+            assert len(parts) == 2, \
+                   (
+                        "Bad use of ``...2b...``, see the method "
+                       f"``{name}`` of ``Nat2Base``"
+                   )
 
             symname = 'b' + '2'.join(parts)
 
             if symname.endswith('2nb'):
                 symname = symname[:-len_2nb] + '2nat'
 
-            assert symname in api[Base2Nat], \
-                   (
-                       f"Missing methdod ``{symname}`` "
-                        "in the API of ``Base2Nat``"
-                   )
-
-            toremove[Nat2Base].add(name)
-            toremove[Base2Nat].add(symname)
-
 # Something expected is missing...
         if not symname is None:
             assert symname in api[Base2Nat], \
                    (
-                       f"Missing methdod ``{symname}`` "
+                       f"Missing method ``{symname}`` "
                         "in the API of ``Base2Nat``"
                    )
 
@@ -158,12 +153,9 @@ def test_nat2base_sym_apis_N2B_B2N():
             and
             api[Base2Nat] == set()
            ),(
-             "what is remaining:"
+             "Something is remaining:"
              "\n\n"
             f"{api[Nat2Base] = }"
              "\n\n"
             f"{api[Nat2Base] = }"
            )
-
-
-test_nat2base_sym_apis_N2B_B2N()

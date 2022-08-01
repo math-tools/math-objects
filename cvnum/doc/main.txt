@@ -19,5 +19,5 @@ abrev::
 
 content::
     ¨content/intro.txt
-    ¨content/convert.txt
-    ¨content/de-textify.txt     ?????
+    ¨content/convert.txt        ?????
+    ¨content/textify.txt
