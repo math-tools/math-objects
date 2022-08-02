@@ -236,7 +236,7 @@ class Base2Nat(NatConv):
 
 ###
 # prototype::
-#     bnumerals : :see: self.checkbnumerals``
+#     bnumerals : :see: self.checkbnumerals
 #     base      : :see: self.bnumeralsof
 #     sep       : :see: self.bnumeralsof
 #
@@ -351,7 +351,7 @@ class Base2Nat(NatConv):
 
 # Lines automatically build by the following file.
 #
-#     + ``tools/factory/convert/natural/build_02_xtra_methods.py``
+#     + ``tools/factory/convert/natural/build_01_xtra_methods_N2B_B2N.py``
 
 ###
 # prototype::

@@ -3,26 +3,7 @@
 from collections import defaultdict
 from inspect     import signature, _empty
 
-
-# ------------------ #
-# -- FORMATTINGS -- #
-# ------------------ #
-
-def seeat(method):
-    return f":see: self.{method}"
-
-def prototype_param(param, method):
-    return f"{param} : :see: self.{method}"
-
-def cleantype(onetype):
-    for toremove in [
-        "typing.",
-        "<class '",
-        "'>"
-    ]:
-        onetype = onetype.replace(toremove, "")
-
-    return onetype
+from .protontype import *
 
 
 # ------------------- #

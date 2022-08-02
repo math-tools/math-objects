@@ -4,6 +4,7 @@ from cbdevtools         import *
 from mistool.os_use     import PPath
 from mistool.string_use import between
 
+from core.templates    import *
 from core.xtra_methods import (
     cls_xtramethods,
     TAG_XXX_2_INTER,
@@ -117,20 +118,6 @@ CLASSES = {
 TAG_SELF     = "self."
 LEN_TAG_SELF = len(TAG_SELF)
 
-TABU_PROTO  = '\n# ' + ' '*4
-TABU_METH_2 = '\n' + ' '*8
-TABU_METH_3 = '\n' + ' '*12
-TABU_METH_4 = '\n' + ' '*16
-
-TEMP_PROTOTYPE = """
-###
-# prototype::
-#     {see_params}
-#
-#     :return: {see_return}
-###
-""".strip()
-
 TEMP_METH_CODE = {
     'nat2base': " "*4 + """
     def {xtramethod}(
@@ -144,7 +131,7 @@ TEMP_METH_CODE = {
             {params_nat_2_YYY}
         )
 """.strip(),
-# We keep the unused ``{params_nat_2_YYY}`` to symplifu-y the code.
+# We keep the unused ``{params_nat_2_YYY}`` to symplify the code just after.
     'base2nat': " "*4 + """
     def {xtramethod}(
         self,

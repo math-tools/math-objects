@@ -1,6 +1,23 @@
 // ---------- //
 
 ==
+02
+==
+
+-----
+:new:
+-----
+
+[[:api:]]
+A new class ``convert.natural.Base2Base`` has been added to convert form any base writtings to any other base writtings.
+
+[[:api:]]
+One builder build all the methods of the class ``convert.natural.Base2Base``.
+
+
+// ---------- //
+
+==
 01
 ==
 

@@ -335,7 +335,7 @@ class Nat2Base(NatConv):
 
 # Lines automatically build by the following file.
 #
-#     + ``tools/factory/convert/natural/build_02_xtra_methods.py``
+#     + ``tools/factory/convert/natural/build_01_xtra_methods_N2B_B2N.py``
 
 ###
 # prototype::
