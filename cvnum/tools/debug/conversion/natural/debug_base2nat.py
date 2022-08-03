@@ -27,6 +27,26 @@ myn2b = Nat2Base()
 # -- LET'S GO -- #
 # -------------- #
 
+# for base in range(2, 15):
+#     numeralize = myb2n.numeralize(base)
+#     allsingles = [
+#         numeralize(n)[0]
+#         for n in range(base)
+#     ]
+
+#     print(f"{allsingles = }")
+
+# exit()
+
+
+# numeralize = myb2n.numeralize(40)
+
+# for n in list(range(17, 20)) + [42]:
+#     print(numeralize(n))
+
+# exit()
+
+
 print(f"{myb2n.frombnumerals(['A', '5'], 16) = }")
 print(f"{myb2n.frombdigits([10, 5], 16)      = }")
 

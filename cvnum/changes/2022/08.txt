@@ -16,46 +16,9 @@ Here are the breaking changes.
     1) Please, do not laugh too loud... The module ``convert.integer.var2int`` with the class ``Var2Int`` has been moved to ``convert.core.var2int``. The aim of the module ``convert.core`` is to propose shared features for conversions.
 
 
------
-:new:
------
-
-[[:api:]]
-???????
-The new implementation of the package ``convert.integer`` has been done following a ¨poo style (it uses the "strict" module ``convert.natural``).
-
-
-[[:doc:]]
-???????
-One section explains good practice to report bugs, or to suggest enhancements (it has been also added in the path::``README.md`` file of the project).
-
-
-    ---> donner canevas de présnetation
-    ---> faire la version angalise pour le README
-
-
---------
-:update:
---------
-
-[[:doc:]]
-Here are the changes made.
-
-    ???????
-    1) Detailed explanations about the ¨api of the new sub package ``convert``.
-
-    ???????
-    1) Comeback of explanations about the possibility to use any legal "integer-string" variable with ``textify.integer.IntName``.
-
-
 --------
 :fordev:
 --------
-
-[[:doc:]]
-???????
-All prototypes are now up to date.
-
 
 [[:tests:]]
 Some new unit tests (with a better covering of all the ¨api).
@@ -64,17 +27,7 @@ Some new unit tests (with a better covering of all the ¨api).
 
     1) Naming integers: new tests added about variables that are convertible to legal "integer-strings".
 
-    1)
-    ???????
-    ``convert.natural``
-    ???????
-    and ``convert.integer`` are fully tested (at least randomly).
-
-
-[[:flow:]]      passer via module vu sur lettre Python???
-???????
-¨Configs for thef actory folder: one path::``factory/factory.cfg`` file is used to customize the behavior of the factory (this will be used by a ¨git hook ¨bash script to choose the outputs printed by the builders in the terminal). This has implied an update of the project ``cbdevtools`` (all the boring job is done by the package ``????``).
-
+    1) Some tests for ``convert.natural`` (``Base2Nat`` is not completely tested, and no test done for ``Base2Base``).
 
 
 // ---------- //

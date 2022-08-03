@@ -23,9 +23,9 @@ for upfolder in [
 from src.convert.natural import Nat2Base, Base2Nat
 
 
-# ----------- #
-# -- TOOLS -- #
-# ----------- #
+# ------------------------ #
+# -- SYMTREY OF THE API -- #
+# ------------------------ #
 
 def shortdircls(cls, toignore):
     dircls_cleaned = set()
@@ -67,11 +67,13 @@ def test_nat2base_sym_apis_N2B_B2N():
 # No common name for methods.
     assert api[Nat2Base].intersection(api[Base2Nat]) == set(), \
            (
+             "\n"
             f"Non-empty intersection"
-             "\n\n"
+             "\n"
             f"{api[Nat2Base] = }"
-             "\n\n"
+             "\n"
             f"{api[Base2Nat] = }"
+             "\n"
            )
 
 # Special case of ``nat2bnb`` and ``bnb2nat``.
@@ -80,7 +82,7 @@ def test_nat2base_sym_apis_N2B_B2N():
         ("bnb2nat", Base2Nat),
     ]:
         assert name in api[onecls], \
-           f"Missing method ``{name}`` in the class ``{onecls.__name__}``"
+               f"Missing method ``{name}`` in the class ``{onecls.__name__}``"
 
         api[onecls].remove(name)
 
@@ -133,8 +135,10 @@ def test_nat2base_sym_apis_N2B_B2N():
 
             assert len(parts) == 2, \
                    (
-                        "Bad use of ``...2b...``, see the method "
-                       f"``{name}`` of ``Nat2Base``"
+                     "\n"
+                     "Bad use of ``...2b...``, see the method "
+                    f"``{name}`` of ``Nat2Base``"
+                     "\n"
                    )
 
             symname = 'b' + '2'.join(parts)
@@ -146,8 +150,10 @@ def test_nat2base_sym_apis_N2B_B2N():
         if not symname is None:
             assert symname in api[Base2Nat], \
                    (
-                       f"Missing method ``{symname}`` "
-                        "in the API of ``Base2Nat``"
+                     "\n"
+                   f"Missing method ``{symname}`` "
+                    "in the API of ``Base2Nat``"
+                     "\n"
                    )
 
             toremove[Nat2Base].add(name)
@@ -161,9 +167,11 @@ def test_nat2base_sym_apis_N2B_B2N():
             and
             api[Base2Nat] == set()
            ),(
+             "\n"
              "Something is remaining:"
-             "\n\n"
+             "\n"
             f"{api[Nat2Base] = }"
-             "\n\n"
+             "\n"
             f"{api[Nat2Base] = }"
+             "\n"
            )

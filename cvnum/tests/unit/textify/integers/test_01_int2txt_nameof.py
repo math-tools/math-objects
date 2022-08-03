@@ -207,6 +207,7 @@ def test_nameof_usecases():
                     f"INITIAL: {onedata[TAG_TEST_INITIAL]}"
                     "\n"
                     f"WHERE  : {onedata[TAG_TEST_WHERE]}"
+                    "\n"
                    )
 
 
@@ -240,6 +241,7 @@ def test_nameof_translators_small():
                     f"LANG: {lang}"
                     "\n"
                     f"NB  : {nb}"
+                    "\n"
                    )
 
 
@@ -261,4 +263,5 @@ def test_nameof_FAKE_INT_convert(nb):
                 f"LANG: {lang}"
                 "\n"
                 f"NB  : {nb}"
+                "\n"
                )

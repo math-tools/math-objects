@@ -51,7 +51,7 @@ INT_DIGITS = tuple(range(10))
 #
 #     1) A list of digits like ``[7, 11]``.
 #
-#     1) A list of numerals like ``["7", "11"]``.
+#     1) A list of numerals like ``["7", "B"]``.
 ###
 class Nat2Base(NatConv):
 ###
@@ -185,8 +185,8 @@ class Nat2Base(NatConv):
 # prototype::
 #     base : :see: self.nat2bdigits
 #
-#     :return: a function that converts a ``base`` natural digit into
-#              a textual numeral.
+#     :return: a function that converts a natural digit into a list of
+#              textual ``base`` numerals.
 #
 #     :see: self.nat2bdigits
 #
@@ -195,7 +195,7 @@ class Nat2Base(NatConv):
 #     This method is an internal one even if we let it public. No check
 #     is done on the type and the value of ``base``!
 ###
-    def numeralize(self, base: int) -> Callable[[int], str]:
+    def numeralize(self, base: int) -> Callable[[int], List[str]]:
 # Number of characters needed to code one single digit.
         if base > self.max_singledigit:
             nbchars = ceil(log(base) / log(self.max_singledigit))
@@ -238,8 +238,9 @@ class Nat2Base(NatConv):
             return result
 
 
-        def alphanum(nb: int) -> str:
-            coding = tuple(
+        def alphanum(nb: int) -> List[str]:
+# We need to have coherent types!
+            coding = list(
                 map(
                     alphanum_single,
                     self.nat2bdigits(
@@ -290,7 +291,7 @@ class Nat2Base(NatConv):
         )
 
 # We need to have coherent types!
-        return list(self.numeralize(base)(nb))
+        return self.numeralize(base)(nb)
 
 
 ###
