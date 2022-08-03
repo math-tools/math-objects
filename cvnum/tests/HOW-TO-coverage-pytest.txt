@@ -6,8 +6,6 @@ packae-used::
     pip install pytest pytest-cov
 
 how-to::
-    cd cvnum/tests
-    coverage run -m pytest cvnum/tests
-    coverage report
-    or
-    coverage html
+    coverage run -m pytest cvnum/tests && coverage html
+    # coverage report --> just for an outut in the terminal
+    open htmlcov/index.html

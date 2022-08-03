@@ -289,7 +289,8 @@ class Nat2Base(NatConv):
             errname = 'base'
         )
 
-        return self.numeralize(base)(nb)
+# We need to have coherent types!
+        return list(self.numeralize(base)(nb))
 
 
 ###
@@ -330,6 +331,7 @@ class Nat2Base(NatConv):
         )
 
         return sep.join(numerals)
+
 
 # -- EXTRA METHODS "AUTO" - START -- #
 

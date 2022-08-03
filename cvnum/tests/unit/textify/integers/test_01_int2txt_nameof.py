@@ -36,8 +36,8 @@ from unit.core   import build_removable, FakeINT
 # -- GENERAL CONSTANTS -- #
 # ----------------------- #
 
-MAXI = 10**9 - 1
-MINI = -MAXI
+STD_MAXI = 10**9 - 1
+STD_MINI = - STD_MAXI
 
 NB_RAND_TESTS = 50
 
@@ -247,13 +247,13 @@ def test_nameof_translators_small():
 # -- FAKE INT INPUT - INT & STRING VERSIONS -- #
 # -------------------------------------------- #
 
-@given(st.integers(min_value = MINI, max_value = MAXI))
+@given(st.integers(min_value = STD_MINI, max_value = STD_MAXI))
 def test_nameof_FAKE_INT_convert(nb):
     for lang in LANGS_SORTED:
         nameof = IntName(lang).nameof
 
-        int_name  = nameof(nb = FakeINT(n = nb))
-        fake_name = nameof(nb = nb)
+        int_name  = nameof(varnb = FakeINT(n = nb))
+        fake_name = nameof(varnb = nb)
 
         assert int_name == fake_name, \
                (

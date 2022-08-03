@@ -24,8 +24,8 @@ class IntName(BaseAutomaton):
 # prototype::
 #     :see: automata.BaseAutomata.__init__
 ###
-    def __init__(self, lang: str = "en_GB") -> None:
-        super().__init__(lang)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 # TODO UGGLY: Remove the following ugly strip! It's a shame...
         if self._very_big_allowed:
@@ -43,11 +43,11 @@ class IntName(BaseAutomaton):
         else:
             self._zerobigname = None
 
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
         # print(f"{self._very_big_allowed = }")
         # print(f"{self._zerobigname      = }")
         # exit()
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
 
 ###
@@ -60,12 +60,12 @@ class IntName(BaseAutomaton):
 #     :see: self.name_big ,
 #           self.name_small
 ###
-    def nameof(self, nb: Any) -> str:
+    def nameof(self, varnb: Any) -> str:
 # For error messages.
-        self._initial_nb = nb
+        self._initial_nb = varnb
 
 # Name of the sign, and the string version of the absolute value of the integer.
-        _, sign, absnb = self.int_n_strsignabs(varnb = nb)
+        _, sign, absnb = self.int_n_strsignabs(varnb = varnb)
 
 # Can we use a sign?
         if sign:
@@ -100,10 +100,10 @@ class IntName(BaseAutomaton):
             name = self.name_big(absnb)
 
 # Suffixes for very big integers.
-            # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
             # print(">>> Before self.build_suffixes <<<")
             # print(f"{name = }")
-            # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
             if nb_digits > self._big_len_max:
                 name = self.build_suffixes(name)
@@ -140,12 +140,12 @@ class IntName(BaseAutomaton):
 #           self.build_DnR_vars
 ###
     def name_big(self, bigslice: str) -> str:
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
         # print()
         # print(">>> name_big <<<")
         # print(f"{bigslice = }")
         # print(f"{self._big_len_min = }")
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
 # A small number.
 #
@@ -160,9 +160,9 @@ class IntName(BaseAutomaton):
         d_var, r_var, grppower = self.build_DnR_vars(bigslice)
 
 # We have something to name.
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
         # print("self.apply used")
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
 # A null intermediate group.
 #
@@ -186,11 +186,11 @@ class IntName(BaseAutomaton):
 # For very by numbers, we must take care of "small" final groups
 # that are equal to zero!
         if self._very_big_allowed:
-            # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
             # print(f"{d_var    = }")
             # print(f"{r_var    = }")
             # print(f"{grppower = }")
-            # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
             nb_r_digits = len(r_var)
 
@@ -323,16 +323,16 @@ class IntName(BaseAutomaton):
 #     :see: self.name_big
 ###
     def build_suffixes(self, name: str) -> str:
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
         # print(">>> build_suffixes <<<")
         # print(f"{name = }")
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
 # We must look for consecutive zeros for big groups that will not be in
 # the final name.
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
         # print(f"{self._zerobigname = }")
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
 # Let's look for the groups that will stay in the name.
         grpnames = []
@@ -359,9 +359,9 @@ class IntName(BaseAutomaton):
             )
         )
 
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
         # print(f"{grpnames = }")
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
 # The suffixes (we have to take care of the direction used).
         suffix   = ''

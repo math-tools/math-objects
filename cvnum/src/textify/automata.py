@@ -99,9 +99,9 @@ class BaseAutomaton:
         self._big_len_max  = 2*self._big_expo_max
         self._big_len_min  = min(self._big_rules)
 
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
         # print(f"{self._big_expo_max = }")
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
 # Big groups
         self._groups_sep = rulestouse[DSL_SPECS_GENE][DSL_TAG_GENE_SEP]
@@ -312,12 +312,12 @@ class BaseAutomaton:
         d_var  : str,
         r_var  : str,
     ) -> str:
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
         # print(">>> nameit_group <<<")
         # print(f"{actions = }")
         # print(f"{d_var   = }")
         # print(f"{r_var   = }")
-        # ! -- DEBUGGING -- ! #
+# ! -- DEBUGGING -- ! #
 
         _, var_to_name = actions[0]
 
