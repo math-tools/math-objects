@@ -17,10 +17,13 @@ Here are the breaking updates made.
 
         * A package ``convert.integer`` will extend the features of ``convert.natural`` to variables with string representation that is an integer. To not break everything, this package only contains the module ``var2int`` for the moment.
 
-    1) The package ``tbox`` has been removed, and so have the method ``textifyt.IntName.sign_n_abs`` and the module ``var2nb``.
-    A module ``convert.integer.var2int`` with a class ``Var2Int`` has been created to obtain several kinds of normalisations of variables that are expected to be printed as integers (no human and ¨tech ¨docs uptodate for the moment).
+    1) The package ``tbox`` has been removed. A module ``convert.integer.var2int`` with a class ``Var2Int`` has been created to obtain several kinds of normalisations of variables that are expected to be printed as integers (no human and ¨tech ¨docs uptodate for the moment).
 
-    1) Naming integers: the method ``IntName.nameof`` accepts again variables with string representation beeing a "legal" integer.
+    1) Naming integers.
+
+        * The method ``IntName.nameof`` accepts again variables with string representation beeing a "legal" integer.
+
+        * The way ``textifyt.IntName.sign_n_abs`` works has changed.
 
 
 --------

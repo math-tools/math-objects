@@ -14,7 +14,12 @@ from typing import *
 # ---------------------------- #
 
 ###
-# This class can convert a "legal" integer into useful representations.
+# This class can convert a "legal" integer into severla representations.
+#
+#
+# note::
+#     A "legal" integer is any ¨python variable ``varnb`` such that
+#     ``int(str(varnb))`` is a ¨python ``int``.
 ###
 
 class Var2Int:
@@ -25,10 +30,11 @@ class Var2Int:
 #     maxi       : the maximum value allowed for the integer representation
 #                @ maxi in RR
 #     tryconvert : to allow, or not, the use of the printed version of
-#                  the ¨python variables such as to try to convert then to an integer
-#     toremove   : a list of strings to remove in the string representation of
-#                  the ¨python variables (this can be spaces, or digital separators
-#                  for example).
+#                  the ¨python variables such as to try to convert then to
+#                  an integer
+#     toremove   : a list of strings to remove in the string representation
+#                  of the ¨python variables (this can be spaces, or digital
+#                  separators for example).
 #                @ len(toremove) >= 0 ;
 #                  ignore(toremove) if tryconvert = False
 #     errname    : the name used in case of error message
@@ -56,9 +62,9 @@ class Var2Int:
 #           @ varnb in ZZ           if self.tryconvert = False ;
 #             str(varnb) in str(ZZ) if self.tryconvert = True ;
 #
-#     :return: a ¨python integer respecting the boundary constraints
-#            @ return[0] = int(varnb) ;
-#              return[1] = str(varnb) ;
+#     :return: a ¨python integer respecting the following constraints
+#            @ return[1] = str(varnb) ;
+#              return[0] = int(return[1]) ;
 #              return[0] in self.mini .. self.maxi
 ###
     def int_n_strify(self, varnb: Any) -> Tuple[int, str]:
@@ -70,10 +76,10 @@ class Var2Int:
 # Use of the string representation.
         else:
             assert self.tryconvert, \
-                (
+                   (
                     f"The {self.errname} ``{str(varnb) = }`` is not an integer. "
                     f"Info: try to convert not allowed, and ``{varnb = }``."
-                )
+                   )
 
             strnb = str(varnb)
 
@@ -92,10 +98,10 @@ class Var2Int:
 
 # We have an integer. Is it in the good range?
         assert intnb >= self.mini, \
-            f"The {self.errname} ``{varnb}`` is too small ({self.mini = })."
+               f"The {self.errname} ``{varnb}`` is too small ({self.mini = })."
 
         assert intnb <= self.maxi, \
-            f"The {self.errname} ``{varnb}`` is too big ({self.maxi = })."
+               f"The {self.errname} ``{varnb}`` is too big ({self.maxi = })."
 
 # Thanks for using this method safely.
         return intnb, strnb
@@ -105,12 +111,12 @@ class Var2Int:
 # prototype::
 #     varnb : :see: self.int_n_strify
 #
-#     :return: the integer value of varnb build by ``self.int_n_strify``,
-#              the sign of the integer-string version of ``varnb``
-#              or an empty string if no sign ``+`` has been used,
-#              and the string version of the absolute numerical value of ``str(nb)``
-#            @ return[0] = int(varnb) ;
-#              return[2] = abs(return[0]) ;
+#     :return: the integer value of ``varnb`` build by ``self.int_n_strify``,
+#              the sign of the "integer string" version of ``varnb`` or
+#              an empty string if no sign ``+`` has been used, and the string
+#              version of the absolute numerical value of ``str(nb)``
+#            @ return[0] = int(str(varnb)) ;
+#              return[2] = str(abs(return[0])) ;
 #              return[1] = '-'        if return[0] < 0 ;
 #              return[1] in ['', '+'] if return[0] >= 0
 #

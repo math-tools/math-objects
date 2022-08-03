@@ -5,8 +5,11 @@
 # --------------------- #
 
 import json
+from random import randint
+
+from   hypothesis            import given
+import hypothesis.strategies as st
 import pytest
-from   random import randint, choice
 
 from cbdevtools     import *
 from mistool.os_use import PPath
@@ -26,12 +29,15 @@ for upfolder in [
     )
 
 from src.textify import *
-from unit.core   import build_removable
+from unit.core   import build_removable, FakeINT
 
 
 # ----------------------- #
 # -- GENERAL CONSTANTS -- #
 # ----------------------- #
+
+MAXI = 10**9 - 1
+MINI = -MAXI
 
 NB_RAND_TESTS = 50
 
@@ -235,3 +241,24 @@ def test_nameof_translators_small():
                     "\n"
                     f"NB  : {nb}"
                    )
+
+
+# -------------------------------------------- #
+# -- FAKE INT INPUT - INT & STRING VERSIONS -- #
+# -------------------------------------------- #
+
+@given(st.integers(min_value = MINI, max_value = MAXI))
+def test_nameof_FAKE_INT_convert(nb):
+    for lang in LANGS_SORTED:
+        nameof = IntName(lang).nameof
+
+        int_name  = nameof(nb = FakeINT(n = nb))
+        fake_name = nameof(nb = nb)
+
+        assert int_name == fake_name, \
+               (
+                "\n"
+                f"LANG: {lang}"
+                "\n"
+                f"NB  : {nb}"
+               )

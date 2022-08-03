@@ -65,14 +65,22 @@ def test_nat2base_sym_apis_N2B_B2N():
         )
 
 # No common name for methods.
-    assert api[Nat2Base].intersection(api[Base2Nat]) == set()
+    assert api[Nat2Base].intersection(api[Base2Nat]) == set(), \
+           (
+            f"Non-empty intersection"
+             "\n\n"
+            f"{api[Nat2Base] = }"
+             "\n\n"
+            f"{api[Base2Nat] = }"
+           )
 
 # Special case of ``nat2bnb`` and ``bnb2nat``.
     for name, onecls in [
         ("nat2bnb", Nat2Base),
         ("bnb2nat", Base2Nat),
     ]:
-        assert name in api[onecls]
+        assert name in api[onecls], \
+           f"Missing method ``{name}`` in the class ``{onecls.__name__}``"
 
         api[onecls].remove(name)
 

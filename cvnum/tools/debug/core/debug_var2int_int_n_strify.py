@@ -17,7 +17,7 @@ MODULE_DIR = addfindsrc(
 # -- TO DEBUG -- #
 # -------------- #
 
-from src.tbox.var2int import *
+from src.convert.core.var2int import *
 
 int_n_strify = Var2Int(
     tryconvert = True,
