@@ -13,7 +13,7 @@ New unit tests: ``convert.natural`` is "fully" tested ("full" is a promise, not 
 
 
 [[:facto:]]
-Better organization of the tests to ease the maintenance.
+Better organization of the tests such as to ease the maintenance.
 
 
 // ---------- //

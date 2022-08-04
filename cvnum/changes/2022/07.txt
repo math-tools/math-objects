@@ -13,6 +13,8 @@ Here are the breaking updates made.
 
     1) Conversions of integers: the code has been totally rebuild to use ¨poo (the human and the ¨tech ¨docs will be updated later).
 
+        * The module for roman numbers has been removed (it will come back later).
+
         * A package ``convert.natural`` contains classes to manipulate easily naturals in different bases. The conversion from any base to any other base will be implemented later.
 
         * A package ``convert.integer`` will extend the features of ``convert.natural`` to variables with string representation that is an integer. To not break everything, this package only contains the module ``var2int`` for the moment.
