@@ -1,6 +1,24 @@
 // ---------- //
 
 ==
+04
+==
+
+--------
+:fordev:
+--------
+
+[[:tests:]]
+New unit tests: ``convert.natural`` is "fully" tested ("full" is a promise, not a real gift).
+
+
+[[:facto:]]
+Better organization of the tests to ease the maintenance.
+
+
+// ---------- //
+
+==
 03
 ==
 
@@ -27,7 +45,7 @@ Some new unit tests (with a better covering of all the ¨api).
 
     1) Naming integers: new tests added about variables that are convertible to legal "integer-strings".
 
-    1) Some tests for ``convert.natural`` (``Base2Nat`` is not completely tested, and no test done for ``Base2Base``).
+    1) Some tests for ``convert.natural`` (``Base2Nat`` is not completely tested, and no test has been done for ``Base2Base``).
 
 
 // ---------- //
@@ -42,6 +60,7 @@ Some new unit tests (with a better covering of all the ¨api).
 
 [[:api:]]
 A new class ``convert.natural.Base2Base`` has been added to convert from any base writtings to any other base writtings.
+
 
 [[:api:]]
 One builder builds all the methods of the class ``convert.natural.Base2Base``.

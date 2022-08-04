@@ -8,7 +8,7 @@ from random import choice
 
 from   hypothesis            import given
 import hypothesis.strategies as st
-import pytest
+# import pytest
 
 from cbdevtools import *
 
@@ -19,6 +19,7 @@ from cbdevtools import *
 
 for upfolder in [
     'cvnum',
+    'natural',
     # 'tests',
 ]:
     _ = addfindsrc(
@@ -30,41 +31,33 @@ from src.convert.natural.base2nat import Base2Nat
 from src.convert.natural.nat2base import Nat2Base
 # from unit.core       import build_removable
 
-
-# ----------------------- #
-# -- CONSTANTS & TOOLS -- #
-# ----------------------- #
-
-OUTPUTS = [
-    "nb",
-    "digits",
-    "numerals",
-]
+# from core.constants import *
 
 
-# ----------------------- #
-# -- "RECIPROCITY LAW" -- #
-# ----------------------- #
+# ------------------------- #
+# -- VIA PYTHON BUILTINS -- #
+# ------------------------- #
 
-@given(st.integers(min_value = 0),
-       st.integers(min_value = 2, max_value = 99),
-       st.sampled_from(OUTPUTS))
-def test_nat2XXX_o_XXX2nat(nb, base, XXX):
-    n2b_NB = Nat2Base().__getattribute__(f"nat2b{XXX}")(
+@given(st.integers(min_value = 36 + 1),
+       st.integers(min_value = 2, max_value = 36))
+def test_base2nat_nat2bnb_vs_python_builtins(nb, base):
+    bnb =  Nat2Base().nat2bnb(
         nb   = nb,
         base = base
     )
 
-    b2n_n2b_NB = Base2Nat().__getattribute__(f"b{XXX}2nat")(
-        n2b_NB,
+    python_bnb2nat = int(bnb, base)
+
+    bnb2nat_found = Base2Nat().bnb2nat(
+        bnb  = bnb,
         base = base
     )
 
-    assert nb == b2n_n2b_NB, \
+    assert bnb2nat_found == python_bnb2nat, \
            (
              "\n"
-            f"{nb    = }"
+            f"{nb   = }"
              "\n"
-            f"{XXX = }"
+            f"{base = }"
              "\n"
            )
