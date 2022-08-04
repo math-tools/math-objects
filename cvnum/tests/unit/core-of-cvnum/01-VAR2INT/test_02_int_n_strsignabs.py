@@ -26,7 +26,7 @@ for upfolder in [
         project = upfolder,
     )
 
-from src.convert.core import Var2Int
+from src.core import Var2Int
 # from unit.core        import FakeINT, SOME_SEPS, choice
 
 

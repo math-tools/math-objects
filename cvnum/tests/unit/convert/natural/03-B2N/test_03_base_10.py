@@ -39,7 +39,7 @@ from core.constants import *
 # --------------------- #
 
 @given(st.integers(min_value = 0))
-def test_base2nat_bnb2nat_base_10_bnb2nat(nb):
+def test_base2nat_bnb2nat_BASE_10_bnb2nat(nb):
     nb_found = Base2Nat().bnb2nat(
         bnb  = str(nb),
         base = 10
@@ -50,7 +50,7 @@ def test_base2nat_bnb2nat_base_10_bnb2nat(nb):
 
 @given(st.integers(min_value = 0),
        st.sampled_from(OUTPUTS_NO_NB))
-def test_base2nat_bnb2nat_base_10_bnb2XXX_vs_XXXof_by_hand(nb, XXX):
+def test_base2nat_bnb2nat_BASE_10_bnb2XXX_vs_XXXof_by_hand(nb, XXX):
     bnb = str(nb)
 
     chgethis = KINDS_CHGETHIS[XXX]

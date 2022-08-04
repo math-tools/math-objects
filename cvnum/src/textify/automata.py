@@ -10,7 +10,7 @@ from typing import *
 
 from ..config.textify import *
 
-from ..convert.core.var2int import Var2Int
+from ..core.var2int import Var2Int
 
 
 # -------------------------- #

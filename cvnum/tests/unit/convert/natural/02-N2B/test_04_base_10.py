@@ -59,7 +59,7 @@ LAMBDA_2_NAT_LIKE = {
 
 @given(st.integers(min_value = 0),
        st.sampled_from(KINDS_ALL))
-def test_nat2base_base_10_nat2bXXX_vs_XXXof(nb, kind):
+def test_nat2base_BASE_10_nat2bXXX_vs_XXXof(nb, kind):
     chgethis = KINDS_CHGETHIS[kind]
 
     XXXof    = f"{kind}of"
@@ -84,7 +84,7 @@ def test_nat2base_base_10_nat2bXXX_vs_XXXof(nb, kind):
 
 
 @given(st.integers(min_value = 0))
-def test_nat2base_base_10_bnb_vs_str_nb(nb):
+def test_nat2base_BASE_10_bnb_vs_str_nb(nb):
     str_nb      = str(nb)
     nat2bnb_ret = Nat2Base().nat2bnb(
         nb   = nb,

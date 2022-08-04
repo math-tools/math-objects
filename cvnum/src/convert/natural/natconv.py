@@ -13,7 +13,7 @@ from typing import *
 # ----------------------------------------- #
 
 ###
-# ???
+# ???? This class is to be herited by the classes playing with base conversions of integers.
 ###
 class NatConv:
 ###
@@ -23,7 +23,7 @@ class NatConv:
 ###
     def __init__(
         self,
-        errname : str  = "number",
+        errname : str = "number",
     ):
         self.errname = errname
 

@@ -1,45 +1,45 @@
-# #!/usr/bin/env python3
+#!/usr/bin/env python3
 
-# ###
-# # This module ????
-# ###
-
-
-# from typing import *
+###
+# This module converts decimal writings into specific base writings.
+###
 
 
-# from .var2int import Var2Int
+from typing import *
 
 
-# # ------------------------------------------- #
-# # -- BASE CLASS FOR INTERGERS' CONVERSIONS -- #
-# # ------------------------------------------- #
+# ----------------------------------------- #
+# -- ??? -- #
+# ----------------------------------------- #
 
-# ###
-# # This class is to be herited by the classes playing with base conversions of integers.
-# ###
+###
+# ???? This class is to be herited by the classes playing with base conversions of integers.
+###
+class IntConv:
+###
+# prototype::
+#     errname : the name used in case of error message
+###
+    def __init__(
+        self,
+        errname : str = "number",
+    ):
+        self.errname = errname
 
-# class IntConv:
-# ###
-# # prototype::
-# #     tryconvert : :see: ``tbox.var2int.Var2Int.__init__``
-# #     toremove   : :see: ``tbox.var2int.Var2Int.__init__``
-# ###
-#     def __init__(
-#         self,
-#         tryconvert: bool      = False,
-#         toremove  : List[str] = [],
-#     ):
-#         self.tryconvert = tryconvert
-#         self.toremove   = toremove
 
-#         self.legalint = Var2Int(
-#             tryconvert = tryconvert,
-#             toremove   = toremove,
-#         )
+###
+# prototype::
+#     ???
+###
+    def sign_n_abs_ofnb(self, nb: int) -> List[int]:
+        if nb < 0:
+            sign = - 1
+            nb   = - nb
 
-#         self.legalebase = Var2Int(
-#             mini       = 2,
-#             tryconvert = tryconvert,
-#             toremove   = toremove,
-#         )
+        elif nb == 0:
+            sign = 0
+
+        else:
+            sign = 1
+
+        return sign, nb
