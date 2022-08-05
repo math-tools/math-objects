@@ -19,12 +19,29 @@ MODULE_DIR = addfindsrc(
 
 from src.convert.integer import *
 
-myi2b = Int2Base(tryconvert = True)
+myi2b = Int2Base()
 
 
 # -------------- #
 # -- LET'S GO -- #
 # -------------- #
+
+for x in [
+    123,
+    -345,
+]:
+    print()
+
+    print(d := myi2b.numeralsof(x))
+    print(myi2b.fromnumerals(d))
+
+    print()
+
+    print(d := myi2b.digitsof(x))
+    print(myi2b.fromdigits(d))
+
+exit()
+
 
 for (n, b) in [
     (1 + 2*5 + 3*5**2, 5),

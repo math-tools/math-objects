@@ -5,7 +5,24 @@
 ###
 
 
+from lib2to3.pgen2.token import PLUS
 from typing import *
+
+
+# --------------- #
+# -- CONSTANTS -- #
+# --------------- #
+
+MINUS_STR_SIGN = "-"
+MINUS_INT_SIGN = -1
+
+PLUS_STR_SIGN = ""
+PLUS_INT_SIGN = 1
+
+STR_SIGNS = [
+    MINUS_STR_SIGN,
+    PLUS_STR_SIGN,
+]
 
 
 # ----------------------------------------- #
@@ -31,15 +48,34 @@ class IntConv:
 # prototype::
 #     ???
 ###
-    def sign_n_abs_ofnb(self, nb: int) -> List[int]:
+    def sign_n_abs_of(self, nb: int) -> Tuple[int]:
         if nb < 0:
-            sign = - 1
-            nb   = - nb
-
-        elif nb == 0:
-            sign = 0
+            sign = MINUS_INT_SIGN
+            nb   = -nb
 
         else:
-            sign = 1
+            sign = PLUS_INT_SIGN
 
         return sign, nb
+
+
+###
+# prototype::
+#     ???
+###
+    def strsign(self, sign: int) -> str:
+        if sign == MINUS_INT_SIGN:
+            return MINUS_STR_SIGN
+
+        return PLUS_STR_SIGN
+
+
+###
+# prototype::
+#     ???
+###
+    def intsign(self, strsign: str) -> int:
+        if strsign == MINUS_STR_SIGN:
+            return MINUS_INT_SIGN
+
+        return PLUS_INT_SIGN
