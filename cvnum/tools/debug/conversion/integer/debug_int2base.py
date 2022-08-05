@@ -26,19 +26,29 @@ myi2b = Int2Base()
 # -- LET'S GO -- #
 # -------------- #
 
+print(f"{myi2b.int2bnb(-18, base = 8) = }")
+
+print(f"{myi2b.int2bnb(8, nb = 18)    = }")
+
+print(f"{myi2b.int2bnb(18, 8)         = }")
+
+# exit()
+
+
 for x in [
     123,
     -345,
 ]:
     print()
 
-    print(d := myi2b.numeralsof(x))
-    print(myi2b.fromnumerals(d))
+    print(f"d := numeralsof({x}) =", d := myi2b.numeralsof(x))
+    print(f"{myi2b.fromnumerals(d) = }")
 
     print()
 
-    print(d := myi2b.digitsof(x))
-    print(myi2b.fromdigits(d))
+    print(f"d := digitsof({x}) =", d := myi2b.digitsof(x))
+    print(f"{myi2b.fromdigits(d) = }")
+    print(f"{myi2b.digits2bdigits(d, 100) = }")
 
 exit()
 

@@ -24,6 +24,65 @@ STR_SIGNS = [
     PLUS_STR_SIGN,
 ]
 
+PARAM_TAG_NB       = 'nb'
+PARAM_TAG_NUMERALS = 'numerals'
+PARAM_TAG_DIGITS   = 'digits'
+PARAM_TAG_BASE     = 'base'
+PARAM_TAG_SEP      = 'sep'
+
+# ----------------------------------------- #
+# -- ??? -- #
+# ----------------------------------------- #
+
+###
+# prototype::
+#     ???
+###
+def self_n_kwargs(
+    method_name,
+    params,
+    optionals,
+    args,
+    kwargs,
+):
+# Isolation of the ``self`` argument.
+    self, *args = args
+
+# We populate ``kwargs`` by using ``args``.
+    _kwargs   = kwargs.copy()
+
+    i_params  = -1
+    nb_params = len(params)
+
+    for i, val in enumerate(args):
+        i_params += 1
+
+        if params[i_params] in _kwargs:
+            i_params += 1
+
+        assert i_params < nb_params
+
+        _kwargs[params[i_params]] = val
+
+# Only optional parameters can miss!
+    missing = set(params) - set(_kwargs)
+
+    assert missing <= optionals, \
+           (
+             f"Int2Base.{method_name}() needs "
+            + ("one" if len (missing) == 1 else "some")
+            + " mandatory parameter"
+            + ("" if len(missing) == 1 else "s")
+            + " that "
+            + ("is" if len (missing) == 1 else "are")
+            + " missing: "
+            + ", ".join(sorted(list(missing)))
+            + "."
+           )
+
+# Nothing looks bad... For the moment!
+    return self, _kwargs
+
 
 # ----------------------------------------- #
 # -- ??? -- #

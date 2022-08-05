@@ -16,84 +16,63 @@ from ..natural.nat2base import Nat2Base
 # -- DECORATORS FOR THE LAZZY CODERS -- #
 # ------------------------------------- #
 
-def _self_n_single_input(
-    arg_name,
-    args,
-    kwargs,
-    error_message,
-):
-    self, *args = args
+def decotest(params, optionals = []):
+    def _decotest_(method):
+        method_name     = method.__name__
+        nat_method_name = method_name.replace('int', 'nat')
 
-    if len(args) > 1:
-        raise TypeError(error_message)
+        def method_wrapped(*args, **kwargs):
+            self, params_found = self_n_kwargs(
+                method_name = method_name,
+                params      = params,
+                optionals   = set(optionals),
+                args        = args,
+                kwargs      = kwargs,
+            )
 
-    if len(args) == 1:
-        input = args[0]
+# Let's take care of signs!
+            if PARAM_TAG_NB in params_found:
+                sign, params_found[PARAM_TAG_NB] = self.sign_n_abs_of(
+                    params_found[PARAM_TAG_NB]
+                )
 
-    else:
-        if set(kwargs.keys()) != set([arg_name]):
-            raise TypeError(error_message)
+            else:
+                for tag in [
+                    PARAM_TAG_DIGITS,
+                    PARAM_TAG_NUMERALS,
+                ]:
+                    if tag in params_found:
+                        sign, *input_absnb = params_found[tag]
+                        params_found[tag]  = input_absnb
+                        break
 
-        for input in kwargs.values():
-            ... # Prettyr hack... Or not!
+            abseturn = self.nat2base.__getattribute__(nat_method_name)(
+                **params_found
+            )
 
-    return self, input
+            if isinstance(abseturn, list):
+                if isinstance(abseturn[0], str):
+                    sign = self.strsign(sign)
 
+                abseturn.insert(0, sign)
 
-def deco_fromXXX_via_NAT(method):
-    method_name = method.__name__
-    arg_name    = method_name.replace("from", '')
+            elif isinstance(abseturn, int):
+                if sign in STR_SIGNS:
+                    sign = self.intsign(sign)
 
-    error_message = f"{method_name}() requires only 1 argument {arg_name}."
+                abseturn = sign*abseturn
 
-    def method_wrapped(*args, **kwargs):
-        self, input = _self_n_single_input(
-            arg_name      = arg_name,
-            args          = args,
-            kwargs        = kwargs,
-            error_message = error_message,
-        )
+            else:
+                if not sign in STR_SIGNS:
+                    sign = self.strsign(sign)
 
-        sign, *input_absnb = input
+                abseturn = sign+abseturn
 
-        absnb = self.nat2base.__getattribute__(method_name)(
-            input_absnb
-        )
+            return abseturn
 
-        if sign in STR_SIGNS:
-            sign = self.intsign(sign)
+        return method_wrapped
 
-        return sign*absnb
-
-    return method_wrapped
-
-
-def deco_XXXof_via_NAT(method):
-    method_name = method.__name__
-    arg_name    = 'nb'
-
-    error_message = f"{method_name}() requires only 1 argument {arg_name}."
-
-    def method_wrapped(*args, **kwargs):
-        self, input = _self_n_single_input(
-            arg_name      = arg_name,
-            args          = args,
-            kwargs        = kwargs,
-            error_message = error_message,
-        )
-
-        sign, absnb = self.sign_n_abs_of(input)
-
-        XXXof_absnb = self.nat2base.__getattribute__(method_name)(absnb)
-
-        if isinstance(XXXof_absnb[0], str):
-            sign = self.strsign(sign)
-
-        XXXof_absnb.insert(0, sign)
-
-        return XXXof_absnb
-
-    return method_wrapped
+    return _decotest_
 
 
 # -------------------------------- #
@@ -128,7 +107,7 @@ class Int2Base(IntConv):
 #
 #     :see: deco_XXXof_via_NAT
 ###
-    @deco_XXXof_via_NAT
+    @decotest(params = [PARAM_TAG_NB])
     def numeralsof(self, nb: int) -> List[str]:
         ...
 
@@ -144,7 +123,7 @@ class Int2Base(IntConv):
 #
 #     :see: deco_XXXof_via_NAT
 ###
-    @deco_XXXof_via_NAT
+    @decotest(params = [PARAM_TAG_NB])
     def digitsof(self, nb: int) -> List[int]:
         ...
 
@@ -161,10 +140,10 @@ class Int2Base(IntConv):
 #
 #     :see: deco_fromXXX_via_NAT
 ###
-    @deco_fromXXX_via_NAT
+    @decotest(params = [PARAM_TAG_NUMERALS])
     def fromnumerals(
         self,
-        numerals: List[int],
+        numerals: List[str],
     ) -> int:
         ...
 
@@ -181,9 +160,49 @@ class Int2Base(IntConv):
 #
 #     :see: deco_fromXXX_via_NAT
 ###
-    @deco_fromXXX_via_NAT
+    @decotest(params = [PARAM_TAG_DIGITS])
     def fromdigits(
         self,
         digits: List[int],
     ) -> int:
         ...
+
+
+###
+# prototype::
+#     nb   : :see: self.numeralsof
+#     base : the base used to write a natural natural
+#          @ base in 2 .. +inf
+#     sep  : a text to use to separate numerals only if they use at least
+#            two characters (that is the case when the base is bigger than 36).
+#            An empty separator can be used.
+#
+#     :return: a string version of ``nb`` when it is converted into the base
+#              ``base``
+#
+#
+# note::
+#     The name ``nat2bnb`` comes from "natural to base number".
+###
+    @decotest(params    = [PARAM_TAG_NB, PARAM_TAG_BASE, PARAM_TAG_SEP],
+              optionals = [PARAM_TAG_SEP])
+    def int2bnb(
+        self,
+        nb  : int,
+        base: int,
+        sep : str = ''
+    ) -> str:
+        ...
+
+
+# -- EXTRA METHODS "AUTO" - START -- #
+
+    @decotest(params    = [PARAM_TAG_DIGITS, PARAM_TAG_BASE])
+    def digits2bdigits(
+        self,
+        digits: List[int],
+        base  : int,
+    ) -> List[int]:
+        ...
+
+# -- EXTRA METHODS "AUTO" - END -- #
