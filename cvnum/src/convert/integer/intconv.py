@@ -25,14 +25,16 @@ STR_SIGNS = [
 ]
 
 PARAM_TAG_NB       = 'nb'
+PARAM_TAG_BNB      = 'bnb'
 PARAM_TAG_NUMERALS = 'numerals'
 PARAM_TAG_DIGITS   = 'digits'
 PARAM_TAG_BASE     = 'base'
 PARAM_TAG_SEP      = 'sep'
 
-# ----------------------------------------- #
-# -- ??? -- #
-# ----------------------------------------- #
+
+# ------------------------------------- #
+# -- DECORATORS FOR THE LAZZY CODERS -- #
+# ------------------------------------- #
 
 ###
 # prototype::
@@ -41,7 +43,7 @@ PARAM_TAG_SEP      = 'sep'
 def self_n_kwargs(
     method_name,
     params,
-    optionals,
+    optional,
     args,
     kwargs,
 ):
@@ -67,7 +69,7 @@ def self_n_kwargs(
 # Only optional parameters can miss!
     missing = set(params) - set(_kwargs)
 
-    assert missing <= optionals, \
+    assert missing <= optional, \
            (
              f"Int2Base.{method_name}() needs "
             + ("one" if len (missing) == 1 else "some")
@@ -82,6 +84,76 @@ def self_n_kwargs(
 
 # Nothing looks bad... For the moment!
     return self, _kwargs
+
+
+###
+# prototype::
+#     ???
+###
+def deco_callof_nat(params, optional = []):
+    def _deco_callof_nat_(method):
+        method_name     = method.__name__
+        nat_method_name = method_name.replace('int', 'nat')
+
+        def method_wrapped(*args, **kwargs):
+            self, params_found = self_n_kwargs(
+                method_name = method_name,
+                params      = params,
+                optional    = set(optional),
+                args        = args,
+                kwargs      = kwargs,
+            )
+
+# Let's take care of signs!
+            if PARAM_TAG_NB in params_found:
+                sign, params_found[PARAM_TAG_NB] = self.intsign_n_abs_of(
+                    params_found[PARAM_TAG_NB]
+                )
+
+            elif PARAM_TAG_BNB in params_found:
+                sign, params_found[PARAM_TAG_BNB] = self.strsign_n_abs_of(
+                    params_found[PARAM_TAG_BNB]
+                )
+
+            else:
+                for tag in [
+                    PARAM_TAG_DIGITS,
+                    PARAM_TAG_NUMERALS,
+                ]:
+                    if tag in params_found:
+                        sign, *input_absnb = params_found[tag]
+                        params_found[tag]  = input_absnb
+                        break
+
+            absreturn = self.nat2base.__getattribute__(nat_method_name)(
+                **params_found
+            )
+
+            if isinstance(absreturn, list):
+                if isinstance(absreturn[0], str):
+                    sign = self.strsign(sign)
+
+                absreturn.insert(0, sign)
+
+            elif isinstance(absreturn, int):
+                if sign in STR_SIGNS:
+                    sign = self.intsign(sign)
+
+                absreturn = sign * absreturn
+
+            else:
+                if not sign in STR_SIGNS:
+                    sign = self.strsign(sign)
+
+                absreturn = f"{sign}{absreturn}"
+
+            return absreturn
+
+        return method_wrapped
+
+    return _deco_callof_nat_
+
+
 
 
 # ----------------------------------------- #
@@ -107,7 +179,7 @@ class IntConv:
 # prototype::
 #     ???
 ###
-    def sign_n_abs_of(self, nb: int) -> Tuple[int]:
+    def intsign_n_abs_of(self, nb: int) -> Tuple[int]:
         if nb < 0:
             sign = MINUS_INT_SIGN
             nb   = -nb
@@ -116,6 +188,21 @@ class IntConv:
             sign = PLUS_INT_SIGN
 
         return sign, nb
+
+
+###
+# prototype::
+#     ???
+###
+    def strsign_n_abs_of(self, bnb: str) -> Tuple[str]:
+        if bnb[0] == MINUS_STR_SIGN:
+            sign = MINUS_STR_SIGN
+            bnb  = bnb[1:]
+
+        else:
+            sign = PLUS_STR_SIGN
+
+        return sign, bnb
 
 
 ###

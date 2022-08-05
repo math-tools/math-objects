@@ -26,13 +26,19 @@ myi2b = Int2Base()
 # -- LET'S GO -- #
 # -------------- #
 
-print(f"{myi2b.int2bnb(-18, base = 8) = }")
+print(f"{myi2b.int2bnb(-18, base = 8)   = }")
 
-print(f"{myi2b.int2bnb(8, nb = 18)    = }")
+print(f"{myi2b.int2bnb(8, nb = 18)      = }")
 
-print(f"{myi2b.int2bnb(18, 8)         = }")
+print(f"{myi2b.int2bnb(18, 8)           = }")
 
-# exit()
+print(f"{myi2b.digits2bnb([1, 1, 8], 8) = }")
+
+print(f"{myi2b.int2bnumerals(18, 8)     = }")
+
+print(f"{myi2b.int2bdigits(18, 8)       = }")
+
+exit()
 
 
 for x in [

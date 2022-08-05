@@ -1,216 +1,164 @@
-# #!/usr/bin/env python3
+#!/usr/bin/env python3
 
-# ###
-# # This module converts specific base writings to decimal writings.
-# ###
-
-
-# from typing import *
-
-# from math import (
-#     ceil,
-#     log
-# )
-
-# from .int2base import int2bnb
-
-# from ...tbox.var2int import (
-#     basify,
-#     intify,
-# )
+###
+# This module converts decimal writings into specific base writings.
+###
 
 
-# # ---------------------------- #
-# # -- SPECIFIC BASE WRITINGS -- #
-# # ---------------------------- #
+from typing import *
 
-# ###
-# # prototype::
-# #     base : an integer that represents a base
-# #          @ base > 1
-# #
-# #     :return: a dictionary associating ``base`` numerals to integer values
-# ###
-# def bdigitize(base: int) -> Dict[str, int]:
-#     return {
-#         int2bnb(i, base): i
-#         for i in range(base)
-#     }
+from .intconv import *
+
+from ..natural.base2nat import Base2Nat
+
+
+# -------------------------------- #
+# -- DECIMAL ~~~> SPECIFIC BASE -- #
+# -------------------------------- #
+
+###
+# ????
+###
+class Base2Int(IntConv):
+###
+# prototype::
+#     :see: ``common.BaseConverter.__init__``
+###
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.base2nat = Base2Nat(self.errname)
 
 
 # ###
 # # prototype::
-# #     bnb  : a number writing into the base ``base``
-# #     base : :see: ``bdigitize``
-# #     sep  : the text used to separate the textual numerals
+# #     nb : a integer ¨nb
+# #        @ nb in ZZ
 # #
-# #     :return: the list of textual numerals of ``bnb``, the numerals beeing
-# #              sorted from the biggest weight to the smallest one
-# #            @ v in return ==> v in str(0..10)
+# #     ??? :return: the list of textual decimal digits of ``nb`` sorted from
+# #              the biggest weight to the smallest one
+# #            @ return[0] = 1  if v >= 0 ;
+# #              return[0] = -1 if v < 0 ;
+# #              v in return[1:] ==> v in str(0..9)
+# #
+# #
+# #     :see: deco_XXXof_via_NAT
 # ###
-# def basenumerals(
-#     bnb : str,
-#     base: int,
-#     sep : str = "."
-# ) -> List[str]:
-#     base          = basify(base)
-#     base_numerals = list(bdigitize(base))
-
-# # No need to use a separator.
-#     if base <= 36:
-#         numerals = [x for x in bnb]
-
-# # An non empty seperator used.
-#     elif sep:
-#         numerals = bnb.split(sep)
-
-# # An empty seperator has been used.
-#     else:
-#         numerals = []
-#         nbchars  = ceil(log(base) / log(36))
-#         sizenb   = len(bnb)
-
-#         for i in range(sizenb - nbchars, -1, -nbchars):
-#             numerals.append(bnb[i: i + nbchars])
-
-#         nbchars_isolated = sizenb % nbchars
-
-#         if nbchars_isolated != 0:
-#             numerals.append(bnb[:nbchars_isolated])
-
-#         numerals.reverse()
-
-# # Legal numerals?
-#     for n in numerals:
-#         assert n in base_numerals, \
-#                f"illegal numeral << {n} >> found"
-
-# # The job is finished.
-#     return numerals
+#     @deco_callof_nat(params = [PARAM_TAG_NB])
+#     def numeralsof(self, nb: int) -> List[str]:
+#         ...
 
 
 # ###
 # # prototype::
-# #     bnb  : a number writing into the base ``base``
-# #     base : :see: ``bdigitize``
-# #     sep  : the text used to separate the integer numerals
+# #     nb : :see: self.numeralsof
 # #
-# #     :return: the list of decimal digits of ``bnb``, the digits beeing
-# #              sorted from the biggest weight to the smallest one
-# #            @ v in return ==> v in 0..base-1
+# #     :return: ???? the list of decimal digits of ``nb``, the digits sorted from
+# #              the biggest weight to the smallest one
+# #            @ v in return ==> v in 0..9
+# #
+# #
+# #     :see: deco_XXXof_via_NAT
 # ###
-# def basedigits(
-#     bnb : str,
-#     base: int,
-#     sep : str = "."
-# ) -> List[int]:
-#     numerals2digits = bdigitize(base)
-
-#     return [
-#         numerals2digits[n]
-#         for n in basenumerals(bnb, base, sep)
-#     ]
-
-
-# # -------------------------------- #
-# # -- SPECIFIC BASE ~~~> DECIMAL -- #
-# # -------------------------------- #
-
-# ###
-# # prototype::
-# #     bdigits : a list of ``base`` digits from the biggest weight to
-# #               the smallest one
-# #             @ d in bdigits ==> d in 0..base-1
-# #     base    : :see: ``bdigitize``
-# #
-# #     :return: the integer value corresponding to the ``base`` digits
-# #
-# #     :see: bdigitize
-# #
-# #
-# # note::
-# #     The name ``bdigits2int`` comes from "base digits to integer".
-# ###
-# def bdigits2int(
-#     bdigits: List[int],
-#     base   : int,
-# ) -> int:
-#     base   = basify(base)
-#     intval = 0
-#     bpower = 1
-
-#     for n in reversed(bdigits):
-#         n = intify(
-#             nb      = n,
-#             mini    = 0,
-#             maxi    = base - 1,
-#             errname = "digit"
-#         )
-
-#         intval += n*bpower
-#         bpower *= base
-
-#     return intval
+#     @deco_callof_nat(params = [PARAM_TAG_NB])
+#     def digitsof(self, nb: int) -> List[int]:
+#         ...
 
 
 # ###
 # # prototype::
-# #     bnumerals : a list of ``base`` textual numerals sorted from the biggest
-# #                 weight to the smallest one
-# #     base      : :see: ``bdigitize``
+# #     ??? numerals : a list of digits sorted from the biggest weight to
+# #              the smallest one
+# #             @ d in digits ==> d in 0..9
 # #
-# #     :return: the integer value from the biggest weight to the smallest one
+# #     :return: the decorator gives ????
+# #              the natural value corresponding to the digits
 # #
-# #     :see: bdigitize
 # #
-# #
-# # note::
-# #     The name ``bnumerals2int`` comes from "base numerals to integer".
+# #     :see: deco_fromXXX_via_NAT
 # ###
-# def bnumerals2int(
-#     bnumerals: List[str],
-#     base     : int,
-# ) -> int:
-#     base_digits = bdigitize(base)
-
-#     intval = 0
-#     bpower = 1
-
-#     for n in reversed(bnumerals):
-#         assert n in base_digits, \
-#                'unknown numeral << {0} >>.'.format(n)
-
-#         intval += base_digits[n]*bpower
-#         bpower *= base
-
-#     return intval
+#     @deco_callof_nat(params = [PARAM_TAG_NUMERALS])
+#     def fromnumerals(
+#         self,
+#         numerals: List[str],
+#     ) -> int:
+#         ...
 
 
 # ###
 # # prototype::
-# #     bnb  : a number written into the base ``base``
-# #     base : :see: ``bdigitize``
-# #     sep  : the text used to separate the textual numerals
+# #     ??? digits : a list of digits sorted from the biggest weight to
+# #              the smallest one
+# #             @ d in digits ==> d in 0..9
 # #
-# #     :return: the integer value of ``number``
-# #
-# #     :see: basenumerals ,
-# #           bnumerals2int
+# #     :return: the decorator gives ????
+# #              the natural value corresponding to the digits
 # #
 # #
-# # note::
-# #     The name ``bnb2int`` comes from "base number to integer".
+# #     :see: deco_fromXXX_via_NAT
 # ###
-# def bnb2int(
-#     bnb : str,
-#     base: int,
-#     sep : str = "."
-# ) -> int:
-#     return bnumerals2int(
-#         bnumerals = basenumerals(
-#             bnb  = bnb,
-#             base = base,
-#             sep  = sep
-#         ),
-#         base = base
-#     )
+#     @deco_callof_nat(params = [PARAM_TAG_DIGITS])
+#     def fromdigits(
+#         self,
+#         digits: List[int],
+#     ) -> int:
+#         ...
+
+
+# ###
+# # prototype::
+# #     nb   : :see: self.numeralsof
+# #     base : the base used to write a natural natural
+# #          @ base in 2 .. +inf
+# #     sep  : a text to use to separate numerals only if they use at least
+# #            two characters (that is the case when the base is bigger than 36).
+# #            An empty separator can be used.
+# #
+# #     :return: a string version of ``nb`` when it is converted into the base
+# #              ``base``
+# ###
+#     @deco_callof_nat(params   = [PARAM_TAG_NB, PARAM_TAG_BASE, PARAM_TAG_SEP],
+#                      optional = [PARAM_TAG_SEP])
+#     def int2bnb(
+#         self,
+#         nb  : int,
+#         base: int,
+#         sep : str = ''
+#     ) -> str:
+#         ...
+
+
+# ###
+# # prototype::
+# #     nb   : :see: self.numeralsof
+# #     base : :see: self.int2bnb
+# #
+# #     :return: ????
+# ###
+#     @deco_callof_nat(params = [PARAM_TAG_NB, PARAM_TAG_BASE])
+#     def int2bnumerals(
+#         self,
+#         nb  : int,
+#         base: int
+#     ) -> str:
+#         ...
+
+
+# ###
+# # prototype::
+# #     nb   : :see: self.numeralsof
+# #     base : :see: self.int2bnb
+# #
+# #     :return: ????
+# ###
+#     @deco_callof_nat(params = [PARAM_TAG_NB, PARAM_TAG_BASE])
+#     def int2bdigits(
+#         self,
+#         nb  : int,
+#         base: int
+#     ) -> str:
+#         ...
+
+
+# # -- EXTRA METHODS "AUTO" - START -- #
+# # -- EXTRA METHODS "AUTO" - END -- #

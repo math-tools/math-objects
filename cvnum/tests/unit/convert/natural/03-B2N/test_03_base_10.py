@@ -31,7 +31,7 @@ from src.convert.natural.base2nat import Base2Nat
 from src.convert.natural.nat2base import Nat2Base
 # from unit.core       import build_removable
 
-from core.constants import *
+from natcore.constants import *
 
 
 # --------------------- #

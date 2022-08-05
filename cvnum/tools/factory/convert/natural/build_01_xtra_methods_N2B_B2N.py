@@ -189,7 +189,9 @@ for modulename, pyfile in PYFILES.items():
 
     xtra_code = []
 
-    for xtramethod, infos in xtrainfos.items():
+    for xtramethod in sorted(xtrainfos):
+        infos = xtrainfos[xtramethod]
+
         see_params  = TABU_PROTO.join(infos["see_params"])
         params_xtra = TABU_METH_2.join(infos["params_xtra"])
 

@@ -355,76 +355,6 @@ class Base2Nat(NatConv):
 
 ###
 # prototype::
-#     bnb  : :see: self.bnumeralsof
-#     base : :see: self.bnumeralsof
-#     sep  : :see: self.bnumeralsof
-#
-#     :return: :see: self.bnumeralsof
-###
-    def bnb2nat(
-        self,
-        bnb : str,
-        base: int,
-        sep : str = '',
-    ) -> List[str]:
-        return self.bnumerals2nat(
-            bnumerals = self.bnumeralsof(
-                bnb  = bnb,
-                base = base,
-                sep  = sep,
-            ),
-            base = base,
-        )
-
-
-###
-# prototype::
-#     bnb  : :see: self.bnb2nat
-#     base : :see: self.bnb2nat
-#     sep  : :see: self.bnb2nat
-#
-#     :return: :see: self.self.nat2base.digitsof
-###
-    def bnb2digits(
-        self,
-        bnb : str,
-        base: int,
-        sep : str = '',
-    ) -> List[int]:
-        return self.nat2base.digitsof(
-            nb = self.bnb2nat(
-                bnb  = bnb,
-                base = base,
-                sep  = sep,
-            ),
-        )
-
-
-###
-# prototype::
-#     bnb  : :see: self.bnb2nat
-#     base : :see: self.bnb2nat
-#     sep  : :see: self.bnb2nat
-#
-#     :return: :see: self.self.nat2base.numeralsof
-###
-    def bnb2numerals(
-        self,
-        bnb : str,
-        base: int,
-        sep : str = '',
-    ) -> List[str]:
-        return self.nat2base.numeralsof(
-            nb = self.bnb2nat(
-                bnb  = bnb,
-                base = base,
-                sep  = sep,
-            ),
-        )
-
-
-###
-# prototype::
 #     bdigits : :see: self.frombdigits
 #     base    : :see: self.frombdigits
 #
@@ -462,6 +392,76 @@ class Base2Nat(NatConv):
                 base    = base,
             ),
             base = base,
+        )
+
+
+###
+# prototype::
+#     bnb  : :see: self.bnb2nat
+#     base : :see: self.bnb2nat
+#     sep  : :see: self.bnb2nat
+#
+#     :return: :see: self.self.nat2base.digitsof
+###
+    def bnb2digits(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[int]:
+        return self.nat2base.digitsof(
+            nb = self.bnb2nat(
+                bnb  = bnb,
+                base = base,
+                sep  = sep,
+            ),
+        )
+
+
+###
+# prototype::
+#     bnb  : :see: self.bnumeralsof
+#     base : :see: self.bnumeralsof
+#     sep  : :see: self.bnumeralsof
+#
+#     :return: :see: self.bnumeralsof
+###
+    def bnb2nat(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[str]:
+        return self.bnumerals2nat(
+            bnumerals = self.bnumeralsof(
+                bnb  = bnb,
+                base = base,
+                sep  = sep,
+            ),
+            base = base,
+        )
+
+
+###
+# prototype::
+#     bnb  : :see: self.bnb2nat
+#     base : :see: self.bnb2nat
+#     sep  : :see: self.bnb2nat
+#
+#     :return: :see: self.self.nat2base.numeralsof
+###
+    def bnb2numerals(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[str]:
+        return self.nat2base.numeralsof(
+            nb = self.bnb2nat(
+                bnb  = bnb,
+                base = base,
+                sep  = sep,
+            ),
         )
 
 
