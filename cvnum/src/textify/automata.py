@@ -179,7 +179,7 @@ class BaseAutomaton:
 #               len(d_var) <= self._big_expo_max
 #     r_var   : the string decimal representation of the remaining digits
 #               of a group, or an empty string if such digits don't exist
-#             @ r_var in str(NN)
+#             @    r_var in str(NN)
 #               or r_var = ''
 #
 #     :return: the name obtained by applying the actions of the list
@@ -239,7 +239,7 @@ class BaseAutomaton:
 #               of a group (here the value can't be empty)
 #             @ r_var in str(NN)
 #     :return: the string value of either ``d_var``, or ``r_var``
-#            @ if actions == DSL_SPEVAR_NUMBER_OF
+#            @ if   actions == DSL_SPEVAR_NUMBER_OF
 #              then return = d_var
 #              else return = r_var
 ###

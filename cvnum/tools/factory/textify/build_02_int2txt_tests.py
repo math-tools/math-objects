@@ -27,9 +27,9 @@ while(SRC_DIR.name != "cvnum"):
 THIS_FILE_REL_SRC_PATH = PPath(__file__) - SRC_DIR
 
 DIR_LANG         = SRC_DIR / "contribute" / "api" / "textify" / "lang"
-PYTEST_DIR       = SRC_DIR / "tests" / "unit" / "textify" / "integers"
+PYTEST_DIR       = SRC_DIR / "tests" / "unit" / "textify" / "01-integer"
 TEST_USECASE_DIR = PYTEST_DIR / "usecases"
-TEST_PYFILE      = PYTEST_DIR / "test_01_int2txt_nameof.py"
+TEST_PYFILE      = PYTEST_DIR / "constants.py"
 
 
 # ------------------ #

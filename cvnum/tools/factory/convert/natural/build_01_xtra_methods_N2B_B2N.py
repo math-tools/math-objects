@@ -38,22 +38,22 @@ PYFILES = {
     for name in [
         "nat2base",
         "base2nat",
-    ]
+]
 }
 
 XTRA_METHODS_HARD_SPECS = {n: {} for n in PYFILES}
 
 XTRA_METHODS_HARD_SPECS["base2nat"] = {
-    "bnb2nat"           : ["bnumeralsof"  , "bnumerals2nat"           ],
-    "bnb2digits"        : ["bnb2nat"      , "self.nat2base.digitsof"  ],
+    "bnb2nat"           : ["bnumeralsof"  , "bnumerals2nat"],
+    "bnb2digits"        : ["bnb2nat"      , "self.nat2base.digitsof"],
     "bnb2numerals"      : ["bnb2nat"      , "self.nat2base.numeralsof"],
-    "bdigits2nat"       : ["frombdigits"  , "bnb2nat"                 ],
-    "bnumerals2nat"     : ["frombnumerals", "bnb2nat"                 ],
+    "bdigits2nat"       : ["frombdigits"  , "bnb2nat"],
+    "bnumerals2nat"     : ["frombnumerals", "bnb2nat"],
 # Missing methods found with ``check_xtra_methods.py``.
-    "bdigits2digits"    : ["frombdigits"  , "bnb2digits"              ],
-    "bdigits2numerals"  : ["frombdigits"  , "bnb2numerals"            ],
-    "bnumerals2digits"  : ["frombnumerals", "bnb2digits"              ],
-    "bnumerals2numerals": ["frombnumerals", "bnb2numerals"            ],
+    "bdigits2digits"    : ["frombdigits"  , "bnb2digits"],
+    "bdigits2numerals"  : ["frombdigits"  , "bnb2numerals"],
+    "bnumerals2digits"  : ["frombnumerals", "bnb2digits"],
+    "bnumerals2numerals": ["frombnumerals", "bnb2numerals"],
 }
 
 
@@ -78,7 +78,7 @@ for modulename, pyfile in PYFILES.items():
         seps     = [
             '# -- EXTRA METHODS "AUTO" - START -- #',
             '# -- EXTRA METHODS "AUTO" - END -- #'
-        ],
+],
     )
 
     pycode = f"""{before}
@@ -107,7 +107,7 @@ CLASSES = {
     for c in [
         Nat2Base,
         Base2Nat,
-    ]
+]
 }
 
 
@@ -249,7 +249,7 @@ for modulename, pyfile in PYFILES.items():
                     "bnb = self.bnumeralsof",
                     "bnumerals = self.bnumeralsof"
                 )
-            ]:
+]:
                 code_meth = code_meth.replace(old, new)
 
         xtra_code.append(f"{code_prototype}\n{code_meth}")
@@ -279,7 +279,7 @@ for modulename, pyfile in PYFILES.items():
         seps     = [
             '# -- EXTRA METHODS "AUTO" - START -- #',
             '# -- EXTRA METHODS "AUTO" - END -- #'
-        ],
+],
     )
 
     pycode = f"""{before}

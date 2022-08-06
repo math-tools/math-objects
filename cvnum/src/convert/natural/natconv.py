@@ -1,30 +1,31 @@
 #!/usr/bin/env python3
 
 ###
-# This module converts decimal writings into specific base writings.
+# This module proposes common tools for the classes playing with base
+# conversions of naturals.
 ###
 
 
 from typing import *
 
 
-# ----------------------------------------- #
-# -- NATURAL: DECIMAL ~~~> SPECIFIC BASE -- #
-# ----------------------------------------- #
+# ---------------- #
+# -- BASE CLASS -- #
+# ---------------- #
 
 ###
-# ???? This class is to be herited by the classes playing with base conversions of integers.
+# This class is to be herited by the classes playing with base conversions
+# of naturals.
 ###
 class NatConv:
 ###
 # prototype::
-#     safemode : ???
-#     errname  : the name used in case of error message
+#     errname : the name used in case of error message
 ###
     def __init__(
         self,
         errname : str = "number",
-    ):
+    ) -> None:
         self.errname = errname
 
         self.max_singledigit = 36
@@ -32,7 +33,19 @@ class NatConv:
 
 ###
 # prototype::
-#     ???
+#     nb      : a ¨python varoiable to be checked
+#     mini    : a float number which is a minorant
+#             @ mini in RR or mini in {-inf, +inf}
+#     maxi    : a float number which is a majorant
+#             @ maxi in RR or maxi in {-inf, +inf} ;
+#               mini <= maxi
+#     errname : :see: self.__init__
+#
+#     :canfail: if the postcondition is not respected, this method raises
+#               an exception.
+#
+#     :postcond: nb in ZZ ;
+#                mini <= nb <= maxi
 ###
     def checknatural(
         self,
@@ -46,6 +59,9 @@ class NatConv:
 
         assert isinstance(nb, int), \
                f"The {errname} ``{nb}`` is not an integer."
+
+        assert mini <= maxi, \
+               f"invalid mini and maxi: ``{mini = } > {maxi = }``."
 
         assert nb >= mini, \
                f"The {errname} ``{nb}`` is too small ({mini = })."

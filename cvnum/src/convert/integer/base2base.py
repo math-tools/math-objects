@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 ###
-# This module converts decimal writings into specific base writings.
+# This module proposes one class to convert integers between two bases.
 ###
 
 
@@ -12,17 +12,24 @@ from .intconv import *
 from ..natural.base2base import Base2Base as NatBase2Base
 
 
-# -------------------------------- #
-# -- DECIMAL ~~~> SPECIFIC BASE -- #
-# -------------------------------- #
+# ------------------------------ #
+# -- INTEGER: BASE <~~~> BASE -- #
+# ------------------------------ #
 
 ###
-# ????
+# This class gives an easy-to-use ¨api to convert integers between two bases.
+#
+#
+# warning::
+#     If you only work with conversion from decimal writings to a base,
+#     just work with the class ``int2Base.Int2Base``.
+#     And if you only work with conversion from one base to decimal writings,
+#     just work with the class ``base2int.Base2Int``.
 ###
 class Base2Base(IntConv):
 ###
 # prototype::
-#     :see: ``common.BaseConverter.__init__``
+#     :see: IntConv.__init__
 ###
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -38,11 +45,11 @@ class Base2Base(IntConv):
 
 ###
 # prototype::
-#     bdigits  : :see: integer.nat2base.int2bdigits
-#     base_in  : :see: integer.nat2base.int2bnb
-#     base_out : :see: integer.nat2base.int2bnb
+#     bdigits  : :see: integer.int2base.int2bdigits
+#     base_in  : :see: integer.int2base.int2bnb
+#     base_out : :see: integer.int2base.int2bnb
 #
-#     :return: :see: integer.nat2base.int2bdigits
+#     :return: :see: integer.int2base.int2bdigits
 ###
     @deco_callof(tocall = DECO_TAG_B2B,
                  params = [DECO_TAG_BDIGITS, DECO_TAG_BASE_IN, DECO_TAG_BASE_OUT])
@@ -57,12 +64,12 @@ class Base2Base(IntConv):
 
 ###
 # prototype::
-#     bdigits  : :see: integer.nat2base.int2bdigits
-#     base_in  : :see: integer.nat2base.int2bnb
-#     base_out : :see: integer.nat2base.int2bnb
-#     sep_out  : :see: integer.nat2base.int2bnb
+#     bdigits  : :see: integer.int2base.int2bdigits
+#     base_in  : :see: integer.int2base.int2bnb
+#     base_out : :see: integer.int2base.int2bnb
+#     sep_out  : :see: integer.int2base.int2bnb
 #
-#     :return: :see: integer.nat2base.int2bnb
+#     :return: :see: integer.int2base.int2bnb
 ###
     @deco_callof(tocall   = DECO_TAG_B2B,
                  params   = [DECO_TAG_BDIGITS, DECO_TAG_BASE_IN, DECO_TAG_BASE_OUT, DECO_TAG_SEP_OUT],
@@ -79,11 +86,11 @@ class Base2Base(IntConv):
 
 ###
 # prototype::
-#     bdigits  : :see: integer.nat2base.int2bdigits
-#     base_in  : :see: integer.nat2base.int2bnb
-#     base_out : :see: integer.nat2base.int2bnb
+#     bdigits  : :see: integer.int2base.int2bdigits
+#     base_in  : :see: integer.int2base.int2bnb
+#     base_out : :see: integer.int2base.int2bnb
 #
-#     :return: :see: integer.nat2base.int2bnumerals
+#     :return: :see: integer.int2base.int2bnumerals
 ###
     @deco_callof(tocall = DECO_TAG_B2B,
                  params = [DECO_TAG_BDIGITS, DECO_TAG_BASE_IN, DECO_TAG_BASE_OUT])
@@ -98,12 +105,12 @@ class Base2Base(IntConv):
 
 ###
 # prototype::
-#     bnb      : :see: integer.nat2base.int2bnb
-#     base_in  : :see: integer.nat2base.int2bnb
-#     base_out : :see: integer.nat2base.int2bnb
-#     sep_in   : :see: integer.nat2base.int2bnb
+#     bnb      : :see: integer.int2base.int2bnb
+#     base_in  : :see: integer.int2base.int2bnb
+#     base_out : :see: integer.int2base.int2bnb
+#     sep_in   : :see: integer.int2base.int2bnb
 #
-#     :return: :see: integer.nat2base.int2bdigits
+#     :return: :see: integer.int2base.int2bdigits
 ###
     @deco_callof(tocall   = DECO_TAG_B2B,
                  params   = [DECO_TAG_BNB, DECO_TAG_BASE_IN, DECO_TAG_BASE_OUT, DECO_TAG_SEP_IN],
@@ -120,13 +127,13 @@ class Base2Base(IntConv):
 
 ###
 # prototype::
-#     bnb      : :see: integer.nat2base.int2bnb
-#     base_in  : :see: integer.nat2base.int2bnb
-#     base_out : :see: integer.nat2base.int2bnb
-#     sep_in   : :see: integer.nat2base.int2bnb
-#     sep_out  : :see: integer.nat2base.int2bnb
+#     bnb      : :see: integer.int2base.int2bnb
+#     base_in  : :see: integer.int2base.int2bnb
+#     base_out : :see: integer.int2base.int2bnb
+#     sep_in   : :see: integer.int2base.int2bnb
+#     sep_out  : :see: integer.int2base.int2bnb
 #
-#     :return: :see: integer.nat2base.int2bnb
+#     :return: :see: integer.int2base.int2bnb
 ###
     @deco_callof(tocall   = DECO_TAG_B2B,
                  params   = [DECO_TAG_BNB, DECO_TAG_BASE_IN, DECO_TAG_BASE_OUT, DECO_TAG_SEP_IN, DECO_TAG_SEP_OUT],
@@ -144,12 +151,12 @@ class Base2Base(IntConv):
 
 ###
 # prototype::
-#     bnb      : :see: integer.nat2base.int2bnb
-#     base_in  : :see: integer.nat2base.int2bnb
-#     base_out : :see: integer.nat2base.int2bnb
-#     sep_in   : :see: integer.nat2base.int2bnb
+#     bnb      : :see: integer.int2base.int2bnb
+#     base_in  : :see: integer.int2base.int2bnb
+#     base_out : :see: integer.int2base.int2bnb
+#     sep_in   : :see: integer.int2base.int2bnb
 #
-#     :return: :see: integer.nat2base.int2bnumerals
+#     :return: :see: integer.int2base.int2bnumerals
 ###
     @deco_callof(tocall   = DECO_TAG_B2B,
                  params   = [DECO_TAG_BNB, DECO_TAG_BASE_IN, DECO_TAG_BASE_OUT, DECO_TAG_SEP_IN],
@@ -166,11 +173,11 @@ class Base2Base(IntConv):
 
 ###
 # prototype::
-#     bnumerals : :see: integer.nat2base.int2bnumerals
-#     base_in   : :see: integer.nat2base.int2bnb
-#     base_out  : :see: integer.nat2base.int2bnb
+#     bnumerals : :see: integer.int2base.int2bnumerals
+#     base_in   : :see: integer.int2base.int2bnb
+#     base_out  : :see: integer.int2base.int2bnb
 #
-#     :return: :see: integer.nat2base.int2bdigits
+#     :return: :see: integer.int2base.int2bdigits
 ###
     @deco_callof(tocall = DECO_TAG_B2B,
                  params = [DECO_TAG_BNUMERALS, DECO_TAG_BASE_IN, DECO_TAG_BASE_OUT])
@@ -185,12 +192,12 @@ class Base2Base(IntConv):
 
 ###
 # prototype::
-#     bnumerals : :see: integer.nat2base.int2bnumerals
-#     base_in   : :see: integer.nat2base.int2bnb
-#     base_out  : :see: integer.nat2base.int2bnb
-#     sep_out   : :see: integer.nat2base.int2bnb
+#     bnumerals : :see: integer.int2base.int2bnumerals
+#     base_in   : :see: integer.int2base.int2bnb
+#     base_out  : :see: integer.int2base.int2bnb
+#     sep_out   : :see: integer.int2base.int2bnb
 #
-#     :return: :see: integer.nat2base.int2bnb
+#     :return: :see: integer.int2base.int2bnb
 ###
     @deco_callof(tocall   = DECO_TAG_B2B,
                  params   = [DECO_TAG_BNUMERALS, DECO_TAG_BASE_IN, DECO_TAG_BASE_OUT, DECO_TAG_SEP_OUT],
@@ -207,11 +214,11 @@ class Base2Base(IntConv):
 
 ###
 # prototype::
-#     bnumerals : :see: integer.nat2base.int2bnumerals
-#     base_in   : :see: integer.nat2base.int2bnb
-#     base_out  : :see: integer.nat2base.int2bnb
+#     bnumerals : :see: integer.int2base.int2bnumerals
+#     base_in   : :see: integer.int2base.int2bnb
+#     base_out  : :see: integer.int2base.int2bnb
 #
-#     :return: :see: integer.nat2base.int2bnumerals
+#     :return: :see: integer.int2base.int2bnumerals
 ###
     @deco_callof(tocall = DECO_TAG_B2B,
                  params = [DECO_TAG_BNUMERALS, DECO_TAG_BASE_IN, DECO_TAG_BASE_OUT])

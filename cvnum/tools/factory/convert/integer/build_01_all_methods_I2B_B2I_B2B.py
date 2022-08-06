@@ -33,8 +33,8 @@ CV_DIR_NAT = SRC_DIR / "convert" / "integer"
 PYFILES = {
     name: CV_DIR_NAT / f"{name}.py"
     for name in [
-        # "int2base",
-        # "base2int",
+        "int2base",
+        "base2int",
         "base2base",
     ]
 }
@@ -139,16 +139,16 @@ SEE_REFS = {
 
 
 SEE_REFS['base2int'] = {
-    p: (False, f"integer.nat2base.{r}")
+    p: (False, f"integer.int2base.{r}")
     for p, (_, r) in SEE_REFS['int2base'].items()
 }
 
-SEE_REFS['base2int']['nat'] = (True, "bdigits2nat")
+SEE_REFS['base2int']['nat'] = (True, "bdigits2int")
 
 
 SEE_REFS['base2base'] = {
     p: (
-        (False, f"integer.base2nat.{r}")
+        (False, f"integer.base2int.{r}")
         if s else
         (s, r)
     )
@@ -161,7 +161,7 @@ for p in ['base', 'sep']:
 
     for suffix in ['in', 'out']:
         SEE_REFS['base2base'][f"{p}_{suffix}"] = (
-            (False, f"integer.base2nat.{r}")
+            (False, f"integer.base2int.{r}")
             if s else
             (s, r)
         )
@@ -220,6 +220,7 @@ for modulename, pyfile in PYFILES.items():
         infos   = easyinfos[methodname]
         allrefs = SEE_REFS[modulename]
 
+
         see_params = build_see_params(
             about_params = infos[TAG_PARAMS],
             refs         = allrefs,
@@ -234,9 +235,11 @@ for modulename, pyfile in PYFILES.items():
         # exit()
 # ! -- DEBUGGING -- ! #
 
+
         return_refs = allrefs[
             build_return_ref(methodname)
         ]
+
 
         see_return = seeat(
             ref     = return_refs[1],
@@ -250,7 +253,6 @@ for modulename, pyfile in PYFILES.items():
             tag_tocall = tag_tocall.replace(toremove, '')
 
         tag_tocall = tag_tocall.upper()
-
         tag_tocall = f"DECO_TAG_{tag_tocall}"
 
 
@@ -304,7 +306,7 @@ for modulename, pyfile in PYFILES.items():
         code_meth = TEMP_METH_CODE.format(
             tag_tocall  = tag_tocall,
             params_deco = params_deco,
-            methodname  = methodname,
+            methodname  = replace_nat2int(methodname),
             params_xtra = params_xtra,
             return_type = infos[TAG_RETURN],
         )

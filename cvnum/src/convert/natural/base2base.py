@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 ###
-# This module proposes one class to convert integers between two bases.
+# This module proposes one class to convert naturals between two bases.
 ###
 
 
@@ -17,7 +17,7 @@ from .base2nat import Base2Nat
 # ------------------------------ #
 
 ###
-# This class gives an easy-to-use ¨api to convert integers between two bases.
+# This class gives an easy-to-use ¨api to convert naturals between two bases.
 #
 #
 # warning::

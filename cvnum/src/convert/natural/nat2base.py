@@ -23,11 +23,12 @@ from math import (
 
 INT_DIGITS = tuple(range(10))
 
+
 ###
-# This class can transform a decimal writting natural like ``123`` to a "base"
-# one like ``"7B"`` (which is the hexadecimal writing of ``123``).
+# This class can transform a decimal writting of a natural like ``123`` into
+# a "base" one like ``"7B"`` (which is the hexadecimal writing of ``123``).
 #
-# The input for conversion can be of the following kinds.
+# The input for conversions can be of the following kinds.
 #
 #     1) An ``int`` Python like ``123`` (``str`` version are not supported
 #        by this module, and they won't be).
@@ -41,17 +42,17 @@ INT_DIGITS = tuple(range(10))
 #     For this module, digits are ``int`` Python variables, and numerals are
 #     ``str`` ones. In hexadecimal, the digits are the naturals from `0` to
 #     `15`, and numerals are the strings ``"0"``, ..., ``"9"``, ``"A"``, ...,
-#     and ``"F"`` (with the uppercase style).
+#     and ``"F"`` (with the uppercase style contrary to ¨python).
 #
 #
-# The base must be ``int`` Python greater than ``1``, and the output for
-# conversion can be of the following kinds.
+# The base must be an ``int`` Python greater than ``1``, and the output of
+# one conversion can be of the following kinds.
 #
 #     1) A ``str`` Python like ``"7B"``.
 #
-#     1) A list of digits like ``[7, 11]``.
+#     1) A list of ``int`` digits like ``[7, 11]``.
 #
-#     1) A list of numerals like ``["7", "B"]``.
+#     1) A list of ``str`` numerals like ``["7", "B"]``.
 ###
 class Nat2Base(NatConv):
 ###
@@ -59,8 +60,8 @@ class Nat2Base(NatConv):
 #     nb : a natural ¨nb
 #        @ nb in NN
 #
-#     :return: the list of textual decimal digits of ``nb`` sorted from
-#              the biggest weight to the smallest one
+#     :return: the list of numerals of ``nb`` sorted from the biggest
+#              weight to the smallest one
 #            @ v in return ==> v in str(0..9)
 ###
     def numeralsof(self, nb: int) -> List[str]:
@@ -75,7 +76,7 @@ class Nat2Base(NatConv):
 # prototype::
 #     nb : :see: self.numeralsof
 #
-#     :return: the list of decimal digits of ``nb``, the digits sorted from
+#     :return: the list of digits of ``nb``, the digits sorted from
 #              the biggest weight to the smallest one
 #            @ v in return ==> v in 0..9
 ###
@@ -91,9 +92,9 @@ class Nat2Base(NatConv):
 # prototype::
 #     digits : a list of digits sorted from the biggest weight to
 #              the smallest one
-#             @ d in digits ==> d in 0..9
+#            @ d in digits ==> d in 0..9
 #
-#     :return: the natural value corresponding to the digits
+#     :return: the natural number corresponding to the digits
 ###
     def fromdigits(
         self,
@@ -104,7 +105,7 @@ class Nat2Base(NatConv):
 
         for n in reversed(digits):
             assert n in INT_DIGITS, \
-                   'unknown digit ``{0}``.'.format(n)
+                   'invalid digit ``{0}``.'.format(n)
 
             intval += n*power
             power  *= 10
@@ -114,11 +115,11 @@ class Nat2Base(NatConv):
 
 ###
 # prototype::
-#     numerals : a list of textual numerals sorted from the biggest weight to
+#     numerals : a list of numerals sorted from the biggest weight to
 #                the smallest one
-#             @ d in numerals ==> d in str(0..9)
+#              @ d in numerals ==> d in str(0..9)
 #
-#     :return: the natural value corresponding to thenumerals
+#     :return: the natural number corresponding to the numerals
 ###
     def fromnumerals(
         self,
@@ -126,7 +127,7 @@ class Nat2Base(NatConv):
     ) -> int:
         for n in reversed(numerals):
             assert n in STR_DIGITS, \
-                   'unknown numeral ``{0}``.'.format(n)
+                   'invalid numeral ``{0}``.'.format(n)
 
         return int(''.join(numerals))
 
@@ -137,8 +138,8 @@ class Nat2Base(NatConv):
 #     base : the base used to write a natural natural
 #          @ base in 2 .. +inf
 #
-#     :return: the list of natural digits of ``nb`` when it is converted
-#              into the base ``base``, the digits are sorted from the biggest
+#     :return: the list of digits of ``nb`` when it is converted into
+#              the base ``base``, the digits are sorted from the biggest
 #              weight to the smallest one
 #            @ v in return ==> v in 0 .. (base-1)
 #
@@ -185,8 +186,8 @@ class Nat2Base(NatConv):
 # prototype::
 #     base : :see: self.nat2bdigits
 #
-#     :return: a function that converts a natural digit into a list of
-#              textual ``base`` numerals.
+#     :return: a function that converts a natural into a list of textual
+#              ``base`` numerals.
 #
 #     :see: self.nat2bdigits
 #
@@ -261,8 +262,8 @@ class Nat2Base(NatConv):
 #     nb   : :see: self.nat2bdigits
 #     base : :see: self.nat2bdigits
 #
-#     :return: the list of textual numerals of ``nb`` when it is converted
-#              into the base ``base``, the numerals beeing sorted from
+#     :return: the list of numerals of ``nb`` when it is converted into
+#              the base ``base``, the numerals beeing sorted from
 #              the biggest weight to the smallest one
 #
 #     :see: self.numeralize
@@ -298,12 +299,10 @@ class Nat2Base(NatConv):
 # prototype::
 #     nb   : :see: self.nat2bdigits
 #     base : :see: self.nat2bdigits
-#     sep  : a text to use to separate numerals only if they use at least
-#            two characters (that is the case when the base is bigger than 36).
-#            An empty separator can be used.
+#     sep  : a text to separate the numerals.
 #
-#     :return: a string version of ``nb`` when it is converted into the base
-#              ``base``
+#     :return: a string version of ``nb`` when it is converted into
+#              the base ``base``
 #
 #     :see: self.nat2bnumerals
 #

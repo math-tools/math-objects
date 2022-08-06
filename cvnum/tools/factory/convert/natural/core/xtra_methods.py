@@ -174,7 +174,10 @@ def cls_xtramethods(
             methods_called[tag] = intermeth
 
             if not intermeth.endswith(TAG_NAT):
-                see_return  = seeat(intermeth)
+                see_return  = seeat(
+                    intermeth,
+                    useself  = not(intermeth.startswith('self.'))
+                )
                 return_type = cleantype(str(sign.return_annotation))
 
             max_len_params[tag] = 0

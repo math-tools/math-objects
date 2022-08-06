@@ -4,7 +4,7 @@
 # -- SEVERAL IMPORTS -- #
 # --------------------- #
 
-from random import random, choice
+from random import random
 
 
 # ------------------ #
@@ -23,11 +23,7 @@ class FakeINT:
         rand_polluated = ''
 
         for i, c in enumerate(str_int):
-            if(
-                i != 0
-                and
-                random() < .4
-            ):
+            if i != 0 and random() < .4:
                 rand_polluated += self.s
 
             rand_polluated += c

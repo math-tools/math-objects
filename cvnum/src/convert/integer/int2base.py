@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 ###
-# This module converts decimal writings into specific base writings.
+# This module converts different kinds of decimal writings of integers
+# into different kinds of "base" writings.
 ###
 
 
@@ -12,17 +13,49 @@ from .intconv import *
 from ..natural.nat2base import Nat2Base
 
 
-# -------------------------------- #
-# -- DECIMAL ~~~> SPECIFIC BASE -- #
-# -------------------------------- #
+# ----------------------------------------- #
+# -- INTEGER: DECIMAL ~~~> SPECIFIC BASE -- #
+# ----------------------------------------- #
 
 ###
-# ????
+# This class extends the capabilities of ``natural.Nat2Base`` to any integer.
+# It can transform a decimal writting of an integer like ``-123`` into
+# a "base" one like ``"-7B"`` (which is the hexadecimal writing of ``-123``).
+#
+# The input for conversions can be of the following kinds.
+#
+#     1) An ``int`` Python like ``-123`` (``str`` version are not supported
+#        by this module, and they won't be).
+#
+#     1) A list of digits like ``[-1, 1, 2, 3]`` where the first value of
+#        the list indicates the sign: ``-1`` is for a negative integer, and
+#        ``1`` for a non-negative one.
+#
+#     1) A list of numerals like ``["-", "1", "2", "3"]`` where the first value
+#        of the list indicates the sign: ``"-""`` is for a negative integer,
+#        and ``""`` for a non-negative one.
+#
+#
+# warning::
+#     When working with strings, a plus sign is indicated with ``""``, and
+#     not ``"+"``.
+#
+#
+# The base must be an ``int`` Python greater than ``1``, and the output of
+# one conversion can be of the following kinds.
+#
+#     1) A ``str`` Python like ``"-7B"``.
+#
+#     1) A list of one ``int`` sign followed by ``int`` digits like
+#        ``[-1, 7, 11]``.
+#
+#     1) A list of one ``str`` sign followed by ``str`` numerals like
+#        ``["-", "7", "B"]``.
 ###
 class Int2Base(IntConv):
 ###
 # prototype::
-#     :see: ``common.BaseConverter.__init__``
+#     :see: IntConv.__init__
 ###
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,17 +65,15 @@ class Int2Base(IntConv):
 
 ###
 # prototype::
-#     nb : a integer ¨nb
+#     nb : an integer ¨nb
 #        @ nb in ZZ
 #
-#     ??? :return: the list of textual decimal digits of ``nb`` sorted from
-#              the biggest weight to the smallest one
-#            @ return[0] = 1  if v >= 0 ;
-#              return[0] = -1 if v < 0 ;
+#     :return: a list starting with a ``str`` sign followed by numerals
+#              sorted from the biggest weight to the smallest one
+#            @ if   nb < 0
+#              then return[0] = "-"
+#              else return[0] = "" ;
 #              v in return[1:] ==> v in str(0..9)
-#
-#
-#     :see: deco_XXXof_via_NAT
 ###
     @deco_callof(tocall = DECO_TAG_N2B,
                  params = [DECO_TAG_NB])
@@ -54,12 +85,12 @@ class Int2Base(IntConv):
 # prototype::
 #     nb : :see: self.numeralsof
 #
-#     :return: ???? the list of decimal digits of ``nb``, the digits sorted from
-#              the biggest weight to the smallest one
-#            @ v in return ==> v in 0..9
-#
-#
-#     :see: deco_XXXof_via_NAT
+#     :return: a list starting with a ``int`` sign followed by digits
+#              sorted from the biggest weight to the smallest one
+#            @ if   nb < 0
+#              then return[0] = -1
+#              else return[0] = 1 ;
+#              v in return[1:] ==> v in 0..9
 ###
     @deco_callof(tocall = DECO_TAG_N2B,
                  params = [DECO_TAG_NB])
@@ -69,15 +100,12 @@ class Int2Base(IntConv):
 
 ###
 # prototype::
-#     ??? numerals : a list of digits sorted from the biggest weight to
-#              the smallest one
-#             @ d in digits ==> d in 0..9
+#     numerals : a list starting with a ``str`` sign followed by numerals sorted
+#                from the biggest weight to the smallest one
+#              @ numerals[0] in ["-", ""] ;
+#                d in numerals[1:] ==> d in str(0..9)
 #
-#     :return: the decorator gives ????
-#              the natural value corresponding to the digits
-#
-#
-#     :see: deco_fromXXX_via_NAT
+#     :return: the integer value corresponding to the sign and the numerals
 ###
     @deco_callof(tocall = DECO_TAG_N2B,
                  params = [DECO_TAG_NUMERALS])
@@ -90,15 +118,12 @@ class Int2Base(IntConv):
 
 ###
 # prototype::
-#     ??? digits : a list of digits sorted from the biggest weight to
-#              the smallest one
-#             @ d in digits ==> d in 0..9
+#     digits : a list starting with a ``int`` sign followed by digits sorted
+#              from the biggest weight to the smallest one
+#            @ numerals[0] in [-1, 1] ;
+#              d in numerals[1:] ==> d in 0..9
 #
-#     :return: the decorator gives ????
-#              the natural value corresponding to the digits
-#
-#
-#     :see: deco_fromXXX_via_NAT
+#     :return: the integer value corresponding to the sign and the digits
 ###
     @deco_callof(tocall = DECO_TAG_N2B,
                  params = [DECO_TAG_DIGITS])
@@ -112,14 +137,12 @@ class Int2Base(IntConv):
 ###
 # prototype::
 #     nb   : :see: self.numeralsof
-#     base : the base used to write a natural natural
+#     base : the base used to write a natural
 #          @ base in 2 .. +inf
-#     sep  : a text to use to separate numerals only if they use at least
-#            two characters (that is the case when the base is bigger than 36).
-#            An empty separator can be used.
+#     sep  : a text to separate the numerals.
 #
-#     :return: a string version of ``nb`` when it is converted into the base
-#              ``base``
+#     :return: a string ``base`` number obtaining by taking care
+#              of the arguments
 ###
     @deco_callof(tocall = DECO_TAG_N2B,
                  params   = [DECO_TAG_NB, DECO_TAG_BASE, DECO_TAG_SEP],
@@ -138,7 +161,12 @@ class Int2Base(IntConv):
 #     nb   : :see: self.numeralsof
 #     base : :see: self.int2bnb
 #
-#     :return: ????
+#     :return: a list starting with a ``str`` sign followed by numerals of
+#              the base ``base``, the numerals being sorted from the biggest
+#              weight to the smallest one
+#            @ if   nb < 0
+#              then return[0] = "-"
+#              else return[0] = ""
 ###
     @deco_callof(tocall = DECO_TAG_N2B,
                  params = [DECO_TAG_NB, DECO_TAG_BASE])
@@ -146,7 +174,7 @@ class Int2Base(IntConv):
         self,
         nb  : int,
         base: int
-    ) -> str:
+    ) -> List[str]:
         ...
 
 
@@ -155,7 +183,13 @@ class Int2Base(IntConv):
 #     nb   : :see: self.numeralsof
 #     base : :see: self.int2bnb
 #
-#     :return: ????
+#     :return: a list starting with a ``int`` sign followed by digits of
+#              the base ``base``, the digits being sorted from the biggest
+#              weight to the smallest one
+#            @ if   nb < 0
+#              then return[0] = -1
+#              else return[0] = 1 ;
+#              v in return[1:] ==> v in 0 .. (base-1)
 ###
     @deco_callof(tocall = DECO_TAG_N2B,
                  params = [DECO_TAG_NB, DECO_TAG_BASE])
@@ -163,7 +197,7 @@ class Int2Base(IntConv):
         self,
         nb  : int,
         base: int
-    ) -> str:
+    ) -> List[int]:
         ...
 
 

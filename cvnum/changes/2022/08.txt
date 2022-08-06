@@ -16,30 +16,12 @@ The new implementation of the package ``convert.integer`` has been done followin
 :fordev:
 --------
 
+[[:api:]]
+One builder produces most of the codes of the classes ``Int2Base``, ``Base2Int`` and ``integer.Base2Base``.
+
+
 [[:doc:]]
-???????
 All prototypes are now up to date.
-
-check les :see: de convert !!!
-    natural
-        ...2base
-        base2...
-        base2base
-
-    integer
-        ...2base
-        base2...
-        base2base
-
-
-[[:tests:]]
-??????
-New unit tests: ``convert.integer`` is "fully" tested.
-
-
-
-
-
 
 
 // ---------- //

@@ -127,7 +127,7 @@ class Base2Nat(NatConv):
 #     base : :see: self.checkbdigits
 #     sep  : :see: nat2base.Nat2Base.nat2bnb
 #
-#     :return: the list of textual numerals of ``bnb``, the numerals beeing
+#     :return: the list of numerals of ``bnb``, the numerals beeing
 #              sorted from the biggest weight to the smallest one
 #            @ v in return ==> v in str(0 .. (base-1))
 ###
@@ -401,7 +401,7 @@ class Base2Nat(NatConv):
 #     base : :see: self.bnb2nat
 #     sep  : :see: self.bnb2nat
 #
-#     :return: :see: self.self.nat2base.digitsof
+#     :return: :see: self.nat2base.digitsof
 ###
     def bnb2digits(
         self,
@@ -448,7 +448,7 @@ class Base2Nat(NatConv):
 #     base : :see: self.bnb2nat
 #     sep  : :see: self.bnb2nat
 #
-#     :return: :see: self.self.nat2base.numeralsof
+#     :return: :see: self.nat2base.numeralsof
 ###
     def bnb2numerals(
         self,
