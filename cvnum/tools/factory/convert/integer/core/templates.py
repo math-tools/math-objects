@@ -8,7 +8,7 @@ TABU_PROTO  = '\n# ' + ' '*4
 TABU_METH_2 = '\n'   + ' '*8
 TABU_METH_3 = '\n'   + ' '*12
 TABU_METH_4 = '\n'   + ' '*16
-TABU_DECO   = '\n'   + ' '*(4 + len("@deco_callof_nat("))
+TABU_DECO   = '\n'   + ' '*(4 + len("@deco_callof("))
 
 TEMP_PROTOTYPE = """
 ###

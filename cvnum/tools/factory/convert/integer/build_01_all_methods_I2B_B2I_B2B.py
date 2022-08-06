@@ -34,6 +34,8 @@ PYFILES = {
     name: CV_DIR_NAT / f"{name}.py"
     for name in [
         "int2base",
+        "base2int",
+        "base2base",
     ]
 }
 
@@ -81,8 +83,8 @@ MODULE_DIR = addfindsrc(
     project = 'cvnum',
 )
 
-from src.convert.natural import Nat2Base
-from src.convert.integer import Int2Base
+from src.convert.natural import Nat2Base, Base2Nat, Base2Base
+from src.convert.integer import Int2Base, Base2Int, Base2Base as NatBase2Base
 
 
 TAG_INT_CLS = "int_cls"
@@ -95,6 +97,8 @@ CLASSES = {
     }
     for ic, nc in [
         (Int2Base, Nat2Base),
+        (Base2Int, Base2Nat),
+        (Base2Base, NatBase2Base)
     ]
 }
 
@@ -106,30 +110,57 @@ CLASSES = {
 TAG_SELF     = "self."
 LEN_TAG_SELF = len(TAG_SELF)
 
-TEMP_METH_CODE = {
-    'int2base': " "*4 + """
-    @deco_callof_nat({params_deco})
+TEMP_METH_CODE = " "*4 + """
+    @deco_callof(tocall = {tag_tocall},
+                 {params_deco})
     def {methodname}(
         self,
         {params_xtra}
     ) -> {return_type}:
         ...
-""".strip(),
-}
+""".strip()
+
 
 SEE_REFS = {
     'int2base': {
-        'digits'   : "fromdigits",
-        'numerals' : "fromnumerals",
-        'nb'       : "numeralsof",
-        'bnb'      : "int2bnb",
-        'base'     : "int2bnb",
-        'sep'      : "int2bnb",
-        'bdigits'  : "int2bdigits",
-        'bnumerals': "int2bnumerals",
+        p: (True, r)
+        for p, r in {
+            'digits'    : "fromdigits",
+            'numerals'  : "fromnumerals",
+            'nb'        : "numeralsof",
+            'bnb'       : "int2bnb",
+            'base'      : "int2bnb",
+            'sep'       : "int2bnb",
+            'bdigits'   : "int2bdigits",
+            'bnumerals' : "int2bnumerals",
+        }.items()
     }
 }
 
+
+SEE_REFS['base2int'] = {
+    p: (False, f"integer.nat2base.{r}")
+    for p, (_, r) in SEE_REFS['int2base'].items()
+}
+
+SEE_REFS['base2int']['nat'] = (True, "bdigits2nat")
+
+
+SEE_REFS['base2base'] = {
+    p: (
+        (False, f"integer.base2nat.{r}")
+        if s else
+        (s, r)
+    )
+    for p, (s, r) in SEE_REFS['base2int'].items()
+}
+
+
+# ! -- DEBUGGING -- ! #
+# from pprint import pprint
+# pprint(SEE_REFS['base2base'])
+# exit()
+# ! -- DEBUGGING -- ! #
 
 # ----------------------- #
 # -- METHODS AVAILABLE -- #
@@ -172,23 +203,42 @@ for modulename, pyfile in PYFILES.items():
         infos   = easyinfos[methodname]
         allrefs = SEE_REFS[modulename]
 
-
         see_params = build_see_params(
             about_params = infos[TAG_PARAMS],
-            refs         = allrefs
+            refs         = allrefs,
         )
         see_params = TABU_PROTO.join(see_params)
 
 
+# ! -- DEBUGGING -- ! #
+        # print(f"--- {methodname} ---")
+        # print(f"{build_return_ref(methodname)  = }")
+        # print()
+        # exit()
+# ! -- DEBUGGING -- ! #
+
+        return_refs = allrefs[
+            build_return_ref(methodname)
+        ]
+
         see_return = seeat(
-            allrefs[
-                build_return_ref(methodname)
-            ]
+            ref     = return_refs[1],
+            useself = return_refs[0]
         )
 
 
+        tag_tocall = nat_modulename
+
+        for toremove in ['at', 'ase']:
+            tag_tocall = tag_tocall.replace(toremove, '')
+
+        tag_tocall = tag_tocall.upper()
+
+        tag_tocall = f"DECO_TAG_{tag_tocall}"
+
+
         params_deco = ', '.join(
-            f"PARAM_TAG_{p.upper()}"
+            f"DECO_TAG_{p.upper()}"
             for p in infos[TAG_PARAMS]
         )
         params_deco = [f"params = [{params_deco}]"]
@@ -201,12 +251,17 @@ for modulename, pyfile in PYFILES.items():
             ) + ","
 
             optional_deco = ', '.join(
-                f"PARAM_TAG_{p.upper()}"
+                f"DECO_TAG_{p.upper()}"
                 for p in infos[TAG_OPTIONAL]
             )
             optional_deco = f"optional = [{optional_deco}]"
 
             params_deco.append(optional_deco)
+
+            spaceafter_tocall = ' '*(len("optional") - len("tocall"))
+
+        else:
+            spaceafter_tocall = ''
 
         params_deco = TABU_DECO.join(params_deco)
 
@@ -229,12 +284,19 @@ for modulename, pyfile in PYFILES.items():
             see_return = see_return,
         )
 
-        code_meth = TEMP_METH_CODE[modulename].format(
-            params_deco  = params_deco,
-            methodname   = methodname,
-            params_xtra  = params_xtra,
-            return_type  = infos[TAG_RETURN],
+        code_meth = TEMP_METH_CODE.format(
+            tag_tocall  = tag_tocall,
+            params_deco = params_deco,
+            methodname  = methodname,
+            params_xtra = params_xtra,
+            return_type = infos[TAG_RETURN],
         )
+
+        if spaceafter_tocall:
+            code_meth = code_meth.replace(
+                 "@deco_callof(tocall =",
+                f"@deco_callof(tocall{spaceafter_tocall} ="
+            )
 
         auto_code.append(f"{code_prototype}\n{code_meth}")
 

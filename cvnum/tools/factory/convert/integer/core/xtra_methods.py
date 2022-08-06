@@ -29,6 +29,7 @@ def replace_nat2int(text):
 
 TO_IGNORE = {
     'Nat2Base': ['numeralize'],
+    'Base2Nat': ['basedigitize'],
 }
 
 def cls_automethods(intcls, natcls):

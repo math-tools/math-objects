@@ -44,7 +44,8 @@ class Int2Base(IntConv):
 #
 #     :see: deco_XXXof_via_NAT
 ###
-    @deco_callof_nat(params = [PARAM_TAG_NB])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_NB])
     def numeralsof(self, nb: int) -> List[str]:
         ...
 
@@ -60,7 +61,8 @@ class Int2Base(IntConv):
 #
 #     :see: deco_XXXof_via_NAT
 ###
-    @deco_callof_nat(params = [PARAM_TAG_NB])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_NB])
     def digitsof(self, nb: int) -> List[int]:
         ...
 
@@ -77,7 +79,8 @@ class Int2Base(IntConv):
 #
 #     :see: deco_fromXXX_via_NAT
 ###
-    @deco_callof_nat(params = [PARAM_TAG_NUMERALS])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_NUMERALS])
     def fromnumerals(
         self,
         numerals: List[str],
@@ -97,7 +100,8 @@ class Int2Base(IntConv):
 #
 #     :see: deco_fromXXX_via_NAT
 ###
-    @deco_callof_nat(params = [PARAM_TAG_DIGITS])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_DIGITS])
     def fromdigits(
         self,
         digits: List[int],
@@ -117,8 +121,9 @@ class Int2Base(IntConv):
 #     :return: a string version of ``nb`` when it is converted into the base
 #              ``base``
 ###
-    @deco_callof_nat(params   = [PARAM_TAG_NB, PARAM_TAG_BASE, PARAM_TAG_SEP],
-                     optional = [PARAM_TAG_SEP])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params   = [DECO_TAG_NB, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
     def int2bnb(
         self,
         nb  : int,
@@ -135,7 +140,8 @@ class Int2Base(IntConv):
 #
 #     :return: ????
 ###
-    @deco_callof_nat(params = [PARAM_TAG_NB, PARAM_TAG_BASE])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_NB, DECO_TAG_BASE])
     def int2bnumerals(
         self,
         nb  : int,
@@ -151,7 +157,8 @@ class Int2Base(IntConv):
 #
 #     :return: ????
 ###
-    @deco_callof_nat(params = [PARAM_TAG_NB, PARAM_TAG_BASE])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_NB, DECO_TAG_BASE])
     def int2bdigits(
         self,
         nb  : int,
@@ -164,7 +171,7 @@ class Int2Base(IntConv):
 
 # Lines automatically build by the following file.
 #
-#     + ``tools/factory/convert/integer/build_01_all_methods_I2B.py``
+#     + ``tools/factory/convert/integer/build_01_all_methods_I2B_B2I_B2B.py``
 
 ###
 # prototype::
@@ -173,7 +180,8 @@ class Int2Base(IntConv):
 #
 #     :return: :see: self.int2bdigits
 ###
-    @deco_callof_nat(params = [PARAM_TAG_DIGITS, PARAM_TAG_BASE])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_DIGITS, DECO_TAG_BASE])
     def digits2bdigits(
         self,
         digits: List[int],
@@ -190,8 +198,9 @@ class Int2Base(IntConv):
 #
 #     :return: :see: self.int2bnb
 ###
-    @deco_callof_nat(params   = [PARAM_TAG_DIGITS, PARAM_TAG_BASE, PARAM_TAG_SEP],
-                     optional = [PARAM_TAG_SEP])
+    @deco_callof(tocall   = DECO_TAG_N2B,
+                 params   = [DECO_TAG_DIGITS, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
     def digits2bnb(
         self,
         digits: List[int],
@@ -208,7 +217,8 @@ class Int2Base(IntConv):
 #
 #     :return: :see: self.int2bnumerals
 ###
-    @deco_callof_nat(params = [PARAM_TAG_DIGITS, PARAM_TAG_BASE])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_DIGITS, DECO_TAG_BASE])
     def digits2bnumerals(
         self,
         digits: List[int],
@@ -224,7 +234,8 @@ class Int2Base(IntConv):
 #
 #     :return: :see: self.int2bdigits
 ###
-    @deco_callof_nat(params = [PARAM_TAG_NUMERALS, PARAM_TAG_BASE])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_NUMERALS, DECO_TAG_BASE])
     def numerals2bdigits(
         self,
         numerals: List[str],
@@ -241,8 +252,9 @@ class Int2Base(IntConv):
 #
 #     :return: :see: self.int2bnb
 ###
-    @deco_callof_nat(params   = [PARAM_TAG_NUMERALS, PARAM_TAG_BASE, PARAM_TAG_SEP],
-                     optional = [PARAM_TAG_SEP])
+    @deco_callof(tocall   = DECO_TAG_N2B,
+                 params   = [DECO_TAG_NUMERALS, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
     def numerals2bnb(
         self,
         numerals: List[str],
@@ -259,7 +271,8 @@ class Int2Base(IntConv):
 #
 #     :return: :see: self.int2bnumerals
 ###
-    @deco_callof_nat(params = [PARAM_TAG_NUMERALS, PARAM_TAG_BASE])
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_NUMERALS, DECO_TAG_BASE])
     def numerals2bnumerals(
         self,
         numerals: List[str],

@@ -14,13 +14,37 @@ MODULE_DIR = addfindsrc(
 
 
 # -------------- #
-# -- LET'S GO -- #
+# -- TO DEBUG -- #
 # -------------- #
 
 from src.convert.integer import *
 
+myb2i = Base2Int()
+
+
+# -------------- #
+# -- LET'S GO -- #
+# -------------- #
+
+print(f"{myb2i.bdigitsof('30AF4', 16)  = }")
+print(f"{myb2i.bdigitsof('-30AF4', 16)  = }")
+
+print()
+
+print(f"{myb2i.bnumeralsof('30AF4', 16)  = }")
+print(f"{myb2i.bnumeralsof('-30AF4', 16)  = }")
+
+print()
+
+print(f"{myb2i.frombnumerals(myb2i.bnumeralsof('-30AF4', 16), 16) = }")
+
+print()
+
+exit()
+
+
 # print('---')
-# bnb = '30AF4'
+# bnb =
 # b = 16
 # print(f'{bnb} = {basedigits(bnb, b)}')
 # print(f'{bnb} = {basenumerals(bnb, b)}')

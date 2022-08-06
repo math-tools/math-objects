@@ -36,8 +36,9 @@ def build_see_params(about_params, refs):
 
     return [
         prototype_oneparam(
-            param = param + ' '*(maxlen_param - len(param)),
-            ref = refs[param]
+            param   = param + ' '*(maxlen_param - len(param)),
+            ref     = refs[param][1],
+            useself = refs[param][0]
         )
         for param in about_params
     ]

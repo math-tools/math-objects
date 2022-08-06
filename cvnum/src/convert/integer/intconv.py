@@ -24,12 +24,26 @@ STR_SIGNS = [
     PLUS_STR_SIGN,
 ]
 
-PARAM_TAG_NB       = 'nb'
-PARAM_TAG_BNB      = 'bnb'
-PARAM_TAG_NUMERALS = 'numerals'
-PARAM_TAG_DIGITS   = 'digits'
-PARAM_TAG_BASE     = 'base'
-PARAM_TAG_SEP      = 'sep'
+INT_SIGNS = [
+    MINUS_INT_SIGN,
+    PLUS_INT_SIGN,
+]
+
+DECO_TAG_N2B = 'nat2base'
+DECO_TAG_B2N = 'base2nat'
+DECO_TAG_B2B = 'base2base'
+
+DECO_TAG_NB = 'nb'
+
+DECO_TAG_BNB  = 'bnb'
+DECO_TAG_BASE = 'base'
+DECO_TAG_SEP  = 'sep'
+
+DECO_TAG_NUMERALS = 'numerals'
+DECO_TAG_DIGITS   = 'digits'
+
+DECO_TAG_BNUMERALS = 'bnumerals'
+DECO_TAG_BDIGITS   = 'bdigits'
 
 
 # ------------------------------------- #
@@ -67,9 +81,9 @@ def self_n_kwargs(
         _kwargs[params[i_params]] = val
 
 # Only optional parameters can miss!
-    missing = set(params) - set(_kwargs)
+    missing = set(params) - set(_kwargs) - optional
 
-    assert missing <= optional, \
+    assert missing == set(), \
            (
              f"Int2Base.{method_name}() needs "
             + ("one" if len (missing) == 1 else "some")
@@ -90,8 +104,8 @@ def self_n_kwargs(
 # prototype::
 #     ???
 ###
-def deco_callof_nat(params, optional = []):
-    def _deco_callof_nat_(method):
+def deco_callof(tocall, params, optional = []):
+    def _deco_callof_(method):
         method_name     = method.__name__
         nat_method_name = method_name.replace('int', 'nat')
 
@@ -105,33 +119,42 @@ def deco_callof_nat(params, optional = []):
             )
 
 # Let's take care of signs!
-            if PARAM_TAG_NB in params_found:
-                sign, params_found[PARAM_TAG_NB] = self.intsign_n_abs_of(
-                    params_found[PARAM_TAG_NB]
+            if DECO_TAG_NB in params_found:
+                sign, params_found[DECO_TAG_NB] = self.intsign_n_abs_of(
+                    params_found[DECO_TAG_NB]
                 )
 
-            elif PARAM_TAG_BNB in params_found:
-                sign, params_found[PARAM_TAG_BNB] = self.strsign_n_abs_of(
-                    params_found[PARAM_TAG_BNB]
+            elif DECO_TAG_BNB in params_found:
+                sign, params_found[DECO_TAG_BNB] = self.strsign_n_abs_of(
+                    params_found[DECO_TAG_BNB]
                 )
 
             else:
                 for tag in [
-                    PARAM_TAG_DIGITS,
-                    PARAM_TAG_NUMERALS,
+                    DECO_TAG_DIGITS,
+                    DECO_TAG_NUMERALS,
+                    DECO_TAG_BDIGITS,
+                    DECO_TAG_BNUMERALS,
                 ]:
                     if tag in params_found:
                         sign, *input_absnb = params_found[tag]
                         params_found[tag]  = input_absnb
                         break
 
-            absreturn = self.nat2base.__getattribute__(nat_method_name)(
+            absreturn = self.__getattribute__(
+                tocall
+            ).__getattribute__(
+                nat_method_name
+            )(
                 **params_found
             )
 
             if isinstance(absreturn, list):
                 if isinstance(absreturn[0], str):
                     sign = self.strsign(sign)
+
+                elif isinstance(sign, str):
+                    sign = self.intsign(sign)
 
                 absreturn.insert(0, sign)
 
@@ -151,7 +174,7 @@ def deco_callof_nat(params, optional = []):
 
         return method_wrapped
 
-    return _deco_callof_nat_
+    return _deco_callof_
 
 
 
@@ -210,6 +233,9 @@ class IntConv:
 #     ???
 ###
     def strsign(self, sign: int) -> str:
+        if sign in STR_SIGNS:
+            return sign
+
         if sign == MINUS_INT_SIGN:
             return MINUS_STR_SIGN
 
@@ -220,8 +246,11 @@ class IntConv:
 # prototype::
 #     ???
 ###
-    def intsign(self, strsign: str) -> int:
-        if strsign == MINUS_STR_SIGN:
+    def intsign(self, sign: str) -> int:
+        if sign in STR_SIGNS:
+            return sign
+
+        if sign == MINUS_STR_SIGN:
             return MINUS_INT_SIGN
 
         return PLUS_INT_SIGN

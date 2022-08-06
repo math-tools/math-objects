@@ -14,12 +14,21 @@ MODULE_DIR = addfindsrc(
 
 
 # -------------- #
-# -- LET'S GO -- #
+# -- TO DEBUG -- #
 # -------------- #
 
 from src.convert.integer import *
 
-# base2base = Base2Base()
+myb2b = Base2Base()
+
+
+# -------------- #
+# -- LET'S GO -- #
+# -------------- #
+
+# print(f"{myb2b.bdigitsof('30AF4', 16)  = }")
+
+exit()
 
 # for (x, f, b_1, b_2) in [
 # # SINGLE FUNC.

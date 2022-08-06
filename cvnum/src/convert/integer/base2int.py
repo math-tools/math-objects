@@ -30,135 +30,268 @@ class Base2Int(IntConv):
         self.base2nat = Base2Nat(self.errname)
 
 
-# ###
-# # prototype::
-# #     nb : a integer ¨nb
-# #        @ nb in ZZ
-# #
-# #     ??? :return: the list of textual decimal digits of ``nb`` sorted from
-# #              the biggest weight to the smallest one
-# #            @ return[0] = 1  if v >= 0 ;
-# #              return[0] = -1 if v < 0 ;
-# #              v in return[1:] ==> v in str(0..9)
-# #
-# #
-# #     :see: deco_XXXof_via_NAT
-# ###
-#     @deco_callof_nat(params = [PARAM_TAG_NB])
-#     def numeralsof(self, nb: int) -> List[str]:
-#         ...
+###
+# prototype::
+#     bdigits : :see: integer.nat2base.int2bdigits
+#     base    : :see: integer.nat2base.int2bnb
+#
+#     :return: ????
+###
+    @deco_callof(tocall = DECO_TAG_N2B,
+                 params = [DECO_TAG_BDIGITS, DECO_TAG_BASE])
+    def bdigits2nat(
+        self,
+        bdigits: List[int],
+        base   : int,
+    ) -> int:
+        ...
 
 
-# ###
-# # prototype::
-# #     nb : :see: self.numeralsof
-# #
-# #     :return: ???? the list of decimal digits of ``nb``, the digits sorted from
-# #              the biggest weight to the smallest one
-# #            @ v in return ==> v in 0..9
-# #
-# #
-# #     :see: deco_XXXof_via_NAT
-# ###
-#     @deco_callof_nat(params = [PARAM_TAG_NB])
-#     def digitsof(self, nb: int) -> List[int]:
-#         ...
+# -- EXTRA METHODS "AUTO" - START -- #
+
+# Lines automatically build by the following file.
+#
+#     + ``tools/factory/convert/integer/build_01_all_methods_I2B_B2I_B2B.py``
+
+###
+# prototype::
+#     bdigits : :see: integer.nat2base.int2bdigits
+#     base    : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.fromdigits
+###
+    @deco_callof(tocall = DECO_TAG_B2N,
+                 params = [DECO_TAG_BDIGITS, DECO_TAG_BASE])
+    def bdigits2digits(
+        self,
+        bdigits: List[str],
+        base   : int,
+    ) -> List[int]:
+        ...
 
 
-# ###
-# # prototype::
-# #     ??? numerals : a list of digits sorted from the biggest weight to
-# #              the smallest one
-# #             @ d in digits ==> d in 0..9
-# #
-# #     :return: the decorator gives ????
-# #              the natural value corresponding to the digits
-# #
-# #
-# #     :see: deco_fromXXX_via_NAT
-# ###
-#     @deco_callof_nat(params = [PARAM_TAG_NUMERALS])
-#     def fromnumerals(
-#         self,
-#         numerals: List[str],
-#     ) -> int:
-#         ...
+###
+# prototype::
+#     bdigits : :see: integer.nat2base.int2bdigits
+#     base    : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: self.bdigits2nat
+###
+    @deco_callof(tocall = DECO_TAG_B2N,
+                 params = [DECO_TAG_BDIGITS, DECO_TAG_BASE])
+    def bdigits2nat(
+        self,
+        bdigits: List[int],
+        base   : int,
+    ) -> int:
+        ...
 
 
-# ###
-# # prototype::
-# #     ??? digits : a list of digits sorted from the biggest weight to
-# #              the smallest one
-# #             @ d in digits ==> d in 0..9
-# #
-# #     :return: the decorator gives ????
-# #              the natural value corresponding to the digits
-# #
-# #
-# #     :see: deco_fromXXX_via_NAT
-# ###
-#     @deco_callof_nat(params = [PARAM_TAG_DIGITS])
-#     def fromdigits(
-#         self,
-#         digits: List[int],
-#     ) -> int:
-#         ...
+###
+# prototype::
+#     bdigits : :see: integer.nat2base.int2bdigits
+#     base    : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.fromnumerals
+###
+    @deco_callof(tocall = DECO_TAG_B2N,
+                 params = [DECO_TAG_BDIGITS, DECO_TAG_BASE])
+    def bdigits2numerals(
+        self,
+        bdigits: List[str],
+        base   : int,
+    ) -> List[str]:
+        ...
 
 
-# ###
-# # prototype::
-# #     nb   : :see: self.numeralsof
-# #     base : the base used to write a natural natural
-# #          @ base in 2 .. +inf
-# #     sep  : a text to use to separate numerals only if they use at least
-# #            two characters (that is the case when the base is bigger than 36).
-# #            An empty separator can be used.
-# #
-# #     :return: a string version of ``nb`` when it is converted into the base
-# #              ``base``
-# ###
-#     @deco_callof_nat(params   = [PARAM_TAG_NB, PARAM_TAG_BASE, PARAM_TAG_SEP],
-#                      optional = [PARAM_TAG_SEP])
-#     def int2bnb(
-#         self,
-#         nb  : int,
-#         base: int,
-#         sep : str = ''
-#     ) -> str:
-#         ...
+###
+# prototype::
+#     bnb  : :see: integer.nat2base.int2bnb
+#     base : :see: integer.nat2base.int2bnb
+#     sep  : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.int2bdigits
+###
+    @deco_callof(tocall   = DECO_TAG_B2N,
+                 params   = [DECO_TAG_BNB, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
+    def bdigitsof(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[int]:
+        ...
 
 
-# ###
-# # prototype::
-# #     nb   : :see: self.numeralsof
-# #     base : :see: self.int2bnb
-# #
-# #     :return: ????
-# ###
-#     @deco_callof_nat(params = [PARAM_TAG_NB, PARAM_TAG_BASE])
-#     def int2bnumerals(
-#         self,
-#         nb  : int,
-#         base: int
-#     ) -> str:
-#         ...
+###
+# prototype::
+#     bnb  : :see: integer.nat2base.int2bnb
+#     base : :see: integer.nat2base.int2bnb
+#     sep  : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.fromdigits
+###
+    @deco_callof(tocall   = DECO_TAG_B2N,
+                 params   = [DECO_TAG_BNB, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
+    def bnb2digits(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[int]:
+        ...
 
 
-# ###
-# # prototype::
-# #     nb   : :see: self.numeralsof
-# #     base : :see: self.int2bnb
-# #
-# #     :return: ????
-# ###
-#     @deco_callof_nat(params = [PARAM_TAG_NB, PARAM_TAG_BASE])
-#     def int2bdigits(
-#         self,
-#         nb  : int,
-#         base: int
-#     ) -> str:
-#         ...
+###
+# prototype::
+#     bnb  : :see: integer.nat2base.int2bnb
+#     base : :see: integer.nat2base.int2bnb
+#     sep  : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: self.bdigits2nat
+###
+    @deco_callof(tocall   = DECO_TAG_B2N,
+                 params   = [DECO_TAG_BNB, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
+    def bnb2nat(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[str]:
+        ...
 
 
-# # -- EXTRA METHODS "AUTO" - START -- #
-# # -- EXTRA METHODS "AUTO" - END -- #
+###
+# prototype::
+#     bnb  : :see: integer.nat2base.int2bnb
+#     base : :see: integer.nat2base.int2bnb
+#     sep  : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.fromnumerals
+###
+    @deco_callof(tocall   = DECO_TAG_B2N,
+                 params   = [DECO_TAG_BNB, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
+    def bnb2numerals(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[str]:
+        ...
+
+
+###
+# prototype::
+#     bnumerals : :see: integer.nat2base.int2bnumerals
+#     base      : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.fromdigits
+###
+    @deco_callof(tocall = DECO_TAG_B2N,
+                 params = [DECO_TAG_BNUMERALS, DECO_TAG_BASE])
+    def bnumerals2digits(
+        self,
+        bnumerals: List[str],
+        base     : int,
+    ) -> List[int]:
+        ...
+
+
+###
+# prototype::
+#     bnumerals : :see: integer.nat2base.int2bnumerals
+#     base      : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: self.bdigits2nat
+###
+    @deco_callof(tocall = DECO_TAG_B2N,
+                 params = [DECO_TAG_BNUMERALS, DECO_TAG_BASE])
+    def bnumerals2nat(
+        self,
+        bnumerals: List[str],
+        base     : int,
+    ) -> int:
+        ...
+
+
+###
+# prototype::
+#     bnumerals : :see: integer.nat2base.int2bnumerals
+#     base      : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.fromnumerals
+###
+    @deco_callof(tocall = DECO_TAG_B2N,
+                 params = [DECO_TAG_BNUMERALS, DECO_TAG_BASE])
+    def bnumerals2numerals(
+        self,
+        bnumerals: List[str],
+        base     : int,
+    ) -> List[str]:
+        ...
+
+
+###
+# prototype::
+#     bnb  : :see: integer.nat2base.int2bnb
+#     base : :see: integer.nat2base.int2bnb
+#     sep  : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.int2bnumerals
+###
+    @deco_callof(tocall   = DECO_TAG_B2N,
+                 params   = [DECO_TAG_BNB, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
+    def bnumeralsof(
+        self,
+        bnb : str,
+        base: int,
+        sep : str = '',
+    ) -> List[str]:
+        ...
+
+
+###
+# prototype::
+#     bdigits : :see: integer.nat2base.int2bdigits
+#     base    : :see: integer.nat2base.int2bnb
+#     sep     : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.int2bdigits
+###
+    @deco_callof(tocall   = DECO_TAG_B2N,
+                 params   = [DECO_TAG_BDIGITS, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
+    def frombdigits(
+        self,
+        bdigits: List[str],
+        base   : int,
+        sep    : str = '',
+    ) -> str:
+        ...
+
+
+###
+# prototype::
+#     bnumerals : :see: integer.nat2base.int2bnumerals
+#     base      : :see: integer.nat2base.int2bnb
+#     sep       : :see: integer.nat2base.int2bnb
+#
+#     :return: :see: integer.nat2base.int2bnumerals
+###
+    @deco_callof(tocall   = DECO_TAG_B2N,
+                 params   = [DECO_TAG_BNUMERALS, DECO_TAG_BASE, DECO_TAG_SEP],
+                 optional = [DECO_TAG_SEP])
+    def frombnumerals(
+        self,
+        bnumerals: List[str],
+        base     : int,
+        sep      : str = '',
+    ) -> str:
+        ...
+
+# -- EXTRA METHODS "AUTO" - END -- #
