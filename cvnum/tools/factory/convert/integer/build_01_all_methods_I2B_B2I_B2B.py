@@ -33,8 +33,8 @@ CV_DIR_NAT = SRC_DIR / "convert" / "integer"
 PYFILES = {
     name: CV_DIR_NAT / f"{name}.py"
     for name in [
-        "int2base",
-        "base2int",
+        # "int2base",
+        # "base2int",
         "base2base",
     ]
 }
@@ -83,8 +83,8 @@ MODULE_DIR = addfindsrc(
     project = 'cvnum',
 )
 
-from src.convert.natural import Nat2Base, Base2Nat, Base2Base
-from src.convert.integer import Int2Base, Base2Int, Base2Base as NatBase2Base
+from src.convert.natural import Nat2Base, Base2Nat, Base2Base as NatBase2Base
+from src.convert.integer import Int2Base, Base2Int, Base2Base
 
 
 TAG_INT_CLS = "int_cls"
@@ -153,7 +153,18 @@ SEE_REFS['base2base'] = {
         (s, r)
     )
     for p, (s, r) in SEE_REFS['base2int'].items()
+    if p not in ['base', 'sep']
 }
+
+for p in ['base', 'sep']:
+    s, r = SEE_REFS['base2int'][p]
+
+    for suffix in ['in', 'out']:
+        SEE_REFS['base2base'][f"{p}_{suffix}"] = (
+            (False, f"integer.base2nat.{r}")
+            if s else
+            (s, r)
+        )
 
 
 # ! -- DEBUGGING -- ! #
@@ -170,23 +181,29 @@ for modulename, pyfile in PYFILES.items():
     nat_modulename = replace_int2nat(modulename)
 
     theclasses = CLASSES[modulename]
-    int_cls    = theclasses[TAG_INT_CLS]
-    nat_cls    = theclasses[TAG_NAT_CLS]
-    nat_inst   = nat_cls()
+    intcls     = theclasses[TAG_INT_CLS]
+    natcls     = theclasses[TAG_NAT_CLS]
+    natinst    = natcls()
 
     print(f"   * Module ``{modulename}``")
     print( "       + Building the extra methods.")
 
+# ! -- DEBUGGING -- ! #
+    # print(f"{dir(intcls) = }")
+    # print(f"{dir(natcls) = }")
+# ! -- DEBUGGING -- ! #
+
     easyinfos = {
-        name: easysignature(nat_inst, name)
+        name: easysignature(natinst, name)
         for name in cls_automethods(
-            int_cls,
-            nat_cls,
+            intcls,
+            natcls,
         )
     }
+
 # ! -- DEBUGGING -- ! #
+    # print("\n".join(list(easyinfos.keys())))
     # from pprint import pprint;pprint(easyinfos)
-    # print(easyinfos)
     # exit()
 # ! -- DEBUGGING -- ! #
 

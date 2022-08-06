@@ -35,9 +35,13 @@ DECO_TAG_B2B = 'base2base'
 
 DECO_TAG_NB = 'nb'
 
-DECO_TAG_BNB  = 'bnb'
-DECO_TAG_BASE = 'base'
-DECO_TAG_SEP  = 'sep'
+DECO_TAG_BNB      = 'bnb'
+DECO_TAG_BASE     = 'base'
+DECO_TAG_BASE_IN  = 'base_in'
+DECO_TAG_BASE_OUT = 'base_out'
+DECO_TAG_SEP      = 'sep'
+DECO_TAG_SEP_IN   = 'sep_in'
+DECO_TAG_SEP_OUT  = 'sep_out'
 
 DECO_TAG_NUMERALS = 'numerals'
 DECO_TAG_DIGITS   = 'digits'

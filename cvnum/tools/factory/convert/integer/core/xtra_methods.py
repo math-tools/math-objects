@@ -28,11 +28,18 @@ def replace_nat2int(text):
 
 
 TO_IGNORE = {
-    'Nat2Base': ['numeralize'],
-    'Base2Nat': ['basedigitize'],
+    'Nat2Base' : ['numeralize'],
+    'Base2Nat' : ['basedigitize'],
+    'Base2Base': [],
 }
 
 def cls_automethods(intcls, natcls):
+# ! -- DEBUGGING -- ! #
+    # print('--- cls_automethods ---')
+    # print(f"{intcls.__name__ = }")
+    # print(f"{natcls.__name__ = }")
+# ! -- DEBUGGING -- ! #
+
     dircls = {
         n
         for n in dir(natcls)

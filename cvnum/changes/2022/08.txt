@@ -1,6 +1,50 @@
 // ---------- //
 
 ==
+06
+==
+
+-----
+:new:
+-----
+
+[[:api:]]
+The new implementation of the package ``convert.integer`` has been done following a ¨poo style (it uses the module ``convert.natural``, and the maintenance is easy thanks to the use of one "killing" decorator).
+
+
+--------
+:fordev:
+--------
+
+[[:doc:]]
+???????
+All prototypes are now up to date.
+
+check les :see: de convert !!!
+    natural
+        ...2base
+        base2...
+        base2base
+
+    integer
+        ...2base
+        base2...
+        base2base
+
+
+[[:tests:]]
+??????
+New unit tests: ``convert.integer`` is "fully" tested.
+
+
+
+
+
+
+
+// ---------- //
+
+==
 04
 ==
 

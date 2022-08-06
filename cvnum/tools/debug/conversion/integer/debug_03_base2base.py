@@ -26,7 +26,8 @@ myb2b = Base2Base()
 # -- LET'S GO -- #
 # -------------- #
 
-# print(f"{myb2b.bdigitsof('30AF4', 16)  = }")
+print(f"{myb2b.bnb2bnb('-30AF4', 16, 10)  = }")
+print(f"{myb2b.bnb2bnb('-199412', 10, 16)  = }")
 
 exit()
 
