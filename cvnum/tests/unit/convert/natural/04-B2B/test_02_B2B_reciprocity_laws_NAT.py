@@ -4,11 +4,8 @@
 # -- SEVERAL IMPORTS -- #
 # --------------------- #
 
-from functools import reduce
-
 from   hypothesis            import given
 import hypothesis.strategies as st
-# import pytest
 
 from cbdevtools import *
 
@@ -28,9 +25,7 @@ for upfolder in [
     )
 
 from src.convert.natural.base2base import Base2Base
-from src.convert.natural.base2nat  import Base2Nat
 from src.convert.natural.nat2base  import Nat2Base
-# from unit.core       import build_removable
 
 from natcore.constants import *
 

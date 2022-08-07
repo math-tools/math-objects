@@ -1,0 +1,59 @@
+﻿
+    date = 2022-08-07
+
+
+=========================================
+Versions ``str`` et ``int`` d'un "entier"
+=========================================
+
+La classe ``core.var2int.Var2Int`` propose une méthode ``int_n_strify`` permettant d'obtenir les versions entières et textuelles d'une variable ``int`` (nous verrons après la possibilité de tenter de "convertir" un objet en entier).
+
+
+Commençons par voir le comportement par défaut est strict.
+
+python-term::
+    >>> from core.var2int import Var2Int
+    >>> myv2i = Var2Int()
+    >>> myv2i.int_n_strify(123)
+    (123, '123')
+    >>> myv2i.int_n_strify("-123")
+    [...]
+    AssertionError: the number ``str(varnb) = '123'`` is not an integer.
+    [...]
+
+
+Pour tenter des conversions, il faut utiliser l'attribut ``tryconvert`` comme ci-après.
+
+...python-term::
+    >>> myv2i.tryconvert = True
+    >>> myv2i.int_n_strify("-123")
+    (-123, '-123')
+
+
+En fait, lorsque ``tryconvert = True``, dès qu'un ``unbobjet`` tel que ``str(unbobjet)`` est une écriture valide d'un entier relatif, la méthode travaillera avec cette représentation.
+Par exemple, le code suivant affichera ``(123, '123')``.
+
+python::
+    from core.var2int import Var2Int
+
+    myv2i = Var2Int(tryconvert = True)
+
+    # Une drôle de classe...
+    class Int_123:
+        def __init__(self, x):
+            self.x = x
+
+        def __str__(self):
+            return str(123)
+
+    # Un nombre de type ``Int_123``.
+    print(myv2i.int_n_strify(Int_123("inutile")))
+
+
+En plus de ``tryconvert``, la classe ``Var2Int`` possède les attributs suivants qui sont eux aussi paramétrables à l'initialisation de la classe.
+
+    1) ``mini`` et ``maxi`` servent à définir un minimum et un maximum pour les valeurs entières acceptées.
+
+    1) ``toremove`` permet d'indique une liste de caractères à ignorer dans la version textuelle de l'entier à traiter. Ce parmètre n'est utile que si ``tryconvert = True``.
+
+    1) ``errname`` est utilisé dans les messages d'erreur comme term::``AssertionError: the number ``str(varnb) = '123'`` is not an integer.`` où ``errname = "number"``.

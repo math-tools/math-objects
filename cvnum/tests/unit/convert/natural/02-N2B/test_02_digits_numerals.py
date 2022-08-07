@@ -5,7 +5,6 @@
 # --------------------- #
 
 from functools import reduce
-from random    import choice
 
 from   hypothesis            import given
 import hypothesis.strategies as st
@@ -29,7 +28,6 @@ for upfolder in [
     )
 
 from src.convert.natural.nat2base import Nat2Base
-# from unit.core       import build_removable
 
 from natcore.constants import *
 

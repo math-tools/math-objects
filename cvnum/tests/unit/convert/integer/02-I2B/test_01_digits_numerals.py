@@ -4,11 +4,8 @@
 # -- SEVERAL IMPORTS -- #
 # --------------------- #
 
-from functools import reduce
-
 from   hypothesis            import given
 import hypothesis.strategies as st
-import pytest
 
 from cbdevtools import *
 
@@ -29,23 +26,8 @@ for upfolder in [
 
 from src.convert.integer import Int2Base
 from src.convert.natural import Nat2Base
-# from unit.core       import build_removable
 
 from intcore.constants import *
-
-
-# -------------------------------------------------- #
-# -- DIGITS / NUMERALS --> BASE DIGITS / NUMERALS -- #
-# -------------------------------------------------- #
-
-# TODO
-
-
-# --------------------------------------- #
-# -- DIGITS / NUMERALS --> BASE NUMBER -- #
-# --------------------------------------- #
-
-# TODO
 
 
 # -------------------------- #
@@ -94,20 +76,25 @@ def test_int2base_XXXof_just_sign(nb, kind):
 # -- FROM DIGITS / NUMERALS -- #
 # ---------------------------- #
 
-# @given(st.integers(),
-#        st.sampled_from(KINDS_ALL))
-# def test_int2base_fromXXX(nb, kind):
-#     chgethis = KINDS_CHGETHIS[kind]
+@given(st.integers(),
+       st.sampled_from(KINDS_ALL))
+def test_int2base_fromXXX(nb, kind):
+    chgethis = KINDS_CHGETHIS[kind]
 
-#     fromXXX = f"from{kind}"
-#     datas   = [chgethis(c) for c in str(nb)]
-#     nbfound = Nat2Base().__getattribute__(fromXXX)(datas)
+    fromXXX = f"from{kind}"
 
-#     assert nbfound == nb, \
-#            (
-#              "\n"
-#             f"{nb      = }"
-#              "\n"
-#              f"{fromXXX = }"
-#              "\n"
-#            )
+    sign_wanted = '-' if nb < 0 else '+'
+    sign_wanted = KINDS_SIGNS[kind][sign_wanted]
+
+    datas   = [sign_wanted] + [chgethis(c) for c in str(abs(nb))]
+
+    nbfound = Int2Base().__getattribute__(fromXXX)(datas)
+
+    assert nbfound == nb, \
+           (
+             "\n"
+            f"{nb      = }"
+             "\n"
+             f"{fromXXX = }"
+             "\n"
+           )

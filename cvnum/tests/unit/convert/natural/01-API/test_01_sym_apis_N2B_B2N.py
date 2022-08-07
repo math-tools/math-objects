@@ -43,7 +43,7 @@ def shortdircls(cls, toignore):
     return dircls_cleaned
 
 
-def test_nat2base_sym_apis_N2B_B2N():
+def test_sym_apis_nat2base_vs_base2nat():
     methods_ignored = {
         Nat2Base: [
             'numeralize',
@@ -69,9 +69,9 @@ def test_nat2base_sym_apis_N2B_B2N():
            (
              "\n"
             f"Non-empty intersection"
-             "\n"
+             "\n\n"
             f"{api[Nat2Base] = }"
-             "\n"
+             "\n\n"
             f"{api[Base2Nat] = }"
              "\n"
            )
@@ -169,9 +169,9 @@ def test_nat2base_sym_apis_N2B_B2N():
            ),(
              "\n"
              "Something is remaining:"
-             "\n"
+             "\n\n"
             f"{api[Nat2Base] = }"
-             "\n"
+             "\n\n"
             f"{api[Nat2Base] = }"
              "\n"
            )

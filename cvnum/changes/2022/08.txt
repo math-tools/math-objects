@@ -1,6 +1,40 @@
 // ---------- //
 
 ==
+07
+==
+
+-----
+:new:
+-----
+
+[[:doc:]]
+One ¨doc has been written to explain how to use of the sub package ``core``.
+
+
+--------
+:update:
+--------
+
+[[:doc:]]
+Here are the changes made.
+
+    1) Detailed explanations about the ¨api of the new sub package ``convert``.
+
+    1) Return of the explanations about the possibility to use any legal "integer-string" variable with ``textify.integer.IntName``.
+
+
+--------
+:fordev:
+--------
+
+[[:tests:]]
+New unit tests: ``convert.integer`` is tested but the coverage score is not good (management of the signs, and symetry with the public ¨api of ``convert.natural``).
+
+
+// ---------- //
+
+==
 06
 ==
 
@@ -16,12 +50,12 @@ The new implementation of the package ``convert.integer`` has been done followin
 :fordev:
 --------
 
-[[:api:]]
-One builder produces most of the codes of the classes ``Int2Base``, ``Base2Int`` and ``integer.Base2Base``.
-
-
 [[:doc:]]
 All prototypes are now up to date.
+
+
+[[:api:]]
+One builder produces most of the codes of the classes ``Int2Base``, ``Base2Int`` and ``integer.Base2Base``.
 
 
 // ---------- //

@@ -17,7 +17,7 @@ MODULE_DIR = addfindsrc(
 # -- TO DEBUG -- #
 # -------------- #
 
-from src.convert.core.var2int import *
+from src.core.var2int import *
 
 int_n_strify = Var2Int(
     tryconvert = True,
@@ -40,6 +40,7 @@ class fakeINT:
 for n in [
     123,
     -123,
+    "123",
     "60   000",
     "111_222_333 444_555_666",
     "111.222.333 444.555.666",

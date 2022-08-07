@@ -1,0 +1,48 @@
+﻿this::
+    date = 2022-08-07
+
+
+========================================
+Changement entre des bases "quelconques"
+========================================
+
+La classe ``Base2Base`` permet de faciliter les transformations entre deux bases. Voici un exemple où est utilisé `164 = [A4]_16 = [10100100]_2`
+((
+    La deuxième égalité s'obtient rapidement via `[A]_16 = 10 = [1010]_2` et `[4]_16 = 4 = [0100]_2`.
+)).
+
+python-term::
+    >>> from cvnum.convert.natural.base2base import Base2Base
+    >>> myb2b = Base2Base()
+    >>> print(myb2b.bnb2bdigits('A4', base_in = 16, base_out = 2))
+    [1, 0, 1, 0, 0, 1, 0, 0]
+    >>> print(myb2b.bnb2bnumerals('A4', base_in = 16, base_out = 2))
+    ['1', '0', '1', '0', '0', '1', '0', '0']
+    >>> print(myb2b.bnb2bnb('A4', base_in = 16, base_out = 2))
+    '10100100'
+
+
+On prendra garde qu'avec une base d'entrée, ou de sortie égale à `10`, on travaille et on obtient toujours des chaînes de caractères.
+
+...python-term::
+    >>> print(myb2b.bnb2bdigits('5', base_in = 10, base_out = 2))
+    [1, 0, 1]
+    >>> print(myb2b.bdigits2bnb([1, 0, 1], base_in = 16, base_out = 10))
+    '5'
+
+
+Pour finir, voici toutes les méthodes de conversion proposées par la classe ``Base2Base``.
+
+// -- ALL METHODS "AUTO" - START -- //
+
+    1) ``bdigits2bdigits``
+    1) ``bdigits2bnb``
+    1) ``bdigits2bnumerals``
+    1) ``bnb2bdigits``
+    1) ``bnb2bnb``
+    1) ``bnb2bnumerals``
+    1) ``bnumerals2bdigits``
+    1) ``bnumerals2bnb``
+    1) ``bnumerals2bnumerals``
+
+// -- ALL METHODS "AUTO" - END -- //

@@ -52,7 +52,7 @@ class Base2Int(IntConv):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.base2nat = Base2int(self.errname)
+        self.base2nat = Base2Nat(self.errname)
 
 
 ###
@@ -62,7 +62,7 @@ class Base2Int(IntConv):
 #
 #     :return: the integer obtained by taking care of the arguments
 ###
-    @deco_callof(tocall = DECO_TAG_N2B,
+    @deco_callof(tocall = DECO_TAG_B2N,
                  params = [DECO_TAG_BDIGITS, DECO_TAG_BASE])
     def bdigits2int(
         self,

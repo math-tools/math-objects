@@ -1,0 +1,48 @@
+﻿this::
+    date = 2022-08-07
+
+
+=================================
+Changement de bases "quelconques"
+=================================
+
+Voici quelques exemples illustrant l'usage de signes.
+
+python-term::
+    >>> from cvnum.convert.integer.base2base import Base2Base
+    >>> myb2b = Base2Base()
+    >>> print(myb2b.bnb2bdigits('A4', base_in = 16, base_out = 2))
+    [1, 1, 0, 1, 0, 0, 1, 0, 0]
+    >>> print(myb2b.bnb2bdigits('+A4', base_in = 16, base_out = 2))
+    [1, 1, 0, 1, 0, 0, 1, 0, 0]
+    >>> print(myb2b.bnb2bdigits('-A4', base_in = 16, base_out = 2))
+    [-1, 1, 0, 1, 0, 0, 1, 0, 0]
+    >>> print(myb2b.bnb2bnumerals('A4', base_in = 16, base_out = 2))
+    ['', '1', '0', '1', '0', '0', '1', '0', '0']
+    >>> print(myb2b.bnb2bnumerals('+A4', base_in = 16, base_out = 2))
+    ['', '1', '0', '1', '0', '0', '1', '0', '0']
+    >>> print(myb2b.bnb2bnumerals('-A4', base_in = 16, base_out = 2))
+    ['-', '1', '0', '1', '0', '0', '1', '0', '0']
+    >>> print(myb2b.bnb2bnb('A4', base_in = 16, base_out = 2))
+    '10100100'
+    >>> print(myb2b.bnb2bnb('+A4', base_in = 16, base_out = 2))
+    '10100100'
+    >>> print(myb2b.bnb2bnb('-A4', base_in = 16, base_out = 2))
+    '-10100100'
+
+
+Pour finir, voici toutes les méthodes de conversion proposées par la classe ``Base2Base``.
+
+// -- ALL METHODS "AUTO" - START -- //
+
+    1) ``bdigits2bdigits``
+    1) ``bdigits2bnb``
+    1) ``bdigits2bnumerals``
+    1) ``bnb2bdigits``
+    1) ``bnb2bnb``
+    1) ``bnb2bnumerals``
+    1) ``bnumerals2bdigits``
+    1) ``bnumerals2bnb``
+    1) ``bnumerals2bnumerals``
+
+// -- ALL METHODS "AUTO" - END -- //

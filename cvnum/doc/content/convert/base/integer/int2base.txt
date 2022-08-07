@@ -1,0 +1,71 @@
+﻿this::
+    date = 2022-08-07
+
+
+=========================================
+De la base décimale à une base quelconque
+=========================================
+
+Voici quelques exemples montrant comment travailler avec des signes (la seule nouveauté vis à vis de la sous-librairie ``convert.natural``).
+
+python-term::
+    >>> from cvnum.convert.integer.int2base import Int2Base
+    >>> myi2b = Int2Base()
+    >>> n = 4 + 15*16 + 10*16**2 + 3*16**4
+    >>> b = 16
+    >>> print(myi2b.int2bdigits(n, b))
+    [1, 3, 0, 10, 15, 4]
+    >>> print(myi2b.int2bdigits(-n, b))
+    [-1, 3, 0, 10, 15, 4]
+    >>> print(myi2b.int2bnumerals(n, b))
+    ['', '3', '0', 'A', 'F', '4']
+    >>> print(myi2b.int2bnumerals(-n, b))
+    ['-', '3', '0', 'A', 'F', '4']
+    >>> print(myi2b.int2bnb(n, b))
+    '30AF4'
+    >>> print(myi2b.int2bnb(-n, b))
+    '-30AF4'
+
+
+Voici une autre série d'exemples.
+
+..python-term::
+    >>> n = 13
+    >>> print(myi2b.digitsof(n))
+    [1, 1, 3]
+    >>> print(myi2b.digitsof(-n))
+    [-1, 1, 3]
+    >>> print(myi2b.numeralsof(n))
+    ['', '1', '3']
+    >>> print(myi2b.numeralsof(-n))
+    ['-', '1', '3']
+    >>> b = 2
+    >>> print(myi2b.digits2bnb([1, 1, 3], b))
+    '1011'
+    >>> print(myi2b.digits2bnb([-1, 1, 3], b))
+    '-1011'
+    >>> print(myi2b.numerals2bnb(['', '1', '3'], b))
+    '1011'
+    >>> print(myi2b.numerals2bnb(['-', '1', '3'], b))
+    '-1011'
+
+
+Pour finir, voici toutes les méthodes de conversion proposées par la classe ``Int2Base``.
+
+// -- ALL METHODS "AUTO" - START -- //
+
+    1) ``digits2bdigits``
+    1) ``digits2bnb``
+    1) ``digits2bnumerals``
+    1) ``digitsof``
+    1) ``fromdigits``
+    1) ``fromnumerals``
+    1) ``int2bdigits``
+    1) ``int2bnb``
+    1) ``int2bnumerals``
+    1) ``numerals2bdigits``
+    1) ``numerals2bnb``
+    1) ``numerals2bnumerals``
+    1) ``numeralsof``
+
+// -- ALL METHODS "AUTO" - END -- //

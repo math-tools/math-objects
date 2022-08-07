@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-07-18
+    date = 2022-08-07
 
 
 ===================
@@ -28,7 +28,7 @@ python::
     print(intname.nameof("123"))
 
 
-Vous pouvez juste changer dynamiquement la langue comme dans le code suivant.
+Vous pouvez aussi changer dynamiquement la langue comme dans le code suivant.
 
 python::
     from cvnum import textify

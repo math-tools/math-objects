@@ -1,0 +1,23 @@
+﻿
+    date = 2022-08-07
+
+
+=========================================
+Un entier, son signe et sa valeur absolue
+=========================================
+
+Comparée à ``int_n_strify``, la méthode ``int_n_strsignabs`` de la classe ``core.var2int.Var2Int`` éclate la version textuelle en un signe, évetuellemnt vide, suivi du reste des décimales
+((
+    C'est aussi la version textuelle de la valeur absolue de la variable traitée.
+)).
+Voici des cas d'utilisation.
+
+python-term::
+    >>> from core.var2int import Var2Int
+    >>> myv2i = Var2Int(tryconvert = True)
+    >>> myv2i.int_n_strsignabs(123)
+    (123, '', '123')
+    >>> myv2i.int_n_strsignabs("+123")
+    (123, '+', '123')
+    >>> myv2i.int_n_strsignabs("-123")
+    (123, '-', '123')

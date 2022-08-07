@@ -17,7 +17,7 @@ MODULE_DIR = addfindsrc(
 # -- TO DEBUG -- #
 # -------------- #
 
-from src.convert.core.var2int import *
+from src.core.var2int import *
 
 int_n_strsignabs = Var2Int(
     tryconvert = True,

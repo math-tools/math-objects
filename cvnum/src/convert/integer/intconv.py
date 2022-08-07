@@ -319,7 +319,7 @@ class IntConv:
 #     :return: the string version of the sign
 #            @ if   sign in ["-", -1]
 #              then return = "-"
-#              elif return = ""
+#              else return = ""
 #
 #     :see: self._XXXsign
 ###
@@ -341,7 +341,7 @@ class IntConv:
 #     :return: the integer version of the sign
 #            @ if   sign in ["-", -1]
 #              then return = -1
-#              elif return = 1
+#              else return = 1
 #
 #     :see: _XXXsign
 ###
@@ -371,7 +371,7 @@ class IntConv:
 #     :return: the wanted version of the sign indicated via ``sign``
 #            @ if   sign in [minus_allowed, minus_wanted]
 #              then return = minus_wanted
-#              elif return = plus_wanted
+#              else return = plus_wanted
 #
 #
 # note::

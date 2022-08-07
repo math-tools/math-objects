@@ -1,0 +1,10 @@
+﻿abrev::
+    content = /core
+
+
+==========================
+Une boîte à outils commune
+==========================
+
+content::
+    ¨content/var2int.txt

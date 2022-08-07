@@ -83,7 +83,8 @@ class Var2Int:
         else:
             assert self.tryconvert, \
                    (
-                    f"The {self.errname} ``{str(varnb) = }`` is not an integer. "
+                    f"the {self.errname} ``{str(varnb) = }`` is not an integer."
+                     "\n"
                     f"Info: try to convert not allowed, and ``{varnb = }``."
                    )
 
@@ -98,16 +99,17 @@ class Var2Int:
 
             except Exception:
                 raise ValueError(
-                    f"The {self.errname} ``{str(varnb) = }`` is not an integer. "
+                    f"the {self.errname} ``{str(varnb) = }`` is not an integer."
+                     "\n"
                     f"Infos: ``{varnb = }`` and ``{self.toremove = }``."
                 )
 
 # We have an integer. Is it in the good range?
         assert intnb >= self.mini, \
-               f"The {self.errname} ``{varnb}`` is too small ({self.mini = })."
+               f"the {self.errname} ``{varnb}`` is too small ({self.mini = })."
 
         assert intnb <= self.maxi, \
-               f"The {self.errname} ``{varnb}`` is too big ({self.maxi = })."
+               f"the {self.errname} ``{varnb}`` is too big ({self.maxi = })."
 
 # Thanks for using this method safely.
         return intnb, strnb

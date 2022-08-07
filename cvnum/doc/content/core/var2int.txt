@@ -1,0 +1,11 @@
+﻿abrev::
+    content = /var2int
+
+
+==============================================
+Variables "convertissables" en entiers ¨python
+==============================================
+
+content::
+    ¨content/int_n_strify.txt
+    ¨content/int_n_strsignabs.txt

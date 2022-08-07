@@ -1,0 +1,87 @@
+﻿this::
+    date = 2022-08-07
+
+
+========================================
+D'une base quelconque à la base décimale
+========================================
+
+On peut inverser le travail fait par les fonctions ``nat2bdigits``, ``nat2bnumerals`` et ``nat2bnb``.
+Ceci se fait simplement comme suit où nous utilisons `199412 = 4 + 15*16 + 10*16**2 + 3*16**4 = [30AF4]_16`.
+
+python-term::
+    >>> from cvnum.convert.natural.base2nat import Base2Nat
+    >>> myb2n = Base2Nat()
+    >>> b = 16
+    >>> print(myb2n.bnb2nat('30AF4', b))
+    199412
+    >>> print(myb2n.bnumerals2nat(['3', '0', 'A', 'F', '4'], b))
+    199412
+    >>> print(myb2n.bdigits2nat([3, 0, 10, 15, 4], b))
+    199412
+
+
+Ceci fonctionne aussi sans souci avec des bases `b > 36`. Ci-après, nous avons `439 = 10*40 + 39 = [0A 13]_40` en se souvenant que `39 = 36 + 3 = [13]_36`.
+Noter dans le dernier cas la nécessité d'indiquer le séparateur utilisé.
+
+...python-term::
+    >>> b = 40
+    >>> print(myb2n.bdigits2nat([10, 39], b))
+    439
+    >>> print(myb2n.bnumerals2nat(['0A', '13'], b))
+    439
+    >>> print(myb2n.bnb2nat('0A.13', b))
+    439
+    >>> print(myb2n.bnb2nat('0A13', b))
+    439
+    >>> print(myb2n.bnb2nat('0A.13', b, sep = "."))
+    439
+
+
+warning::
+    Ne pas oublier de faux zéros inutiles à gauche. Par exemple, le code suivant renvoie une erreur comme attendue car `[0A]_40` indique un chiffre, ¨cad un symbole, écrit obligatoirement avec deux caractères.
+
+    ...python-term::
+        >>> print(myb2n.bnb2nat("A.13", 40, sep = "."))
+        ...
+        ValueError: invalid numeral << A >>.
+        ...
+
+
+Voici des cas d'utilisationde chiffres, ou de decimales où `13 = 8 + 2 + 1 = [1011]_2`.
+
+...python-term::
+    >>> b = 2
+    >>> bnb = "1.0.1.1"
+    >>> print(myn2b.bdigitsof(bnb, 2, sep = '.'))
+    [1, 0, 1, 1]
+    >>> bnb = "1011"
+    >>> print(myn2b.bdigitsof(bnb, 2))
+    [1, 0, 1, 1]
+    >>> print(myn2b.bnumeralsof(bnb, 2))
+    ['1', '0', '1', '1']
+    >>> print(myn2b.bdigits2nat([1, 0, 1, 1], b))
+    13
+    >>> print(myn2b.bnumerlas2nat(['1', '0', '1', '1'], b))
+    13
+
+
+Pour finir, voici toutes les méthodes de conversion proposées par la classe ``Base2Nat``.
+
+// -- ALL METHODS "AUTO" - START -- //
+
+    1) ``bdigits2digits``
+    1) ``bdigits2int``
+    1) ``bdigits2numerals``
+    1) ``bdigitsof``
+    1) ``bnb2digits``
+    1) ``bnb2int``
+    1) ``bnb2numerals``
+    1) ``bnumerals2digits``
+    1) ``bnumerals2int``
+    1) ``bnumerals2numerals``
+    1) ``bnumeralsof``
+    1) ``frombdigits``
+    1) ``frombnumerals``
+
+// -- ALL METHODS "AUTO" - END -- //

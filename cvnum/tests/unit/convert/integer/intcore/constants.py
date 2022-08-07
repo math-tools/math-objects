@@ -28,4 +28,10 @@ KINDS_SIGNS = {
     },
 }
 
-KINDS_ALL = list(KINDS_SIGNS)
+
+KINDS_CHGETHIS = {
+    "digits"  : int,
+    "numerals": str,
+}
+
+KINDS_ALL = list(KINDS_CHGETHIS)
