@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from json import dumps
 import re
 
 from mistool.os_use import PPath
@@ -17,7 +18,7 @@ print("\033c", end="")
 THIS_DIR = PPath(__file__).parent
 
 CHGES_DIR    = THIS_DIR / "changes"
-VERSION_FILE = THIS_DIR / "VERSION.txt"
+VERSION_FILE = THIS_DIR / "VERSION.json"
 
 
 # ----------- #
@@ -27,6 +28,9 @@ VERSION_FILE = THIS_DIR / "VERSION.txt"
 PATTERN_TITLE = re.compile("\n==\n(\d+.*)\n==\n")
 
 MEANING = ['major', 'minor', 'patch', 'extra']
+
+LEGAL_EXTRA = ['alpha', 'beta']
+
 
 def easyversion(version, infos):
     version = version.strip()
@@ -39,13 +43,24 @@ def easyversion(version, infos):
              '\n' + infos
            )
 
-    about = {
-        'full': version
-    }
+    about = {'nb': version}
+
+    patch_extra = parts[2]
+    patch_extra = patch_extra.split('-')
+
+    if len(patch_extra) == 1:
+        patch_extra.append('')
+
+    parts = parts[:2] + patch_extra
 
     for i, p in enumerate(parts):
-        if i == 4:
-            ...
+        if i == 3:
+            assert p and p in LEGAL_EXTRA, \
+                   (
+                    f'invalid extra: {p}.'
+                    '\n' + infos +
+                    '\n' + f"{LEGAL_EXTRA = }"
+                   )
 
         else:
             assert p.isdigit(), \
@@ -145,6 +160,33 @@ for path in chge_files:
 
 
 # ! -- DEBUGGING -- ! #
-from pprint import pprint
-pprint(versions_found)
+# from pprint import pprint
+# pprint(versions_found)
+# exit()
 # ! -- DEBUGGING -- ! #
+
+
+# --------------------- #
+# -- FIND VERSION NB -- #
+# --------------------- #
+
+print(f"   * Update of the file ``VERSION.json``.")
+
+if not versions_found:
+    about_version = {}
+
+else:
+    for date, infos in versions_found.items():
+        about_version = infos
+
+        about_version['date'] = date
+
+        break
+
+content = dumps(about_version)
+
+with VERSION_FILE.open(
+    encoding = "utf-8",
+    mode     = "w",
+) as f:
+    f.write(content)

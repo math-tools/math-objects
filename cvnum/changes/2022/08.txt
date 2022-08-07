@@ -1,7 +1,7 @@
 // ---------- //
 
 ==
-07 (0.0.4)
+07
 ==
 
 -----
@@ -33,8 +33,7 @@ New unit tests: ``convert.integer`` is tested but the coverage score is not good
 
 
 [[:flow:]]
-??????
-Version ¨nb: a dedicated file ``VERSION.txt`` just contains the ¨nb of the last version (the content is automatically build by analysing the change log). This file can be easily used by external tools.
+Version ¨nb: a dedicated file ``VERSION.json`` contains a dictionary with ¨infos about the ¨nb of the last version (the content is automatically build by analysing the change log). This file can be easily used by external tools.
 
 
 // ---------- //
