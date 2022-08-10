@@ -3,6 +3,8 @@
 from json import dumps
 import re
 
+from semantic_version import Version
+
 from mistool.os_use import PPath
 
 # ! -- DEBUGGING -- ! #
@@ -27,61 +29,15 @@ VERSION_FILE = THIS_DIR / "VERSION.json"
 
 PATTERN_TITLE = re.compile("\n==\n(\d+.*)\n==\n")
 
-MEANING = ['major', 'minor', 'patch', 'extra']
-
-LEGAL_EXTRA = ['alpha', 'beta']
-
-
-def easyversion(version, infos):
-    version = version.strip()
-    parts   = version.split('.')
-
-    assert len(parts) == 3, \
-           (
-            f'invalid version number ``{version}``: '
-             '3 dots must be used.'
-             '\n' + infos
-           )
-
-    about = {'nb': version}
-
-    patch_extra = parts[2]
-    patch_extra = patch_extra.split('-')
-
-    if len(patch_extra) == 1:
-        patch_extra.append('')
-
-    parts = parts[:2] + patch_extra
-
-    for i, p in enumerate(parts):
-        if i == 3:
-            assert p and p in LEGAL_EXTRA, \
-                   (
-                    f'invalid extra: {p}.'
-                    '\n' + infos +
-                    '\n' + f"{LEGAL_EXTRA = }"
-                   )
-
-        else:
-            assert p.isdigit(), \
-                   (
-                    f'invalid {MEANING[i]} number: {p}.'
-                    '\n' + infos
-                   )
-
-        about[MEANING[i]] = p
-
-    if not MEANING[-1] in about:
-        about[MEANING[-1]] = ''
-
-    return about
+MEANING_VERSION_PARTS = ['major', 'minor', 'patch', 'prerelease']
+MEANING_DATE          = ['year', 'month', 'date']
 
 
-# --------------------- #
-# -- FIND VERSION NB -- #
-# --------------------- #
+# ---------------------- #
+# -- CHANGE LOG FILES -- #
+# ---------------------- #
 
-print(f"   * Looking for the version nb. in the change log.")
+print(f"   * Looking for the version NB. in the change log.")
 
 versions_found = {}
 
@@ -139,14 +95,10 @@ for path in chge_files:
 
         version = version[0]
         version = version[:-1].strip()
-
-        aboutversion = easyversion(
-            version = version,
-            infos   = infos
-        )
+        version = Version(version)
 
         day  = day.strip()
-        date = f"{year}-{month}-{day}"
+        date = (year, month, day)
 
         assert date not in versions_found, \
                (
@@ -156,7 +108,12 @@ for path in chge_files:
                 f'changes/{year}/{month}.txt'
                )
 
-        versions_found[date] = aboutversion
+        versions_found[date] = {
+            m: version.__getattribute__(m)
+            for m in MEANING_VERSION_PARTS
+        }
+
+        versions_found[date]['full'] = str(version)
 
 
 # ! -- DEBUGGING -- ! #
@@ -167,7 +124,7 @@ for path in chge_files:
 
 
 # --------------------- #
-# -- FIND VERSION NB -- #
+# -- LAST VERSION NB -- #
 # --------------------- #
 
 print(f"   * Update of the file ``VERSION.json``.")
@@ -179,7 +136,11 @@ else:
     for date, infos in versions_found.items():
         about_version = infos
 
-        about_version['date'] = date
+        about_version['date'] = {
+            m: date[i]
+            for i, m in enumerate(MEANING_DATE)
+        }
+
 
         break
 
@@ -190,3 +151,14 @@ with VERSION_FILE.open(
     mode     = "w",
 ) as f:
     f.write(content)
+
+
+if about_version:
+    what = "last"
+    xtra = f": {about_version['full']}"
+
+else:
+    what = "no"
+    xtra = ''
+
+print(f"   * {what.title()} version NB. found{xtra}.")

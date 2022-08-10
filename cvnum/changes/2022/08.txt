@@ -1,6 +1,34 @@
 // ---------- //
 
 ==
+10
+==
+
+--------
+:fordev:
+--------
+
+[[:flow:]]
+Version ¨nb: one script updates the version number for the path::``README.md`` file, and also the ``TOML`` file used by ¨poetry (this will be integrated in ¨cbdevtools).
+
+
+// ---------- //
+
+==
+09
+==
+
+--------
+:fordev:
+--------
+
+[[:facto:]]
+Version ¨nb: use of the package ¨semanticversion to parse version numbers(this will be integrated in ¨tnschges).
+
+
+// ---------- //
+
+==
 07
 ==
 
