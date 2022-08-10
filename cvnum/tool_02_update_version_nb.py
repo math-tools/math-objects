@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from hashlib import new
 from json import load
 
 from mistool.os_use import PPath
@@ -21,6 +20,7 @@ VERSION_FILE = THIS_DIR / "VERSION.json"
 
 README_FILE = THIS_DIR / "readme" / "last.md"
 POETRY_FILE = THIS_DIR / "pyproject.toml"
+INIT_FILE   = THIS_DIR / "src" / "__init__.py"
 
 
 # ---------------------- #
@@ -96,45 +96,57 @@ with README_FILE.open(
     f.write(content)
 
 
-# ------------------- #
-# -- UPDATE POETRY TOML -- #
-# ------------------- #
+# ----------------------------- #
+# -- UPDATE POETRY, SRC INIT -- #
+# ----------------------------- #
 
-print(f"   * Update of the POETRY TOML file.")
-
-
-with POETRY_FILE.open(
-    encoding = "utf-8",
-    mode     = "r",
-) as f:
-    content = f.read()
-
-if version_nb_found:
-    new_content = []
-
-    for line in content.split('\n'):
-        for pref in ['', '#']:
-            if line.startswith(f'{pref}version'):
-                if pref:
-                    line = line[1:]
-
-                version_txt, _, version_nb = line.partition('=')
-
-                line = f"{version_txt}= {version_full}"
-
-        new_content.append(line)
-
-    new_content = '\n'.join(new_content)
-
-else:
-    new_content = content.replace(
-        '\nversion',
-        '\n#version'
-    )
+for param, info, path in [
+    (
+        'version',
+        "Update of the POETRY TOML file.",
+        POETRY_FILE
+    ),
+    (
+        '__version__',
+        "Update of the __init__.py in the source folder.",
+        INIT_FILE
+    ),
+]:
+    print(f"   * {info}.")
 
 
-with POETRY_FILE.open(
-    encoding = "utf-8",
-    mode     = "w",
-) as f:
-    f.write(new_content)
+    with path.open(
+        encoding = "utf-8",
+        mode     = "r",
+    ) as f:
+        content = f.read()
+
+    if version_nb_found:
+        new_content = []
+
+        for line in content.split('\n'):
+            for pref in ['', '#']:
+                if line.startswith(f'{pref}{param}'):
+                    if pref:
+                        line = line[1:]
+
+                    version_txt, _, version_nb = line.partition('=')
+
+                    line = f'{version_txt}= "{version_full}"'
+
+            new_content.append(line)
+
+        new_content = '\n'.join(new_content)
+
+    else:
+        new_content = content.replace(
+            f'\n{param}',
+            f'\n#{param}'
+        )
+
+
+    with path.open(
+        encoding = "utf-8",
+        mode     = "w",
+    ) as f:
+        f.write(new_content)

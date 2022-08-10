@@ -1,8 +1,16 @@
 // ---------- //
 
 ==
-10
+10 (0.0.0)
 ==
+
+-----
+:new:
+-----
+
+[[:flow:]]
+The project is now on ¨pypi (the tool ¨src2prod is used to acheive easily this).
+
 
 --------
 :fordev:

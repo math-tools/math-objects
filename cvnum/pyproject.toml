@@ -1,7 +1,7 @@
 [tool.poetry]
 name        = "cvnum"
-#version     =
-description = 'This module is for writing and reading numbers in several formats.'
+version     = "0.0.0"
+description = "A tool to convert mathematical numbers in several formats."
 readme       = "README.md"
 authors      = ["Christophe BAL"]
 maintainers  = ["Christophe BAL"]
@@ -12,6 +12,7 @@ repository   = "https://github.com/math-tools/math-objects/tree/main/cvnum"
 python = "^3.8"
 
 [tool.poetry.dev-dependencies]
+hypothesis = "^6.29.3"
 src2prod = "^0.0.8-beta.0"
 
 [build-system]

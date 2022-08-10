@@ -1,4 +1,4 @@
-Last version
-------------
+Last version: 0.0.0
+-------------------
 
-For the moment, there is no version number.
+This version was made on 2022-08-10.
