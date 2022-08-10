@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 
+LOCAL_TEST = False
+# LOCAL_TEST = True
+
+
 from random import randint
 
-from cbdevtools import *
+
+if LOCAL_TEST:
+    from cbdevtools import *
 
 
 # ! -- DEBUGGING -- ! #
@@ -101,10 +107,11 @@ FIXED_INTS = [
 # -- MODULES IMPORTED FROM SOURCES! -- #
 # ------------------------------------ #
 
-MODULE_DIR = addfindsrc(
-    file    = __file__,
-    project = 'cvnum',
-)
+if LOCAL_TEST:
+    MODULE_DIR = addfindsrc(
+        file    = __file__,
+        project = 'cvnum',
+    )
 
 
 # ----------- #
@@ -141,7 +148,12 @@ def testandprint(nameof, x):
 # -- LET'S GO -- #
 # -------------- #
 
-from src.textify import *
+if LOCAL_TEST:
+    from src.textify import *
+
+else:
+    from cvnum import *
+
 
 nameof = IntName(lang).nameof
 
