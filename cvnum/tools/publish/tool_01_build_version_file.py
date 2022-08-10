@@ -17,10 +17,13 @@ print("\033c", end="")
 # -- CONSTANTS -- #
 # --------------- #
 
-THIS_DIR = PPath(__file__).parent
+SRC_DIR = PPath(__file__)
 
-CHGES_DIR    = THIS_DIR / "changes"
-VERSION_FILE = THIS_DIR / "VERSION.json"
+while SRC_DIR.name != "cvnum":
+    SRC_DIR = SRC_DIR.parent
+
+CHGES_DIR    = SRC_DIR / "changes"
+VERSION_FILE = SRC_DIR / "VERSION.json"
 
 
 # ----------- #

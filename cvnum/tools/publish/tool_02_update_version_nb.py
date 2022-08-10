@@ -14,13 +14,17 @@ print("\033c", end="")
 # -- CONSTANTS -- #
 # --------------- #
 
-THIS_DIR = PPath(__file__).parent
+SRC_DIR = PPath(__file__)
 
-VERSION_FILE = THIS_DIR / "VERSION.json"
+while SRC_DIR.name != "cvnum":
+    SRC_DIR = SRC_DIR.parent
 
-README_FILE = THIS_DIR / "readme" / "last.md"
-POETRY_FILE = THIS_DIR / "pyproject.toml"
-INIT_FILE   = THIS_DIR / "src" / "__init__.py"
+
+VERSION_FILE = SRC_DIR / "VERSION.json"
+
+README_FILE = SRC_DIR / "readme" / "last.md"
+POETRY_FILE = SRC_DIR / "pyproject.toml"
+INIT_FILE   = SRC_DIR / "src" / "__init__.py"
 
 
 # ---------------------- #
