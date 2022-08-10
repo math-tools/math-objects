@@ -33,7 +33,7 @@ TEMPLATE_README_ALONE = """
 One project in this monorepo
 ----------------------------
 
-For the moment, there is just `{project}`.
+For the moment, there is just **{project}**.
 
   1. **Description:** {desc}
   1. **Version:** {version} .
@@ -45,7 +45,7 @@ TEMPLATE_README_NOT_ALONE = """
 Projects in this monorepo
 -------------------------
 
-  1. `{project}`: {desc}
+  1. **{project}**: {desc}
      **Version:** {version} .
      **Date:** {date}
 """.strip()
@@ -124,9 +124,12 @@ for about in about_projects:
     desc = about['desc']
     desc = desc[0].lower() + desc[1:]
 
+    project = about['project']
+    project = f"[{project}]({project}/README.md)"
+
     content.append(
         template.format(
-            project = about['project'],
+            project = project,
             desc    = desc,
             version = version['full'],
             date    = '-'.join(version['date'].values()),

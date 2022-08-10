@@ -15,7 +15,7 @@ This monorepo will contain series of tools to manipulate mathematical objects.
 One project in this monorepo
 ----------------------------
 
-For the moment, there is just `cvnum`.
+For the moment, there is just **[cvnum](cvnum/README.md)**.
 
   1. **Description:** a tool to convert mathematical numbers in several formats.
   1. **Version:** 0.0.0 .
