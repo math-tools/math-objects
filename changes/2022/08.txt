@@ -1,0 +1,12 @@
+// ---------- //
+
+==
+10
+==
+
+-----
+:new:
+-----
+
+[[:doc:]]
+The path::``README.md`` file is automatically updated with the last ¨infos about the project.

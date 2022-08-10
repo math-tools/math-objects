@@ -1,5 +1,5 @@
 ﻿this::
-    date = 2022-08-07
+    date = 2022-08-10
 
 
 ========================================
@@ -17,7 +17,7 @@ python-term::
     >>> print(myb2i.bnb2int('+30AF4', b))
     199412
     >>> print(myb2i.bnb2int('-30AF4', b))
-    199412
+    -199412
     >>> print(myb2i.bnumerals2int(['', '3', '0', 'A', 'F', '4'], b))
     199412
     >>> print(myb2i.bnumerals2int(['-', '3', '0', 'A', 'F', '4'], b))

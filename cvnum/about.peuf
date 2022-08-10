@@ -1,6 +1,6 @@
 general::
-    project = cvnum
-    desc    = A tool to convert mathematical numbers in several formats.
-    author  = Christophe BAL
-    licence = gnu 3
-    need    = python3 ;
+    project  = cvnum
+    desc     = A tool to convert mathematical numbers in several formats.
+    author   = Christophe BAL
+    licence  = gnu 3
+    need     = python3 ;
