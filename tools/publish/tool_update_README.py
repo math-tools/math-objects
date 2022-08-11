@@ -37,7 +37,7 @@ For the moment, there is just **{project}**.
 
   1. **Description:** {desc}
   1. **Version:** {version} .
-  1. **Date:** {date}
+  1. **Date:** {date} .
 """.strip()
 
 
@@ -127,12 +127,14 @@ for about in about_projects:
     project = about['project']
     project = f"[{project}]({project}/README.md)"
 
+    date = '-'.join(version['date'].values())
+
     content.append(
         template.format(
             project = project,
             desc    = desc,
             version = version['full'],
-            date    = '-'.join(version['date'].values()),
+            date    = date,
         )
     )
     content.append('')

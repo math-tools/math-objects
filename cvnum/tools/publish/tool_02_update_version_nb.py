@@ -75,7 +75,7 @@ TEMPLATE_WITH_NB = """
 Last version: {version}
 --------------{decotitle}
 
-This version was made on {date}.
+This version **{version}** was made on **{date}** .
 """.strip() + "\n"
 
 
