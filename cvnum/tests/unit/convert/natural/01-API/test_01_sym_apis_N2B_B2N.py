@@ -27,18 +27,25 @@ from src.convert.natural import Nat2Base, Base2Nat
 # -- SYMTREY OF THE API -- #
 # ------------------------ #
 
+PATTERNS_TO_IGNORE = [
+    re_compile(s)
+    for s in [
+        'check.+',
+    ]
+]
+PATTERNS_TO_IGNORE.append(PATTERN_UNDERSCORE)
+
 def shortdircls(cls, toignore):
     dircls_cleaned = set()
 
-    for name in dir(cls):
-        if not(
-            name[0] == '_'
-            or
-            name.startswith('check')
-            or
-            name in toignore
-        ):
-            dircls_cleaned.add(name)
+    for name in shortdir(
+        cls,
+        PATTERNS_TO_IGNORE + [
+            re_compile(s)
+            for s in toignore
+        ]
+    ):
+        dircls_cleaned.add(name)
 
     return dircls_cleaned
 

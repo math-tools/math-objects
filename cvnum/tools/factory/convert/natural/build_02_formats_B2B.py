@@ -9,8 +9,22 @@ from cbdevtools         import *
 from mistool.os_use     import PPath
 from mistool.string_use import between
 
-from core.protontype import *
+# ----------------- #
+# -- MODULE USED -- #
+# ----------------- #
+
 from core.templates  import *
+
+for upfolder in [
+    'convert',
+    # 'tests',
+]:
+    _ = addfindsrc(
+        file    = __file__,
+        project = upfolder,
+    )
+
+from cvcore.protontype import *
 
 
 # ! -- DEBUGGING -- ! #
@@ -331,7 +345,7 @@ for name, sign in signatures_sorted.items():
 
     for tag in [TAG_IN, TAG_OUT]:
         params[TAG_PROTO] += [
-            prototype_param(
+            prototype_oneparam(
                 param   = new_p + ' '*(maxlen_all - len(new_p)),
                 ref     = PARAMS_SEE_REF[p.strip()],
                 useself = False

@@ -194,7 +194,7 @@ for modulename, pyfile in PYFILES.items():
 # ! -- DEBUGGING -- ! #
 
     easyinfos = {
-        name: easysignature(natinst, name)
+        name: easysign(natinst.__getattribute__(name))
         for name in cls_automethods(
             intcls,
             natcls,

@@ -41,7 +41,7 @@ class Base2Base(IntConv):
 
 # Lines automatically build by the following file.
 #
-#     + ``tools/factory/convert/integer/build_01_all_methods_I2B_B2I_B2B.py``
+#     + ``tools/factory/convert/integer/build_01_xtra_methods_I2B_B2I_B2B.py``
 
 ###
 # prototype::

@@ -3,7 +3,23 @@
 from collections import defaultdict
 from inspect     import signature, _empty
 
-from .protontype import *
+from cbdevtools import *
+
+
+# ----------------- #
+# -- MODULE USED -- #
+# ----------------- #
+
+for upfolder in [
+    'convert',
+    # 'tests',
+]:
+    _ = addfindsrc(
+        file    = __file__,
+        project = upfolder,
+    )
+
+from cvcore.protontype import *
 
 
 # ------------------- #
@@ -34,7 +50,7 @@ def cls_xtramethods(
     cls,
     xtra_methods_hard_specs,
 ):
-    dircls = dir(cls)
+    dircls = shortdir(cls)
     inst   = cls()
 
 # "INPUT" tag & "OUPUT" tag
@@ -57,9 +73,6 @@ def cls_xtramethods(
 # ! -- DEBUGGING -- ! #
 
     for name in dircls:
-        if name[0] == "_":
-            continue
-
         if TAG_2 in name:
             _, _, after = name.partition(TAG_2)
 
@@ -244,7 +257,7 @@ def cls_xtramethods(
                 len_p = len(p)
                 p_all = p + ' '*(maxlen_all - len_p)
 
-                proto_p = prototype_param(p_all, see)
+                proto_p = prototype_oneparam(p_all, see)
                 see_params.append(proto_p)
 
                 if default is None:

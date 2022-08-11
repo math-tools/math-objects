@@ -12,11 +12,9 @@ About `math-objects`
 This monorepo will contain series of tools to manipulate mathematical objects.
 
 
-One project in this monorepo
-----------------------------
+Just one project in this monorepo
+---------------------------------
 
-For the moment, there is just **[cvnum](cvnum/README.md)**.
+For the moment, there is just **[cvnum](cvnum/README.md) v-0.0.0 [2022-08-10]** .
 
-  1. **Description:** a tool to convert mathematical numbers in several formats.
-  1. **Version:** 0.0.0 .
-  1. **Date:** 2022-08-10 .
+  * **Description:** a tool to convert mathematical numbers in several formats.

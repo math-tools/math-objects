@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 
-# --------------------- #
-# -- SEVERAL IMPORTS -- #
-# --------------------- #
-
 from cbdevtools import *
 
 
@@ -37,31 +33,33 @@ from src.convert.integer import (
 # -- SYMTREY OF THE API -- #
 # ------------------------ #
 
+PATTERNS_TO_IGNORE = [
+    re_compile(s)
+    for s in [
+        'check.+',
+        'intsign.*',
+        'strsign.*',
+    ]
+]
+PATTERNS_TO_IGNORE.append(PATTERN_UNDERSCORE)
+
 def shortdircls(cls, toignore):
     dircls_cleaned = set()
 
-    for name in dir(cls):
-        if not(
-            name[0] == '_'
-            or
-            any(
-                name.startswith(ignorestart)
-                for ignorestart in [
-                    'check',
-                    'intsign',
-                    'strsign',
-                ]
-            )
-            or
-            name in toignore
-        ):
-            for old, new in [
-                ('nat2', 'int2'),
-                ('2nat', '2int'),
-            ]:
-                name = name.replace(old, new)
+    for name in shortdir(
+        cls,
+        PATTERNS_TO_IGNORE + [
+            re_compile(s)
+            for s in toignore
+        ]
+    ):
+        for old, new in [
+            ('nat2', 'int2'),
+            ('2nat', '2int'),
+        ]:
+            name = name.replace(old, new)
 
-            dircls_cleaned.add(name)
+        dircls_cleaned.add(name)
 
     return dircls_cleaned
 

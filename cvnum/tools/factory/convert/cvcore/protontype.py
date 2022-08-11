@@ -78,6 +78,7 @@ def method_oneparam(param, about):
 
     return text
 
+
 def build_method_params(about_params):
     maxlen_param = maxlen(about_params)
 
@@ -88,20 +89,3 @@ def build_method_params(about_params):
         )
         for param in about_params
     ]
-
-
-# ------------ #
-# -- TYPING -- #
-# ------------ #
-
-def cleantype(onetype):
-    onetype = onetype.strip()
-
-    for toremove in [
-        "typing.",
-        "<class '",
-        "'>"
-    ]:
-        onetype = onetype.replace(toremove, "")
-
-    return onetype

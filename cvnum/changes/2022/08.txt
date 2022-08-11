@@ -1,6 +1,20 @@
 // ---------- //
 
 ==
+11
+==
+
+--------
+:fordev:
+--------
+
+[[:facto:]]
+Some little changes to adapt the codes to the new version of ¨cbdevtools.
+
+
+// ---------- //
+
+==
 10 (0.0.0)
 ==
 

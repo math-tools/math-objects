@@ -29,25 +29,21 @@ ABOUT_MONOREPO = MONOREPO_DIR / 'about.peuf'
 README_PROJECTS = MONOREPO_DIR / 'readme' / 'projects.md'
 
 
-TEMPLATE_README_ALONE = """
-One project in this monorepo
-----------------------------
+TEMPLATE_README_SINGLE = """
+Just one project in this monorepo
+---------------------------------
 
-For the moment, there is just **{project}**.
+For the moment, there is just **{project} v-{version} [{date}]** .
 
-  1. **Description:** {desc}
-  1. **Version:** {version} .
-  1. **Date:** {date} .
+  * **Description:** {desc}
 """.strip()
 
 
-TEMPLATE_README_NOT_ALONE = """
+TEMPLATE_README_SEVERAL = """
 Projects in this monorepo
 -------------------------
 
-  1. **{project}**: {desc}
-     **Version:** {version} .
-     **Date:** {date}
+  1. **{project} v-{version} [{date}]** : {desc}
 """.strip()
 
 
@@ -114,9 +110,9 @@ for oneproj in projects:
 print(f"   * Updating the README file.")
 
 if len(about_projects) == 1:
-    template = TEMPLATE_README_ALONE
+    template = TEMPLATE_README_SINGLE
 else:
-    template = TEMPLATE_README_NOT_ALONE
+    template = TEMPLATE_README_SEVERAL
 
 content = []
 
