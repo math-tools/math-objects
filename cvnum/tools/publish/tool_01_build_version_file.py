@@ -158,7 +158,11 @@ with VERSION_FILE.open(
 
 if about_version:
     what = "last"
-    xtra = f": {about_version['full']}"
+    xtra = (
+        f": {about_version['full']}"
+         " "
+        f"[{'-'.join(about_version['date'].values())}]"
+    )
 
 else:
     what = "no"

@@ -9,7 +9,11 @@
 --------
 
 [[:facto:]]
-Some little changes to adapt the codes to the new version of ¨cbdevtools.
+Some little changes to adapt the codes to the new version of ¨cbdevtools (some very ugly codes remain in some builders). This concerns the following features.
+
+    1) Easy signatures of the methods of one class.
+
+    1) Short ``dir(cls)``.
 
 
 // ---------- //

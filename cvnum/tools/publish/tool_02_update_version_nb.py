@@ -61,7 +61,8 @@ print(f"   * {what.title()} version NB. found{xtra}.")
 # -- UPDATE README -- #
 # ------------------- #
 
-print(f"   * Update of the README file.")
+print("   * Updating files...")
+print("      + README file.")
 
 TEMPLATE_NO_NB = """
 Last version
@@ -107,16 +108,16 @@ with README_FILE.open(
 for param, info, path in [
     (
         'version',
-        "Update of the POETRY TOML file.",
+        "POETRY TOML file",
         POETRY_FILE
     ),
     (
         '__version__',
-        "Update of the __init__.py in the source folder.",
+        "__init__.py in the source folder",
         INIT_FILE
     ),
 ]:
-    print(f"   * {info}.")
+    print(f"      + {info}.")
 
 
     with path.open(
