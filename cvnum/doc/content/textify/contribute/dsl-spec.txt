@@ -7,11 +7,11 @@ Spécifications du langage spécialisé
 ====================================
 
 content::
-    ¨content/key-n-val.txt
-    ¨content/matching-nb.txt
-    ¨content/extract.txt
-    ¨content/hooks.txt
-    ¨content/quotes.txt
-    ¨content/braces.txt
-    ¨content/if-else.txt
-    ¨content/tests.txt
+    \content/key-n-val.txt
+    \content/matching-nb.txt
+    \content/extract.txt
+    \content/hooks.txt
+    \content/quotes.txt
+    \content/braces.txt
+    \content/if-else.txt
+    \content/tests.txt

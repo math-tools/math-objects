@@ -7,7 +7,7 @@ Le bloc cvnum::``general``
 ==========================
 
 Pour le bloc cvnum::``general``, il est possible de redéfinir certaines valeurs.
-Par exemple, dans le code suivant, on utilise le même séparateur que la langue ``fr_FR``, mais on change la règle pour les très ¨grds ¨nbres.
+Par exemple, dans le code suivant, on utilise le même séparateur que la langue ``fr_FR``, mais on change la règle pour les très \grds \nbres.
 
 cvnum::
     ---
@@ -27,4 +27,4 @@ cvnum::
 
 
 note::
-    Pour interdir le nommage de grands ¨nbres, il suffit d'utiliser cvnumm::``big = no``.
+    Pour interdir le nommage de grands \nbres, il suffit d'utiliser cvnumm::``big = no``.

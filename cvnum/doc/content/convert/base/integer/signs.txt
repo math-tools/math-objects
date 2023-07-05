@@ -8,18 +8,18 @@ Des signes
 
 Vis à vis de ``convert.natural``, la sous-librairie ``convert.integer`` apporte la gestion des signes `+` et `-` pour travailler dans `ZZ` et non juste dans `NN`. Voici les représentations possibles de ces signes.
 
-    1) Les signes utilisables avec le type ``int`` de ¨python sont pris en compte.
+    1) Les signes utilisables avec le type ``int`` de \python sont pris en compte.
 
     1) Voici ce qui est pris en compte pour les chaînes de caractères. Voici
 
         * Le signe `-` se tape tel quel.
 
-        * Le signe `+` se tape tel quel, ou bien il peut être omis. Dans les sorties produites par les classes de ``convert.integer``, le signe `+` sera ¨tjrs omis.
+        * Le signe `+` se tape tel quel, ou bien il peut être omis. Dans les sorties produites par les classes de ``convert.integer``, le signe `+` sera \tjrs omis.
 
 
 De plus, dans les listes de chiffres, ou bien celles de décimales, les conventions suivantes seront suivies.
 
-    1) Le ¨1er élément sert toujours à indiquer le signe, puis viennent ensuite soit les chiffres, soit les décimales.
+    1) Le \1er élément sert toujours à indiquer le signe, puis viennent ensuite soit les chiffres, soit les décimales.
 
     1) Avec des chiffres, le signe moins est indiqué via ``"-"`` pour un signe `-`, ou ``""``, la chaîne vide, pour un signe `+`
     ((

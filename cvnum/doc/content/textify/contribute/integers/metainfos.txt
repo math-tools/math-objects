@@ -6,7 +6,7 @@ this::
 Qui et quand ?
 ==============
 
-Chaque fichier de ¨trad peut fournir des ¨infos sur le fichier. Dans l'exemple suivant le code parle de lui-même une fois que l'on a compris que le bloc peuf::``this`` sert à indiquer un bloc de clé-valeur.
+Chaque fichier de \trad peut fournir des \infos sur le fichier. Dans l'exemple suivant le code parle de lui-même une fois que l'on a compris que le bloc peuf::``this`` sert à indiquer un bloc de clé-valeur.
 
 cvnum::
     ---

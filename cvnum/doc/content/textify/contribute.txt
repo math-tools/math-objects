@@ -3,12 +3,12 @@
 
 
 ===================
-Proposer des ¨trads
+Proposer des \trads
 ===================
 
 content::
-    ¨content/nocoding.txt
-    ¨content/structure.txt
-    ¨content/integers.txt
-    ¨content/dsl-spec.txt
-    ¨content/usecases.txt
+    \content/nocoding.txt
+    \content/structure.txt
+    \content/integers.txt
+    \content/dsl-spec.txt
+    \content/usecases.txt

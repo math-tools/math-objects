@@ -10,7 +10,7 @@
 --------
 
 [[:doc:]]
-¨DSL for translations: the way used to name the very big numbers has been clarified.
+\DSL for translations: the way used to name the very big numbers has been clarified.
 
 
 // ---------- //
@@ -25,7 +25,7 @@
 -----
 
 [[:api:]]
-¨DSL for translations: the way to name big groups like "billion of billion" must be explicitly written (if no such rule is explained, this indicates to not name big integers).
+\DSL for translations: the way to name big groups like "billion of billion" must be explicitly written (if no such rule is explained, this indicates to not name big integers).
 
 
 -------
@@ -33,7 +33,7 @@
 -------
 
 [[:api:]]
-¨DSL for translations: the support of none decimal bases has been dropped (this was a very bad good idea). This implies the suppression of the keys ``base`` and ``zero`` of the block ``general``.
+\DSL for translations: the support of none decimal bases has been dropped (this was a very bad good idea). This implies the suppression of the keys ``base`` and ``zero`` of the block ``general``.
 
 
 // ---------- //
@@ -63,7 +63,7 @@ Roman conversion: only integers can be given as an argument.
 --------
 
 [[:api:]]
-¨DSL for translations: the way to work with groups has been clarified and documented.
+\DSL for translations: the way to work with groups has been clarified and documented.
 
 
 // ---------- //
@@ -111,7 +111,7 @@ Converting numbers.
         * ``base2base.bdigits2bdigits``
         * ``base2base.bnumerals2bnumerals``
 
-    1) Suchas to have a coherent ¨api, the functions below have been added.
+    1) Suchas to have a coherent \api, the functions below have been added.
 
         * ``dec2base.intdigits`` returns the list of integer digits of a natural number.
 
@@ -185,7 +185,7 @@ Factory: rules are now normalized and shorten to obtain the Python variables for
 -----
 
 [[:doc:]]
-¨DSL ¨specs for translations: important clarifications about the ¨specs for the hooks and the order of searching of the goode rule have been added.
+\DSL \specs for translations: important clarifications about the \specs for the hooks and the order of searching of the goode rule have been added.
 
 
 // ---------- //
@@ -200,7 +200,7 @@ Factory: rules are now normalized and shorten to obtain the Python variables for
 -----
 
 [[:doc:]]
-¨DSL ¨specs for translations: the specs¨ about testing have been added.
+\DSL \specs for translations: the specs\ about testing have been added.
 
 
 // ---------- //
@@ -215,13 +215,13 @@ Factory: rules are now normalized and shorten to obtain the Python variables for
 -----
 
 [[:doc:]]
-¨DSL ¨specs for translations.
+\DSL \specs for translations.
 
     1) For groups, the rules must be verbose by using cvnum::``[d]`` and cvnum::``[r]``, but there is a shortcut cvnum::``=>`` to type cvnum::``6 => million`` instead of cvnum::``6 = [d] million [r]``.
 
     1) An example of use of the key ``zero`` for groups have been written.
 
-    1) All the ¨DSL ¨specs have been simplified a lot.
+    1) All the \DSL \specs have been simplified a lot.
 
 
 // ---------- //
@@ -236,9 +236,9 @@ Factory: rules are now normalized and shorten to obtain the Python variables for
 -----
 
 [[:doc:]]
-¨DSL ¨specs for translations.
+\DSL \specs for translations.
 
-    1) Good practices for the use of the ¨DSL.
+    1) Good practices for the use of the \DSL.
 
     1) Some clarifications about the special constants cvnum::``d`` and cvnum::``r``.
 
@@ -257,7 +257,7 @@ Factory: rules are now normalized and shorten to obtain the Python variables for
 --------
 
 [[:doc:]]
-¨DSL ¨specs for translations: explanations for patterns matching have been added.
+\DSL \specs for translations: explanations for patterns matching have been added.
 
 
 // ---------- //
@@ -272,7 +272,7 @@ Factory: rules are now normalized and shorten to obtain the Python variables for
 --------
 
 [[:doc:]]
-The ¨DSL ¨specs for translations are almost fully documented.
+The \DSL \specs for translations are almost fully documented.
 
 
 // ---------- //
@@ -287,7 +287,7 @@ The ¨DSL ¨specs for translations are almost fully documented.
 -----
 
 [[:api:]]
-First simplifications of the code and the ¨api of the tools to convert integers (by changing the numeral base).
+First simplifications of the code and the \api of the tools to convert integers (by changing the numeral base).
 
 
 --------
@@ -295,4 +295,4 @@ First simplifications of the code and the ¨api of the tools to convert integers
 --------
 
 [[:doc:]]
-The ¨doc for the tools to convert integers has been updated regarding to the changes into the ¨api.
+The \doc for the tools to convert integers has been updated regarding to the changes into the \api.

@@ -3,11 +3,11 @@ this::
 
 
 =========================
-Ordre de ¨rech des règles
+Ordre de \rech des règles
 =========================
 
 Commençons par du vocabulaire : la longueur d'un motif est le nombre de caractères qui le définissent.
-Par exemple, cvnum::``1``, cvnum::``*2`` et cvnum::``3**`` sont de longueur `1`, `2` et `3` ¨resp.
+Par exemple, cvnum::``1``, cvnum::``*2`` et cvnum::``3**`` sont de longueur `1`, `2` et `3` \resp.
 Le vocabulaire étant fixé, voyons comment les règles sont utilisées.
 
     1) En premier sont tentées les règles de traduction avec un motif explicite comme cvnum::``71 = [60]-et-[11]``.
@@ -17,4 +17,4 @@ s
         * L'analyse commence par les motifs de plus petite taille pour finir avec ceux de plus grande si besoin.
         Par exemple, l'analyse testera cvnum::``*`` forcément avant cvnum::``***``.
 
-        * Pour des motifs de même taille, l'ordre de rédaction dans le fichier de ¨def est respecté.
+        * Pour des motifs de même taille, l'ordre de rédaction dans le fichier de \def est respecté.

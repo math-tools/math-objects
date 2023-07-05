@@ -4,9 +4,9 @@
 
 
 =============================
-Nommer les "¨grpes" de ¨nbres
+Nommer les "\grpes" de \nbres
 =============================
 
 content::
-    ¨content/small-big.txt
-    ¨content/big-big.txt
+    \content/small-big.txt
+    \content/big-big.txt

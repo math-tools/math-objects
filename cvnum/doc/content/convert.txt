@@ -7,5 +7,5 @@ Outils classiques de conversion
 ===============================
 
 content::
-    ¨content/base.txt
-//    ¨content/roman.txt    ?????
+    \content/base.txt
+//    \content/roman.txt    ?????

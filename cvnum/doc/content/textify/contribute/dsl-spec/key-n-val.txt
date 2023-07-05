@@ -17,7 +17,7 @@ On utilise toujours la syntaxe cvnum::``clé = valeur``.
 Juste avec le bloc ``group``
 ----------------------------
 
-Pour les groupes, on dispose de cvnum::``=>`` pour l'ajout ¨auto de cvnum::``[d]`` et cvnum::``[r]`` autour d'une règle incomplète avec des espaces séparateurs
+Pour les groupes, on dispose de cvnum::``=>`` pour l'ajout \auto de cvnum::``[d]`` et cvnum::``[r]`` autour d'une règle incomplète avec des espaces séparateurs
 ((
     En fait, on peut utiliser cvnum::``=   >`` avec des espaces qui seront ignorés lors de l'analyse de la règle.
 )).

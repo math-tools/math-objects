@@ -6,11 +6,11 @@ this::
 Pour analyser les nombres
 =========================
 
-L'analyse d'un ¨nbre définie dans le bloc cvnum::``small::...`` suit les modes suivants où les ¨trads ont été omises.
+L'analyse d'un \nbre définie dans le bloc cvnum::``small::...`` suit les modes suivants où les \trads ont été omises.
 
     1) cvnum::``60 = ...`` définit directement la traduction de `60`.
 
-    1) cvnum::``7* = ...`` utilise cvnum::``*`` pour indiquer n'importe quel chiffre. Ici on définit donc une traduction pour les ¨nbres allant de `70` à `79`.
+    1) cvnum::``7* = ...`` utilise cvnum::``*`` pour indiquer n'importe quel chiffre. Ici on définit donc une traduction pour les \nbres allant de `70` à `79`.
     Attention car cvnumm::``***`` indique un nombre à trois chiffres **sans zéro inutile** tout à gauche.
 
     1) cvnum::``[2..6]1 = ...`` et cvnum::``[1..6 | 8]* = ...`` emploient les alternatives cvnum::``[2..6]`` et cvnum::``[1..6 | 8]`` qui sont équivalentes à cvnum::``[2 | 3 | 4 | 5 | 6]`` et cvnum::``[1 | 2 | 3 | 4 | 5 | 6 | 8]`` où la barre verticale cvnum::``|`` est un "OU".

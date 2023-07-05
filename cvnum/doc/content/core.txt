@@ -7,4 +7,4 @@ Une boîte à outils commune
 ==========================
 
 content::
-    ¨content/var2int.txt
+    \content/var2int.txt

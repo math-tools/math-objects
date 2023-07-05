@@ -3,10 +3,10 @@ this::
 
 
 ==============================
-Comment organiser ses ¨trads ?
+Comment organiser ses \trads ?
 ==============================
 
-Le code source de ¨cvnum contient un dossier path::``contribute/api/textify/lang`` avec toutes les ¨trads prises en compte.
+Le code source de \cvnum contient un dossier path::``contribute/api/textify/lang`` avec toutes les \trads prises en compte.
 Par exemple, la langue anglaise est gérée dans le dossier path::``EN`` qui a la structure suivante.
 
 dirtree::
@@ -32,11 +32,11 @@ Cette structure indique plusieurs choses.
         Ne voyez aucun nationalisme dans cet exemple...
     )).
 
-    1) Les dossiers path::``usecases`` permettent de proposer des exemples d'utilisation qui serviront à tester la ¨trad proposée. Nous verrons comment indiquer des exemples dans cf::``usecases.txt``.
+    1) Les dossiers path::``usecases`` permettent de proposer des exemples d'utilisation qui serviront à tester la \trad proposée. Nous verrons comment indiquer des exemples dans cf::``usecases.txt``.
 
-    1) Les fichiers path::``integers.txt`` permettent de définir toutes les règles de ¨trad liées aux entiers
+    1) Les fichiers path::``integers.txt`` permettent de définir toutes les règles de \trad liées aux entiers
     ((
-        Plus tard, d'autres traductions seront disponibles pour les fractions et les nombres décimaux qui se feront dans des fichiers path::``decimals.txt`` et path::``fractions.txt`` ¨resp.
+        Plus tard, d'autres traductions seront disponibles pour les fractions et les nombres décimaux qui se feront dans des fichiers path::``decimals.txt`` et path::``fractions.txt`` \resp.
     )).
 
 

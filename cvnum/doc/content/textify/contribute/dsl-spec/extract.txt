@@ -7,7 +7,7 @@ Utiliser un, ou des chiffres au choix
 =====================================
 
 ----------------------
-Pour les petits ¨nbres
+Pour les petits \nbres
 ----------------------
 
 La règle cvnum::``8* = [4]-[20]-[d(0)]`` utilise deux choses.
@@ -15,32 +15,32 @@ La règle cvnum::``8* = [4]-[20]-[d(0)]`` utilise deux choses.
     1) La variable spéciale cvnum::``d`` fait référence au nombre repéré avec très peu de chiffres.
 
     1) cvnum::``d(0)`` permet de ne garder que le chiffre des unités (chiffre pour `10^0` d'où le zéro).
-    On peut bien entendu utiliser cvnum::``d(1)``, cvnum::``d(2)``, ... ¨etc. Si cvnum::``d`` ne contient que `n` chiffres alors cvnum::``d(k) = 0`` pour `k > n`.
+    On peut bien entendu utiliser cvnum::``d(1)``, cvnum::``d(2)``, ... \etc. Si cvnum::``d`` ne contient que `n` chiffres alors cvnum::``d(k) = 0`` pour `k > n`.
 
     1) Si besoin, on peut utiliser des raccourcis comme cvnum::``d(0..3)`` au lieu de cvnum::``d(3)d(2)d(1)d(0)``. Noter que cvnum::``d(0..3)`` indique les chiffres allant des positions `0` à `3`, ce qui correspond bien à cvnum::``d(3)d(2)d(1)d(0)``, et non à cvnum::``d(0)d(1)d(2)d(3)``.
 
 
 ---------------
-Pour les ¨grpes
+Pour les \grpes
 ---------------
 
-La règle cvnum::``9 => "de :if: d(0..5) = 0" milliard{s}``, un raccourci pour cvnum::``9 = [d] "de :if: d(0..5) = 0" milliard{s} [r]``, et la règle    cvnum::``3 = [d :if: d > 1] mille [r]`` utilisent les choses suivantes où, pour les explications, nous allons considérer l'analyse du ¨nbre `111,222,333,444,555,666`.
+La règle cvnum::``9 => "de :if: d(0..5) = 0" milliard{s}``, un raccourci pour cvnum::``9 = [d] "de :if: d(0..5) = 0" milliard{s} [r]``, et la règle    cvnum::``3 = [d :if: d > 1] mille [r]`` utilisent les choses suivantes où, pour les explications, nous allons considérer l'analyse du \nbre `111,222,333,444,555,666`.
 
     1) **Les tests.**
 
-        * Pour la règle cvnum::``9 = ...``, cvnum::``d`` et cvnum::``r`` du test correspondent ¨resp à `111,222,333`, le ¨nbre de milliards, et `444,555,666`, soit ce qui reste sous les milliards.
+        * Pour la règle cvnum::``9 = ...``, cvnum::``d`` et cvnum::``r`` du test correspondent \resp à `111,222,333`, le \nbre de milliards, et `444,555,666`, soit ce qui reste sous les milliards.
 
-        * Pour la règle cvnum::``3 = ...``, lors de l'analyse des milliers sous le milliard, cvnum::``d`` et cvnum::``r`` du test correspondent ¨resp à `555` et `666`.
-        Pour les milliers de milliards, cvnum::``d`` et cvnum::``r`` correspondent ¨resp à `222` et `333`.
+        * Pour la règle cvnum::``3 = ...``, lors de l'analyse des milliers sous le milliard, cvnum::``d`` et cvnum::``r`` du test correspondent \resp à `555` et `666`.
+        Pour les milliers de milliards, cvnum::``d`` et cvnum::``r`` correspondent \resp à `222` et `333`.
 
     1) **Le nommage.**
-    Une règle pour un ¨grpe doit toujours contenir les instructions cvnum::``[d]`` et cvnum::``[r]`` éventuellement soumises à une condition comme dans la règle cvnum::``3 = [d :if: d > 1] mille [r]``.
-    Ceci sert à bien placer le nom du ¨grpe.
+    Une règle pour un \grpe doit toujours contenir les instructions cvnum::``[d]`` et cvnum::``[r]`` éventuellement soumises à une condition comme dans la règle cvnum::``3 = [d :if: d > 1] mille [r]``.
+    Ceci sert à bien placer le nom du \grpe.
 
 
 note::
-    Ce qui a été dit pour l'extraction de chiffres pour les petits ¨nbres via des choses comme cvnum::``d(0..5)`` reste valable pour les ¨grpes
+    Ce qui a été dit pour l'extraction de chiffres pour les petits \nbres via des choses comme cvnum::``d(0..5)`` reste valable pour les \grpes
     ((
-        Dans la ¨1ere règle donnée en exemple, le test regarde si le ¨nbre total de milliards est en millions.
+        Dans la \1ere règle donnée en exemple, le test regarde si le \nbre total de milliards est en millions.
     )).
     Si besoin, on peut aussi utiliser des choses comme cvnum::``r(6)`` par exemple.

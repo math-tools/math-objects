@@ -7,11 +7,11 @@ Traduire des entiers
 ====================
 
 content::
-    ¨content/metainfos.txt
-    ¨content/sign.txt
-    ¨content/small-vs-big.txt
-    ¨content/small.txt
-    ¨content/big.txt
-    ¨content/patch.txt
-    ¨content/extend.txt
-    ¨content/good-practices.txt
+    \content/metainfos.txt
+    \content/sign.txt
+    \content/small-vs-big.txt
+    \content/small.txt
+    \content/big.txt
+    \content/patch.txt
+    \content/extend.txt
+    \content/good-practices.txt

@@ -6,7 +6,7 @@ this::
 Extension d'une langue
 ======================
 
-La langue ``fr_FR_tiret`` étend ``fr_FR``. Dans cec cas, il suffit de se focaliser sur les cas d'utilisation spécifiques aux ¨nelles règles de ``fr_FR_tiret``
+La langue ``fr_FR_tiret`` étend ``fr_FR``. Dans cec cas, il suffit de se focaliser sur les cas d'utilisation spécifiques aux \nelles règles de ``fr_FR_tiret``
 ((
     En coulisse, les tests utilisées des règles communes aux deux langues seront les cas d'utilisation déjà fournis pour la langue ``fr_FR``.
 )).

@@ -6,7 +6,7 @@
 Par où commencer ?
 ==================
 
-Pour indiquer que l'on souhaite partir d'une ¨lang existante, il suffit de passer via le bloc cvnum::``extend`` comme ci-dessous.
+Pour indiquer que l'on souhaite partir d'une \lang existante, il suffit de passer via le bloc cvnum::``extend`` comme ci-dessous.
 
 cvnum::
     ---
@@ -19,4 +19,4 @@ cvnum::
 
 
 note::
-    Il est autorisé d'étendre une ¨lang qui elle-même en étend une autre, et d'empiler autant d'extensions que nécessaires.
+    Il est autorisé d'étendre une \lang qui elle-même en étend une autre, et d'empiler autant d'extensions que nécessaires.

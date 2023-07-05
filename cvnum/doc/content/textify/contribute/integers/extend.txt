@@ -7,8 +7,8 @@ Partir d'une traduction existante
 =================================
 
 content::
-    ¨content/howto.txt
-    ¨content/general.txt
-    ¨content/group.txt
-    ¨content/small.txt
-    ¨content/patch.txt
+    \content/howto.txt
+    \content/general.txt
+    \content/group.txt
+    \content/small.txt
+    \content/patch.txt

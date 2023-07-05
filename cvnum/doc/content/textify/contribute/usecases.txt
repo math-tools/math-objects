@@ -7,6 +7,6 @@ Des cas d'utilisation pour tester
 =================================
 
 content::
-    ¨content/folders.txt
-    ¨content/datas.txt
-    ¨content/extended.txt
+    \content/folders.txt
+    \content/datas.txt
+    \content/extended.txt

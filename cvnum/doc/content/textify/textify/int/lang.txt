@@ -54,7 +54,7 @@ terminal::
     es_ES : ciento veintitrés
 
 
-La constante ``ALL_LANGS`` est la liste de tous les identifiants des langues supportées, ces derniers étant définis comme suit dans le code ¨src.
+La constante ``ALL_LANGS`` est la liste de tous les identifiants des langues supportées, ces derniers étant définis comme suit dans le code \src.
 
 // -- ALL LANGS - START -- //
 

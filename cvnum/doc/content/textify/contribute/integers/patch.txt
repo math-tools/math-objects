@@ -7,7 +7,7 @@ Gestion des exceptions, une méthode brutale
 ===========================================
 
 Certaines langues ont des exceptions de nommage. Dans ce type de situation, il faut faire appel au bloc cvnum::``patch``.
-Par exemple, le code ci-dessous gère les exceptions liées au nom "eins", ¨cad `1` en allemand.
+Par exemple, le code ci-dessous gère les exceptions liées au nom "eins", \cad `1` en allemand.
 
 cvnum::
     ---

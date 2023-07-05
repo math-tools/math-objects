@@ -11,7 +11,7 @@ warning::
 
 
 ------------------------
-Analyse d'un petit ¨nbre
+Analyse d'un petit \nbre
 ------------------------
 
 Dans cette situation, les crochets peuvent avoir les types suivants de contenu.
@@ -41,7 +41,7 @@ Dans cette situation, les crochets peuvent avoir les types suivants de contenu.
 
     1) On peut utiliser une suite finie de contenus de l'un des types ci-dessus comme dans cvnum::``d(2)00``.
 
-    1) Enfin, on dipose des alternatives cvnum::``... :if: ... :else: ...`` et cvnum::``... :if: ...`` où les cas gagnants ¨etou perdants doivent être du type précédent.
+    1) Enfin, on dipose des alternatives cvnum::``... :if: ... :else: ...`` et cvnum::``... :if: ...`` où les cas gagnants \etou perdants doivent être du type précédent.
 
 
 note::

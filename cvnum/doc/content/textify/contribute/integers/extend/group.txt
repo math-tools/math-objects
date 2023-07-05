@@ -6,7 +6,7 @@
 Les blocs cvnum::``group`` et cvnum::``ignore-group``
 =====================================================
 
-Nicolas Chuquet a proposé détendre le système académique français de nommage des ¨nbres naturels pour prendre en compte de très grandes valeurs.
+Nicolas Chuquet a proposé détendre le système académique français de nommage des \nbres naturels pour prendre en compte de très grandes valeurs.
 L'une des versions proposées par Nicolas Chuquet ne garde par le nom milliard et s'appuie sur des groupes de `6` chiffres au lieu de `3`.
 La définition de ce système est très rapidement faite via le fichier (où le le bloc cvnum::``this`` a été omis).
 Des explications sont données juste après.
@@ -50,4 +50,4 @@ Dans le code précédent, nous avons procédé comme suit.
 
     1) Grâce au bloc **optionnel** cvnum::``ignore-group``, on peut retirer des règles pour les groupes.
 
-    1) Pour finir, l'ajout de ¨nelles règles, ou la redéfinition de certaines existantes, se fait très simplement via le bloc cvnum::``group``.
+    1) Pour finir, l'ajout de \nelles règles, ou la redéfinition de certaines existantes, se fait très simplement via le bloc cvnum::``group``.

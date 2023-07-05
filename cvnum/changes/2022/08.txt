@@ -9,7 +9,7 @@
 --------
 
 [[:api:]]
-Naming integers: the main folders use small case as in the ¨python ¨api.
+Naming integers: the main folders use small case as in the \python \api.
 
 
 // ---------- //
@@ -23,7 +23,7 @@ Naming integers: the main folders use small case as in the ¨python ¨api.
 --------
 
 [[:facto:]]
-Some little changes to adapt the codes to the new version of ¨cbdevtools (some very ugly codes remain in some builders). This concerns the following features.
+Some little changes to adapt the codes to the new version of \cbdevtools (some very ugly codes remain in some builders). This concerns the following features.
 
     1) Easy signatures of the methods of one class.
 
@@ -41,7 +41,7 @@ Some little changes to adapt the codes to the new version of ¨cbdevtools (some 
 -----
 
 [[:flow:]]
-The project is now on ¨pypi (the tool ¨src2prod is used to acheive easily this).
+The project is now on \pypi (the tool \src2prod is used to acheive easily this).
 
 
 --------
@@ -49,7 +49,7 @@ The project is now on ¨pypi (the tool ¨src2prod is used to acheive easily this
 --------
 
 [[:flow:]]
-Version ¨nb: one script updates the version number for the path::``README.md`` file, and also the ``TOML`` file used by ¨poetry (this will be integrated in ¨cbdevtools).
+Version \nb: one script updates the version number for the path::``README.md`` file, and also the ``TOML`` file used by \poetry (this will be integrated in \cbdevtools).
 
 
 // ---------- //
@@ -63,7 +63,7 @@ Version ¨nb: one script updates the version number for the path::``README.md`` 
 --------
 
 [[:facto:]]
-Version ¨nb: use of the package ¨semanticversion to parse version numbers(this will be integrated in ¨tnschges).
+Version \nb: use of the package \semanticversion to parse version numbers(this will be integrated in \tnschges).
 
 
 // ---------- //
@@ -77,7 +77,7 @@ Version ¨nb: use of the package ¨semanticversion to parse version numbers(this
 -----
 
 [[:doc:]]
-One ¨doc has been written to explain how to use of the sub package ``core``.
+One \doc has been written to explain how to use of the sub package ``core``.
 
 
 --------
@@ -87,7 +87,7 @@ One ¨doc has been written to explain how to use of the sub package ``core``.
 [[:doc:]]
 Here are the changes made.
 
-    1) Detailed explanations about the ¨api of the new sub package ``convert``.
+    1) Detailed explanations about the \api of the new sub package ``convert``.
 
     1) Return of the explanations about the possibility to use any legal "integer-string" variable with ``textify.integer.IntName``.
 
@@ -97,11 +97,11 @@ Here are the changes made.
 --------
 
 [[:tests:]]
-New unit tests: ``convert.integer`` is tested but the coverage score is not good (management of the signs, and symetry with the public ¨api of ``convert.natural``).
+New unit tests: ``convert.integer`` is tested but the coverage score is not good (management of the signs, and symetry with the public \api of ``convert.natural``).
 
 
 [[:flow:]]
-Version ¨nb: a dedicated file ``VERSION.json`` contains a dictionary with ¨infos about the ¨nb of the last version (the content is automatically build by analysing the change log). This file can be easily used by external tools.
+Version \nb: a dedicated file ``VERSION.json`` contains a dictionary with \infos about the \nb of the last version (the content is automatically build by analysing the change log). This file can be easily used by external tools.
 
 
 // ---------- //
@@ -115,7 +115,7 @@ Version ¨nb: a dedicated file ``VERSION.json`` contains a dictionary with ¨inf
 -----
 
 [[:api:]]
-The new implementation of the package ``convert.integer`` has been done following a ¨poo style (it uses the module ``convert.natural``, and the maintenance is easy thanks to the use of one "killing" decorator).
+The new implementation of the package ``convert.integer`` has been done following a \poo style (it uses the module ``convert.natural``, and the maintenance is easy thanks to the use of one "killing" decorator).
 
 
 --------
@@ -171,7 +171,7 @@ Here are the breaking changes.
 --------
 
 [[:tests:]]
-Some new unit tests (with a better covering of all the ¨api).
+Some new unit tests (with a better covering of all the \api).
 
     1) The new class ``convert.core.var2int.Var2int`` is tested.
 
@@ -209,4 +209,4 @@ One builder builds all the methods of the class ``convert.natural.Base2Base``.
 --------
 
 [[:tests:]]
-Unit tests: the checker of the symetry of the ¨apis of the classes ``Base2Nat`` and ``Nat2Base`` has been transformed into a more strict test.
+Unit tests: the checker of the symetry of the \apis of the classes ``Base2Nat`` and ``Nat2Base`` has been transformed into a more strict test.

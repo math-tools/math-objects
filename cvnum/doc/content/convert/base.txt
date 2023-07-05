@@ -1,7 +1,7 @@
 ﻿abrev::
     content     = /base
-    content_nat = ¨content/natural
-    content_int = ¨content/integer
+    content_nat = \content/natural
+    content_int = \content/integer
 
 
 ======================
@@ -13,9 +13,9 @@ Avec des naturels
 -----------------
 
 content::
-    ¨content_nat/nat2base.txt
-    ¨content_nat/base2nat.txt
-    ¨content_nat/base2base.txt
+    \content_nat/nat2base.txt
+    \content_nat/base2nat.txt
+    \content_nat/base2base.txt
 
 
 -------------------------
@@ -23,7 +23,7 @@ Avec des entiers relatifs
 -------------------------
 
 content::
-    ¨content_int/signs.txt
-    ¨content_int/int2base.txt
-    ¨content_int/base2int.txt
-    ¨content_int/base2base.txt
+    \content_int/signs.txt
+    \content_int/int2base.txt
+    \content_int/base2int.txt
+    \content_int/base2base.txt

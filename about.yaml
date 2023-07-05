@@ -1,0 +1,11 @@
+# Presentation of the project : talking between human beings.
+general:
+  monorepo: math-objects
+  desc    : This project ????
+  author  : Christophe, BAL
+  repo    : https://github.com/math-tools/math-objects
+
+
+# ????
+projects:
+  - cvnum

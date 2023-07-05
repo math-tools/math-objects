@@ -3,10 +3,10 @@
 
 
 ========================
-Type de ¨nbres supportés
+Type de \nbres supportés
 ========================
 
-Par défaut, la langue est l'anglais académique, ¨cad celui de Grande-Bretagne. Nous verrons dans la section suivante comment changer de langues. Ce qui nous intéresse dans cette section, c'est d'indiquer les types de ¨nbres nommables.
+Par défaut, la langue est l'anglais académique, \cad celui de Grande-Bretagne. Nous verrons dans la section suivante comment changer de langues. Ce qui nous intéresse dans cette section, c'est d'indiquer les types de \nbres nommables.
 Très classiquement, le code suivant affichera deux fois de suite le texte "one hundred and twenty-three".
 
 python::

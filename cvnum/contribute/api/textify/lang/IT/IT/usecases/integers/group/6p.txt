@@ -1,3 +1,3 @@
-1 000000 = uno milione
+1 000 000 = uno milione
 
-2 000000 = due milioni
+2 000 000 = due milioni

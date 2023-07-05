@@ -3,10 +3,10 @@ this::
 
 
 ===============
-¨Trads directes
+\Trads directes
 ===============
 
-Certains petits ¨nbres ont juste un nom, aucune réfexion n'est demandé pour les écrire.
+Certains petits \nbres ont juste un nom, aucune réfexion n'est demandé pour les écrire.
 Ceci s'indique via une syntaxe du type peuf::``NOMBRE = TEXTE`` comme dans l'exemple ci-dessous.
 
 cvnum::

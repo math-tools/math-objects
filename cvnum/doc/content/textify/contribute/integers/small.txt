@@ -7,6 +7,6 @@ Nommer les petits nombres
 =========================
 
 content::
-    ¨content/no-dsl.txt
-    ¨content/with-dsl.txt
-    ¨content/sorting-rules.txt
+    \content/no-dsl.txt
+    \content/with-dsl.txt
+    \content/sorting-rules.txt

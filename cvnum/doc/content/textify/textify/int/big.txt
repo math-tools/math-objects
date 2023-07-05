@@ -7,10 +7,10 @@ Les "gros" nombres
 ==================
 
 warning::
-    Les explications suivantes ne sont valables que pour les langages acceptant de nommer de très grands ¨nbres.
+    Les explications suivantes ne sont valables que pour les langages acceptant de nommer de très grands \nbres.
 
 
-Supposons que nous souhaitions avoir le nom de `2*10**27`. En français usuel, la plus grande puissance de dix ayant un nom est `10**9`, à savoir "un milliard". Le choix qui a été retenu pour nommer des puissances plus grandes est tout simplement de nommer "un milliard de milliards" la puissance de dix `10**18`, puis d'utiliser "un milliard de milliards de milliards" pour `10**27`, ¨etc... Donc le code suivant donnera "deux milliards de milliards de milliards".
+Supposons que nous souhaitions avoir le nom de `2*10**27`. En français usuel, la plus grande puissance de dix ayant un nom est `10**9`, à savoir "un milliard". Le choix qui a été retenu pour nommer des puissances plus grandes est tout simplement de nommer "un milliard de milliards" la puissance de dix `10**18`, puis d'utiliser "un milliard de milliards de milliards" pour `10**27`, \etc... Donc le code suivant donnera "deux milliards de milliards de milliards".
 
 python::
     from cvnum import textify

@@ -1,6 +1,6 @@
-1 000000 = un million
+1 000 000 = un million
 
-2 000000 = deux millions
+2 000 000 = deux millions
 
 3 240 500 = trois millions
             deux cent quarante mille

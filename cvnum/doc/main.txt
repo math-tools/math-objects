@@ -1,5 +1,5 @@
 ﻿this::
-    title   = Lire et écrire des nombres avec ¨cvnum
+    title   = Lire et écrire des nombres avec \cvnum
     author  = Christophe, BAL
     mail    = projetmbc@gmail.com
     lang    = fr
@@ -18,7 +18,7 @@ abrev::
 
 
 content::
-    ¨content/intro.txt
-    ¨content/convert.txt
-    ¨content/textify.txt
-    ¨content/core.txt
+    \content/intro.txt
+    \content/convert.txt
+    \content/textify.txt
+    \content/core.txt

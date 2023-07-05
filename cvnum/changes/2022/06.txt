@@ -10,7 +10,7 @@
 --------
 
 [[:doc:]]
-Naming integers: the new ¨api has been documented.
+Naming integers: the new \api has been documented.
 
 
 // ---------- //
@@ -25,4 +25,4 @@ Naming integers: the new ¨api has been documented.
 --------
 
 [[:api:]]
-¨DSL for translations: the way used to name the very big numbers has been simplified (this should be enough for real use cases).
+\DSL for translations: the way used to name the very big numbers has been simplified (this should be enough for real use cases).

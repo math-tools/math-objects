@@ -8,7 +8,7 @@ De la base décimale à une base quelconque
 
 Commençons par du classique où vous noterez que les lettres sont en majuscule
 ((
-    C'est un choix facilitant la lecture. ¨Python travaille lui avec des minuscules.
+    C'est un choix facilitant la lecture. \Python travaille lui avec des minuscules.
 )),
 et aussi que les listes de chiffres vont du poids le plus élevé à celui le plus faible
 ((
@@ -31,7 +31,7 @@ python-term::
 
 Suivant les besoins, on peut donc au choix obtenir une liste d'entiers relativement à la base choisie via la méthode ``nat2bdigits``
 ((
-    Dans ``nat2bdigits``, ``nat`` fait ¨ref à "natural", et ``bdigits`` à "base digits".
+    Dans ``nat2bdigits``, ``nat`` fait \ref à "natural", et ``bdigits`` à "base digits".
     Donc ``nat2bdigits`` se lit "natural to base digits", soit "naturel vers décimaux de la base" en anglais.
 )),
 soit une liste de chiffres
@@ -65,17 +65,17 @@ Comment est obtenue la liste de chiffres relativement à une base `b > 1` non cl
 
         b) Si `10 <= n < b`, l'écriture alphanumérique de `n` est la lettre majuscule à la position `(n - 9)` dans l'alphabet
         ((
-            Le choix retenu est de proposer une écriture décryptable par un humain. C'est pour cela que ne sont pas utilisés les minuscules et les caractères spéciaux non blancs du code ¨ascii.
+            Le choix retenu est de proposer une écriture décryptable par un humain. C'est pour cela que ne sont pas utilisés les minuscules et les caractères spéciaux non blancs du code \ascii.
         )).
-        Pour `n = 10`, ce sera "A", pour `n = 11`, ce sera "B"... ¨etc.
+        Pour `n = 10`, ce sera "A", pour `n = 11`, ce sera "B"... \etc.
 
-    1) Si **`36 <= b < 36**2`**, notant `n = 36*q + r` la division euclidienne de `n` par `36`, ¨ie notant `[q, r]_36`  l'écriture `36`-adique de `n`, alors l'écriture alphanumérique de `n` sera la concaténation des écritures alphanumériques de `q` et `r` relativement à la base `36`, en complétant si besoin par un zéro à gauche. Par exemple, `11` et `49 = 13 + 1*36` seront transformés en ``"0B"`` et  ``"1D"`` ¨resp.
+    1) Si **`36 <= b < 36**2`**, notant `n = 36*q + r` la division euclidienne de `n` par `36`, \ie notant `[q, r]_36`  l'écriture `36`-adique de `n`, alors l'écriture alphanumérique de `n` sera la concaténation des écritures alphanumériques de `q` et `r` relativement à la base `36`, en complétant si besoin par un zéro à gauche. Par exemple, `11` et `49 = 13 + 1*36` seront transformés en ``"0B"`` et  ``"1D"`` \resp.
 
     1) Pour **`b >= 36**2`**, on procède comme dans le point précédent excepté que l'écriture `36`-adique de `n` aura plus de deux chiffres avec si besoin des zéros ajoutés automatiquement à gauche.
 
 
 warning::
-    Dans l'écriture '[00A000000000000000013001]_3000', les zéros à gauche ne sont pas superflus puisqu'en fait nous avons '[00A 000 000 000 000 000 013 001]_3000' où '[00A]_3000' désigne un chiffre, ¨ie un symbole, non nul dans la base `3000`.
+    Dans l'écriture '[00A000000000000000013001]_3000', les zéros à gauche ne sont pas superflus puisqu'en fait nous avons '[00A 000 000 000 000 000 013 001]_3000' où '[00A]_3000' désigne un chiffre, \ie un symbole, non nul dans la base `3000`.
 
 
 Il est aussi possible de travailler directement avec les chiffres, ou les décimales d'un naturel. Voici quelques exemples où `13 = 8 + 2 + 1 = [1011]_2`.

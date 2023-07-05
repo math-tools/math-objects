@@ -3,10 +3,10 @@
 
 
 ===============================
-Nommer des ¨nbres "très grands"
+Nommer des \nbres "très grands"
 ===============================
 
-La méthode retenue pour nommer des ¨nbres "très grands" est basique.
+La méthode retenue pour nommer des \nbres "très grands" est basique.
 Prenons le cas de l'espagnol qui permet de parler de "millones de millones de millones"
 ((
     Nous ne répondrons pas à la question épineuse de l'utilité de ceci.
@@ -37,15 +37,15 @@ cvnum::
 Commençons par expliquer la règle cvnum::``big = mill... -> ... de millones``. Un exemple est donné un peu plus bas pour clarifier les explications ci-dessous.
 
     1) cvnum::``mill...`` avant cvnum::``->`` indique de capturer tout mot commençant par "mill" dans le nom du nombre.
-    Ici les trois ¨pts de suspension indiquent toute séquence, éventuellement vide, de caractères autre qu'un espace.
+    Ici les trois \pts de suspension indiquent toute séquence, éventuellement vide, de caractères autre qu'un espace.
     Pour l'espagnol, "millones" ou "millón" sont les seuls mots produits par les règles de nommage qui commencent par "mill".
 
     1) cvnum::``... de millones`` après cvnum::``->`` demande de compléter les "millones" et "millón" capturés par autant de "de millones" que nécessaire.
 
 
-Voici ce qu'il se passe en coulisse pour le très grand ¨nbre `11,222,333,444,555,666,777` que nous utilisons tous les jours. Ceci va permettre de lever toute ambiguïté...
+Voici ce qu'il se passe en coulisse pour le très grand \nbre `11,222,333,444,555,666,777` que nous utilisons tous les jours. Ceci va permettre de lever toute ambiguïté...
 
-    1) Comme la plus grande puissance pour les ¨grpes en espagnol est `6`, on commence par faire des blocs de `6` chiffres
+    1) Comme la plus grande puissance pour les \grpes en espagnol est `6`, on commence par faire des blocs de `6` chiffres
     ((
         Pour le français et l'anglais, on ferait des blocs de `9` chiffres car la plus grande puissance est `9` dans ces cas.
     )).
@@ -56,7 +56,7 @@ Voici ce qu'il se passe en coulisse pour le très grand ¨nbre `11,222,333,444,5
         * `666,777`
 
     1) De façon récursive, on nomme `11` puis `222,333,444,555,666,777`.
-    Ceci donne bêtement quelque chose du type "`11` millones `222,333,444,555,666,777`" où `222,333,444,555,666,777` est en fait nommé récursivement sous une forme du type "`222,333` millones `444,555,666,777`", ¨etc.
+    Ceci donne bêtement quelque chose du type "`11` millones `222,333,444,555,666,777`" où `222,333,444,555,666,777` est en fait nommé récursivement sous une forme du type "`222,333` millones `444,555,666,777`", \etc.
     On obtient finalement un texte ressemblant à "`11` millones `222,333` millones `444,555` millones `666,777`".
 
     1) Pour finir, la transformation des "millones" en "... de millones" se fait de gauche à droite par défaut (voir la note ci-dessous à propos de la clé **optionnelle** cvnum::``dir``).
@@ -74,9 +74,9 @@ note::
 
 
 note::
-    Il est possible d'étendre un langage. Si tel est le cas, il peut arriver que le langage de départ autorise le nommage de grands ¨nbres, mais pas celui étendu.
-    Dans ce cas, il suffit d'utiliser cvnumm::``big = no`` dans le fichier de ¨spec du ¨lang étendu.
+    Il est possible d'étendre un langage. Si tel est le cas, il peut arriver que le langage de départ autorise le nommage de grands \nbres, mais pas celui étendu.
+    Dans ce cas, il suffit d'utiliser cvnumm::``big = no`` dans le fichier de \spec du \lang étendu.
 
 
 note::
-    Pour une ¨lang n'étendant pas une autre, si la clé optionnelle cvnum::``big`` n'est pas utilisée, alors la ¨trad des ¨nbres trop grands sera refusée.
+    Pour une \lang n'étendant pas une autre, si la clé optionnelle cvnum::``big`` n'est pas utilisée, alors la \trad des \nbres trop grands sera refusée.

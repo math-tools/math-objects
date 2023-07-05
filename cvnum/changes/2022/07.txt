@@ -11,7 +11,7 @@
 [[:api:]]
 Here are the breaking updates made.
 
-    1) Conversions of integers: the code has been totally rebuild to use ¨poo (the human and the ¨tech ¨docs will be updated later).
+    1) Conversions of integers: the code has been totally rebuild to use \poo (the human and the \tech \docs will be updated later).
 
         * The module for roman numbers has been removed (it will come back later).
 
@@ -19,7 +19,7 @@ Here are the breaking updates made.
 
         * A package ``convert.integer`` will extend the features of ``convert.natural`` to variables with string representation that is an integer. To not break everything, this package only contains the module ``var2int`` for the moment.
 
-    1) The package ``tbox`` has been removed. A module ``convert.integer.var2int`` with a class ``Var2Int`` has been created to obtain several kinds of normalisations of variables that are expected to be printed as integers (no human and ¨tech ¨docs uptodate for the moment).
+    1) The package ``tbox`` has been removed. A module ``convert.integer.var2int`` with a class ``Var2Int`` has been created to obtain several kinds of normalisations of variables that are expected to be printed as integers (no human and \tech \docs uptodate for the moment).
 
     1) Naming integers.
 
@@ -33,7 +33,7 @@ Here are the breaking updates made.
 --------
 
 [[:api:]]
-Some builders and one checker are used such as to obtain easily symetric ¨apis for the classes ``Base2Nat`` and ``Nat2Base``.
+Some builders and one checker are used such as to obtain easily symetric \apis for the classes ``Base2Nat`` and ``Nat2Base``.
 
 
 [[:tests:]]
@@ -83,7 +83,7 @@ Unit tests.
 [[:api:]]
 Here are the breaking new features.
 
-    1) Conversions of integers: one package ``convert.integer`` has been created to gather all the features already available (conversions of other kinds of ¨nbs will be added later).
+    1) Conversions of integers: one package ``convert.integer`` has been created to gather all the features already available (conversions of other kinds of \nbs will be added later).
 
     1) Naming integers: the method ``IntName.nameof`` only accepts a string.
 
@@ -93,7 +93,7 @@ Here are the breaking new features.
 
         * Creation of a new package ``tbox.var2nb`` with the following functions.
 
-            + ``intify`` can transform one variable into a legal integer (for example, this new function allows the use of ¨_s between digits).
+            + ``intify`` can transform one variable into a legal integer (for example, this new function allows the use of \_s between digits).
 
             + ``intify_notneg`` can transform one variable into a legal non negtaive integer.
 
@@ -111,11 +111,11 @@ Here the new things added.
 
     1) Naming integers: the only possibility to translate from string to string has been added.
 
-    1) Toolbox: a ¨doc has been added to present this package.
+    1) Toolbox: a \doc has been added to present this package.
 
 
 [[:bugs:]]
-¨DSL for translations: the work on the new unit tests via *googletrad has revealed two stupid bugs with the ¨lang ``en_US``.
+\DSL for translations: the work on the new unit tests via *googletrad has revealed two stupid bugs with the \lang ``en_US``.
 
     1) The ignored rule cvnum::``*00`` was not redefined in the block cvnum::``small`` such as to obtain the good naming of `100`.
 
@@ -131,7 +131,7 @@ New unit tests with some of them that use of the excellent package ``hypothesis`
 
     1) Naming integers: two new things.
 
-        * Use of the library ``translators`` to test all integers from `0` to `999` via ¨googletrad (we keep the usecases to verify that ``translators`` does a good job and for tricky names). **The method used is to do some "manual" checkings, and then trust ¨cvnum for some patterns if ¨googletrad is wrong, so some tricky errors could remain inside ¨cvnum.** If needed, some new usecases will be added in the ¨DSL files.
+        * Use of the library ``translators`` to test all integers from `0` to `999` via \googletrad (we keep the usecases to verify that ``translators`` does a good job and for tricky names). **The method used is to do some "manual" checkings, and then trust \cvnum for some patterns if \googletrad is wrong, so some tricky errors could remain inside \cvnum.** If needed, some new usecases will be added in the \DSL files.
 
         * The method ``sign_n_abs`` is tested using ``hypothesis``.
 
@@ -150,11 +150,11 @@ New unit tests with some of them that use of the excellent package ``hypothesis`
 --------
 
 [[:bugs:]]
-¨DSL for translations: the work on some new unit tests have revealed two bad rules.
+\DSL for translations: the work on some new unit tests have revealed two bad rules.
 
-    1) With the ¨lang ``en_GB``, `14` was translated to "forteen" instead of "fourteen".
+    1) With the \lang ``en_GB``, `14` was translated to "forteen" instead of "fourteen".
 
-    1) With the ¨lang ``es_ES``, `26` was translated to "veintiseis" instead of "veintiséis".
+    1) With the \lang ``es_ES``, `26` was translated to "veintiseis" instead of "veintiséis".
 
 
 // ---------- //
@@ -173,11 +173,11 @@ Three bugs have been fixed.
 
     1) Class ``textify.integer.IntName``: the underscores was not treated by the method ``sign_n_abs``.
 
-    1) ¨DSL for translations: the usecases tested have revealed some small bugs in the ¨specs of the ¨lang ``it_IT`` and ``de_DE``.
+    1) \DSL for translations: the usecases tested have revealed some small bugs in the \specs of the \lang ``it_IT`` and ``de_DE``.
 
 
 [[:doc:]]
-¨DSL for translations: the block cvnum::``patch`` has been clearly indicated to be used for exceptions in naming.
+\DSL for translations: the block cvnum::``patch`` has been clearly indicated to be used for exceptions in naming.
 
 
 --------
@@ -225,13 +225,13 @@ Contributions.
 
     1) The folder path::``tools/factory/textify/lang`` has been moved to become path::``contribute/api/textify/lang``.
 
-    1) Creation of the directory path::``contribute/doc`` for the translations of the "human" ¨doc (the ¨lang used for the ¨doc written by the developer is indicated in the file path::``doc/main.txt``)
+    1) Creation of the directory path::``contribute/doc`` for the translations of the "human" \doc (the \lang used for the \doc written by the developer is indicated in the file path::``doc/main.txt``)
 
 
 [[:doc:]]
 The following changes have been made.
 
-    1) Folder with the ¨langs supported by the module ``textify``: the new path path::``contribute/api/textify/lang`` has been indicated.
+    1) Folder with the \langs supported by the module ``textify``: the new path path::``contribute/api/textify/lang`` has been indicated.
 
     1) One warning has been added about the new special file path::``FR/FR/usecases/integers/special.txt``.
 
@@ -256,13 +256,13 @@ Semantic coding: ``assert WHAT_IS_WANTED, ERROR_MESSAGE`` is always used instead
 ------
 
 [[:api:]]
-¨DSL for translations.
+\DSL for translations.
 
-    1) It is now possible to chain extensions of ¨langs (this has allowed to simplify the definition of ``fr_FR_chuquet_1`` by using ``fr_FR_chuquet_2``, this last one being an extension of ``fr_FR``).
+    1) It is now possible to chain extensions of \langs (this has allowed to simplify the definition of ``fr_FR_chuquet_1`` by using ``fr_FR_chuquet_2``, this last one being an extension of ``fr_FR``).
 
-    1) The possibility to forbid naming of very big numbers was a missing feature. This has been added (it is used by the ¨langs ``fr_FR_chuquet_1``, ``fr_FR_chuquet_2`` and ``fr_FR_rowlett``).
+    1) The possibility to forbid naming of very big numbers was a missing feature. This has been added (it is used by the \langs ``fr_FR_chuquet_1``, ``fr_FR_chuquet_2`` and ``fr_FR_rowlett``).
 
-    1) For the signs, it is possible to indicate a pattern to follow (this has been used to complete the ¨lang ``fr_FR_tiret``).
+    1) For the signs, it is possible to indicate a pattern to follow (this has been used to complete the \lang ``fr_FR_tiret``).
 
 
 // ---------- //
@@ -281,7 +281,7 @@ Naming integers: the work on the unit tests has shown the following bugs that ha
 
     1) `400,000` was translated into "four hundred thousand zero" with an unwanted "zero" at the end.
 
-    1) `200_000*10**18` was translated into "two hundred thousand" with the ¨lang ``en_GB``, but "deux cent mille milliards de milliards" with the ¨lang ``fr_FR`` as expected. The bug was also met with the ¨langs ``de_DE``, ``en_US`` and ``it_IT``. That was so violent! :-)
+    1) `200_000*10**18` was translated into "two hundred thousand" with the \lang ``en_GB``, but "deux cent mille milliards de milliards" with the \lang ``fr_FR`` as expected. The bug was also met with the \langs ``de_DE``, ``en_US`` and ``it_IT``. That was so violent! :-)
 
 
 ------
@@ -291,15 +291,15 @@ Naming integers: the work on the unit tests has shown the following bugs that ha
 [[:api:]]
 Here are the changes.
 
-    1) ¨DSL for translations: extended ¨langs can have their own patches.
+    1) \DSL for translations: extended \langs can have their own patches.
 
     1) The file path::``convert.base2dec`` and path::``convert.dec2base`` have been renamed path::``convert.base2int`` and path::``convert.int2base``.
 
 
 [[:doc:]]
-¨DSL for translations.
+\DSL for translations.
 
-    1) Some important clarifications have been made about extensions of ¨langs.
+    1) Some important clarifications have been made about extensions of \langs.
 
     1) Some rules and conventions must be followed to write usecases.
 
@@ -309,7 +309,7 @@ Here are the changes.
 --------
 
 [[:misc:]]
-¨Tech ¨doc in the ¨src code: all the prototypes have been updated in the module ``detextify``.
+\Tech \doc in the \src code: all the prototypes have been updated in the module ``detextify``.
 
 
 // ---------- //
@@ -326,13 +326,13 @@ Here are the changes.
 [[:tests:]]
 Here are the new features to name integers.
 
-    1) Naming integers: the new ¨python ¨api is now "fully functional" (unit tests will be added soon, so it should remain some insidious and serious bugs).
+    1) Naming integers: the new \python \api is now "fully functional" (unit tests will be added soon, so it should remain some insidious and serious bugs).
 
-    1) ¨DSL for translations: the analysis of very big numbers follows a simpler logic. This implies the creation of a new optional key cvnum::``dir`` for the block peuf::``general``.
+    1) \DSL for translations: the analysis of very big numbers follows a simpler logic. This implies the creation of a new optional key cvnum::``dir`` for the block peuf::``general``.
 
 
 [[:doc:]]
-Naming integers: the new way used to analyze very big numbers has been explained (¨docs for the users, and also for the ¨DSL).
+Naming integers: the new way used to analyze very big numbers has been explained (\docs for the users, and also for the \DSL).
 
 
 --------
@@ -367,7 +367,7 @@ Naming integers: the "kinds" of numbers that can be converted have been document
 
 
 [[:api:]]
-¨DSL for translations: a block peuf::``this`` must be used to indicated ¨infos about the translation (see the short ¨desc).
+\DSL for translations: a block peuf::``this`` must be used to indicated \infos about the translation (see the short \desc).
 
 
 // ---------- //
@@ -386,7 +386,7 @@ Naming integers.
 
     1) A new translation: the academic French using the convention "hyphens everywhere" has been added.
 
-    1) Tags for ¨langs have been added to avoid typing errors.
+    1) Tags for \langs have been added to avoid typing errors.
 
 
 --------
@@ -394,7 +394,7 @@ Naming integers.
 --------
 
 [[:doc:]]
-Naming integers: explanations about the tags for ¨langs have been added (all the ¨langs available are automatically indicated in the ¨doc).
+Naming integers: explanations about the tags for \langs have been added (all the \langs available are automatically indicated in the \doc).
 
 
 --------
@@ -402,7 +402,7 @@ Naming integers: explanations about the tags for ¨langs have been added (all th
 --------
 
 [[:api:]]
-¨DSL for translations: a short ¨desc, only in english, must be given for all languages (this is used for the technical and the human ¨docs).
+\DSL for translations: a short \desc, only in english, must be given for all languages (this is used for the technical and the human \docs).
 
 
 // ---------- //

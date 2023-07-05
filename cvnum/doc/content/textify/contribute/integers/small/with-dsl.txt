@@ -3,10 +3,10 @@ this::
 
 
 ==================
-¨Trads "calculées"
+\Trads "calculées"
 ==================
 
-L'efficacité du nommage des nombres naturels vient de règles "calculatoires". Par exemple, en français académique, les nombres de `81` à `89` se nomment en accolant le nom du chiffre des unités à la suite de "quatre-vingt-" pour obtenir "quatre-vingt-**un**", "quatre-vingt-**deux**", "quatre-vingt-**trois**", ... ¨etc.
+L'efficacité du nommage des nombres naturels vient de règles "calculatoires". Par exemple, en français académique, les nombres de `81` à `89` se nomment en accolant le nom du chiffre des unités à la suite de "quatre-vingt-" pour obtenir "quatre-vingt-**un**", "quatre-vingt-**deux**", "quatre-vingt-**trois**", ... \etc.
 Notons au passage que "quatre-vingt" utilise les noms de `4` et `20`.
 Ces deux règles sont rapidement définies comme suit.
 
@@ -27,18 +27,18 @@ cvnum::
 
 Comment cela fonctionne-t-il ? Il se trouve que l'on peut utiliser un petit langage spécialisé pour rendre les traductions faciles à définir.
 
-    1) Dans cvnum::``80 = [4]-[20]s``, nous demandons que `80` soit traduit en utilisant cvnum::``[4]`` et cvnum::``[20]`` les noms de `4`et `20` ¨resp (ces noms sont définis avant dans le code reproduit partiellement ci-dessus).
+    1) Dans cvnum::``80 = [4]-[20]s``, nous demandons que `80` soit traduit en utilisant cvnum::``[4]`` et cvnum::``[20]`` les noms de `4`et `20` \resp (ces noms sont définis avant dans le code reproduit partiellement ci-dessus).
 
     1) La règle cvnum::``8* = [4]-[20]-[d(0)]`` utilise les mécanismes suivants.
 
         * cvnum::``8*`` demande d'appliquer une règle aux naturels de deux chiffres commençant par un `8`.
 
-        * La règle cvnum::``80 = ...`` étant avant cvnum::``8* = ...`` , lorsque le naturel `80` sera rencontré, on utilisera la ¨1ere règle sans chercher à en appliquer d'autre : c'est le principe du "premier arrivé, premier servi".
+        * La règle cvnum::``80 = ...`` étant avant cvnum::``8* = ...`` , lorsque le naturel `80` sera rencontré, on utilisera la \1ere règle sans chercher à en appliquer d'autre : c'est le principe du "premier arrivé, premier servi".
         Donc ici, la règle cvnum::``8*`` ne s'appliquera qu'aux naturels allant de `81` à `89`.
 
         * Dans cvnum::``8* = [4]-[20]-[d(0)]``, l'emploi de cvnum::``[d(0)]`` demande de remplacer cvnum::``[d(0)]`` par le nom du chiffre des unités.
         Par exemple, pour `86`, le code cvnum::``[d(0)]`` fait référence à "six" le nom de `6`.
-        En fait, cvnum::``d`` est le petit ¨nbre à nommer, tandis que cvnum::``d(0)`` fait référence au chiffre des unités correspondant à `1 = 10^0`.
+        En fait, cvnum::``d`` est le petit \nbre à nommer, tandis que cvnum::``d(0)`` fait référence au chiffre des unités correspondant à `1 = 10^0`.
         De même, cvnum::``d(1)`` est le chiffre des dizaines puisque `10 = 10^1`.
 
 
@@ -93,7 +93,7 @@ Ce qui précède contient les commandes suivantes qui pourront peut-être s'avé
     Si à l'usage il est inutile de se servir d'alternatives de recherche, cette fonctionnalité disparaîtra dans le cimétière des FBI (Fausses Bonnes Idées).
 )).
 
-    1) La règle cvnum::``[2..6]1 = [d(1)0]-et-[1]`` s'applique aux naturels `21`, `31`, `41`, `51` et `61` en prenant ¨resp les noms de `20`, `30`, `40`, `50` et `60` suivis de "-et-" puis du nom de `1`.
+    1) La règle cvnum::``[2..6]1 = [d(1)0]-et-[1]`` s'applique aux naturels `21`, `31`, `41`, `51` et `61` en prenant \resp les noms de `20`, `30`, `40`, `50` et `60` suivis de "-et-" puis du nom de `1`.
     En fait, cvnum::``2..6`` indique un naturel allant de `2` à `6`.
 
     1) cvnum::``1..6 | 8`` indique `8` ou un naturel allant de `1` à `6`. En fait, cvnum::``1..6`` est un raccourci pour cvnum::``1 | 2 | 3 | 4 | 5 | 6``.

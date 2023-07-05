@@ -32,14 +32,14 @@ Dans cette organisation, la structure des dossiers est partiellement imposée.
     1) Le dossier path::``usecases`` est celui qui va contenir les cas d'utilisation qui vont être testés.
 
     1) Le dossier path::``integers`` est pour le nommage des entiers relatifs ((
-        Ceci est justifié par le fait qu'il est prévu de nommer d'autres types de ¨nbres à l'avenir.
+        Ceci est justifié par le fait qu'il est prévu de nommer d'autres types de \nbres à l'avenir.
     )).
 
     1) Par contre, le contenu du dossier path::``integers`` est libre, mais **il est conseillé d'utiliser des dossiers l'un de l'un des types suivants** (aucun de ces sous-dossiers n'est obligatoire).
 
         * path::``sign`` sert à tester les noms utilisant les signes `-` et `+`.
 
-        * path::``small`` est pour les "petits" entiers positifs ou nuls, ¨cad ceux contenant moins de chiffres que la taille du plus petit groupe (généralement ce sont des ¨nbres de `1` ou `2` chiffres).
+        * path::``small`` est pour les "petits" entiers positifs ou nuls, \cad ceux contenant moins de chiffres que la taille du plus petit groupe (généralement ce sont des \nbres de `1` ou `2` chiffres).
 
         * path::``group`` va permettre de proposer des exemples de "gros" entiers positifs, mais "pas trop", c'est à dire ceux ne nécessitant pas d'appliquer la règle cvnum::``big = ...`` du bloc cvnum::``general``.
 

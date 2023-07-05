@@ -43,4 +43,4 @@ note::
          :if: d :else:
          [e :if: c :else: f]"``
 
-    Ceci semble tout de même peu utile, et n'est possible que pour des raisons purement ¨techs liées à la grammaire du langage.
+    Ceci semble tout de même peu utile, et n'est possible que pour des raisons purement \techs liées à la grammaire du langage.

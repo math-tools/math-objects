@@ -1,0 +1,8 @@
+general:
+    project: cvnum
+    acronym: C-on-V-ert NUM-bers
+    desc   : A tool to convert mathematical numbers in several formats.
+    author : Christophe, BAL
+    licence: gnu 3
+    require:
+      - python3

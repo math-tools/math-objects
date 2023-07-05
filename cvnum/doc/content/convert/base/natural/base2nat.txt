@@ -39,7 +39,7 @@ Noter dans le dernier cas la nécessité d'indiquer le séparateur utilisé.
 
 
 warning::
-    Ne pas oublier de faux zéros inutiles à gauche. Par exemple, le code suivant renvoie une erreur comme attendue car `[0A]_40` indique un chiffre, ¨cad un symbole, écrit obligatoirement avec deux caractères.
+    Ne pas oublier de faux zéros inutiles à gauche. Par exemple, le code suivant renvoie une erreur comme attendue car `[0A]_40` indique un chiffre, \cad un symbole, écrit obligatoirement avec deux caractères.
 
     ...python-term::
         >>> print(myb2n.bnb2nat("A.13", 40, sep = "."))

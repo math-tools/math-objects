@@ -1,6 +1,6 @@
 ﻿abrev::
     content     = /textify
-    content_int = ¨content/int
+    content_int = \content/int
 
 
 ========================
@@ -8,8 +8,8 @@ Nommer un entier relatif
 ========================
 
 content::
-    ¨content_int/nb-format.txt
-    ¨content_int/lang.txt
-    ¨content_int/sign.txt
-    ¨content_int/separator.txt
-    ¨content_int/big.txt
+    \content_int/nb-format.txt
+    \content_int/lang.txt
+    \content_int/sign.txt
+    \content_int/separator.txt
+    \content_int/big.txt
