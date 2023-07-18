@@ -1,0 +1,12 @@
+// ---------- //
+
+==
+18
+==
+
+--------
+:update:
+--------
+
+[[:api:]]
+Contributions: the usecase file names for groups have been changed from ``DDp`` to ``power_of_DD`` to be more explicit.
